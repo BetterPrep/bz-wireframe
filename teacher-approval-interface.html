@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Review Submission — Brainzeta Teacher</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body class="app-layout">
+
+  <!-- ============================================================
+       SIDEBAR
+  ============================================================ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-text">Brainzeta</span>
+    </div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="teacher-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="teacher-assessments-list.html" class="sidebar-nav-item"><span class="nav-icon">📋</span> My Assessments</a></li>
+        <li><a href="teacher-class-analytics.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Class Analytics</a></li>
+        <li><a href="teacher-submission-tracker.html" class="sidebar-nav-item"><span class="nav-icon">📬</span> Submission Tracker</a></li>
+        <li><a href="teacher-pending-approvals.html" class="sidebar-nav-item active"><span class="nav-icon">✅</span> Pending Approvals</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <div class="main-wrapper">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Review Submission</span>
+      </div>
+      <div class="topbar-right">
+        <span class="badge badge-role">Teacher</span>
+        <span class="notif-btn">🔔 <span class="notif-badge">8</span></span>
+        <span class="avatar avatar-sm">RS</span>
+      </div>
+    </header>
+
+    <!-- PAGE BODY -->
+    <main class="page-body page-body-flush">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb breadcrumb-pad">
+        <span class="breadcrumb-item">Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item"><a href="teacher-pending-approvals.html">Pending Approvals</a></span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item breadcrumb-current">Review Submission</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header breadcrumb-pad">
+        <div>
+          <h1 class="page-title">Review — Priya Sharma</h1>
+          <p class="page-subtitle">Math Half-Yearly Exam — Section 12-A</p>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           3-COLUMN REVIEW LAYOUT
+      ============================================================ -->
+      <div class="review-layout">
+
+        <!-- ── Column 1: Answer Sheet ── -->
+        <div class="review-col">
+          <div class="review-col-header">
+            📄 Answer Sheet — Priya Sharma
+          </div>
+          <div class="review-col-body">
+            <div class="answer-page">
+              <div class="answer-page-label">Page 1 of 5</div>
+              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+1" alt="Answer sheet page 1" class="answer-page-img" />
+            </div>
+            <div class="answer-page">
+              <div class="answer-page-label">Page 2 of 5</div>
+              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+2" alt="Answer sheet page 2" class="answer-page-img" />
+            </div>
+            <div class="answer-page">
+              <div class="answer-page-label">Page 3 of 5</div>
+              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+3" alt="Answer sheet page 3" class="answer-page-img" />
+            </div>
+            <button class="btn btn-ghost btn-block mt-8">Show More Pages</button>
+          </div>
+        </div>
+
+        <!-- ── Column 2: Question Paper ── -->
+        <div class="review-col">
+          <div class="review-col-header">
+            📋 Question Paper
+          </div>
+          <div class="review-col-body">
+            <div class="question-block-compact">
+              <div class="qbc-number">Q1 <span class="text-muted">(10 marks)</span></div>
+              <div class="qbc-text">Describe the key features of the Cold War and its impact on world politics.</div>
+            </div>
+            <div class="question-block-compact">
+              <div class="qbc-number">Q2 <span class="text-muted">(10 marks)</span></div>
+              <div class="qbc-text">Explain the concept of a bipolar world. How did it end?</div>
+            </div>
+            <div class="question-block-compact">
+              <div class="qbc-number">Q3 <span class="text-muted">(20 marks)</span></div>
+              <div class="qbc-text">Analyze US hegemony in the post-Cold War era with examples.</div>
+            </div>
+            <div class="question-block-compact">
+              <div class="qbc-number">Q4 <span class="text-muted">(20 marks)</span></div>
+              <div class="qbc-text">What is NIEO? Discuss India's role in this movement.</div>
+            </div>
+            <div class="question-block-compact">
+              <div class="qbc-number">Q5 <span class="text-muted">(20 marks)</span></div>
+              <div class="qbc-text">Explain India's non-alignment policy and its relevance today.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Column 3: AI Evaluation ── -->
+        <div class="review-col">
+          <div class="review-col-header">
+            🤖 AI Evaluation
+          </div>
+          <div class="review-col-body">
+
+            <!-- Score Display -->
+            <div class="score-display-block">
+              <span class="score-main">76</span><span class="score-denom text-muted"> / 80</span>
+              <div class="score-sub text-muted">AI Score — Pending Teacher Approval</div>
+            </div>
+
+            <hr class="divider" />
+
+            <!-- Q1 AI Score -->
+            <div class="ai-q-block">
+              <div class="ai-q-header d-flex justify-between align-center">
+                <span class="ai-q-label">Q1</span>
+                <span class="badge badge-success">9 / 10</span>
+              </div>
+              <p class="ai-q-feedback text-muted">Comprehensive answer covering all key aspects of the Cold War.</p>
+            </div>
+
+            <!-- Q2 AI Score -->
+            <div class="ai-q-block">
+              <div class="ai-q-header d-flex justify-between align-center">
+                <span class="ai-q-label">Q2</span>
+                <span class="badge badge-success">9 / 10</span>
+              </div>
+              <p class="ai-q-feedback text-muted">Good understanding of bipolarity and USSR collapse.</p>
+            </div>
+
+            <!-- Q3 AI Score -->
+            <div class="ai-q-block">
+              <div class="ai-q-header d-flex justify-between align-center">
+                <span class="ai-q-label">Q3</span>
+                <span class="badge badge-success">18 / 20</span>
+              </div>
+              <p class="ai-q-feedback text-muted">Well-structured. Minor gaps in economic examples.</p>
+            </div>
+
+            <!-- Q4 AI Score -->
+            <div class="ai-q-block">
+              <div class="ai-q-header d-flex justify-between align-center">
+                <span class="ai-q-label">Q4</span>
+                <span class="badge badge-success">20 / 20</span>
+              </div>
+              <p class="ai-q-feedback text-muted">Excellent detailed response on NIEO and India's contribution.</p>
+            </div>
+
+            <!-- Q5 AI Score -->
+            <div class="ai-q-block">
+              <div class="ai-q-header d-flex justify-between align-center">
+                <span class="ai-q-label">Q5</span>
+                <span class="badge badge-success">20 / 20</span>
+              </div>
+              <p class="ai-q-feedback text-muted">Strong analysis with relevant historical context.</p>
+            </div>
+
+            <hr class="divider" />
+
+            <!-- Overall Feedback -->
+            <div class="card card-sm">
+              <div class="card-header">
+                <h4 class="card-title">Overall Feedback</h4>
+              </div>
+              <div class="card-body">
+                <p class="form-label mb-4">Strengths:</p>
+                <p class="text-muted mb-8">• Strong conceptual understanding &nbsp;·&nbsp; Well-organized answers &nbsp;·&nbsp; Good use of examples</p>
+                <p class="form-label mb-4">Areas for Improvement:</p>
+                <p class="text-muted">• Some minor factual gaps in Q3 economic section</p>
+              </div>
+            </div>
+
+            <div class="d-flex gap-8 mt-12">
+              <button class="btn btn-sm btn-ghost">✏ Edit Score</button>
+              <button class="btn btn-sm btn-ghost">✏ Edit Feedback</button>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- /review-layout -->
+
+      <!-- ============================================================
+           APPROVAL BAR
+      ============================================================ -->
+      <div class="approval-bar">
+        <div class="d-flex gap-20 align-center">
+          <label class="approval-radio-label"><input type="radio" name="approval-decision" checked /> Approve as-is</label>
+          <label class="approval-radio-label"><input type="radio" name="approval-decision" /> Approve with edits</label>
+          <label class="approval-radio-label"><input type="radio" name="approval-decision" /> Reject</label>
+        </div>
+        <div class="d-flex gap-8">
+          <a href="teacher-pending-approvals.html" class="btn btn-secondary">← Previous Student</a>
+          <button class="btn btn-success">✓ Approve</button>
+          <button class="btn btn-primary">Next Student →</button>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /main-wrapper -->
+</body>
+</html>

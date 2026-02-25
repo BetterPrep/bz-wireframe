@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brainzeta — Assessment Calendar</title>
+  <link rel="stylesheet" href="styles/base.css" />
+  <style>
+    /* ── Calendar grid ── */
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      border-left: 1px solid var(--border, #e5e7eb);
+      border-top: 1px solid var(--border, #e5e7eb);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .cal-day-header {
+      background: #f9fafb;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-align: center;
+      padding: 8px 4px;
+      border-right: 1px solid var(--border, #e5e7eb);
+      border-bottom: 1px solid var(--border, #e5e7eb);
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .cal-day {
+      min-height: 90px;
+      padding: 6px 8px;
+      border-right: 1px solid var(--border, #e5e7eb);
+      border-bottom: 1px solid var(--border, #e5e7eb);
+      background: #fff;
+      vertical-align: top;
+    }
+    .cal-day.other-month {
+      background: #f9fafb;
+    }
+    .cal-day.today {
+      background: #eff6ff;
+    }
+    .cal-day-num {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 4px;
+    }
+    .cal-day.today .cal-day-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #2563eb;
+      color: #fff;
+      font-size: 0.75rem;
+    }
+    /* Calendar event pills */
+    .cal-event {
+      display: block;
+      font-size: 0.68rem;
+      padding: 2px 5px;
+      border-radius: 4px;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 500;
+    }
+    .cal-event.exam   { background: #fee2e2; color: #991b1b; }
+    .cal-event.quiz   { background: #fef9c3; color: #854d0e; }
+    .cal-event.assign { background: #d1fae5; color: #065f46; }
+    /* Legend items */
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: #374151;
+    }
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .legend-dot.exam   { background: #fee2e2; border: 1px solid #fca5a5; }
+    .legend-dot.quiz   { background: #fef9c3; border: 1px solid #fde047; }
+    .legend-dot.assign { background: #d1fae5; border: 1px solid #6ee7b7; }
+  </style>
+</head>
+<body class="app-layout">
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-text">Brainzeta</span>
+    </div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="principal-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="principal-assessment-calendar.html" class="sidebar-nav-item active"><span class="nav-icon">📅</span> Assessment Calendar</a></li>
+        <li><a href="principal-teacher-monitor.html" class="sidebar-nav-item"><span class="nav-icon">👩‍🏫</span> Teacher Monitor</a></li>
+        <li><a href="principal-student-performance.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Student Performance</a></li>
+        <li><a href="principal-assessment-review.html" class="sidebar-nav-item"><span class="nav-icon">🔍</span> Assessment Review</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ===================== MAIN CONTENT ===================== -->
+  <div class="main-wrapper">
+
+    <!-- ===================== TOPBAR ===================== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Assessment Calendar</span>
+      </div>
+      <div class="topbar-right">
+        <span class="badge badge-role">Principal</span>
+        <span class="notif-btn">🔔 <span class="notif-badge">4</span></span>
+        <div class="avatar-initials">MP</div>
+      </div>
+    </header>
+
+    <!-- ===================== PAGE BODY ===================== -->
+    <main class="page-body">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <span>Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-active">Assessment Calendar</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">Assessment Calendar</h1>
+        <p class="page-subtitle">February 2026</p>
+      </div>
+
+      <!-- ===================== MONTH NAV ===================== -->
+      <div class="d-flex justify-between align-center mb-16">
+        <button class="btn btn-secondary">← Prev Month</button>
+        <h3 style="margin:0; font-size:1.1rem; font-weight:600; color:#111827;">February 2026</h3>
+        <button class="btn btn-secondary">Next Month →</button>
+      </div>
+
+      <!-- ===================== FILTER BAR ===================== -->
+      <div class="filter-bar mb-16">
+        <select class="form-select">
+          <option>Grade: All</option>
+          <option>Grade 8</option>
+          <option>Grade 9</option>
+          <option>Grade 10</option>
+          <option>Grade 11</option>
+          <option>Grade 12</option>
+        </select>
+        <select class="form-select">
+          <option>Subject: All</option>
+          <option>Mathematics</option>
+          <option>Physics</option>
+          <option>Chemistry</option>
+          <option>Economics</option>
+          <option>History</option>
+          <option>English</option>
+        </select>
+        <select class="form-select">
+          <option>Type: All</option>
+          <option>Exam</option>
+          <option>Quiz</option>
+          <option>Assignment</option>
+        </select>
+      </div>
+
+      <!-- ===================== LEGEND ===================== -->
+      <div class="d-flex gap-16 mb-16">
+        <div class="legend-item">
+          <span class="legend-dot exam"></span>
+          <span>Exam</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot quiz"></span>
+          <span>Quiz</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot assign"></span>
+          <span>Assignment</span>
+        </div>
+      </div>
+
+      <!-- ===================== CALENDAR GRID ===================== -->
+      <div class="cal-grid">
+
+        <!-- Day headers -->
+        <div class="cal-day-header">Mon</div>
+        <div class="cal-day-header">Tue</div>
+        <div class="cal-day-header">Wed</div>
+        <div class="cal-day-header">Thu</div>
+        <div class="cal-day-header">Fri</div>
+        <div class="cal-day-header">Sat</div>
+        <div class="cal-day-header">Sun</div>
+
+        <!-- Row 1: Feb 2026 starts on Sunday — so Mon-Fri empty, Sat=1, Sun=2 -->
+        <div class="cal-day other-month"></div>
+        <div class="cal-day other-month"></div>
+        <div class="cal-day other-month"></div>
+        <div class="cal-day other-month"></div>
+        <div class="cal-day other-month"></div>
+        <div class="cal-day">
+          <div class="cal-day-num">1</div>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">2</div>
+        </div>
+
+        <!-- Row 2: 3–9 -->
+        <div class="cal-day">
+          <div class="cal-day-num">3</div>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">4</div>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">5</div>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">6</div>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">7</div>
+          <span class="cal-event exam">Math HY Exam 12-A</span>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">8</div>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">9</div>
+        </div>
+
+        <!-- Row 3: 10–16 -->
+        <div class="cal-day">
+          <div class="cal-day-num">10</div>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">11</div>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">12</div>
+          <span class="cal-event quiz">Physics Quiz 11-B</span>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">13</div>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">14</div>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">15</div>
+          <span class="cal-event assign">Econ Assignment 12-C</span>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">16</div>
+        </div>
+
+        <!-- Row 4: 17–23 — day 20 is today -->
+        <div class="cal-day">
+          <div class="cal-day-num">17</div>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">18</div>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">19</div>
+        </div>
+        <div class="cal-day today">
+          <div class="cal-day-num">20</div>
+          <span class="cal-event exam">Chemistry Test 11-A</span>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">21</div>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">22</div>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">23</div>
+        </div>
+
+        <!-- Row 5: 24–28 + 2 empty -->
+        <div class="cal-day">
+          <div class="cal-day-num">24</div>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">25</div>
+          <span class="cal-event assign">History Essay 10-A</span>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">26</div>
+          <span class="cal-event exam">Math HY 12-B</span>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">27</div>
+        </div>
+        <div class="cal-day">
+          <div class="cal-day-num">28</div>
+        </div>
+        <div class="cal-day other-month"></div>
+        <div class="cal-day other-month"></div>
+
+      </div><!-- /.cal-grid -->
+
+      <!-- ===================== ASSESSMENTS THIS MONTH TABLE ===================== -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Assessments This Month</h2>
+        </div>
+        <div class="card-body">
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Assessment</th>
+                  <th>Subject</th>
+                  <th>Grade / Section</th>
+                  <th>Type</th>
+                  <th>Teacher</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Feb 7</td>
+                  <td>Math Half-Yearly Exam</td>
+                  <td>Mathematics</td>
+                  <td>12-A</td>
+                  <td><span class="badge badge-error">Exam</span></td>
+                  <td>Mr. Sharma</td>
+                </tr>
+                <tr>
+                  <td>Feb 12</td>
+                  <td>Physics Quiz</td>
+                  <td>Physics</td>
+                  <td>11-B</td>
+                  <td><span class="badge badge-warning">Quiz</span></td>
+                  <td>Mr. Gupta</td>
+                </tr>
+                <tr>
+                  <td>Feb 15</td>
+                  <td>Economics Assignment</td>
+                  <td>Economics</td>
+                  <td>12-C</td>
+                  <td><span class="badge badge-success">Assignment</span></td>
+                  <td>Ms. Verma</td>
+                </tr>
+                <tr>
+                  <td>Feb 20</td>
+                  <td>Chemistry Test</td>
+                  <td>Chemistry</td>
+                  <td>11-A</td>
+                  <td><span class="badge badge-error">Exam</span></td>
+                  <td>Ms. Rao</td>
+                </tr>
+                <tr>
+                  <td>Feb 25</td>
+                  <td>History Essay</td>
+                  <td>History</td>
+                  <td>10-A</td>
+                  <td><span class="badge badge-success">Assignment</span></td>
+                  <td>Mr. Nair</td>
+                </tr>
+                <tr>
+                  <td>Feb 26</td>
+                  <td>Math Half-Yearly Exam</td>
+                  <td>Mathematics</td>
+                  <td>12-B</td>
+                  <td><span class="badge badge-error">Exam</span></td>
+                  <td>Mr. Sharma</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+
+</body>
+</html>

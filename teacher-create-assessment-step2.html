@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Assessment — Step 2 — Brainzeta Teacher</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body class="app-layout">
+
+  <!-- ============================================================
+       SIDEBAR
+  ============================================================ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-text">Brainzeta</span>
+    </div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="teacher-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="teacher-assessments-list.html" class="sidebar-nav-item active"><span class="nav-icon">📋</span> My Assessments</a></li>
+        <li><a href="teacher-class-analytics.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Class Analytics</a></li>
+        <li><a href="teacher-submission-tracker.html" class="sidebar-nav-item"><span class="nav-icon">📬</span> Submission Tracker</a></li>
+        <li><a href="teacher-pending-approvals.html" class="sidebar-nav-item"><span class="nav-icon">✅</span> Pending Approvals</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <div class="main-wrapper">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Create Assessment</span>
+      </div>
+      <div class="topbar-right">
+        <span class="badge badge-role">Teacher</span>
+        <span class="notif-btn">🔔 <span class="notif-badge">8</span></span>
+        <span class="avatar avatar-sm">RS</span>
+      </div>
+    </header>
+
+    <!-- PAGE BODY -->
+    <main class="page-body">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <span class="breadcrumb-item">Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item"><a href="teacher-assessments-list.html">My Assessments</a></span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item breadcrumb-current">Create New</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">Create Assessment</h1>
+      </div>
+
+      <!-- ── Stepper ── -->
+      <div class="stepper">
+        <div class="stepper-step stepper-done">
+          <div class="stepper-circle">✓</div>
+          <div class="stepper-label">Basic Info</div>
+        </div>
+        <div class="stepper-connector stepper-connector-done"></div>
+        <div class="stepper-step stepper-active">
+          <div class="stepper-circle">2</div>
+          <div class="stepper-label">Upload Files</div>
+        </div>
+        <div class="stepper-connector"></div>
+        <div class="stepper-step stepper-pending">
+          <div class="stepper-circle">3</div>
+          <div class="stepper-label">Review Rubric</div>
+        </div>
+      </div>
+
+      <!-- ── Step 2 Header Card ── -->
+      <div class="card mt-24">
+        <div class="card-header">
+          <h2 class="card-title">Step 2: Upload Files</h2>
+        </div>
+      </div>
+
+      <!-- ── Question Paper Card ── -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h3 class="card-title">Question Paper <span class="required">*</span></h3>
+        </div>
+        <div class="card-body">
+          <div class="dropzone dropzone-has-file">
+            <span class="dropzone-icon">✅ 📄</span>
+            <p class="dropzone-primary"><strong>math_halfyearly_qp.pdf</strong> uploaded</p>
+            <p class="dropzone-secondary text-muted">12 pages · 2.4 MB</p>
+          </div>
+          <div class="file-preview mt-12">
+            <span class="file-preview-icon">📄</span>
+            <span class="file-preview-name">math_halfyearly_qp.pdf</span>
+            <span class="file-preview-meta text-muted">12 pages, 2.4 MB</span>
+            <button class="btn btn-sm btn-ghost file-preview-remove">Remove ✕</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Marking Rubric Card ── -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h3 class="card-title">Marking Rubric <span class="required">*</span></h3>
+        </div>
+        <div class="card-body">
+          <div class="dropzone dropzone-has-file">
+            <span class="dropzone-icon">✅ 📄</span>
+            <p class="dropzone-primary"><strong>marking_rubric.pdf</strong> uploaded</p>
+            <p class="dropzone-secondary text-muted">3 pages · 0.8 MB</p>
+          </div>
+          <div class="file-preview mt-12">
+            <span class="file-preview-icon">📄</span>
+            <span class="file-preview-name">marking_rubric.pdf</span>
+            <span class="file-preview-meta text-muted">3 pages, 0.8 MB</span>
+            <button class="btn btn-sm btn-ghost file-preview-remove">Remove ✕</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Alert Info ── -->
+      <div class="alert alert-info mt-16">
+        📄 <strong>Important:</strong> Upload your question paper and marking rubric as separate PDF files. Max size: 50 MB each.
+      </div>
+
+      <!-- ── Validation Status Card ── -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h3 class="card-title">Validation Status</h3>
+        </div>
+        <div class="card-body">
+          <ul class="list-plain">
+            <li class="d-flex gap-8 align-center validation-item">
+              <span class="text-success">✅</span>
+              <span>Files are separate documents</span>
+            </li>
+            <li class="d-flex gap-8 align-center validation-item">
+              <span class="text-success">✅</span>
+              <span>Valid PDF format</span>
+            </li>
+            <li class="d-flex gap-8 align-center validation-item">
+              <span class="text-warning">⏳</span>
+              <span>Extracting rubric structure from <em>marking_rubric.pdf</em>...</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions mt-24">
+        <a href="teacher-create-assessment-step1.html" class="btn btn-secondary">← Back</a>
+        <a href="teacher-create-assessment-step3.html" class="btn btn-primary">Next: Review Rubric →</a>
+      </div>
+
+    </main>
+  </div><!-- /main-wrapper -->
+</body>
+</html>

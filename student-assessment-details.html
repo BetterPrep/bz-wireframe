@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assessment Details — Brainzeta Student</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body class="layout-shell">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="student-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="student-assessment-details.html" class="sidebar-nav-item active"><span class="nav-icon">📋</span> My Assessments</a></li>
+        <li><a href="student-upload-answer.html" class="sidebar-nav-item"><span class="nav-icon">📤</span> Upload Answer</a></li>
+        <li><a href="student-outcomes-list.html" class="sidebar-nav-item"><span class="nav-icon">🎯</span> My Outcomes</a></li>
+        <li><a href="student-result-details.html" class="sidebar-nav-item"><span class="nav-icon">📈</span> My Results</a></li>
+        <li><a href="student-practice-mode.html" class="sidebar-nav-item"><span class="nav-icon">🧠</span> Practice Mode</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN WRAPPER ===== -->
+  <div class="main-wrapper">
+
+    <!-- ===== TOPBAR ===== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Assessment Details</span>
+      </div>
+      <div class="topbar-right">
+        <span class="role-badge badge badge-primary">Student</span>
+        <button class="btn btn-ghost btn-icon notif-btn" aria-label="Notifications">
+          🔔 <span class="notif-badge">2</span>
+        </button>
+        <div class="avatar-circle">AK</div>
+      </div>
+    </header>
+
+    <!-- ===== PAGE CONTENT ===== -->
+    <main class="page-content">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <span class="breadcrumb-item">Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item"><a href="student-dashboard.html">My Assessments</a></span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item breadcrumb-current">Math Half-Yearly Exam</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Math Half-Yearly Exam</h1>
+        </div>
+        <div class="page-actions">
+          <a href="student-upload-answer.html" class="btn btn-primary">📤 Submit Answer Sheet</a>
+        </div>
+      </div>
+
+      <!-- ===== CARD: Assessment Information ===== -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h2 class="card-title">📋 Assessment Information</h2>
+        </div>
+        <div class="card-body">
+          <div class="info-grid">
+            <div class="info-row">
+              <div class="info-cell">
+                <span class="info-label">Subject</span>
+                <span class="info-value">Mathematics</span>
+              </div>
+              <div class="info-cell">
+                <span class="info-label">Grade</span>
+                <span class="info-value">12</span>
+              </div>
+              <div class="info-cell">
+                <span class="info-label">Section</span>
+                <span class="info-value">A</span>
+              </div>
+              <div class="info-cell">
+                <span class="info-label">Max Marks</span>
+                <span class="info-value">80</span>
+              </div>
+            </div>
+            <div class="info-row mt-12">
+              <div class="info-cell">
+                <span class="info-label">Due Date</span>
+                <span class="info-value">Feb 26, 2026</span>
+              </div>
+              <div class="info-cell">
+                <span class="info-label">Time Left</span>
+                <span class="info-value"><span class="badge badge-error">2 days remaining</span></span>
+              </div>
+              <div class="info-cell">
+                <span class="info-label">Status</span>
+                <span class="info-value"><span class="badge badge-error">Not Submitted</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== CARD: Question Paper ===== -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h2 class="card-title">📄 Question Paper</h2>
+        </div>
+        <div class="card-body">
+          <div class="pdf-viewer-placeholder" style="height:360px; border:1px solid #e0e0e0; background:#fafafa; display:flex; flex-direction:column; align-items:center; justify-content:center; border-radius:6px; gap:12px;">
+            <span style="font-size:48px;">📄</span>
+            <span style="font-size:15px; color:#555; font-weight:500;">Click to view Question Paper</span>
+            <span style="font-size:13px; color:#888;">Math Half-Yearly Exam — 2026.pdf</span>
+          </div>
+          <button class="btn btn-secondary btn-full-width mt-12">📥 Download PDF</button>
+        </div>
+      </div>
+
+      <!-- ===== CARD: Your Submission ===== -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h2 class="card-title">📤 Your Submission</h2>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-between align-center">
+            <div>
+              <span class="info-label">Status: </span>
+              <span class="badge badge-error">Not Submitted</span>
+            </div>
+            <div>
+              <a href="student-upload-answer.html" class="btn btn-primary">📤 Upload Answer Sheet</a>
+            </div>
+          </div>
+          <p class="form-hint mt-8">Submit your scanned answer sheet before Feb 26, 2026</p>
+        </div>
+      </div>
+
+      <!-- Alert -->
+      <div class="alert alert-warning mt-16">
+        ⏰ Deadline in 2 days. Make sure to scan all pages clearly before uploading.
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Result Details — Brainzeta Student</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body class="layout-shell">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="student-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="student-assessment-details.html" class="sidebar-nav-item"><span class="nav-icon">📋</span> My Assessments</a></li>
+        <li><a href="student-upload-answer.html" class="sidebar-nav-item"><span class="nav-icon">📤</span> Upload Answer</a></li>
+        <li><a href="student-outcomes-list.html" class="sidebar-nav-item"><span class="nav-icon">🎯</span> My Outcomes</a></li>
+        <li><a href="student-result-details.html" class="sidebar-nav-item active"><span class="nav-icon">📈</span> My Results</a></li>
+        <li><a href="student-practice-mode.html" class="sidebar-nav-item"><span class="nav-icon">🧠</span> Practice Mode</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN WRAPPER ===== -->
+  <div class="main-wrapper">
+
+    <!-- ===== TOPBAR ===== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Result Details</span>
+      </div>
+      <div class="topbar-right">
+        <span class="role-badge badge badge-primary">Student</span>
+        <button class="btn btn-ghost btn-icon notif-btn" aria-label="Notifications">
+          🔔 <span class="notif-badge">2</span>
+        </button>
+        <div class="avatar-circle">AK</div>
+      </div>
+    </header>
+
+    <!-- ===== PAGE CONTENT ===== -->
+    <main class="page-content">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <span class="breadcrumb-item">Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item"><a href="student-outcomes-list.html">My Outcomes</a></span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item breadcrumb-current">Math Half-Yearly Exam</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Math Half-Yearly Exam — Result</h1>
+        </div>
+      </div>
+
+      <!-- ===== CARD: Your Score ===== -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h2 class="card-title">🏆 Your Score</h2>
+        </div>
+        <div class="card-body text-center" style="padding:32px 24px;">
+          <div style="font-size:56px; font-weight:800; color:#1a237e; line-height:1;">
+            72 <span style="font-size:28px; font-weight:400; color:#555;">/ 80</span>
+          </div>
+          <div class="d-flex justify-center gap-16 mt-16">
+            <span class="badge badge-success" style="font-size:15px; padding:6px 16px;">Grade A</span>
+            <span class="badge badge-primary" style="font-size:15px; padding:6px 16px;">90%</span>
+          </div>
+          <p class="text-muted mt-12" style="font-size:13px;">Approved by: Mr. Ramesh Sharma · Feb 24, 2026</p>
+        </div>
+      </div>
+
+      <!-- ===== CARD: Question-wise Breakdown ===== -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h2 class="card-title">📝 Question-wise Breakdown</h2>
+        </div>
+        <div class="card-body">
+
+          <!-- Q1 -->
+          <div class="question-block" style="border:1px solid #e8e8e8; border-radius:6px; padding:14px 16px; margin-bottom:12px; background:#fafafa;">
+            <div class="d-flex justify-between align-center">
+              <div>
+                <span style="font-weight:600;">Q1</span>
+                <span class="text-muted" style="font-size:13px; margin-left:8px;">(10 marks)</span>
+              </div>
+              <div class="d-flex align-center gap-8">
+                <span style="font-weight:700; font-size:15px;">9/10</span>
+                <span class="badge badge-success">✓</span>
+              </div>
+            </div>
+            <p style="font-size:13px; color:#555; margin-top:8px; margin-bottom:0;">
+              <strong>Feedback:</strong> Excellent answer. Well-structured with key points covered.
+            </p>
+          </div>
+
+          <!-- Q2 -->
+          <div class="question-block" style="border:1px solid #e8e8e8; border-radius:6px; padding:14px 16px; margin-bottom:12px; background:#fafafa;">
+            <div class="d-flex justify-between align-center">
+              <div>
+                <span style="font-weight:600;">Q2</span>
+                <span class="text-muted" style="font-size:13px; margin-left:8px;">(10 marks)</span>
+              </div>
+              <div class="d-flex align-center gap-8">
+                <span style="font-weight:700; font-size:15px;">9/10</span>
+                <span class="badge badge-success">✓</span>
+              </div>
+            </div>
+            <p style="font-size:13px; color:#555; margin-top:8px; margin-bottom:0;">
+              <strong>Feedback:</strong> Good understanding of bipolar world. Mentioned USSR collapse.
+            </p>
+          </div>
+
+          <!-- Q3 -->
+          <div class="question-block" style="border:1px solid #e8e8e8; border-radius:6px; padding:14px 16px; margin-bottom:12px; background:#fafafa;">
+            <div class="d-flex justify-between align-center">
+              <div>
+                <span style="font-weight:600;">Q3</span>
+                <span class="text-muted" style="font-size:13px; margin-left:8px;">(20 marks)</span>
+              </div>
+              <div class="d-flex align-center gap-8">
+                <span style="font-weight:700; font-size:15px;">16/20</span>
+                <span class="badge badge-warning">~</span>
+              </div>
+            </div>
+            <p style="font-size:13px; color:#555; margin-top:8px; margin-bottom:0;">
+              <strong>Feedback:</strong> Solid analysis of US hegemony. Missing specific economic examples like WTO and IMF roles.
+            </p>
+          </div>
+
+          <!-- Q4 -->
+          <div class="question-block" style="border:1px solid #e8e8e8; border-radius:6px; padding:14px 16px; margin-bottom:12px; background:#fafafa;">
+            <div class="d-flex justify-between align-center">
+              <div>
+                <span style="font-weight:600;">Q4</span>
+                <span class="text-muted" style="font-size:13px; margin-left:8px;">(20 marks)</span>
+              </div>
+              <div class="d-flex align-center gap-8">
+                <span style="font-weight:700; font-size:15px;">18/20</span>
+                <span class="badge badge-success">✓</span>
+              </div>
+            </div>
+            <p style="font-size:13px; color:#555; margin-top:8px; margin-bottom:0;">
+              <strong>Feedback:</strong> Well explained NIEO. India's role covered comprehensively.
+            </p>
+          </div>
+
+          <!-- Q5 -->
+          <div class="question-block" style="border:1px solid #e8e8e8; border-radius:6px; padding:14px 16px; margin-bottom:0; background:#fafafa;">
+            <div class="d-flex justify-between align-center">
+              <div>
+                <span style="font-weight:600;">Q5</span>
+                <span class="text-muted" style="font-size:13px; margin-left:8px;">(20 marks)</span>
+              </div>
+              <div class="d-flex align-center gap-8">
+                <span style="font-weight:700; font-size:15px;">20/20</span>
+                <span class="badge badge-success">✓ Full marks</span>
+              </div>
+            </div>
+            <p style="font-size:13px; color:#555; margin-top:8px; margin-bottom:0;">
+              <strong>Feedback:</strong> Outstanding non-alignment analysis. Excellent use of historical context.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== CARD: Overall Feedback ===== -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h2 class="card-title">💡 Overall Feedback</h2>
+        </div>
+        <div class="card-body">
+
+          <div class="grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+
+            <!-- Strengths -->
+            <div>
+              <h3 style="font-size:14px; font-weight:700; margin-bottom:10px; color:#2e7d32;">✅ Strengths</h3>
+              <ul class="list-plain" style="font-size:14px; color:#333;">
+                <li style="padding:3px 0;">• Strong conceptual understanding</li>
+                <li style="padding:3px 0;">• Well-organized answers</li>
+                <li style="padding:3px 0;">• Excellent non-alignment analysis</li>
+                <li style="padding:3px 0;">• Good use of historical examples</li>
+              </ul>
+            </div>
+
+            <!-- Areas for Improvement -->
+            <div>
+              <h3 style="font-size:14px; font-weight:700; margin-bottom:10px; color:#e65100;">📈 Areas for Improvement</h3>
+              <ul class="list-plain" style="font-size:14px; color:#333;">
+                <li style="padding:3px 0;">• Include more economic examples in Q3</li>
+                <li style="padding:3px 0;">• Expand on international organization roles</li>
+                <li style="padding:3px 0;">• Double-check facts in complex questions</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- Focus Areas -->
+          <div class="card mt-16" style="background:#f3f4f6; border:1px solid #e0e0e0;">
+            <div class="card-body" style="padding:14px 16px;">
+              <p style="font-size:13px; font-weight:600; margin-bottom:10px;">📚 Focus Areas for Next Study Session</p>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <span class="chip" style="background:#e8eaf6; color:#3949ab; border:1px solid #c5cae9; padding:4px 12px; border-radius:20px; font-size:13px;">Chapter 3: US Hegemony</span>
+                <span class="chip" style="background:#e8eaf6; color:#3949ab; border:1px solid #c5cae9; padding:4px 12px; border-radius:20px; font-size:13px;">Chapter 6: International Economic Institutions</span>
+                <span class="chip" style="background:#e8eaf6; color:#3949ab; border:1px solid #c5cae9; padding:4px 12px; border-radius:20px; font-size:13px;">Chapter 8: India's Foreign Policy</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions mt-16" style="justify-content:flex-start; border:none; padding-top:8px;">
+        <button class="btn btn-secondary">📄 View Answer Sheet</button>
+        <button class="btn btn-secondary">⬇ Download PDF</button>
+        <button class="btn btn-ghost">🖨 Print</button>
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+
+</body>
+</html>

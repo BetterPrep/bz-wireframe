@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brainzeta — SuperAdmin Dashboard</title>
+  <link rel="stylesheet" href="styles/base.css" />
+  <style>
+    /* ====== PAGE-SPECIFIC: Bar Chart ====== */
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      height: 180px;
+      padding: 0 8px;
+    }
+    .bar-chart-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      gap: 6px;
+    }
+    .bar-chart-bar {
+      width: 100%;
+      background: var(--color-primary);
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      opacity: 0.85;
+    }
+    .bar-chart-label {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 60px;
+    }
+    .bar-chart-value {
+      font-size: var(--font-size-xs);
+      color: var(--color-text);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ====== APP SHELL ====== -->
+<div class="app-shell">
+
+  <!-- ====== SIDEBAR ====== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-text">Brainzeta</span>
+    </div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="superadmin-dashboard.html" class="sidebar-nav-item active"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="superadmin-schools-list.html" class="sidebar-nav-item"><span class="nav-icon">🏫</span> Schools</a></li>
+        <li><a href="superadmin-textbooks.html" class="sidebar-nav-item"><span class="nav-icon">📚</span> Textbooks</a></li>
+        <li><a href="superadmin-token-usage.html" class="sidebar-nav-item"><span class="nav-icon">🪙</span> Token Usage</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+  <!-- ====== END SIDEBAR ====== -->
+
+  <!-- ====== MAIN AREA ====== -->
+  <div class="main-wrapper">
+
+    <!-- ====== TOPBAR ====== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">System Overview</div>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-role-badge">Super Admin</span>
+        <button class="topbar-notif-btn">🔔<span class="notif-badge">3</span></button>
+        <div class="topbar-avatar">SA</div>
+      </div>
+    </header>
+    <!-- ====== END TOPBAR ====== -->
+
+    <!-- ====== PAGE CONTENT ====== -->
+    <main class="page-content">
+
+      <!-- ====== BREADCRUMB ====== -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="superadmin-dashboard.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Dashboard</span>
+      </nav>
+
+      <!-- ====== PAGE HEADER ====== -->
+      <div class="page-header">
+        <div class="page-header-left">
+          <h1 class="page-title">System Overview</h1>
+          <p class="page-subtitle">Brainzeta platform health and activity</p>
+        </div>
+      </div>
+
+      <!-- ====== STAT GRID ====== -->
+      <div class="stat-grid">
+
+        <div class="stat-card">
+          <div class="stat-icon blue">🏫</div>
+          <div class="stat-body">
+            <div class="stat-value">42</div>
+            <div class="stat-label">Total Schools</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon green">👩‍🏫</div>
+          <div class="stat-body">
+            <div class="stat-value">1,284</div>
+            <div class="stat-label">Teachers</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon orange">👨‍🎓</div>
+          <div class="stat-body">
+            <div class="stat-value">38,560</div>
+            <div class="stat-label">Students</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon purple">✅</div>
+          <div class="stat-body">
+            <div class="stat-value">98.5%</div>
+            <div class="stat-label">System Uptime</div>
+          </div>
+        </div>
+
+      </div>
+      <!-- ====== END STAT GRID ====== -->
+
+      <!-- ====== TOKEN USAGE CHART ====== -->
+      <section class="section">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Token Usage This Month</h2>
+          </div>
+          <div class="card-body">
+            <div class="chart-area">
+              <div class="bar-chart">
+
+                <div class="bar-chart-col">
+                  <div class="bar-chart-value">25k</div>
+                  <div class="bar-chart-bar" style="height: 140px;"></div>
+                  <div class="bar-chart-label">ABC School</div>
+                </div>
+
+                <div class="bar-chart-col">
+                  <div class="bar-chart-value">18.5k</div>
+                  <div class="bar-chart-bar" style="height: 104px;"></div>
+                  <div class="bar-chart-label">XYZ Academy</div>
+                </div>
+
+                <div class="bar-chart-col">
+                  <div class="bar-chart-value">16.2k</div>
+                  <div class="bar-chart-bar" style="height: 91px;"></div>
+                  <div class="bar-chart-label">DEF High</div>
+                </div>
+
+                <div class="bar-chart-col">
+                  <div class="bar-chart-value">14.8k</div>
+                  <div class="bar-chart-bar" style="height: 83px;"></div>
+                  <div class="bar-chart-label">Sunrise Intl</div>
+                </div>
+
+                <div class="bar-chart-col">
+                  <div class="bar-chart-value">12.5k</div>
+                  <div class="bar-chart-bar" style="height: 70px;"></div>
+                  <div class="bar-chart-label">Westlake</div>
+                </div>
+
+                <div class="bar-chart-col">
+                  <div class="bar-chart-value">11k</div>
+                  <div class="bar-chart-bar" style="height: 62px;"></div>
+                  <div class="bar-chart-label">Green Valley</div>
+                </div>
+
+                <div class="bar-chart-col">
+                  <div class="bar-chart-value">9.4k</div>
+                  <div class="bar-chart-bar" style="height: 53px;"></div>
+                  <div class="bar-chart-label">Oakridge</div>
+                </div>
+
+                <div class="bar-chart-col">
+                  <div class="bar-chart-value">7.8k</div>
+                  <div class="bar-chart-bar" style="height: 44px;"></div>
+                  <div class="bar-chart-label">Maple Leaf</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ====== END TOKEN USAGE CHART ====== -->
+
+      <!-- ====== RECENT ACTIVITY ====== -->
+      <section class="section">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Recent Activity</h2>
+          </div>
+          <div class="card-body">
+            <ul class="activity-feed list-plain">
+              <li class="activity-item">
+                <span class="activity-icon">🏫</span>
+                <div class="activity-body">
+                  <div class="activity-text">ABC School enrolled 50 new students</div>
+                  <div class="activity-time text-muted">2 hours ago</div>
+                </div>
+              </li>
+              <li class="activity-item">
+                <span class="activity-icon">📚</span>
+                <div class="activity-body">
+                  <div class="activity-text">XYZ Academy uploaded 3 new textbooks</div>
+                  <div class="activity-time text-muted">4 hours ago</div>
+                </div>
+              </li>
+              <li class="activity-item">
+                <span class="activity-icon">✅</span>
+                <div class="activity-body">
+                  <div class="activity-text">DEF High: 200 submissions evaluated</div>
+                  <div class="activity-time text-muted">6 hours ago</div>
+                </div>
+              </li>
+              <li class="activity-item">
+                <span class="activity-icon">👩‍🏫</span>
+                <div class="activity-body">
+                  <div class="activity-text">Sunrise School added 12 teachers</div>
+                  <div class="activity-time text-muted">Yesterday, 3:45 PM</div>
+                </div>
+              </li>
+              <li class="activity-item">
+                <span class="activity-icon">📝</span>
+                <div class="activity-body">
+                  <div class="activity-text">Westlake Academy created 8 assessments</div>
+                  <div class="activity-time text-muted">Yesterday, 11:20 AM</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!-- ====== END RECENT ACTIVITY ====== -->
+
+      <!-- ====== QUICK ACTIONS ====== -->
+      <section class="section">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Quick Actions</h2>
+          </div>
+          <div class="card-body">
+            <div class="quick-actions">
+              <a href="superadmin-add-school.html" class="btn btn-primary">+ Add School</a>
+              <a href="superadmin-textbooks.html" class="btn btn-secondary">📚 Manage Textbooks</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ====== END QUICK ACTIONS ====== -->
+
+    </main>
+    <!-- ====== END PAGE CONTENT ====== -->
+
+  </div>
+  <!-- ====== END MAIN AREA ====== -->
+
+</div>
+<!-- ====== END APP SHELL ====== -->
+
+</body>
+</html>

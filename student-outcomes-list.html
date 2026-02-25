@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Outcomes — Brainzeta Student</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body class="layout-shell">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="student-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="student-assessment-details.html" class="sidebar-nav-item"><span class="nav-icon">📋</span> My Assessments</a></li>
+        <li><a href="student-upload-answer.html" class="sidebar-nav-item"><span class="nav-icon">📤</span> Upload Answer</a></li>
+        <li><a href="student-outcomes-list.html" class="sidebar-nav-item active"><span class="nav-icon">🎯</span> My Outcomes</a></li>
+        <li><a href="student-result-details.html" class="sidebar-nav-item"><span class="nav-icon">📈</span> My Results</a></li>
+        <li><a href="student-practice-mode.html" class="sidebar-nav-item"><span class="nav-icon">🧠</span> Practice Mode</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN WRAPPER ===== -->
+  <div class="main-wrapper">
+
+    <!-- ===== TOPBAR ===== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">My Outcomes</span>
+      </div>
+      <div class="topbar-right">
+        <span class="role-badge badge badge-primary">Student</span>
+        <button class="btn btn-ghost btn-icon notif-btn" aria-label="Notifications">
+          🔔 <span class="notif-badge">2</span>
+        </button>
+        <div class="avatar-circle">AK</div>
+      </div>
+    </header>
+
+    <!-- ===== PAGE CONTENT ===== -->
+    <main class="page-content">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <span class="breadcrumb-item">Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item breadcrumb-current">My Outcomes</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">My Outcomes</h1>
+          <p class="page-subtitle">Your marked assessments and results</p>
+        </div>
+      </div>
+
+      <!-- Tab Pills -->
+      <div class="tab-pills">
+        <a href="student-dashboard.html" class="tab-pill">Workspace</a>
+        <a href="student-outcomes-list.html" class="tab-pill active">Outcomes</a>
+      </div>
+
+      <!-- Alert -->
+      <div class="alert alert-info mt-16">
+        🆕 You have 2 new results! Check below.
+      </div>
+
+      <!-- ===== CARD: New Results ===== -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h2 class="card-title">🎉 New Results — Recently Received</h2>
+        </div>
+        <div class="card-body">
+          <ul class="list-plain list-spaced">
+            <li class="list-item-row">
+              <span>📊 <strong>Math Half-Yearly Exam</strong></span>
+              <span class="text-muted">Score: 72/80 (90%)</span>
+              <span class="badge badge-success">Grade A</span>
+              <span class="text-muted" style="font-size:13px;">Received: Today</span>
+              <a href="student-result-details.html" class="btn btn-sm btn-primary">View Details</a>
+            </li>
+            <li class="list-item-row">
+              <span>📊 <strong>Physics Quiz</strong></span>
+              <span class="text-muted">Score: 18/20 (90%)</span>
+              <span class="badge badge-success">Grade A</span>
+              <span class="text-muted" style="font-size:13px;">Received: 2 days ago</span>
+              <a href="student-result-details.html" class="btn btn-sm btn-primary">View Details</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ===== CARD: All Results ===== -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h2 class="card-title">📊 All Results</h2>
+        </div>
+        <div class="card-body">
+
+          <!-- Filter Bar -->
+          <div class="filter-bar mb-16">
+            <div class="filter-group">
+              <label class="filter-label">Subject</label>
+              <select class="form-select">
+                <option>All</option>
+                <option>Mathematics</option>
+                <option>Physics</option>
+                <option>Chemistry</option>
+                <option>English</option>
+                <option>Political Science</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label class="filter-label">Date</label>
+              <select class="form-select">
+                <option>Last 3 Months</option>
+                <option>Last 6 Months</option>
+                <option>This Year</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Assessment</th>
+                  <th>Subject</th>
+                  <th>Score</th>
+                  <th>%</th>
+                  <th>Grade</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Math HY Exam</td>
+                  <td>Mathematics</td>
+                  <td>72/80</td>
+                  <td>90%</td>
+                  <td><span class="badge badge-success">A</span></td>
+                  <td>Today</td>
+                  <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View</a></td>
+                </tr>
+                <tr>
+                  <td>Physics Quiz</td>
+                  <td>Physics</td>
+                  <td>18/20</td>
+                  <td>90%</td>
+                  <td><span class="badge badge-success">A</span></td>
+                  <td>2d ago</td>
+                  <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View</a></td>
+                </tr>
+                <tr>
+                  <td>Pol Science Exam</td>
+                  <td>Pol. Science</td>
+                  <td>65/80</td>
+                  <td>81%</td>
+                  <td><span class="badge badge-primary">B+</span></td>
+                  <td>1w ago</td>
+                  <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View</a></td>
+                </tr>
+                <tr>
+                  <td>Chemistry Lab</td>
+                  <td>Chemistry</td>
+                  <td>34/40</td>
+                  <td>85%</td>
+                  <td><span class="badge badge-success">A</span></td>
+                  <td>2w ago</td>
+                  <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View</a></td>
+                </tr>
+                <tr>
+                  <td>English Grammar</td>
+                  <td>English</td>
+                  <td>48/50</td>
+                  <td>96%</td>
+                  <td><span class="badge badge-success">A+</span></td>
+                  <td>3w ago</td>
+                  <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+
+</body>
+</html>

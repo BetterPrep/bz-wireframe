@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brainzeta — System Textbooks</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body>
+
+<!-- ====== APP SHELL ====== -->
+<div class="app-shell">
+
+  <!-- ====== SIDEBAR ====== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-text">Brainzeta</span>
+    </div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="superadmin-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="superadmin-schools-list.html" class="sidebar-nav-item"><span class="nav-icon">🏫</span> Schools</a></li>
+        <li><a href="superadmin-textbooks.html" class="sidebar-nav-item active"><span class="nav-icon">📚</span> Textbooks</a></li>
+        <li><a href="superadmin-token-usage.html" class="sidebar-nav-item"><span class="nav-icon">🪙</span> Token Usage</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+  <!-- ====== END SIDEBAR ====== -->
+
+  <!-- ====== MAIN AREA ====== -->
+  <div class="main-wrapper">
+
+    <!-- ====== TOPBAR ====== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">System Textbooks</div>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-role-badge">Super Admin</span>
+        <button class="topbar-notif-btn">🔔<span class="notif-badge">3</span></button>
+        <div class="topbar-avatar">SA</div>
+      </div>
+    </header>
+    <!-- ====== END TOPBAR ====== -->
+
+    <!-- ====== PAGE CONTENT ====== -->
+    <main class="page-content">
+
+      <!-- ====== BREADCRUMB ====== -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="superadmin-dashboard.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Textbooks</span>
+      </nav>
+
+      <!-- ====== PAGE HEADER ====== -->
+      <div class="page-header">
+        <div class="page-header-left">
+          <h1 class="page-title">System Textbook Library</h1>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary">+ Add Textbook</button>
+        </div>
+      </div>
+
+      <!-- ====== FILTER BAR ====== -->
+      <div class="filter-bar">
+        <select class="form-control form-select" name="grade_filter" aria-label="Filter by grade" style="width: auto;">
+          <option value="" selected>Grade: All</option>
+          <option value="9">Grade 9</option>
+          <option value="10">Grade 10</option>
+          <option value="11">Grade 11</option>
+          <option value="12">Grade 12</option>
+        </select>
+        <select class="form-control form-select" name="subject_filter" aria-label="Filter by subject" style="width: auto;">
+          <option value="" selected>Subject: All</option>
+          <option value="maths">Mathematics</option>
+          <option value="physics">Physics</option>
+          <option value="chemistry">Chemistry</option>
+          <option value="science">Science</option>
+          <option value="polsci">Political Science</option>
+          <option value="economics">Economics</option>
+          <option value="sst">Social Science</option>
+        </select>
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input class="form-control" type="text" placeholder="Search textbooks..." aria-label="Search textbooks" />
+        </div>
+      </div>
+      <!-- ====== END FILTER BAR ====== -->
+
+      <!-- ====== TEXTBOOKS TABLE ====== -->
+      <div class="table-wrapper">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Grade</th>
+              <th>Subject</th>
+              <th>Title</th>
+              <th>Publisher</th>
+              <th>Chapters</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>12</td>
+              <td>Political Science</td>
+              <td>NCERT Political Science 2025</td>
+              <td>NCERT</td>
+              <td>8</td>
+              <td><span class="badge badge-success">Active</span></td>
+              <td><button class="btn btn-icon" aria-label="More options" title="More options">•••</button></td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>Economics</td>
+              <td>NCERT Economics 2025</td>
+              <td>NCERT</td>
+              <td>6</td>
+              <td><span class="badge badge-success">Active</span></td>
+              <td><button class="btn btn-icon" aria-label="More options" title="More options">•••</button></td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>Mathematics</td>
+              <td>NCERT Mathematics 2025</td>
+              <td>NCERT</td>
+              <td>13</td>
+              <td><span class="badge badge-success">Active</span></td>
+              <td><button class="btn btn-icon" aria-label="More options" title="More options">•••</button></td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Physics</td>
+              <td>NCERT Physics Part I &amp; II</td>
+              <td>NCERT</td>
+              <td>15</td>
+              <td><span class="badge badge-success">Active</span></td>
+              <td><button class="btn btn-icon" aria-label="More options" title="More options">•••</button></td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Chemistry</td>
+              <td>NCERT Chemistry 2024</td>
+              <td>NCERT</td>
+              <td>14</td>
+              <td><span class="badge badge-success">Active</span></td>
+              <td><button class="btn btn-icon" aria-label="More options" title="More options">•••</button></td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Social Science</td>
+              <td>NCERT Social Science 2025</td>
+              <td>NCERT</td>
+              <td>12</td>
+              <td><span class="badge badge-warning">Processing</span></td>
+              <td><button class="btn btn-icon" aria-label="More options" title="More options">•••</button></td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>Science</td>
+              <td>NCERT Science 2024</td>
+              <td>NCERT</td>
+              <td>15</td>
+              <td><span class="badge badge-success">Active</span></td>
+              <td><button class="btn btn-icon" aria-label="More options" title="More options">•••</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- ====== END TEXTBOOKS TABLE ====== -->
+
+    </main>
+    <!-- ====== END PAGE CONTENT ====== -->
+
+  </div>
+  <!-- ====== END MAIN AREA ====== -->
+
+</div>
+<!-- ====== END APP SHELL ====== -->
+
+</body>
+</html>

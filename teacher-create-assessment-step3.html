@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Assessment — Step 3 — Brainzeta Teacher</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body class="app-layout">
+
+  <!-- ============================================================
+       SIDEBAR
+  ============================================================ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-text">Brainzeta</span>
+    </div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="teacher-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="teacher-assessments-list.html" class="sidebar-nav-item active"><span class="nav-icon">📋</span> My Assessments</a></li>
+        <li><a href="teacher-class-analytics.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Class Analytics</a></li>
+        <li><a href="teacher-submission-tracker.html" class="sidebar-nav-item"><span class="nav-icon">📬</span> Submission Tracker</a></li>
+        <li><a href="teacher-pending-approvals.html" class="sidebar-nav-item"><span class="nav-icon">✅</span> Pending Approvals</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <div class="main-wrapper">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Create Assessment</span>
+      </div>
+      <div class="topbar-right">
+        <span class="badge badge-role">Teacher</span>
+        <span class="notif-btn">🔔 <span class="notif-badge">8</span></span>
+        <span class="avatar avatar-sm">RS</span>
+      </div>
+    </header>
+
+    <!-- PAGE BODY -->
+    <main class="page-body">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <span class="breadcrumb-item">Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item"><a href="teacher-assessments-list.html">My Assessments</a></span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item breadcrumb-current">Create New</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">Create Assessment</h1>
+      </div>
+
+      <!-- ── Stepper ── -->
+      <div class="stepper">
+        <div class="stepper-step stepper-done">
+          <div class="stepper-circle">✓</div>
+          <div class="stepper-label">Basic Info</div>
+        </div>
+        <div class="stepper-connector stepper-connector-done"></div>
+        <div class="stepper-step stepper-done">
+          <div class="stepper-circle">✓</div>
+          <div class="stepper-label">Upload Files</div>
+        </div>
+        <div class="stepper-connector stepper-connector-done"></div>
+        <div class="stepper-step stepper-active">
+          <div class="stepper-circle">3</div>
+          <div class="stepper-label">Review Rubric</div>
+        </div>
+      </div>
+
+      <!-- ── Alert Success ── -->
+      <div class="alert alert-success mt-24">
+        ✓ AI has extracted the rubric structure from your marking rubric. Please review and edit if needed.
+      </div>
+
+      <!-- ── Question Blocks ── -->
+
+      <!-- Question 1 -->
+      <div class="question-block card mt-16">
+        <div class="question-block-header d-flex justify-between align-center">
+          <h3 class="question-block-title">Question 1 · 10 marks</h3>
+          <div class="d-flex gap-8">
+            <button class="btn btn-sm btn-ghost">Edit</button>
+            <button class="btn btn-sm btn-ghost">Delete</button>
+          </div>
+        </div>
+        <div class="question-block-body">
+          <p class="form-label mb-4">Expected Key Points:</p>
+          <ul class="key-points-list">
+            <li>The Cold War refers to the ideological struggle between USA and USSR <span class="marks-tag">(5 marks)</span> · <em>Keywords: Cold War, USA, USSR, ideology</em></li>
+            <li>The Cold War led to the formation of alliances such as NATO and Warsaw Pact <span class="marks-tag">(5 marks)</span> · <em>Keywords: NATO, Warsaw Pact, alliances</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="question-block card mt-12">
+        <div class="question-block-header d-flex justify-between align-center">
+          <h3 class="question-block-title">Question 2 · 10 marks</h3>
+          <div class="d-flex gap-8">
+            <button class="btn btn-sm btn-ghost">Edit</button>
+            <button class="btn btn-sm btn-ghost">Delete</button>
+          </div>
+        </div>
+        <div class="question-block-body">
+          <p class="form-label mb-4">Expected Key Points:</p>
+          <ul class="key-points-list">
+            <li>Description of bipolar world order <span class="marks-tag">(5 marks)</span> · <em>Keywords: bipolar, superpower</em></li>
+            <li>Fall of Soviet Union as end of bipolarity <span class="marks-tag">(5 marks)</span> · <em>Keywords: Soviet Union, collapse</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="question-block card mt-12">
+        <div class="question-block-header d-flex justify-between align-center">
+          <h3 class="question-block-title">Question 3 · 20 marks</h3>
+          <div class="d-flex gap-8">
+            <button class="btn btn-sm btn-ghost">Edit</button>
+            <button class="btn btn-sm btn-ghost">Delete</button>
+          </div>
+        </div>
+        <div class="question-block-body">
+          <p class="form-label mb-4">Expected Key Points:</p>
+          <ul class="key-points-list">
+            <li>US Hegemony in the post-Cold War era <span class="marks-tag">(10 marks)</span> · <em>Keywords: hegemony, unipolar</em></li>
+            <li>Examples of US military and economic dominance <span class="marks-tag">(10 marks)</span> · <em>Keywords: Gulf War, WTO, IMF</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="question-block card mt-12">
+        <div class="question-block-header d-flex justify-between align-center">
+          <h3 class="question-block-title">Question 4 · 20 marks</h3>
+          <div class="d-flex gap-8">
+            <button class="btn btn-sm btn-ghost">Edit</button>
+            <button class="btn btn-sm btn-ghost">Delete</button>
+          </div>
+        </div>
+        <div class="question-block-body">
+          <p class="form-label mb-4">Expected Key Points:</p>
+          <ul class="key-points-list">
+            <li>Definition of New International Economic Order <span class="marks-tag">(10 marks)</span></li>
+            <li>India's role in NIEO movement <span class="marks-tag">(10 marks)</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Question 5 -->
+      <div class="question-block card mt-12">
+        <div class="question-block-header d-flex justify-between align-center">
+          <h3 class="question-block-title">Question 5 · 20 marks</h3>
+          <div class="d-flex gap-8">
+            <button class="btn btn-sm btn-ghost">Edit</button>
+            <button class="btn btn-sm btn-ghost">Delete</button>
+          </div>
+        </div>
+        <div class="question-block-body">
+          <p class="form-label mb-4">Expected Key Points:</p>
+          <ul class="key-points-list">
+            <li>India's foreign policy of non-alignment <span class="marks-tag">(10 marks)</span></li>
+            <li>Benefits of NAM for India <span class="marks-tag">(10 marks)</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Add Question Button -->
+      <div class="mt-16">
+        <button class="btn btn-secondary">+ Add Question Manually</button>
+      </div>
+
+      <!-- ── Total Marks Summary ── -->
+      <div class="card card-sm mt-16">
+        <div class="card-body d-flex justify-between align-center">
+          <span>Sum of all questions: <strong>80 marks</strong></span>
+          <span class="badge badge-success">✓ Matches Max Marks (80)</span>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions mt-24">
+        <a href="teacher-create-assessment-step2.html" class="btn btn-secondary">← Back</a>
+        <button class="btn btn-secondary">Save as Draft</button>
+        <a href="teacher-assignment-page.html" class="btn btn-primary">Save &amp; Assign →</a>
+      </div>
+
+    </main>
+  </div><!-- /main-wrapper -->
+</body>
+</html>

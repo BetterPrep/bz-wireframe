@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brainzeta — Curriculum Mapping</title>
+  <link rel="stylesheet" href="styles/base.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="admin-dashboard.html" class="sidebar-link">🏠 Dashboard</a></li>
+        <li><a href="admin-users-list.html" class="sidebar-link">👥 Users</a></li>
+        <li class="sidebar-section-label">ACADEMIC</li>
+        <li><a href="admin-teacher-sections.html" class="sidebar-link">🗂️ Teacher Sections</a></li>
+        <li><a href="admin-curriculum-mapping.html" class="sidebar-link sidebar-link--active">📋 Curriculum</a></li>
+        <li class="sidebar-section-label">LIBRARY</li>
+        <li><a href="admin-textbook-library.html" class="sidebar-link">📖 Textbook Library</a></li>
+        <li><a href="admin-upload-textbook.html" class="sidebar-link">📤 Upload Textbook</a></li>
+        <li class="sidebar-section-label">REPORTS</li>
+        <li><a href="admin-token-usage.html" class="sidebar-link">🪙 Token Usage</a></li>
+        <li><a href="admin-reports.html" class="sidebar-link">📊 Reports</a></li>
+      </ul>
+    </nav>
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-link">👤 My Profile</a>
+      <a href="login.html" class="sidebar-link">🚪 Sign Out</a>
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">Curriculum Mapping</div>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-role-badge">School Admin</span>
+        <button class="topbar-notif-btn">🔔<span class="notif-badge">2</span></button>
+        <div class="topbar-avatar">JD</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+
+      <!-- BREADCRUMB -->
+      <nav class="breadcrumb">
+        <a href="admin-dashboard.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Curriculum Mapping</span>
+      </nav>
+
+      <!-- PAGE HEADER -->
+      <div class="page-header">
+        <div>
+          <h1>Curriculum Mapping</h1>
+          <p class="page-subtitle text-muted">Map textbooks to subjects for each grade</p>
+        </div>
+      </div>
+
+      <!-- FILTER BAR -->
+      <div class="filter-bar">
+        <select class="form-select">
+          <option>Grade: 6</option>
+          <option>Grade: 7</option>
+          <option>Grade: 8</option>
+          <option>Grade: 9</option>
+          <option>Grade: 10</option>
+          <option>Grade: 11</option>
+          <option selected>Grade: 12</option>
+        </select>
+      </div>
+
+      <!-- GRADE 12 MAPPINGS CARD -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Grade 12 — Subject Mappings</h2>
+        </div>
+        <div class="card-body">
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Mapped Textbook</th>
+                  <th>Chapters</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Political Science</td>
+                  <td>NCERT Political Science 2025</td>
+                  <td>8 chapters</td>
+                  <td><span class="badge badge-success">Mapped</span></td>
+                  <td><button class="btn btn-sm btn-secondary">Change</button></td>
+                </tr>
+                <tr>
+                  <td>Economics</td>
+                  <td>NCERT Economics 2025</td>
+                  <td>6 chapters</td>
+                  <td><span class="badge badge-success">Mapped</span></td>
+                  <td><button class="btn btn-sm btn-secondary">Change</button></td>
+                </tr>
+                <tr>
+                  <td>Mathematics</td>
+                  <td>NCERT Mathematics 2025</td>
+                  <td>13 chapters</td>
+                  <td><span class="badge badge-success">Mapped</span></td>
+                  <td><button class="btn btn-sm btn-secondary">Change</button></td>
+                </tr>
+                <tr class="table-row--error">
+                  <td>Physics</td>
+                  <td><span class="text-muted">— Not Mapped —</span></td>
+                  <td><span class="text-muted">—</span></td>
+                  <td><span class="badge badge-error">Unmapped</span></td>
+                  <td><button class="btn btn-sm btn-primary">Map Now</button></td>
+                </tr>
+                <tr>
+                  <td>Chemistry</td>
+                  <td>School Custom Chemistry</td>
+                  <td>12 chapters</td>
+                  <td><span class="badge badge-success">Mapped</span></td>
+                  <td><button class="btn btn-sm btn-secondary">Change</button></td>
+                </tr>
+                <tr class="table-row--error">
+                  <td>English</td>
+                  <td><span class="text-muted">— Not Mapped —</span></td>
+                  <td><span class="text-muted">—</span></td>
+                  <td><span class="badge badge-error">Unmapped</span></td>
+                  <td><button class="btn btn-sm btn-primary">Map Now</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- WARNING ALERT -->
+      <div class="alert alert-warning">
+        ⚠️ 2 subjects are unmapped. Students and teachers will not be able to use AI evaluation for these subjects.
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+</div><!-- /.app-shell -->
+</body>
+</html>

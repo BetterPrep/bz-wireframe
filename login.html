@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brainzeta — Login</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body class="auth-page">
+
+<div class="auth-wrapper">
+  <!-- ====== AUTH CARD ====== -->
+  <div class="auth-card">
+
+    <!-- ====== AUTH LOGO ====== -->
+    <div class="auth-logo">
+      <div class="auth-logo-mark">🧠</div>
+      <div class="auth-logo-text">Brainzeta</div>
+      <div class="auth-logo-tagline">AI-Powered Assessment Platform</div>
+    </div>
+
+    <!-- ====== AUTH HEADER ====== -->
+    <h1 class="auth-title">Welcome Back</h1>
+    <p class="auth-subtitle">Sign in to your account</p>
+
+    <!-- ====== LOGIN FORM ====== -->
+    <form class="auth-form" action="#" method="post">
+
+      <div class="form-group">
+        <label class="form-label" for="username">Username</label>
+        <input
+          class="form-control"
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter your username"
+          autocomplete="username"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <div class="password-input-wrapper">
+          <input
+            class="form-control"
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+          />
+          <button type="button" class="pw-toggle-btn" aria-label="Show password">👁</button>
+        </div>
+      </div>
+
+      <div class="form-group form-check-row">
+        <label class="form-check">
+          <input type="checkbox" name="remember" value="1" />
+          <span>Remember me</span>
+        </label>
+        <a href="forgot-password.html" class="form-link">Forgot Password?</a>
+      </div>
+
+      <!-- Login button acts as a link for wireframe navigation -->
+      <a href="teacher-dashboard.html" class="btn btn-primary btn-block" style="text-align:center; margin-top:4px;">Login</a>
+
+    </form>
+    <!-- ====== END LOGIN FORM ====== -->
+
+    <!-- ====== AUTH FOOTER ====== -->
+    <div class="auth-footer">Powered by AIthena Innovations</div>
+
+  </div>
+  <!-- ====== END AUTH CARD ====== -->
+</div>
+
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brainzeta — STA Single Upload</title>
+  <link rel="stylesheet" href="styles/base.css">
+  <style>
+    /* Student selected chip */
+    .student-chip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: var(--color-bg-subtle);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      margin-top: 8px;
+    }
+    .student-chip-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #EFF6FF;
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: var(--font-size-sm);
+      flex-shrink: 0;
+    }
+    .student-chip-info { flex: 1; }
+    .student-chip-name { font-weight: 600; font-size: var(--font-size-sm); }
+    .student-chip-meta { font-size: var(--font-size-xs); color: var(--color-text-muted); margin-top: 1px; }
+
+    /* Verification checklist */
+    .verify-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .verify-item { display: flex; align-items: flex-start; gap: 10px; font-size: var(--font-size-sm); }
+    .verify-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+    /* Form actions row */
+    .form-actions { display: flex; align-items: center; gap: 12px; margin-top: 8px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- ═══════════════════════════════════════════════════════
+       SIDEBAR
+  ════════════════════════════════════════════════════════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="sta-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="sta-single-upload.html" class="sidebar-nav-item active"><span class="nav-icon">📤</span> Single Upload</a></li>
+        <li><a href="sta-bulk-upload.html" class="sidebar-nav-item"><span class="nav-icon">📦</span> Bulk Upload</a></li>
+        <li><a href="sta-upload-history.html" class="sidebar-nav-item"><span class="nav-icon">🕓</span> Upload History</a></li>
+      </ul>
+    </nav>
+    <!-- Sidebar footer -->
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+
+    <!-- ═══════════════════════════════════════════════════════
+         TOPBAR
+    ════════════════════════════════════════════════════════════ -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">Single Upload</div>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-role-badge">School Assistant</span>
+        <button class="topbar-notif-btn">🔔<span class="notif-badge">2</span></button>
+        <div class="topbar-avatar">PN</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+
+      <!-- BREADCRUMB -->
+      <nav class="breadcrumb">
+        <a href="sta-dashboard.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Single Upload</span>
+      </nav>
+
+      <!-- PAGE HEADER -->
+      <div class="page-header">
+        <h1>Upload Single Answer Sheet</h1>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────────
+           STEP 1: Select Assessment & Student
+      ──────────────────────────────────────────────────────── -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Step 1: Select Assessment &amp; Student</h2>
+        </div>
+        <div class="card-body">
+          <div class="form">
+
+            <!-- Assessment selector -->
+            <div class="form-group">
+              <label class="form-label required">Assessment</label>
+              <select class="form-select">
+                <option selected>Math Half-Yearly Exam — Grade 12</option>
+                <option>Physics Quiz — Grade 11</option>
+                <option>Economics Assignment — Grade 12</option>
+                <option>Chemistry Test — Grade 11</option>
+              </select>
+            </div>
+
+            <!-- Section selector (shown after assessment selected) -->
+            <div class="form-group">
+              <label class="form-label required">Section</label>
+              <select class="form-select">
+                <option selected>12-A</option>
+                <option>12-B</option>
+                <option>12-C</option>
+              </select>
+            </div>
+
+            <!-- Student search & selected chip -->
+            <div class="form-group">
+              <label class="form-label required">Student</label>
+              <div class="search-bar">
+                <span class="search-icon">🔍</span>
+                <input type="text" placeholder="Search by name or roll number..." class="form-input" style="border:none;box-shadow:none;padding-left:0;">
+              </div>
+              <!-- Selected student chip -->
+              <div class="student-chip">
+                <div class="student-chip-avatar">AK</div>
+                <div class="student-chip-info">
+                  <div class="student-chip-name">Amit Kumar</div>
+                  <div class="student-chip-meta">Roll: 101 &nbsp;·&nbsp; Grade 12-A</div>
+                </div>
+                <button class="btn btn-sm btn-ghost">✕ Change</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────────
+           STEP 2: Upload Answer Sheet
+      ──────────────────────────────────────────────────────── -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Step 2: Upload Answer Sheet</h2>
+        </div>
+        <div class="card-body">
+
+          <!-- Dropzone — has-file state -->
+          <div class="dropzone has-file" style="margin-bottom: 16px;">
+            <div class="dropzone-icon">✅</div>
+            <div class="dropzone-title">amit_kumar_101.pdf uploaded</div>
+            <div class="dropzone-hint text-muted">8 pages · 11.2 MB</div>
+          </div>
+
+          <!-- File preview row -->
+          <div class="file-preview">
+            <div class="file-preview-icon">📄</div>
+            <div style="flex:1;">
+              <div class="file-preview-name">amit_kumar_101.pdf</div>
+              <div class="file-preview-meta">8 pages · 11.2 MB</div>
+            </div>
+            <button class="file-preview-remove">Remove ✕</button>
+          </div>
+
+          <!-- Page thumbnails -->
+          <div class="thumb-grid" style="margin-top: 16px;">
+            <div class="thumb">
+              <img src="https://placehold.co/90x120/e0e0e0/999?text=Pg+1" alt="Page 1" class="thumb-img">
+              <div class="thumb-label">Pg 1</div>
+            </div>
+            <div class="thumb">
+              <img src="https://placehold.co/90x120/e0e0e0/999?text=Pg+2" alt="Page 2" class="thumb-img">
+              <div class="thumb-label">Pg 2</div>
+            </div>
+            <div class="thumb">
+              <img src="https://placehold.co/90x120/e0e0e0/999?text=Pg+3" alt="Page 3" class="thumb-img">
+              <div class="thumb-label">Pg 3</div>
+            </div>
+            <div class="thumb">
+              <img src="https://placehold.co/90x120/e0e0e0/999?text=Pg+4" alt="Page 4" class="thumb-img">
+              <div class="thumb-label">Pg 4</div>
+            </div>
+            <div class="thumb">
+              <img src="https://placehold.co/90x120/e0e0e0/999?text=Pg+5" alt="Page 5" class="thumb-img">
+              <div class="thumb-label">Pg 5</div>
+            </div>
+            <div class="thumb" style="display:flex;align-items:center;justify-content:center;background:var(--color-bg-muted);border-radius:var(--radius-sm);font-size:1.25rem;color:var(--color-text-muted);">
+              …
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────────
+           STEP 3: Verify & Submit
+      ──────────────────────────────────────────────────────── -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Step 3: Verify &amp; Submit</h2>
+        </div>
+        <div class="card-body">
+
+          <!-- Verification checklist -->
+          <ul class="verify-list" style="margin-bottom: 24px;">
+            <li class="verify-item">
+              <span class="verify-icon">✅</span>
+              <span><strong>Assessment:</strong> Math Half-Yearly Exam — Grade 12</span>
+            </li>
+            <li class="verify-item">
+              <span class="verify-icon">✅</span>
+              <span><strong>Student:</strong> Amit Kumar (Roll No: 101, Section 12-A)</span>
+            </li>
+            <li class="verify-item">
+              <span class="verify-icon">✅</span>
+              <span><strong>File:</strong> amit_kumar_101.pdf (8 pages, 11.2 MB)</span>
+            </li>
+            <li class="verify-item">
+              <span class="verify-icon">✅</span>
+              <span><strong>PDF format verified</strong></span>
+            </li>
+          </ul>
+
+          <!-- Form actions -->
+          <div class="form-actions">
+            <a href="sta-dashboard.html" class="btn btn-secondary">Cancel</a>
+            <button class="btn btn-primary">✓ Submit Upload</button>
+            <button class="btn btn-ghost">+ Upload Another</button>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+</div><!-- /.app-shell -->
+</body>
+</html>

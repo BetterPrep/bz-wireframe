@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pending Approvals — Brainzeta Teacher</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body class="app-layout">
+
+  <!-- ============================================================
+       SIDEBAR
+  ============================================================ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-text">Brainzeta</span>
+    </div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="teacher-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="teacher-assessments-list.html" class="sidebar-nav-item"><span class="nav-icon">📋</span> My Assessments</a></li>
+        <li><a href="teacher-class-analytics.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Class Analytics</a></li>
+        <li><a href="teacher-submission-tracker.html" class="sidebar-nav-item"><span class="nav-icon">📬</span> Submission Tracker</a></li>
+        <li><a href="teacher-pending-approvals.html" class="sidebar-nav-item active"><span class="nav-icon">✅</span> Pending Approvals</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <div class="main-wrapper">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Pending Approvals</span>
+      </div>
+      <div class="topbar-right">
+        <span class="badge badge-role">Teacher</span>
+        <span class="notif-btn">🔔 <span class="notif-badge">8</span></span>
+        <span class="avatar avatar-sm">RS</span>
+      </div>
+    </header>
+
+    <!-- PAGE BODY -->
+    <main class="page-body">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <span class="breadcrumb-item">Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item breadcrumb-current">Pending Approvals</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">Pending Approvals <span class="badge badge-error">8</span></h1>
+      </div>
+
+      <!-- ── Filter Bar ── -->
+      <div class="filter-bar">
+        <select class="select-input">
+          <option>Assessment: All</option>
+          <option>Math HY Exam</option>
+          <option>Physics Quiz</option>
+          <option>Economics Assignment</option>
+        </select>
+        <select class="select-input">
+          <option>Section: All</option>
+          <option>12-A</option>
+          <option>12-B</option>
+          <option>12-C</option>
+          <option>11-B</option>
+        </select>
+      </div>
+
+      <!-- ── Bulk Actions Bar ── -->
+      <div class="bulk-bar d-flex gap-8 align-center mt-12">
+        <label class="checkbox-label"><input type="checkbox" /> Select all</label>
+        <span class="text-muted">0 selected</span>
+        <button class="btn btn-sm btn-success" disabled>Bulk Approve Selected</button>
+      </div>
+
+      <!-- ── Approvals Table ── -->
+      <div class="table-wrapper mt-8">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="col-check"><input type="checkbox" /></th>
+              <th>Student</th>
+              <th>Assessment</th>
+              <th>Grade/Section</th>
+              <th>AI Score</th>
+              <th>Submitted</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="checkbox" checked /></td>
+              <td>
+                <div class="d-flex gap-8 align-center">
+                  <span class="avatar avatar-xs">PS</span>
+                  Priya Sharma
+                </div>
+              </td>
+              <td>Math HY Exam</td>
+              <td>12-A</td>
+              <td><strong>76/80</strong></td>
+              <td class="text-muted">2h ago</td>
+              <td><a href="teacher-approval-interface.html" class="btn btn-sm btn-primary">👁 Review</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" checked /></td>
+              <td>
+                <div class="d-flex gap-8 align-center">
+                  <span class="avatar avatar-xs">RM</span>
+                  Raj Malhotra
+                </div>
+              </td>
+              <td>Math HY Exam</td>
+              <td>12-A</td>
+              <td><strong>65/80</strong></td>
+              <td class="text-muted">3h ago</td>
+              <td><a href="teacher-approval-interface.html" class="btn btn-sm btn-primary">👁 Review</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td>
+                <div class="d-flex gap-8 align-center">
+                  <span class="avatar avatar-xs">NG</span>
+                  Neha Gupta
+                </div>
+              </td>
+              <td>Math HY Exam</td>
+              <td>12-B</td>
+              <td><strong>58/80</strong></td>
+              <td class="text-muted">4h ago</td>
+              <td><a href="teacher-approval-interface.html" class="btn btn-sm btn-primary">👁 Review</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td>
+                <div class="d-flex gap-8 align-center">
+                  <span class="avatar avatar-xs">SK</span>
+                  Suresh Kumar
+                </div>
+              </td>
+              <td>Physics Quiz</td>
+              <td>11-B</td>
+              <td><strong>18/20</strong></td>
+              <td class="text-muted">5h ago</td>
+              <td><a href="teacher-approval-interface.html" class="btn btn-sm btn-primary">👁 Review</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td>
+                <div class="d-flex gap-8 align-center">
+                  <span class="avatar avatar-xs">DP</span>
+                  Divya Patel
+                </div>
+              </td>
+              <td>Physics Quiz</td>
+              <td>11-B</td>
+              <td><strong>14/20</strong></td>
+              <td class="text-muted">6h ago</td>
+              <td><a href="teacher-approval-interface.html" class="btn btn-sm btn-primary">👁 Review</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td>
+                <div class="d-flex gap-8 align-center">
+                  <span class="avatar avatar-xs">AS</span>
+                  Aryan Shah
+                </div>
+              </td>
+              <td>Physics Quiz</td>
+              <td>11-B</td>
+              <td><strong>16/20</strong></td>
+              <td class="text-muted">7h ago</td>
+              <td><a href="teacher-approval-interface.html" class="btn btn-sm btn-primary">👁 Review</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td>
+                <div class="d-flex gap-8 align-center">
+                  <span class="avatar avatar-xs">KN</span>
+                  Kavya Nair
+                </div>
+              </td>
+              <td>Economics Assignment</td>
+              <td>12-C</td>
+              <td><strong>38/40</strong></td>
+              <td class="text-muted">8h ago</td>
+              <td><a href="teacher-approval-interface.html" class="btn btn-sm btn-primary">👁 Review</a></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td>
+                <div class="d-flex gap-8 align-center">
+                  <span class="avatar avatar-xs">RM</span>
+                  Rohan Mehta
+                </div>
+              </td>
+              <td>Economics Assignment</td>
+              <td>12-C</td>
+              <td><strong>32/40</strong></td>
+              <td class="text-muted">9h ago</td>
+              <td><a href="teacher-approval-interface.html" class="btn btn-sm btn-primary">👁 Review</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Bulk Approve Button -->
+      <div class="mt-16">
+        <a href="teacher-bulk-approval.html" class="btn btn-success">Bulk Approve 2 Selected</a>
+      </div>
+
+    </main>
+  </div><!-- /main-wrapper -->
+</body>
+</html>

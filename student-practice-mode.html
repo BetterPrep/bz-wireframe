@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brainzeta — Practice Mode</title>
+  <link rel="stylesheet" href="styles/base.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- ====== SIDEBAR ====== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-text">Brainzeta</span>
+    </div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="student-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="student-assessment-details.html" class="sidebar-nav-item"><span class="nav-icon">📋</span> My Assessments</a></li>
+        <li><a href="student-upload-answer.html" class="sidebar-nav-item"><span class="nav-icon">📤</span> Upload Answer</a></li>
+        <li><a href="student-outcomes-list.html" class="sidebar-nav-item"><span class="nav-icon">🎯</span> My Outcomes</a></li>
+        <li><a href="student-result-details.html" class="sidebar-nav-item"><span class="nav-icon">📈</span> My Results</a></li>
+        <li><a href="student-practice-mode.html" class="sidebar-nav-item active"><span class="nav-icon">🧠</span> Practice Mode</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+
+    <!-- ====== TOPBAR ====== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">Practice Mode</div>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-role-badge">Student</span>
+        <button class="topbar-notif-btn">🔔<span class="notif-badge">2</span></button>
+        <div class="topbar-avatar">AK</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+
+      <!-- ====== BREADCRUMB ====== -->
+      <nav class="breadcrumb">
+        <span class="breadcrumb-item"><a href="student-dashboard.html">Home</a></span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item active">Practice Mode</span>
+      </nav>
+
+      <!-- ====== PAGE HEADER ====== -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Practice Mode</h1>
+          <p class="page-subtitle">Practice with instant AI feedback — no teacher approval needed</p>
+        </div>
+      </div>
+
+      <!-- ====== INFO ALERT ====== -->
+      <div class="alert alert-success">
+        <span class="alert-icon">⚡</span>
+        <div class="alert-body">
+          <div class="alert-title">Instant Results</div>
+          Your answers are evaluated by AI immediately after submission. No waiting for teacher approval!
+        </div>
+      </div>
+
+      <!-- ====== FILTER BAR ====== -->
+      <div class="filter-bar">
+        <span class="filter-label">Subject:</span>
+        <select class="form-select" style="width:180px;">
+          <option selected>Mathematics</option>
+          <option>Physics</option>
+          <option>Chemistry</option>
+          <option>Economics</option>
+          <option>Political Science</option>
+        </select>
+        <select class="form-select" style="width:160px;">
+          <option>All Difficulty</option>
+          <option>Easy</option>
+          <option>Medium</option>
+          <option>Hard</option>
+        </select>
+      </div>
+
+      <!-- ====== PRACTICE SETS TABLE ====== -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Available Practice Sets</h2>
+          <span class="text-muted text-sm">5 sets available</span>
+        </div>
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Subject</th>
+                <th>Difficulty</th>
+                <th>Duration</th>
+                <th>Questions</th>
+                <th>Status</th>
+                <th class="col-actions">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Trigonometry — Basics</strong><br><span class="text-xs text-muted">Chapter 2: Inverse Trigonometric Functions</span></td>
+                <td>Mathematics</td>
+                <td><span class="badge badge-success">Easy</span></td>
+                <td>30 min</td>
+                <td>10 Q</td>
+                <td><span class="badge badge-gray">Not Started</span></td>
+                <td><a href="#" class="btn btn-sm btn-primary">▶ Start</a></td>
+              </tr>
+              <tr>
+                <td><strong>Calculus — Differentiation</strong><br><span class="text-xs text-muted">Chapter 5: Continuity and Differentiability</span></td>
+                <td>Mathematics</td>
+                <td><span class="badge badge-warning">Medium</span></td>
+                <td>45 min</td>
+                <td>12 Q</td>
+                <td><span class="badge badge-primary">In Progress</span></td>
+                <td><a href="#" class="btn btn-sm btn-primary">▶ Continue</a></td>
+              </tr>
+              <tr>
+                <td><strong>Integration — Advanced</strong><br><span class="text-xs text-muted">Chapter 7: Integrals</span></td>
+                <td>Mathematics</td>
+                <td><span class="badge badge-error">Hard</span></td>
+                <td>60 min</td>
+                <td>15 Q</td>
+                <td><span class="badge badge-gray">Not Started</span></td>
+                <td><a href="#" class="btn btn-sm btn-primary">▶ Start</a></td>
+              </tr>
+              <tr>
+                <td><strong>Algebra — Problem Solving</strong><br><span class="text-xs text-muted">Chapter 1: Relations and Functions</span></td>
+                <td>Mathematics</td>
+                <td><span class="badge badge-warning">Medium</span></td>
+                <td>40 min</td>
+                <td>10 Q</td>
+                <td><span class="badge badge-success">Completed</span></td>
+                <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">👁 View Results</a></td>
+              </tr>
+              <tr>
+                <td><strong>Coordinate Geometry</strong><br><span class="text-xs text-muted">Chapter 10: Straight Lines</span></td>
+                <td>Mathematics</td>
+                <td><span class="badge badge-success">Easy</span></td>
+                <td>30 min</td>
+                <td>8 Q</td>
+                <td><span class="badge badge-gray">Not Started</span></td>
+                <td><a href="#" class="btn btn-sm btn-primary">▶ Start</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ====== HOW IT WORKS ====== -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">How Practice Mode Works</h2>
+        </div>
+        <div style="display:flex; gap:16px; justify-content:space-around; padding:8px 0 16px; flex-wrap:wrap;">
+          <!-- Step 1 -->
+          <div style="display:flex; flex-direction:column; align-items:center; text-align:center; max-width:140px; gap:10px;">
+            <div style="width:48px; height:48px; border-radius:50%; border:2px solid var(--color-primary); display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:700; color:var(--color-primary);">1</div>
+            <p style="margin:0; font-size:var(--font-size-sm); color:var(--color-text);">📥 Download the question paper</p>
+          </div>
+          <div style="display:flex; align-items:center; color:var(--color-gray-300); font-size:1.5rem; padding-top:4px;">→</div>
+          <!-- Step 2 -->
+          <div style="display:flex; flex-direction:column; align-items:center; text-align:center; max-width:140px; gap:10px;">
+            <div style="width:48px; height:48px; border-radius:50%; border:2px solid var(--color-primary); display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:700; color:var(--color-primary);">2</div>
+            <p style="margin:0; font-size:var(--font-size-sm); color:var(--color-text);">✏️ Solve questions on paper</p>
+          </div>
+          <div style="display:flex; align-items:center; color:var(--color-gray-300); font-size:1.5rem; padding-top:4px;">→</div>
+          <!-- Step 3 -->
+          <div style="display:flex; flex-direction:column; align-items:center; text-align:center; max-width:140px; gap:10px;">
+            <div style="width:48px; height:48px; border-radius:50%; border:2px solid var(--color-primary); display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:700; color:var(--color-primary);">3</div>
+            <p style="margin:0; font-size:var(--font-size-sm); color:var(--color-text);">📤 Scan &amp; upload your answers</p>
+          </div>
+          <div style="display:flex; align-items:center; color:var(--color-gray-300); font-size:1.5rem; padding-top:4px;">→</div>
+          <!-- Step 4 -->
+          <div style="display:flex; flex-direction:column; align-items:center; text-align:center; max-width:140px; gap:10px;">
+            <div style="width:48px; height:48px; border-radius:50%; border:2px solid var(--color-success); background:#ECFDF5; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:700; color:var(--color-success);">4</div>
+            <p style="margin:0; font-size:var(--font-size-sm); color:var(--color-text);">⚡ Get instant AI feedback</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== MY PRACTICE HISTORY ====== -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">My Practice History</h2>
+        </div>
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Practice Set</th>
+                <th>Subject</th>
+                <th>Score</th>
+                <th>Date</th>
+                <th class="col-actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Algebra — Problem Solving</td>
+                <td>Mathematics</td>
+                <td><strong>8/10</strong> <span class="text-muted text-xs">(80%)</span></td>
+                <td class="text-muted">Feb 18, 2026</td>
+                <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">👁 View</a></td>
+              </tr>
+              <tr>
+                <td>Coordinate Geometry</td>
+                <td>Mathematics</td>
+                <td><strong>7/8</strong> <span class="text-muted text-xs">(88%)</span></td>
+                <td class="text-muted">Feb 10, 2026</td>
+                <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">👁 View</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+</body>
+</html>

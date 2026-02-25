@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brainzeta — Teacher Activity Monitor</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body class="app-layout">
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-text">Brainzeta</span>
+    </div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="principal-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="principal-assessment-calendar.html" class="sidebar-nav-item"><span class="nav-icon">📅</span> Assessment Calendar</a></li>
+        <li><a href="principal-teacher-monitor.html" class="sidebar-nav-item active"><span class="nav-icon">👩‍🏫</span> Teacher Monitor</a></li>
+        <li><a href="principal-student-performance.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Student Performance</a></li>
+        <li><a href="principal-assessment-review.html" class="sidebar-nav-item"><span class="nav-icon">🔍</span> Assessment Review</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ===================== MAIN CONTENT ===================== -->
+  <div class="main-wrapper">
+
+    <!-- ===================== TOPBAR ===================== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Teacher Activity Monitor</span>
+      </div>
+      <div class="topbar-right">
+        <span class="badge badge-role">Principal</span>
+        <span class="notif-btn">🔔 <span class="notif-badge">4</span></span>
+        <div class="avatar-initials">MP</div>
+      </div>
+    </header>
+
+    <!-- ===================== PAGE BODY ===================== -->
+    <main class="page-body">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <span>Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-active">Teacher Activity Monitor</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">Teacher Activity Monitor</h1>
+        <p class="page-subtitle">Track teacher engagement and assessment activity</p>
+      </div>
+
+      <!-- ===================== FILTER BAR ===================== -->
+      <div class="filter-bar mb-16">
+        <select class="form-select">
+          <option>Date: This Month</option>
+          <option>Date: Last Month</option>
+          <option>Date: Last 3 Months</option>
+          <option>Date: This Year</option>
+        </select>
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="form-input search-input" placeholder="Search teacher..." />
+        </div>
+      </div>
+
+      <!-- ===================== STAT GRID (3 cards) ===================== -->
+      <div class="stat-grid stat-grid-3">
+        <div class="stat-card stat-blue">
+          <div class="stat-icon">📋</div>
+          <div class="stat-value">156</div>
+          <div class="stat-label">Total Assessments</div>
+        </div>
+        <div class="stat-card stat-green">
+          <div class="stat-icon">✅</div>
+          <div class="stat-value">87%</div>
+          <div class="stat-label">Avg Approval Rate</div>
+        </div>
+        <div class="stat-card stat-orange">
+          <div class="stat-icon">⏳</div>
+          <div class="stat-value">40</div>
+          <div class="stat-label">Pending Reviews</div>
+        </div>
+      </div>
+
+      <!-- ===================== TEACHER PERFORMANCE TABLE ===================== -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Teacher Performance Overview</h2>
+        </div>
+        <div class="card-body">
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Teacher</th>
+                  <th>Subject</th>
+                  <th>Assessments</th>
+                  <th>Submissions</th>
+                  <th>Evaluated</th>
+                  <th>Approval Rate</th>
+                  <th>Avg Response Time</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="d-flex align-center gap-8">
+                      <img src="https://placehold.co/32x32" alt="Avatar" class="avatar-sm" style="border-radius:50%;" />
+                      <span>Mr. Ramesh Sharma</span>
+                    </div>
+                  </td>
+                  <td>Mathematics</td>
+                  <td>8</td>
+                  <td>145</td>
+                  <td>140</td>
+                  <td>97%</td>
+                  <td>1.2 days</td>
+                  <td><span class="badge badge-success">Active</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-center gap-8">
+                      <img src="https://placehold.co/32x32" alt="Avatar" class="avatar-sm" style="border-radius:50%;" />
+                      <span>Ms. Priya Verma</span>
+                    </div>
+                  </td>
+                  <td>Economics</td>
+                  <td>6</td>
+                  <td>98</td>
+                  <td>85</td>
+                  <td>87%</td>
+                  <td>2.1 days</td>
+                  <td><span class="badge badge-success">Active</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-center gap-8">
+                      <img src="https://placehold.co/32x32" alt="Avatar" class="avatar-sm" style="border-radius:50%;" />
+                      <span>Mr. Amit Gupta</span>
+                    </div>
+                  </td>
+                  <td>Physics</td>
+                  <td>5</td>
+                  <td>112</td>
+                  <td>108</td>
+                  <td>96%</td>
+                  <td>1.5 days</td>
+                  <td><span class="badge badge-success">Active</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-center gap-8">
+                      <img src="https://placehold.co/32x32" alt="Avatar" class="avatar-sm" style="border-radius:50%;" />
+                      <span>Ms. Sunita Rao</span>
+                    </div>
+                  </td>
+                  <td>Chemistry</td>
+                  <td>4</td>
+                  <td>76</td>
+                  <td>60</td>
+                  <td>79%</td>
+                  <td>3.2 days</td>
+                  <td><span class="badge badge-warning">Slow</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-center gap-8">
+                      <img src="https://placehold.co/32x32" alt="Avatar" class="avatar-sm" style="border-radius:50%;" />
+                      <span>Mr. Vikram Nair</span>
+                    </div>
+                  </td>
+                  <td>History</td>
+                  <td>3</td>
+                  <td>54</td>
+                  <td>30</td>
+                  <td>56%</td>
+                  <td>5.1 days</td>
+                  <td><span class="badge badge-error">Delayed</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-center gap-8">
+                      <img src="https://placehold.co/32x32" alt="Avatar" class="avatar-sm" style="border-radius:50%;" />
+                      <span>Ms. Meera Joshi</span>
+                    </div>
+                  </td>
+                  <td>English</td>
+                  <td>7</td>
+                  <td>132</td>
+                  <td>128</td>
+                  <td>97%</td>
+                  <td>1.0 days</td>
+                  <td><span class="badge badge-success">Active</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== TEACHER ACTIVITY HBAR CHART ===================== -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Teacher Activity — This Month</h2>
+          <span class="card-subtitle">Assessments created per teacher</span>
+        </div>
+        <div class="card-body">
+          <div class="hbar-chart">
+
+            <div class="hbar-row">
+              <span class="hbar-label">Mr. Sharma</span>
+              <div class="hbar-track">
+                <div class="hbar-fill hbar-fill-blue" style="width: 80%;"></div>
+              </div>
+              <span class="hbar-value">8 assessments</span>
+            </div>
+
+            <div class="hbar-row">
+              <span class="hbar-label">Ms. Joshi</span>
+              <div class="hbar-track">
+                <div class="hbar-fill hbar-fill-green" style="width: 70%;"></div>
+              </div>
+              <span class="hbar-value">7 assessments</span>
+            </div>
+
+            <div class="hbar-row">
+              <span class="hbar-label">Ms. Verma</span>
+              <div class="hbar-track">
+                <div class="hbar-fill hbar-fill-blue" style="width: 60%;"></div>
+              </div>
+              <span class="hbar-value">6 assessments</span>
+            </div>
+
+            <div class="hbar-row">
+              <span class="hbar-label">Mr. Gupta</span>
+              <div class="hbar-track">
+                <div class="hbar-fill hbar-fill-green" style="width: 50%;"></div>
+              </div>
+              <span class="hbar-value">5 assessments</span>
+            </div>
+
+            <div class="hbar-row">
+              <span class="hbar-label">Ms. Rao</span>
+              <div class="hbar-track">
+                <div class="hbar-fill hbar-fill-orange" style="width: 40%;"></div>
+              </div>
+              <span class="hbar-value">4 assessments</span>
+            </div>
+
+            <div class="hbar-row">
+              <span class="hbar-label">Mr. Nair</span>
+              <div class="hbar-track">
+                <div class="hbar-fill hbar-fill-orange" style="width: 30%;"></div>
+              </div>
+              <span class="hbar-value">3 assessments</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+
+</body>
+</html>

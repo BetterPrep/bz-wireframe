@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Results — Brainzeta Parent</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body class="layout-shell">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="parent-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="parent-pending-assignments.html" class="sidebar-nav-item"><span class="nav-icon">📋</span> Pending Assignments</a></li>
+        <li><a href="parent-results-list.html" class="sidebar-nav-item active"><span class="nav-icon">📊</span> Results</a></li>
+        <li><a href="parent-performance-tracker.html" class="sidebar-nav-item"><span class="nav-icon">📈</span> Performance Tracker</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN WRAPPER ===== -->
+  <div class="main-wrapper">
+
+    <!-- ===== TOPBAR ===== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Results</span>
+      </div>
+      <div class="topbar-right">
+        <span class="role-badge badge badge-primary">Parent</span>
+        <button class="btn btn-ghost btn-icon notif-btn" aria-label="Notifications">
+          🔔 <span class="notif-badge">1</span>
+        </button>
+        <div class="avatar-circle">SK</div>
+      </div>
+    </header>
+
+    <!-- ===== PAGE CONTENT ===== -->
+    <main class="page-content">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <span class="breadcrumb-item">Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item breadcrumb-current">Results</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Amit's Results</h1>
+          <p class="page-subtitle">All marked assessments</p>
+        </div>
+      </div>
+
+      <!-- Filter bar -->
+      <div class="filter-bar">
+        <select class="form-control">
+          <option>Subject: All</option>
+          <option>Mathematics</option>
+          <option>Physics</option>
+          <option>Chemistry</option>
+          <option>Economics</option>
+          <option>English</option>
+          <option>History</option>
+          <option>Political Science</option>
+        </select>
+        <select class="form-control">
+          <option>Date: Last 3 Months</option>
+          <option>Last Month</option>
+          <option>Last 6 Months</option>
+          <option>This Year</option>
+        </select>
+      </div>
+
+      <!-- Stat grid — 3 cards -->
+      <div class="stat-grid mt-16" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="stat-card">
+          <div class="stat-label">Avg Score</div>
+          <div class="stat-value" style="color: var(--color-primary);">86%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Best Grade</div>
+          <div class="stat-value" style="color: var(--color-success);">A+</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total Assessments</div>
+          <div class="stat-value" style="color: var(--color-warning);">8</div>
+        </div>
+      </div>
+
+      <!-- ===== CARD: Results Table ===== -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h2 class="card-title">All Results</h2>
+        </div>
+        <div class="card-body">
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Assessment</th>
+                  <th>Subject</th>
+                  <th>Score</th>
+                  <th>%</th>
+                  <th>Grade</th>
+                  <th>Teacher</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Math HY Exam</td>
+                  <td>Mathematics</td>
+                  <td>72/80</td>
+                  <td>90%</td>
+                  <td><span class="badge badge-success">A</span></td>
+                  <td>Mr. Sharma</td>
+                  <td>Today</td>
+                  <td><a href="#" class="btn btn-sm btn-ghost">👁 View</a></td>
+                </tr>
+                <tr>
+                  <td>Physics Quiz</td>
+                  <td>Physics</td>
+                  <td>18/20</td>
+                  <td>90%</td>
+                  <td><span class="badge badge-success">A</span></td>
+                  <td>Mr. Gupta</td>
+                  <td>2d ago</td>
+                  <td><a href="#" class="btn btn-sm btn-ghost">👁 View</a></td>
+                </tr>
+                <tr>
+                  <td>Pol Science Exam</td>
+                  <td>Pol. Science</td>
+                  <td>65/80</td>
+                  <td>81%</td>
+                  <td><span class="badge badge-primary">B+</span></td>
+                  <td>Mr. Nair</td>
+                  <td>1w ago</td>
+                  <td><a href="#" class="btn btn-sm btn-ghost">👁 View</a></td>
+                </tr>
+                <tr>
+                  <td>Chemistry Lab</td>
+                  <td>Chemistry</td>
+                  <td>34/40</td>
+                  <td>85%</td>
+                  <td><span class="badge badge-success">A</span></td>
+                  <td>Ms. Rao</td>
+                  <td>2w ago</td>
+                  <td><a href="#" class="btn btn-sm btn-ghost">👁 View</a></td>
+                </tr>
+                <tr>
+                  <td>English Grammar</td>
+                  <td>English</td>
+                  <td>48/50</td>
+                  <td>96%</td>
+                  <td><span class="badge badge-success">A+</span></td>
+                  <td>Ms. Joshi</td>
+                  <td>3w ago</td>
+                  <td><a href="#" class="btn btn-sm btn-ghost">👁 View</a></td>
+                </tr>
+                <tr>
+                  <td>History Essay</td>
+                  <td>History</td>
+                  <td>38/50</td>
+                  <td>76%</td>
+                  <td><span class="badge badge-primary">B</span></td>
+                  <td>Mr. Nair</td>
+                  <td>1m ago</td>
+                  <td><a href="#" class="btn btn-sm btn-ghost">👁 View</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination mt-16">
+        <button class="btn btn-ghost btn-sm" disabled>← Prev</button>
+        <span class="pagination-info">Page 1 of 1 · 6 results</span>
+        <button class="btn btn-ghost btn-sm" disabled>Next →</button>
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+
+</body>
+</html>

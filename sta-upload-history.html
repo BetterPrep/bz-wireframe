@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brainzeta — STA Upload History</title>
+  <link rel="stylesheet" href="styles/base.css">
+  <style>
+    /* Filter bar layout */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .filter-bar .form-select { width: auto; min-width: 150px; }
+    .filter-bar .search-bar { flex: 1; min-width: 200px; }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- ═══════════════════════════════════════════════════════
+       SIDEBAR
+  ════════════════════════════════════════════════════════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="sta-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="sta-single-upload.html" class="sidebar-nav-item"><span class="nav-icon">📤</span> Single Upload</a></li>
+        <li><a href="sta-bulk-upload.html" class="sidebar-nav-item"><span class="nav-icon">📦</span> Bulk Upload</a></li>
+        <li><a href="sta-upload-history.html" class="sidebar-nav-item active"><span class="nav-icon">🕓</span> Upload History</a></li>
+      </ul>
+    </nav>
+    <!-- Sidebar footer -->
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+
+    <!-- ═══════════════════════════════════════════════════════
+         TOPBAR
+    ════════════════════════════════════════════════════════════ -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">Upload History</div>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-role-badge">School Assistant</span>
+        <button class="topbar-notif-btn">🔔<span class="notif-badge">2</span></button>
+        <div class="topbar-avatar">PN</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+
+      <!-- BREADCRUMB -->
+      <nav class="breadcrumb">
+        <a href="sta-dashboard.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Upload History</span>
+      </nav>
+
+      <!-- PAGE HEADER -->
+      <div class="page-header">
+        <h1>Upload History</h1>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────────
+           FILTER BAR
+      ──────────────────────────────────────────────────────── -->
+      <div class="filter-bar">
+        <select class="form-select">
+          <option selected>Date: Today</option>
+          <option>Last 7 Days</option>
+          <option>Last 30 Days</option>
+          <option>Custom Range</option>
+        </select>
+        <select class="form-select">
+          <option selected>Status: All</option>
+          <option>Done</option>
+          <option>Processing</option>
+          <option>Failed</option>
+          <option>In Queue</option>
+        </select>
+        <select class="form-select">
+          <option selected>Assessment: All</option>
+          <option>Math Half-Yearly Exam</option>
+          <option>Physics Quiz</option>
+          <option>Economics Assignment</option>
+          <option>Chemistry Test</option>
+        </select>
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="Search student name...">
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────────
+           STAT GRID: 3 KPI cards
+      ──────────────────────────────────────────────────────── -->
+      <div class="stat-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="stat-card">
+          <div class="stat-icon blue">📤</div>
+          <div class="stat-body">
+            <div class="stat-value">45</div>
+            <div class="stat-label">Today's Uploads</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">✅</div>
+          <div class="stat-body">
+            <div class="stat-value">43</div>
+            <div class="stat-label">Success</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon red">❌</div>
+          <div class="stat-body">
+            <div class="stat-value">2</div>
+            <div class="stat-label">Failed</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────────
+           UPLOAD HISTORY TABLE
+      ──────────────────────────────────────────────────────── -->
+      <div class="card">
+        <div class="card-body" style="padding: 0;">
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Assessment</th>
+                  <th>Student</th>
+                  <th>Section</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <!-- Row 1: Single / Done -->
+                <tr>
+                  <td>09:45 AM</td>
+                  <td>Math HY Exam</td>
+                  <td>Amit Kumar</td>
+                  <td>12-A</td>
+                  <td>Single</td>
+                  <td><span class="badge badge-success">✓ Done</span></td>
+                  <td><button class="btn btn-sm btn-ghost">👁 View</button></td>
+                </tr>
+
+                <!-- Row 2: Single / Processing -->
+                <tr>
+                  <td>09:43 AM</td>
+                  <td>Math HY Exam</td>
+                  <td>Priya Sharma</td>
+                  <td>12-A</td>
+                  <td>Single</td>
+                  <td><span class="badge badge-primary">🔄 Processing</span></td>
+                  <td><button class="btn btn-sm btn-ghost">👁 View</button></td>
+                </tr>
+
+                <!-- Row 3: Bulk / Done -->
+                <tr>
+                  <td>09:30 AM</td>
+                  <td>Physics Quiz</td>
+                  <td>Batch — 35 files</td>
+                  <td>11-B</td>
+                  <td>Bulk</td>
+                  <td><span class="badge badge-success">✓ Done</span></td>
+                  <td><button class="btn btn-sm btn-ghost">👁 View</button></td>
+                </tr>
+
+                <!-- Row 4: Single / Failed -->
+                <tr>
+                  <td>08:55 AM</td>
+                  <td>Math HY Exam</td>
+                  <td>Raj Malhotra</td>
+                  <td>12-B</td>
+                  <td>Single</td>
+                  <td><span class="badge badge-error">✗ Failed</span></td>
+                  <td><button class="btn btn-sm btn-warning">🔄 Retry</button></td>
+                </tr>
+
+                <!-- Row 5: Bulk / Done -->
+                <tr>
+                  <td>08:40 AM</td>
+                  <td>Economics Assignment</td>
+                  <td>Batch — 28 files</td>
+                  <td>12-C</td>
+                  <td>Bulk</td>
+                  <td><span class="badge badge-success">✓ Done</span></td>
+                  <td><button class="btn btn-sm btn-ghost">👁 View</button></td>
+                </tr>
+
+                <!-- Row 6: Single / Failed -->
+                <tr>
+                  <td>08:20 AM</td>
+                  <td>Math HY Exam</td>
+                  <td>Karan Patel</td>
+                  <td>12-A</td>
+                  <td>Single</td>
+                  <td><span class="badge badge-error">✗ Failed</span></td>
+                  <td><button class="btn btn-sm btn-warning">🔄 Retry</button></td>
+                </tr>
+
+                <!-- Row 7: Bulk / Done -->
+                <tr>
+                  <td>08:05 AM</td>
+                  <td>Chemistry Test</td>
+                  <td>Batch — 40 files</td>
+                  <td>11-A</td>
+                  <td>Bulk</td>
+                  <td><span class="badge badge-success">✓ Done</span></td>
+                  <td><button class="btn btn-sm btn-ghost">👁 View</button></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="card-body" style="border-top: 1px solid var(--color-border); padding-top: 12px;">
+          <div class="pagination">
+            <button class="page-btn" disabled>‹ Prev</button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <span class="page-ellipsis">…</span>
+            <button class="page-btn">8</button>
+            <button class="page-btn">Next ›</button>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+</div><!-- /.app-shell -->
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brainzeta — Bulk Import Users</title>
+  <link rel="stylesheet" href="styles/base.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="admin-dashboard.html" class="sidebar-link">🏠 Dashboard</a></li>
+        <li><a href="admin-users-list.html" class="sidebar-link sidebar-link--active">👥 Users</a></li>
+        <li class="sidebar-section-label">ACADEMIC</li>
+        <li><a href="admin-teacher-sections.html" class="sidebar-link">🗂️ Teacher Sections</a></li>
+        <li><a href="admin-curriculum-mapping.html" class="sidebar-link">📋 Curriculum</a></li>
+        <li class="sidebar-section-label">LIBRARY</li>
+        <li><a href="admin-textbook-library.html" class="sidebar-link">📖 Textbook Library</a></li>
+        <li><a href="admin-upload-textbook.html" class="sidebar-link">📤 Upload Textbook</a></li>
+        <li class="sidebar-section-label">REPORTS</li>
+        <li><a href="admin-token-usage.html" class="sidebar-link">🪙 Token Usage</a></li>
+        <li><a href="admin-reports.html" class="sidebar-link">📊 Reports</a></li>
+      </ul>
+    </nav>
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-link">👤 My Profile</a>
+      <a href="login.html" class="sidebar-link">🚪 Sign Out</a>
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">Bulk Import Users</div>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-role-badge">School Admin</span>
+        <button class="topbar-notif-btn">🔔<span class="notif-badge">2</span></button>
+        <div class="topbar-avatar">JD</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+
+      <!-- BREADCRUMB -->
+      <nav class="breadcrumb">
+        <a href="admin-dashboard.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="admin-users-list.html">User Management</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Bulk Import</span>
+      </nav>
+
+      <!-- PAGE HEADER -->
+      <div class="page-header">
+        <h1>Bulk Import Users</h1>
+      </div>
+
+      <!-- STEPPER: 3 steps — Step 3 active -->
+      <div class="stepper">
+        <div class="stepper-step stepper-step--done">
+          <div class="stepper-indicator">✓</div>
+          <div class="stepper-label">Step 1<br><span class="text-sm">Download Template</span></div>
+        </div>
+        <div class="stepper-connector stepper-connector--done"></div>
+        <div class="stepper-step stepper-step--done">
+          <div class="stepper-indicator">✓</div>
+          <div class="stepper-label">Step 2<br><span class="text-sm">Upload CSV</span></div>
+        </div>
+        <div class="stepper-connector stepper-connector--done"></div>
+        <div class="stepper-step stepper-step--active">
+          <div class="stepper-indicator">3</div>
+          <div class="stepper-label">Step 3<br><span class="text-sm">Review &amp; Import</span></div>
+        </div>
+      </div>
+
+      <!-- STEP 1 CARD (completed/muted) -->
+      <div class="card card--muted">
+        <div class="card-header">
+          <h2 class="card-title text-muted">Step 1: Download Template <span class="badge badge-success" style="font-size: 12px; margin-left: 8px;">Done</span></h2>
+        </div>
+        <div class="card-body">
+          <div class="radio-group d-flex gap-24" style="margin-bottom: 16px;">
+            <label class="radio-label"><input type="radio" name="tpl-type" checked disabled> Students</label>
+            <label class="radio-label"><input type="radio" name="tpl-type" disabled> Teachers</label>
+            <label class="radio-label"><input type="radio" name="tpl-type" disabled> Parents</label>
+          </div>
+          <button class="btn btn-secondary" disabled>📥 Download CSV Template</button>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- STEP 2 CARD: Upload CSV (completed) -->
+      <div class="card card--muted">
+        <div class="card-header">
+          <h2 class="card-title text-muted">Step 2: Upload CSV <span class="badge badge-success" style="font-size: 12px; margin-left: 8px;">Done</span></h2>
+        </div>
+        <div class="card-body">
+          <!-- Dropzone with file uploaded -->
+          <div class="dropzone has-file" style="margin-bottom: 16px;">
+            <div class="dropzone-icon">✅</div>
+            <div class="dropzone-text">students_12A.csv uploaded successfully</div>
+            <div class="text-muted text-sm">45 rows detected</div>
+          </div>
+          <!-- File preview row -->
+          <div class="file-preview d-flex align-center justify-between">
+            <div class="d-flex align-center gap-8">
+              <span>📄</span>
+              <span>students_12A.csv</span>
+              <span class="text-muted text-sm">45 rows, 8 columns</span>
+              <span class="text-muted text-sm">128 KB</span>
+            </div>
+            <button class="btn btn-sm btn-ghost" disabled>✕ Remove</button>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- STEP 3 CARD: Preview & Confirm (active) -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Step 3: Preview &amp; Confirm</h2>
+        </div>
+        <div class="card-body">
+
+          <!-- Validation summary alerts -->
+          <div class="d-flex gap-12" style="margin-bottom: 20px; flex-wrap: wrap;">
+            <div class="alert alert-success" style="flex: 1;">✓ 42 records valid and ready to import</div>
+            <div class="alert alert-error" style="flex: 1;">✗ 3 records have errors</div>
+          </div>
+
+          <!-- Preview table -->
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Roll No</th>
+                  <th>Grade</th>
+                  <th>Section</th>
+                  <th>Email</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Amit Kumar</td>
+                  <td>101</td>
+                  <td>12</td>
+                  <td>A</td>
+                  <td>a.kumar@student.edu</td>
+                  <td><span class="badge badge-success">✓ Valid</span></td>
+                </tr>
+                <tr>
+                  <td>Priya Sharma</td>
+                  <td>102</td>
+                  <td>12</td>
+                  <td>A</td>
+                  <td>p.sharma@student.edu</td>
+                  <td><span class="badge badge-success">✓ Valid</span></td>
+                </tr>
+                <tr>
+                  <td>Raj Malhotra</td>
+                  <td>103</td>
+                  <td>12</td>
+                  <td>A</td>
+                  <td>r.malhotra@student.edu</td>
+                  <td><span class="badge badge-success">✓ Valid</span></td>
+                </tr>
+                <tr class="table-row--error">
+                  <td><span class="text-muted">—</span></td>
+                  <td>104</td>
+                  <td>—</td>
+                  <td>A</td>
+                  <td>—</td>
+                  <td><span class="badge badge-error">✗ Missing fields</span></td>
+                </tr>
+                <tr>
+                  <td>Sara Joshi</td>
+                  <td>105</td>
+                  <td>12</td>
+                  <td>B</td>
+                  <td>s.joshi@student.edu</td>
+                  <td><span class="badge badge-success">✓ Valid</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Error actions -->
+          <div class="d-flex gap-12" style="margin-top: 16px; margin-bottom: 8px;">
+            <button class="btn btn-ghost">View All 3 Errors</button>
+            <button class="btn btn-secondary">Download Error Report</button>
+          </div>
+
+          <!-- Final form actions -->
+          <div class="form-actions">
+            <a href="admin-users-list.html" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Import 42 Valid Users</button>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+</div><!-- /.app-shell -->
+</body>
+</html>

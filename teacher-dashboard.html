@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Dashboard — Brainzeta Teacher</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body class="app-layout">
+
+  <!-- ============================================================
+       SIDEBAR
+  ============================================================ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-text">Brainzeta</span>
+    </div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="teacher-dashboard.html" class="sidebar-nav-item active"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="teacher-assessments-list.html" class="sidebar-nav-item"><span class="nav-icon">📋</span> My Assessments</a></li>
+        <li><a href="teacher-class-analytics.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Class Analytics</a></li>
+        <li><a href="teacher-submission-tracker.html" class="sidebar-nav-item"><span class="nav-icon">📬</span> Submission Tracker</a></li>
+        <li><a href="teacher-pending-approvals.html" class="sidebar-nav-item"><span class="nav-icon">✅</span> Pending Approvals</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <div class="main-wrapper">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">My Dashboard</span>
+      </div>
+      <div class="topbar-right">
+        <span class="badge badge-role">Teacher</span>
+        <span class="notif-btn">🔔 <span class="notif-badge">8</span></span>
+        <span class="avatar avatar-sm">RS</span>
+      </div>
+    </header>
+
+    <!-- PAGE BODY -->
+    <main class="page-body">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <span class="breadcrumb-item">Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item breadcrumb-current">Dashboard</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Welcome back, Mr. Sharma!</h1>
+          <p class="page-subtitle">Mathematics — Grade 11 &amp; 12</p>
+        </div>
+      </div>
+
+      <!-- ── Stat Grid ── -->
+      <div class="stat-grid stat-grid-4">
+        <div class="stat-card stat-card-blue">
+          <div class="stat-icon">📋</div>
+          <div class="stat-value">12</div>
+          <div class="stat-label">My Assessments</div>
+        </div>
+        <div class="stat-card stat-card-green">
+          <div class="stat-icon">📤</div>
+          <div class="stat-value">145</div>
+          <div class="stat-label">Total Submissions</div>
+        </div>
+        <div class="stat-card stat-card-orange">
+          <div class="stat-icon">⏳</div>
+          <div class="stat-value">8</div>
+          <div class="stat-label">Pending Approvals</div>
+        </div>
+        <div class="stat-card stat-card-purple">
+          <div class="stat-icon">👨‍🎓</div>
+          <div class="stat-value">156</div>
+          <div class="stat-label">My Students</div>
+        </div>
+      </div>
+
+      <!-- ── Pending Approvals Card ── -->
+      <div class="card pending-card mt-24">
+        <div class="card-header">
+          <h2 class="pending-card-title">⚠ Pending Approvals (8)</h2>
+        </div>
+        <div class="card-body">
+          <ul class="list-plain list-spaced">
+            <li class="d-flex justify-between align-center">
+              <span>Math HY Exam — 12-A: <strong>5 submissions waiting</strong></span>
+              <a href="teacher-pending-approvals.html" class="btn btn-sm btn-primary">Review Now</a>
+            </li>
+            <li class="d-flex justify-between align-center">
+              <span>Physics Quiz — 11-B: <strong>3 submissions waiting</strong></span>
+              <a href="teacher-pending-approvals.html" class="btn btn-sm btn-primary">Review Now</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ── Upcoming Assessments ── -->
+      <div class="card mt-24">
+        <div class="card-header">
+          <h2 class="card-title">Upcoming Assessments</h2>
+        </div>
+        <div class="card-body">
+          <ul class="list-plain list-spaced">
+            <li class="d-flex justify-between align-center">
+              <span>📋 <strong>Political Science HY Exam</strong> &nbsp;|&nbsp; Sections 12-A, 12-B &nbsp;|&nbsp; Due: Feb 26, 2026</span>
+              <span class="badge badge-warning">2 days</span>
+            </li>
+            <li class="d-flex justify-between align-center">
+              <span>📋 <strong>Economics Assignment</strong> &nbsp;|&nbsp; Section 12-C &nbsp;|&nbsp; Due: Mar 1, 2026</span>
+              <span class="badge badge-gray">5 days</span>
+            </li>
+            <li class="d-flex justify-between align-center">
+              <span>📋 <strong>Physics Lab Report</strong> &nbsp;|&nbsp; Section 11-B &nbsp;|&nbsp; Due: Mar 5, 2026</span>
+              <span class="badge badge-gray">9 days</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ── Recent Submissions ── -->
+      <div class="card mt-24">
+        <div class="card-header">
+          <h2 class="card-title">Recent Submissions</h2>
+        </div>
+        <div class="card-body">
+          <ul class="activity-feed list-plain">
+            <li class="activity-item">
+              <span class="activity-dot"></span>
+              <span class="activity-text"><strong>Amit Kumar</strong> submitted Math HY Exam — 12-A</span>
+              <span class="activity-time text-muted">2h ago</span>
+            </li>
+            <li class="activity-item">
+              <span class="activity-dot"></span>
+              <span class="activity-text"><strong>Priya Sharma</strong> submitted Physics Quiz — 11-B</span>
+              <span class="activity-time text-muted">3h ago</span>
+            </li>
+            <li class="activity-item">
+              <span class="activity-dot"></span>
+              <span class="activity-text"><strong>Raj Malhotra</strong> submitted Math HY Exam — 12-A</span>
+              <span class="activity-time text-muted">4h ago</span>
+            </li>
+            <li class="activity-item">
+              <span class="activity-dot"></span>
+              <span class="activity-text"><strong>Sara Joshi</strong> submitted Physics Quiz — 11-B</span>
+              <span class="activity-time text-muted">5h ago</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ── Quick Actions ── -->
+      <div class="card mt-24">
+        <div class="card-header">
+          <h2 class="card-title">Quick Actions</h2>
+        </div>
+        <div class="card-body">
+          <div class="d-flex gap-12">
+            <a href="teacher-create-assessment-step1.html" class="btn btn-primary">+ Create Assessment</a>
+            <a href="teacher-submission-tracker.html" class="btn btn-secondary">View All Submissions</a>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /main-wrapper -->
+</body>
+</html>

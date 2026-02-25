@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parent Dashboard — Brainzeta</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body class="layout-shell">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="parent-dashboard.html" class="sidebar-nav-item active"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="parent-pending-assignments.html" class="sidebar-nav-item"><span class="nav-icon">📋</span> Pending Assignments</a></li>
+        <li><a href="parent-results-list.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Results</a></li>
+        <li><a href="parent-performance-tracker.html" class="sidebar-nav-item"><span class="nav-icon">📈</span> Performance Tracker</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN WRAPPER ===== -->
+  <div class="main-wrapper">
+
+    <!-- ===== TOPBAR ===== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Parent Dashboard</span>
+      </div>
+      <div class="topbar-right">
+        <span class="role-badge badge badge-primary">Parent</span>
+        <button class="btn btn-ghost btn-icon notif-btn" aria-label="Notifications">
+          🔔 <span class="notif-badge">1</span>
+        </button>
+        <div class="avatar-circle">SK</div>
+      </div>
+    </header>
+
+    <!-- ===== PAGE CONTENT ===== -->
+    <main class="page-content">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <span class="breadcrumb-item">Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item breadcrumb-current">Dashboard</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Welcome, Mrs. Kumar!</h1>
+          <p class="page-subtitle">Monitoring: Amit Kumar · Grade 12-A · ABC School</p>
+        </div>
+        <!-- Child selector (for parents with multiple children) -->
+        <div>
+          <select class="form-control" style="min-width:220px;">
+            <option selected>Amit Kumar — Grade 12</option>
+            <option>Priya Kumar — Grade 9</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Deadline alert -->
+      <div class="alert alert-warning">
+        ⏰ Amit has 3 pending assignments. The nearest deadline is in 2 days.
+      </div>
+
+      <!-- ===== TWO-COLUMN GRID ===== -->
+      <div class="grid-2 mt-16">
+
+        <!-- Left card: Pending Submissions -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Pending Submissions (3)</h2>
+          </div>
+          <div class="card-body">
+            <ul class="list-plain list-spaced">
+              <li class="list-item-row">
+                <span>📋 <strong>Math Half-Yearly Exam</strong></span>
+                <span class="text-muted">Due: Feb 26</span>
+                <span class="badge badge-error">2 days left</span>
+              </li>
+              <li class="list-item-row">
+                <span>📋 <strong>Physics Quiz</strong></span>
+                <span class="text-muted">Due: Mar 1</span>
+                <span class="badge badge-warning">5 days left</span>
+              </li>
+              <li class="list-item-row">
+                <span>📋 <strong>Economics Assignment</strong></span>
+                <span class="text-muted">Due: Mar 5</span>
+                <span class="badge badge-gray">9 days left</span>
+              </li>
+            </ul>
+            <div class="mt-16">
+              <a href="parent-pending-assignments.html" class="btn btn-ghost btn-sm">View All</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right card: Submitted — Awaiting Results -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Submitted — Awaiting Results (2)</h2>
+          </div>
+          <div class="card-body">
+            <ul class="list-plain list-spaced">
+              <li class="list-item-row">
+                <span>📄 <strong>Political Science Exam</strong></span>
+                <span class="text-muted">Submitted: Feb 20</span>
+                <span class="badge badge-primary">Under Evaluation</span>
+              </li>
+              <li class="list-item-row">
+                <span>📄 <strong>Chemistry Lab Report</strong></span>
+                <span class="text-muted">Submitted: Feb 14</span>
+                <span class="badge badge-primary">Under Evaluation</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /.grid-2 -->
+
+      <!-- ===== CARD: Recent Results ===== -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h2 class="card-title">🆕 Recent Results (Last 7 Days)</h2>
+        </div>
+        <div class="card-body">
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Assessment</th>
+                  <th>Subject</th>
+                  <th>Score</th>
+                  <th>%</th>
+                  <th>Grade</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Math HY Exam</td>
+                  <td>Mathematics</td>
+                  <td>72/80</td>
+                  <td>90%</td>
+                  <td><span class="badge badge-success">A</span></td>
+                  <td>Today</td>
+                  <td><a href="parent-results-list.html" class="btn btn-sm btn-ghost">👁 View</a></td>
+                </tr>
+                <tr>
+                  <td>Physics Quiz</td>
+                  <td>Physics</td>
+                  <td>18/20</td>
+                  <td>90%</td>
+                  <td><span class="badge badge-success">A</span></td>
+                  <td>2 days ago</td>
+                  <td><a href="parent-results-list.html" class="btn btn-sm btn-ghost">👁 View</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="d-flex gap-8 mt-16">
+        <a href="parent-results-list.html" class="btn btn-secondary">View All Results</a>
+        <a href="parent-performance-tracker.html" class="btn btn-primary">Performance Tracker</a>
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brainzeta — School Dashboard</title>
+  <link rel="stylesheet" href="styles/base.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="admin-dashboard.html" class="sidebar-link sidebar-link--active">🏠 Dashboard</a></li>
+        <li><a href="admin-users-list.html" class="sidebar-link">👥 Users</a></li>
+        <li class="sidebar-section-label">ACADEMIC</li>
+        <li><a href="admin-teacher-sections.html" class="sidebar-link">🗂️ Teacher Sections</a></li>
+        <li><a href="admin-curriculum-mapping.html" class="sidebar-link">📋 Curriculum</a></li>
+        <li class="sidebar-section-label">LIBRARY</li>
+        <li><a href="admin-textbook-library.html" class="sidebar-link">📖 Textbook Library</a></li>
+        <li><a href="admin-upload-textbook.html" class="sidebar-link">📤 Upload Textbook</a></li>
+        <li class="sidebar-section-label">REPORTS</li>
+        <li><a href="admin-token-usage.html" class="sidebar-link">🪙 Token Usage</a></li>
+        <li><a href="admin-reports.html" class="sidebar-link">📊 Reports</a></li>
+      </ul>
+    </nav>
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-link">👤 My Profile</a>
+      <a href="login.html" class="sidebar-link">🚪 Sign Out</a>
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">ABC School Dashboard</div>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-role-badge">School Admin</span>
+        <button class="topbar-notif-btn">🔔<span class="notif-badge">2</span></button>
+        <div class="topbar-avatar">JD</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+
+      <!-- BREADCRUMB -->
+      <nav class="breadcrumb">
+        <a href="admin-dashboard.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Dashboard</span>
+      </nav>
+
+      <!-- PAGE HEADER -->
+      <div class="page-header">
+        <h1>ABC School Dashboard</h1>
+      </div>
+
+      <!-- STAT GRID: 4 cards -->
+      <div class="stat-grid">
+        <div class="stat-card stat-card--blue">
+          <div class="stat-icon">👩‍🏫</div>
+          <div class="stat-info">
+            <div class="stat-value">45</div>
+            <div class="stat-label">Teachers</div>
+          </div>
+        </div>
+        <div class="stat-card stat-card--green">
+          <div class="stat-icon">👨‍🎓</div>
+          <div class="stat-info">
+            <div class="stat-value">1,200</div>
+            <div class="stat-label">Students</div>
+          </div>
+        </div>
+        <div class="stat-card stat-card--orange">
+          <div class="stat-icon">📋</div>
+          <div class="stat-info">
+            <div class="stat-value">120</div>
+            <div class="stat-label">Assessments</div>
+          </div>
+        </div>
+        <div class="stat-card stat-card--purple">
+          <div class="stat-icon">👪</div>
+          <div class="stat-info">
+            <div class="stat-value">850</div>
+            <div class="stat-label">Parents</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOKEN USAGE CARD -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Token Usage This Month</h2>
+        </div>
+        <div class="card-body">
+          <!-- Token usage row -->
+          <div class="token-usage-row d-flex justify-between align-center" style="margin-bottom: 12px;">
+            <span>12,500 / 50,000 tokens used</span>
+            <span class="badge badge-warning">25% Used</span>
+          </div>
+          <!-- Progress bar -->
+          <div class="progress">
+            <div class="progress-bar" style="width: 25%;"></div>
+          </div>
+          <p class="text-muted text-sm" style="margin-top: 8px;">Remaining: 37,500 tokens</p>
+        </div>
+      </div>
+
+      <!-- RECENT ACTIVITY CARD -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Recent Activity</h2>
+        </div>
+        <div class="card-body">
+          <ul class="activity-feed list-plain">
+            <li class="activity-item">
+              <span class="activity-dot"></span>
+              <div class="activity-content">
+                <span>Mr. Sharma created 'Math Half-Yearly Exam' assessment</span>
+                <span class="activity-time text-muted text-sm">1h ago</span>
+              </div>
+            </li>
+            <li class="activity-item">
+              <span class="activity-dot"></span>
+              <div class="activity-content">
+                <span>45 students submitted Physics Quiz in Section 12-B</span>
+                <span class="activity-time text-muted text-sm">2h ago</span>
+              </div>
+            </li>
+            <li class="activity-item">
+              <span class="activity-dot"></span>
+              <div class="activity-content">
+                <span>Ms. Gupta approved 30 submissions for Economics</span>
+                <span class="activity-time text-muted text-sm">3h ago</span>
+              </div>
+            </li>
+            <li class="activity-item">
+              <span class="activity-dot"></span>
+              <div class="activity-content">
+                <span>New teacher account created: Ms. Priya Verma</span>
+                <span class="activity-time text-muted text-sm">5h ago</span>
+              </div>
+            </li>
+            <li class="activity-item">
+              <span class="activity-dot"></span>
+              <div class="activity-content">
+                <span>Grade 12 curriculum mapping updated</span>
+                <span class="activity-time text-muted text-sm">1d ago</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- QUICK ACTIONS CARD -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Quick Actions</h2>
+        </div>
+        <div class="card-body d-flex gap-12">
+          <a href="admin-add-user.html" class="btn btn-primary">+ Add User</a>
+          <a href="admin-curriculum-mapping.html" class="btn btn-secondary">📋 Manage Curriculum</a>
+          <a href="admin-reports.html" class="btn btn-secondary">📊 View Reports</a>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+</div><!-- /.app-shell -->
+</body>
+</html>

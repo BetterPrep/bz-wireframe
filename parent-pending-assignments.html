@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pending Assignments — Brainzeta Parent</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body class="layout-shell">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="parent-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="parent-pending-assignments.html" class="sidebar-nav-item active"><span class="nav-icon">📋</span> Pending Assignments</a></li>
+        <li><a href="parent-results-list.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Results</a></li>
+        <li><a href="parent-performance-tracker.html" class="sidebar-nav-item"><span class="nav-icon">📈</span> Performance Tracker</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN WRAPPER ===== -->
+  <div class="main-wrapper">
+
+    <!-- ===== TOPBAR ===== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Pending Assignments</span>
+      </div>
+      <div class="topbar-right">
+        <span class="role-badge badge badge-primary">Parent</span>
+        <button class="btn btn-ghost btn-icon notif-btn" aria-label="Notifications">
+          🔔 <span class="notif-badge">1</span>
+        </button>
+        <div class="avatar-circle">SK</div>
+      </div>
+    </header>
+
+    <!-- ===== PAGE CONTENT ===== -->
+    <main class="page-content">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <span class="breadcrumb-item">Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item breadcrumb-current">Pending Assignments</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Pending Assignments</h1>
+          <p class="page-subtitle">Amit Kumar — Grade 12-A</p>
+        </div>
+      </div>
+
+      <!-- Deadline reminder alert -->
+      <div class="alert alert-warning">
+        ⏰ Remind Amit to submit before deadlines. Late submissions may not be accepted.
+      </div>
+
+      <!-- ===== CARD: Pending Assignments Table ===== -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h2 class="card-title">All Pending Assignments (3)</h2>
+        </div>
+        <div class="card-body">
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Assessment</th>
+                  <th>Subject</th>
+                  <th>Teacher</th>
+                  <th>Due Date</th>
+                  <th>Days Left</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>📋 Math Half-Yearly Exam</td>
+                  <td>Mathematics</td>
+                  <td>Mr. R. Sharma</td>
+                  <td>Feb 26, 2026</td>
+                  <td><span class="badge badge-error">2 days</span></td>
+                  <td><a href="#" class="btn btn-sm btn-ghost">👁 View Details</a></td>
+                </tr>
+                <tr>
+                  <td>📋 Physics Quiz</td>
+                  <td>Physics</td>
+                  <td>Mr. A. Gupta</td>
+                  <td>Mar 1, 2026</td>
+                  <td><span class="badge badge-warning">5 days</span></td>
+                  <td><a href="#" class="btn btn-sm btn-ghost">👁 View Details</a></td>
+                </tr>
+                <tr>
+                  <td>📋 Economics Assignment</td>
+                  <td>Economics</td>
+                  <td>Ms. P. Verma</td>
+                  <td>Mar 5, 2026</td>
+                  <td><span class="badge badge-gray">9 days</span></td>
+                  <td><a href="#" class="btn btn-sm btn-ghost">👁 View Details</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+
+</body>
+</html>

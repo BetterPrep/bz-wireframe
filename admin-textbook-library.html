@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brainzeta — Textbook Library</title>
+  <link rel="stylesheet" href="styles/base.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="admin-dashboard.html" class="sidebar-link">🏠 Dashboard</a></li>
+        <li><a href="admin-users-list.html" class="sidebar-link">👥 Users</a></li>
+        <li class="sidebar-section-label">ACADEMIC</li>
+        <li><a href="admin-teacher-sections.html" class="sidebar-link">🗂️ Teacher Sections</a></li>
+        <li><a href="admin-curriculum-mapping.html" class="sidebar-link">📋 Curriculum</a></li>
+        <li class="sidebar-section-label">LIBRARY</li>
+        <li><a href="admin-textbook-library.html" class="sidebar-link sidebar-link--active">📖 Textbook Library</a></li>
+        <li><a href="admin-upload-textbook.html" class="sidebar-link">📤 Upload Textbook</a></li>
+        <li class="sidebar-section-label">REPORTS</li>
+        <li><a href="admin-token-usage.html" class="sidebar-link">🪙 Token Usage</a></li>
+        <li><a href="admin-reports.html" class="sidebar-link">📊 Reports</a></li>
+      </ul>
+    </nav>
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-link">👤 My Profile</a>
+      <a href="login.html" class="sidebar-link">🚪 Sign Out</a>
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">Textbook Library</div>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-role-badge">School Admin</span>
+        <button class="topbar-notif-btn">🔔<span class="notif-badge">2</span></button>
+        <div class="topbar-avatar">JD</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+
+      <!-- BREADCRUMB -->
+      <nav class="breadcrumb">
+        <a href="admin-dashboard.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Textbook Library</span>
+      </nav>
+
+      <!-- PAGE HEADER -->
+      <div class="page-header">
+        <div class="page-header-left">
+          <h1>Textbook Library</h1>
+        </div>
+        <div class="page-actions">
+          <a href="admin-upload-textbook.html" class="btn btn-primary">+ Upload New</a>
+        </div>
+      </div>
+
+      <!-- TAB PILLS -->
+      <div class="tab-pills">
+        <button class="tab-pill tab-pill--active">System Library</button>
+        <button class="tab-pill">School Library</button>
+      </div>
+
+      <!-- FILTER BAR -->
+      <div class="filter-bar">
+        <select class="form-select">
+          <option selected>Grade: All</option>
+          <option>Grade: 8</option>
+          <option>Grade: 9</option>
+          <option>Grade: 10</option>
+          <option>Grade: 11</option>
+          <option>Grade: 12</option>
+        </select>
+        <select class="form-select">
+          <option selected>Subject: All</option>
+          <option>Mathematics</option>
+          <option>Physics</option>
+          <option>Chemistry</option>
+          <option>English</option>
+          <option>Economics</option>
+          <option>Political Science</option>
+          <option>Social Science</option>
+        </select>
+        <div class="search-bar-wrapper">
+          <span class="search-icon">🔍</span>
+          <input class="form-input search-bar" type="text" placeholder="Search textbooks...">
+        </div>
+      </div>
+
+      <!-- TEXTBOOKS TABLE -->
+      <div class="table-wrapper">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Grade</th>
+              <th>Subject</th>
+              <th>Title</th>
+              <th>Publisher</th>
+              <th>Chapters</th>
+              <th>Uploaded</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>12</td>
+              <td>Political Science</td>
+              <td>NCERT Political Science 2025</td>
+              <td>NCERT</td>
+              <td>8</td>
+              <td><span class="badge badge-gray">System</span></td>
+              <td><button class="btn btn-sm btn-ghost">•••</button></td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>Economics</td>
+              <td>NCERT Economics 2025</td>
+              <td>NCERT</td>
+              <td>6</td>
+              <td><span class="badge badge-gray">System</span></td>
+              <td><button class="btn btn-sm btn-ghost">•••</button></td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>Mathematics</td>
+              <td>NCERT Mathematics 2025</td>
+              <td>NCERT</td>
+              <td>13</td>
+              <td><span class="badge badge-gray">System</span></td>
+              <td><button class="btn btn-sm btn-ghost">•••</button></td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Physics</td>
+              <td>NCERT Physics 2024</td>
+              <td>NCERT</td>
+              <td>15</td>
+              <td><span class="badge badge-gray">System</span></td>
+              <td><button class="btn btn-sm btn-ghost">•••</button></td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Chemistry</td>
+              <td>School Custom Chemistry</td>
+              <td>ABC School</td>
+              <td>12</td>
+              <td><span class="badge badge-blue">School</span></td>
+              <td><button class="btn btn-sm btn-ghost">•••</button></td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Social Science</td>
+              <td>NCERT Social Science 2025</td>
+              <td>NCERT</td>
+              <td>12</td>
+              <td><span class="badge badge-gray">System</span></td>
+              <td><button class="btn btn-sm btn-ghost">•••</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+</div><!-- /.app-shell -->
+</body>
+</html>

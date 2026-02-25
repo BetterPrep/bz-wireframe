@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brainzeta — Upload Textbook</title>
+  <link rel="stylesheet" href="styles/base.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="admin-dashboard.html" class="sidebar-link">🏠 Dashboard</a></li>
+        <li><a href="admin-users-list.html" class="sidebar-link">👥 Users</a></li>
+        <li class="sidebar-section-label">ACADEMIC</li>
+        <li><a href="admin-teacher-sections.html" class="sidebar-link">🗂️ Teacher Sections</a></li>
+        <li><a href="admin-curriculum-mapping.html" class="sidebar-link">📋 Curriculum</a></li>
+        <li class="sidebar-section-label">LIBRARY</li>
+        <li><a href="admin-textbook-library.html" class="sidebar-link">📖 Textbook Library</a></li>
+        <li><a href="admin-upload-textbook.html" class="sidebar-link sidebar-link--active">📤 Upload Textbook</a></li>
+        <li class="sidebar-section-label">REPORTS</li>
+        <li><a href="admin-token-usage.html" class="sidebar-link">🪙 Token Usage</a></li>
+        <li><a href="admin-reports.html" class="sidebar-link">📊 Reports</a></li>
+      </ul>
+    </nav>
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-link">👤 My Profile</a>
+      <a href="login.html" class="sidebar-link">🚪 Sign Out</a>
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">Upload Textbook</div>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-role-badge">School Admin</span>
+        <button class="topbar-notif-btn">🔔<span class="notif-badge">2</span></button>
+        <div class="topbar-avatar">JD</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+
+      <!-- BREADCRUMB -->
+      <nav class="breadcrumb">
+        <a href="admin-dashboard.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="admin-textbook-library.html">Textbook Library</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Upload Textbook</span>
+      </nav>
+
+      <!-- PAGE HEADER -->
+      <div class="page-header">
+        <h1>Upload Textbook</h1>
+      </div>
+
+      <!-- STEPPER: Step 1 active -->
+      <div class="stepper">
+        <div class="stepper-step stepper-step--active">
+          <div class="stepper-indicator">1</div>
+          <div class="stepper-label">Step 1<br><span class="text-sm">Textbook Info</span></div>
+        </div>
+        <div class="stepper-connector"></div>
+        <div class="stepper-step stepper-step--pending">
+          <div class="stepper-indicator">2</div>
+          <div class="stepper-label">Step 2<br><span class="text-sm">Upload Chapters</span></div>
+        </div>
+        <div class="stepper-connector"></div>
+        <div class="stepper-step stepper-step--pending">
+          <div class="stepper-indicator">3</div>
+          <div class="stepper-label">Step 3<br><span class="text-sm">Processing</span></div>
+        </div>
+      </div>
+
+      <!-- STEP 1: Textbook Information (active) -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Step 1: Textbook Information</h2>
+        </div>
+        <div class="card-body">
+          <form>
+            <!-- Title (full width) -->
+            <div class="form-group">
+              <label class="form-label">Title <span class="required">*</span></label>
+              <input class="form-input" type="text" placeholder="e.g. NCERT Chemistry 2025" style="max-width: 100%;">
+            </div>
+            <!-- Subject + Grade -->
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Subject <span class="required">*</span></label>
+                <select class="form-select">
+                  <option value="">Select Subject</option>
+                  <option>Mathematics</option>
+                  <option>Physics</option>
+                  <option>Chemistry</option>
+                  <option>English</option>
+                  <option>Economics</option>
+                  <option>Political Science</option>
+                  <option>Social Science</option>
+                  <option>History</option>
+                  <option>Geography</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Grade <span class="required">*</span></label>
+                <select class="form-select">
+                  <option value="">Select Grade</option>
+                  <option>Grade 6</option>
+                  <option>Grade 7</option>
+                  <option>Grade 8</option>
+                  <option>Grade 9</option>
+                  <option>Grade 10</option>
+                  <option>Grade 11</option>
+                  <option>Grade 12</option>
+                </select>
+              </div>
+            </div>
+            <!-- Publisher + Edition -->
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Publisher</label>
+                <input class="form-input" type="text" placeholder="e.g. NCERT">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Edition</label>
+                <input class="form-input" type="text" placeholder="2025">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- STEP 2: Upload Chapters (pending/muted) -->
+      <div class="card card--muted">
+        <div class="card-header">
+          <h2 class="card-title text-muted">Step 2: Upload Chapters</h2>
+        </div>
+        <div class="card-body">
+          <p class="form-hint" style="margin-bottom: 16px;">Fill in textbook information above first</p>
+          <!-- Chapter rows (disabled) -->
+          <div class="chapter-upload-list">
+            <div class="chapter-upload-row d-flex align-center gap-12" style="margin-bottom: 10px; opacity: 0.5;">
+              <span class="text-muted" style="min-width: 80px;">Chapter 1</span>
+              <input class="form-input" type="text" placeholder="Chapter title..." disabled style="flex: 1;">
+              <button class="btn btn-secondary btn-sm" disabled>Choose File</button>
+            </div>
+            <div class="chapter-upload-row d-flex align-center gap-12" style="margin-bottom: 10px; opacity: 0.5;">
+              <span class="text-muted" style="min-width: 80px;">Chapter 2</span>
+              <input class="form-input" type="text" placeholder="Chapter title..." disabled style="flex: 1;">
+              <button class="btn btn-secondary btn-sm" disabled>Choose File</button>
+            </div>
+            <div class="chapter-upload-row d-flex align-center gap-12" style="margin-bottom: 10px; opacity: 0.5;">
+              <span class="text-muted" style="min-width: 80px;">Chapter 3</span>
+              <input class="form-input" type="text" placeholder="Chapter title..." disabled style="flex: 1;">
+              <button class="btn btn-secondary btn-sm" disabled>Choose File</button>
+            </div>
+          </div>
+          <button class="btn btn-ghost" disabled style="opacity: 0.5;">+ Add More Chapters</button>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- STEP 3: AI Processing (pending) -->
+      <div class="card card--muted">
+        <div class="card-header">
+          <h2 class="card-title text-muted">Step 3: AI Processing</h2>
+        </div>
+        <div class="card-body">
+          <p class="text-muted" style="margin-bottom: 12px;">Chapters will be processed for AI evaluation after upload</p>
+          <div class="progress" style="opacity: 0.4;">
+            <div class="progress-bar" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM ACTIONS -->
+      <div class="form-actions">
+        <a href="admin-textbook-library.html" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">Save &amp; Upload Chapters</button>
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+</div><!-- /.app-shell -->
+</body>
+</html>

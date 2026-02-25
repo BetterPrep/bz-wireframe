@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brainzeta — Wireframe Demo</title>
+  <link rel="stylesheet" href="styles/base.css">
+  <style>
+    .demo-page {
+      min-height: 100vh;
+      background: var(--color-bg-subtle);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+    .demo-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .demo-logo {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      letter-spacing: -0.03em;
+    }
+    .demo-logo-mark {
+      font-size: 2.8rem;
+      margin-bottom: 8px;
+    }
+    .demo-tagline {
+      font-size: var(--font-size-base);
+      color: var(--color-text-muted);
+      margin-top: 6px;
+    }
+    .demo-subtitle {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+      margin-top: 32px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      width: 100%;
+      max-width: 900px;
+    }
+    .role-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      padding: 32px 24px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--color-text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      transition: box-shadow 0.15s, border-color 0.15s, transform 0.1s;
+    }
+    .role-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      border-color: var(--color-primary);
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+    .role-icon {
+      font-size: 2.8rem;
+      line-height: 1;
+    }
+    .role-name {
+      font-size: var(--font-size-lg);
+      font-weight: 700;
+      color: var(--color-text);
+    }
+    .role-desc {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+    .role-btn {
+      margin-top: 4px;
+      padding: 8px 20px;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+    }
+    .demo-footer {
+      margin-top: 48px;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      text-align: center;
+    }
+    .demo-footer a {
+      color: var(--color-primary);
+    }
+  </style>
+</head>
+<body class="demo-page">
+
+  <!-- ====== HEADER ====== -->
+  <div class="demo-header">
+    <div class="demo-logo-mark">🧠</div>
+    <div class="demo-logo">Brainzeta</div>
+    <div class="demo-tagline">AI-Powered Assessment Platform</div>
+    <div class="demo-subtitle">Select a role to explore the wireframes</div>
+  </div>
+
+  <!-- ====== ROLE ENTRY POINTS ====== -->
+  <div class="role-grid">
+
+    <a href="superadmin-dashboard.html" class="role-card">
+      <div class="role-icon">🛡️</div>
+      <div class="role-name">Super Admin</div>
+      <div class="role-desc">Manage all schools, textbooks, token usage and system health</div>
+      <span class="role-btn">Enter as Super Admin →</span>
+    </a>
+
+    <a href="admin-dashboard.html" class="role-card">
+      <div class="role-icon">🏫</div>
+      <div class="role-name">School Admin</div>
+      <div class="role-desc">Manage users, curriculum, textbooks and school-level reports</div>
+      <span class="role-btn">Enter as School Admin →</span>
+    </a>
+
+    <a href="principal-dashboard.html" class="role-card">
+      <div class="role-icon">👔</div>
+      <div class="role-name">Principal</div>
+      <div class="role-desc">Monitor teacher activity, assessment calendar and student performance</div>
+      <span class="role-btn">Enter as Principal →</span>
+    </a>
+
+    <a href="teacher-dashboard.html" class="role-card">
+      <div class="role-icon">👩‍🏫</div>
+      <div class="role-name">Teacher</div>
+      <div class="role-desc">Create assessments, track submissions and approve AI evaluations</div>
+      <span class="role-btn">Enter as Teacher →</span>
+    </a>
+
+    <a href="student-dashboard.html" class="role-card">
+      <div class="role-icon">👨‍🎓</div>
+      <div class="role-name">Student</div>
+      <div class="role-desc">View assessments, upload answer sheets and check results</div>
+      <span class="role-btn">Enter as Student →</span>
+    </a>
+
+    <a href="parent-dashboard.html" class="role-card">
+      <div class="role-icon">👪</div>
+      <div class="role-name">Parent</div>
+      <div class="role-desc">Track your ward's pending assignments and performance</div>
+      <span class="role-btn">Enter as Parent →</span>
+    </a>
+
+    <a href="sta-dashboard.html" class="role-card">
+      <div class="role-icon">📤</div>
+      <div class="role-name">School Assistant</div>
+      <div class="role-desc">Upload student answer sheets individually or in bulk</div>
+      <span class="role-btn">Enter as School Assistant →</span>
+    </a>
+
+  </div>
+
+  <!-- ====== FOOTER ====== -->
+  <div class="demo-footer">
+    <p>Brainzeta Wireframes v1.0 · <a href="login.html">View Login Screen</a> · Powered by AIthena Innovations</p>
+  </div>
+
+</body>
+</html>

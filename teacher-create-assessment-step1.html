@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Assessment — Step 1 — Brainzeta Teacher</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body class="app-layout">
+
+  <!-- ============================================================
+       SIDEBAR
+  ============================================================ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-text">Brainzeta</span>
+    </div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="teacher-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="teacher-assessments-list.html" class="sidebar-nav-item active"><span class="nav-icon">📋</span> My Assessments</a></li>
+        <li><a href="teacher-class-analytics.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Class Analytics</a></li>
+        <li><a href="teacher-submission-tracker.html" class="sidebar-nav-item"><span class="nav-icon">📬</span> Submission Tracker</a></li>
+        <li><a href="teacher-pending-approvals.html" class="sidebar-nav-item"><span class="nav-icon">✅</span> Pending Approvals</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <div class="main-wrapper">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Create Assessment</span>
+      </div>
+      <div class="topbar-right">
+        <span class="badge badge-role">Teacher</span>
+        <span class="notif-btn">🔔 <span class="notif-badge">8</span></span>
+        <span class="avatar avatar-sm">RS</span>
+      </div>
+    </header>
+
+    <!-- PAGE BODY -->
+    <main class="page-body">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <span class="breadcrumb-item">Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item"><a href="teacher-assessments-list.html">My Assessments</a></span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item breadcrumb-current">Create New</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">Create Assessment</h1>
+      </div>
+
+      <!-- ── Stepper ── -->
+      <div class="stepper">
+        <div class="stepper-step stepper-active">
+          <div class="stepper-circle">1</div>
+          <div class="stepper-label">Basic Info</div>
+        </div>
+        <div class="stepper-connector"></div>
+        <div class="stepper-step stepper-pending">
+          <div class="stepper-circle">2</div>
+          <div class="stepper-label">Upload Files</div>
+        </div>
+        <div class="stepper-connector"></div>
+        <div class="stepper-step stepper-pending">
+          <div class="stepper-circle">3</div>
+          <div class="stepper-label">Review Rubric</div>
+        </div>
+      </div>
+
+      <!-- ── Step 1 Form Card ── -->
+      <div class="card mt-24">
+        <div class="card-header">
+          <h2 class="card-title">Step 1: Basic Information</h2>
+        </div>
+        <div class="card-body">
+          <form>
+
+            <!-- Assessment Title -->
+            <div class="form-group">
+              <label class="form-label">Assessment Title <span class="required">*</span></label>
+              <input class="form-input form-input-full" type="text" placeholder="e.g. Mathematics Half-Yearly Examination" />
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+              <label class="form-label">Description</label>
+              <textarea class="form-input form-input-full form-textarea" rows="3" placeholder="Describe the assessment purpose and instructions for students"></textarea>
+            </div>
+
+            <!-- Row: Grade / Subject / Type -->
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Grade <span class="required">*</span></label>
+                <select class="form-input select-input">
+                  <option>10</option>
+                  <option>11</option>
+                  <option selected>12</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Subject <span class="required">*</span></label>
+                <select class="form-input select-input">
+                  <option selected>Mathematics</option>
+                  <option>Physics</option>
+                  <option>Chemistry</option>
+                  <option>Economics</option>
+                  <option>History</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Assessment Type <span class="required">*</span></label>
+                <select class="form-input select-input">
+                  <option selected>Exam</option>
+                  <option>Quiz</option>
+                  <option>Assignment</option>
+                  <option>Lab Report</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Row: Max Marks / Due Date -->
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Max Marks <span class="required">*</span></label>
+                <input class="form-input" type="number" value="80" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Due Date <span class="required">*</span></label>
+                <input class="form-input" type="date" value="2026-02-26" />
+              </div>
+            </div>
+
+            <!-- Requires Approval -->
+            <div class="form-group">
+              <label class="form-label">Requires Teacher Approval?</label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="approval" checked />
+                  <strong>Yes</strong> — AI evaluates, teacher approves
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="approval" />
+                  <strong>No</strong> — Instant AI feedback (Practice Mode)
+                </label>
+              </div>
+            </div>
+
+            <!-- Link Textbook Chapters -->
+            <div class="form-group">
+              <label class="form-label">Link Textbook Chapters (Optional)</label>
+              <p class="form-hint">Select relevant chapters for AI evaluation context</p>
+              <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" /> Chapter 1: Relations and Functions</label>
+                <label class="checkbox-label"><input type="checkbox" checked /> Chapter 2: Inverse Trigonometric Functions</label>
+                <label class="checkbox-label"><input type="checkbox" checked /> Chapter 3: Matrices</label>
+                <label class="checkbox-label"><input type="checkbox" /> Chapter 4: Determinants</label>
+                <label class="checkbox-label"><input type="checkbox" checked /> Chapter 5: Continuity and Differentiability</label>
+                <label class="checkbox-label"><input type="checkbox" /> Chapter 6: Application of Derivatives</label>
+              </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="form-actions">
+              <a href="teacher-assessments-list.html" class="btn btn-secondary">Cancel</a>
+              <a href="teacher-create-assessment-step2.html" class="btn btn-primary">Next: Upload Files →</a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /main-wrapper -->
+</body>
+</html>

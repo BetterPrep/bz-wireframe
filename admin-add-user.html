@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brainzeta — Add New User</title>
+  <link rel="stylesheet" href="styles/base.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="admin-dashboard.html" class="sidebar-link">🏠 Dashboard</a></li>
+        <li><a href="admin-users-list.html" class="sidebar-link sidebar-link--active">👥 Users</a></li>
+        <li class="sidebar-section-label">ACADEMIC</li>
+        <li><a href="admin-teacher-sections.html" class="sidebar-link">🗂️ Teacher Sections</a></li>
+        <li><a href="admin-curriculum-mapping.html" class="sidebar-link">📋 Curriculum</a></li>
+        <li class="sidebar-section-label">LIBRARY</li>
+        <li><a href="admin-textbook-library.html" class="sidebar-link">📖 Textbook Library</a></li>
+        <li><a href="admin-upload-textbook.html" class="sidebar-link">📤 Upload Textbook</a></li>
+        <li class="sidebar-section-label">REPORTS</li>
+        <li><a href="admin-token-usage.html" class="sidebar-link">🪙 Token Usage</a></li>
+        <li><a href="admin-reports.html" class="sidebar-link">📊 Reports</a></li>
+      </ul>
+    </nav>
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-link">👤 My Profile</a>
+      <a href="login.html" class="sidebar-link">🚪 Sign Out</a>
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">Add New User</div>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-role-badge">School Admin</span>
+        <button class="topbar-notif-btn">🔔<span class="notif-badge">2</span></button>
+        <div class="topbar-avatar">JD</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+
+      <!-- BREADCRUMB -->
+      <nav class="breadcrumb">
+        <a href="admin-dashboard.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="admin-users-list.html">User Management</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Add New User</span>
+      </nav>
+
+      <!-- PAGE HEADER -->
+      <div class="page-header">
+        <h1>Add New User</h1>
+      </div>
+
+      <!-- MAIN FORM CARD -->
+      <div class="card">
+        <div class="card-body">
+          <form>
+
+            <!-- ROLE SELECTION -->
+            <div class="form-group">
+              <label class="form-label">Select Role <span class="required">*</span></label>
+              <div class="radio-group d-flex gap-24">
+                <label class="radio-label">
+                  <input type="radio" name="role" checked> Teacher
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="role"> Student
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="role"> Parent
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="role"> Staff
+                </label>
+              </div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- SECTION TITLE -->
+            <div class="form-section-title">Teacher Information</div>
+
+            <!-- Full Name + Email -->
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Full Name <span class="required">*</span></label>
+                <input class="form-input" type="text" placeholder="e.g. Priya Verma">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email <span class="required">*</span></label>
+                <input class="form-input" type="email" placeholder="e.g. p.verma@school.edu">
+              </div>
+            </div>
+
+            <!-- Phone + Username -->
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Phone <span class="required">*</span></label>
+                <input class="form-input" type="text" placeholder="+91 XXXXX XXXXX">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Username <span class="required">*</span></label>
+                <input class="form-input" type="text" placeholder="e.g. p.verma">
+              </div>
+            </div>
+
+            <!-- Auto-generated Password -->
+            <div class="form-group">
+              <label class="form-label">Auto-generated Password</label>
+              <div class="d-flex gap-8 align-center">
+                <div class="password-input-wrapper" style="flex: 1;">
+                  <input class="form-input" type="text" value="Temp@2026">
+                  <button type="button" class="password-toggle-btn">👁</button>
+                </div>
+                <button type="button" class="btn btn-secondary btn-sm">🔄</button>
+              </div>
+              <span class="form-hint">Password will be emailed to the user</span>
+            </div>
+
+            <hr class="divider">
+
+            <!-- SECTION TITLE: Subjects & Grades -->
+            <div class="form-section-title">Subjects &amp; Grades</div>
+
+            <!-- Subjects Taught -->
+            <div class="form-group">
+              <label class="form-label">Subjects Taught <span class="required">*</span></label>
+              <div class="checkbox-group grid-3">
+                <label class="checkbox-label">
+                  <input type="checkbox" checked> Mathematics
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" checked> Physics
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox"> Chemistry
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox"> English
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox"> History
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox"> Geography
+                </label>
+              </div>
+            </div>
+
+            <!-- Grades -->
+            <div class="form-group">
+              <label class="form-label">Grades <span class="required">*</span></label>
+              <div class="checkbox-group d-flex gap-16">
+                <label class="checkbox-label"><input type="checkbox"> 6</label>
+                <label class="checkbox-label"><input type="checkbox"> 7</label>
+                <label class="checkbox-label"><input type="checkbox"> 8</label>
+                <label class="checkbox-label"><input type="checkbox"> 9</label>
+                <label class="checkbox-label"><input type="checkbox" checked> 10</label>
+                <label class="checkbox-label"><input type="checkbox" checked> 11</label>
+                <label class="checkbox-label"><input type="checkbox" checked> 12</label>
+              </div>
+            </div>
+
+            <!-- FORM ACTIONS -->
+            <div class="form-actions">
+              <a href="admin-users-list.html" class="btn btn-secondary">Cancel</a>
+              <button type="submit" class="btn btn-primary">Create User</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+</div><!-- /.app-shell -->
+</body>
+</html>

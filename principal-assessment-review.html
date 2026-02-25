@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brainzeta — Assessment Review</title>
+  <link rel="stylesheet" href="styles/base.css" />
+  <style>
+    /* ── Pagination ── */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+    .pagination-controls {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .page-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: 32px;
+      padding: 0 8px;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+      background: #fff;
+      font-size: 0.82rem;
+      color: #374151;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .page-btn:hover {
+      background: #f3f4f6;
+    }
+    .page-btn.active {
+      background: #2563eb;
+      color: #fff;
+      border-color: #2563eb;
+    }
+    .page-btn:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+  </style>
+</head>
+<body class="app-layout">
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-text">Brainzeta</span>
+    </div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="principal-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="principal-assessment-calendar.html" class="sidebar-nav-item"><span class="nav-icon">📅</span> Assessment Calendar</a></li>
+        <li><a href="principal-teacher-monitor.html" class="sidebar-nav-item"><span class="nav-icon">👩‍🏫</span> Teacher Monitor</a></li>
+        <li><a href="principal-student-performance.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Student Performance</a></li>
+        <li><a href="principal-assessment-review.html" class="sidebar-nav-item active"><span class="nav-icon">🔍</span> Assessment Review</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ===================== MAIN CONTENT ===================== -->
+  <div class="main-wrapper">
+
+    <!-- ===================== TOPBAR ===================== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Assessment Review</span>
+      </div>
+      <div class="topbar-right">
+        <span class="badge badge-role">Principal</span>
+        <span class="notif-btn">🔔 <span class="notif-badge">4</span></span>
+        <div class="avatar-initials">MP</div>
+      </div>
+    </header>
+
+    <!-- ===================== PAGE BODY ===================== -->
+    <main class="page-body">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <span>Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-active">Assessment Review</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">Assessment Review</h1>
+        <p class="page-subtitle">Read-only view of all school assessments</p>
+      </div>
+
+      <!-- ===================== FILTER BAR ===================== -->
+      <div class="filter-bar mb-16">
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="form-input search-input" placeholder="Search assessments..." />
+        </div>
+        <select class="form-select">
+          <option>Grade: All</option>
+          <option>Grade 8</option>
+          <option>Grade 9</option>
+          <option>Grade 10</option>
+          <option>Grade 11</option>
+          <option>Grade 12</option>
+        </select>
+        <select class="form-select">
+          <option>Subject: All</option>
+          <option>Mathematics</option>
+          <option>Physics</option>
+          <option>Chemistry</option>
+          <option>Economics</option>
+          <option>History</option>
+          <option>English</option>
+        </select>
+        <select class="form-select">
+          <option>Status: All</option>
+          <option>In Progress</option>
+          <option>Completed</option>
+          <option>Upcoming</option>
+          <option>Draft</option>
+        </select>
+        <select class="form-select">
+          <option>Teacher: All</option>
+          <option>Mr. Sharma</option>
+          <option>Mr. Gupta</option>
+          <option>Ms. Verma</option>
+          <option>Ms. Rao</option>
+          <option>Mr. Nair</option>
+          <option>Ms. Joshi</option>
+        </select>
+      </div>
+
+      <!-- ===================== ASSESSMENTS TABLE ===================== -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">All Assessments</h2>
+          <span class="card-subtitle">Showing 6 of 156 assessments</span>
+        </div>
+        <div class="card-body">
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Assessment Title</th>
+                  <th>Subject</th>
+                  <th>Grade</th>
+                  <th>Teacher</th>
+                  <th>Type</th>
+                  <th>Due Date</th>
+                  <th>Status</th>
+                  <th>Submissions</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="d-flex align-center gap-8">
+                      <span class="list-icon">📋</span>
+                      <span class="font-medium">Math Half-Yearly Exam</span>
+                    </div>
+                  </td>
+                  <td>Mathematics</td>
+                  <td>12</td>
+                  <td>Mr. Sharma</td>
+                  <td><span class="badge badge-gray">Exam</span></td>
+                  <td>Feb 26</td>
+                  <td><span class="badge badge-warning">In Progress</span></td>
+                  <td>
+                    <div class="d-flex align-center gap-6">
+                      <span>45/78</span>
+                      <div class="hbar-track" style="width:60px; display:inline-block;">
+                        <div class="hbar-fill hbar-fill-blue" style="width:58%;"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><button class="btn btn-sm btn-ghost">🔍 View</button></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-center gap-8">
+                      <span class="list-icon">📝</span>
+                      <span class="font-medium">Physics Quiz</span>
+                    </div>
+                  </td>
+                  <td>Physics</td>
+                  <td>11</td>
+                  <td>Mr. Gupta</td>
+                  <td><span class="badge badge-gray">Quiz</span></td>
+                  <td>Feb 12</td>
+                  <td><span class="badge badge-success">Completed</span></td>
+                  <td>
+                    <div class="d-flex align-center gap-6">
+                      <span>38/38</span>
+                      <div class="hbar-track" style="width:60px; display:inline-block;">
+                        <div class="hbar-fill hbar-fill-green" style="width:100%;"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><button class="btn btn-sm btn-ghost">🔍 View</button></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-center gap-8">
+                      <span class="list-icon">📄</span>
+                      <span class="font-medium">Economics Assignment</span>
+                    </div>
+                  </td>
+                  <td>Economics</td>
+                  <td>12</td>
+                  <td>Ms. Verma</td>
+                  <td><span class="badge badge-gray">Assignment</span></td>
+                  <td>Feb 15</td>
+                  <td><span class="badge badge-success">Completed</span></td>
+                  <td>
+                    <div class="d-flex align-center gap-6">
+                      <span>42/42</span>
+                      <div class="hbar-track" style="width:60px; display:inline-block;">
+                        <div class="hbar-fill hbar-fill-green" style="width:100%;"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><button class="btn btn-sm btn-ghost">🔍 View</button></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-center gap-8">
+                      <span class="list-icon">📋</span>
+                      <span class="font-medium">Chemistry Test</span>
+                    </div>
+                  </td>
+                  <td>Chemistry</td>
+                  <td>11</td>
+                  <td>Ms. Rao</td>
+                  <td><span class="badge badge-gray">Exam</span></td>
+                  <td>Feb 20</td>
+                  <td><span class="badge badge-warning">In Progress</span></td>
+                  <td>
+                    <div class="d-flex align-center gap-6">
+                      <span>22/40</span>
+                      <div class="hbar-track" style="width:60px; display:inline-block;">
+                        <div class="hbar-fill hbar-fill-orange" style="width:55%;"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><button class="btn btn-sm btn-ghost">🔍 View</button></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-center gap-8">
+                      <span class="list-icon">📄</span>
+                      <span class="font-medium">History Essay</span>
+                    </div>
+                  </td>
+                  <td>History</td>
+                  <td>10</td>
+                  <td>Mr. Nair</td>
+                  <td><span class="badge badge-gray">Assignment</span></td>
+                  <td>Feb 25</td>
+                  <td><span class="badge badge-gray">Upcoming</span></td>
+                  <td>
+                    <div class="d-flex align-center gap-6">
+                      <span>0/55</span>
+                      <div class="hbar-track" style="width:60px; display:inline-block;">
+                        <div class="hbar-fill" style="width:0%; background:#9ca3af;"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><button class="btn btn-sm btn-ghost">🔍 View</button></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-center gap-8">
+                      <span class="list-icon">📝</span>
+                      <span class="font-medium">English Grammar Test</span>
+                    </div>
+                  </td>
+                  <td>English</td>
+                  <td>8</td>
+                  <td>Ms. Joshi</td>
+                  <td><span class="badge badge-gray">Quiz</span></td>
+                  <td>Mar 5</td>
+                  <td><span class="badge badge-gray">Draft</span></td>
+                  <td>
+                    <div class="d-flex align-center gap-6">
+                      <span>0/60</span>
+                      <div class="hbar-track" style="width:60px; display:inline-block;">
+                        <div class="hbar-fill" style="width:0%; background:#9ca3af;"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><button class="btn btn-sm btn-ghost">🔍 View</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- ===================== PAGINATION ===================== -->
+          <div class="pagination">
+            <span>Showing <strong>1–6</strong> of <strong>156</strong> assessments</span>
+            <div class="pagination-controls">
+              <button class="page-btn" disabled>‹ Prev</button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <span style="padding:0 4px; color:#9ca3af;">…</span>
+              <button class="page-btn">26</button>
+              <button class="page-btn">Next ›</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+
+</body>
+</html>

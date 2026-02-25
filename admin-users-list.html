@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brainzeta — User Management</title>
+  <link rel="stylesheet" href="styles/base.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="admin-dashboard.html" class="sidebar-link">🏠 Dashboard</a></li>
+        <li><a href="admin-users-list.html" class="sidebar-link sidebar-link--active">👥 Users</a></li>
+        <li class="sidebar-section-label">ACADEMIC</li>
+        <li><a href="admin-teacher-sections.html" class="sidebar-link">🗂️ Teacher Sections</a></li>
+        <li><a href="admin-curriculum-mapping.html" class="sidebar-link">📋 Curriculum</a></li>
+        <li class="sidebar-section-label">LIBRARY</li>
+        <li><a href="admin-textbook-library.html" class="sidebar-link">📖 Textbook Library</a></li>
+        <li><a href="admin-upload-textbook.html" class="sidebar-link">📤 Upload Textbook</a></li>
+        <li class="sidebar-section-label">REPORTS</li>
+        <li><a href="admin-token-usage.html" class="sidebar-link">🪙 Token Usage</a></li>
+        <li><a href="admin-reports.html" class="sidebar-link">📊 Reports</a></li>
+      </ul>
+    </nav>
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-link">👤 My Profile</a>
+      <a href="login.html" class="sidebar-link">🚪 Sign Out</a>
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">User Management</div>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-role-badge">School Admin</span>
+        <button class="topbar-notif-btn">🔔<span class="notif-badge">2</span></button>
+        <div class="topbar-avatar">JD</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+
+      <!-- BREADCRUMB -->
+      <nav class="breadcrumb">
+        <a href="admin-dashboard.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>User Management</span>
+      </nav>
+
+      <!-- PAGE HEADER -->
+      <div class="page-header">
+        <div class="page-header-left">
+          <h1>All Users <span class="badge badge-gray">1,365</span></h1>
+        </div>
+        <div class="page-actions">
+          <a href="admin-add-user.html" class="btn btn-primary">+ Add User</a>
+          <a href="admin-bulk-import.html" class="btn btn-secondary">📥 Bulk Import</a>
+        </div>
+      </div>
+
+      <!-- TAB PILLS -->
+      <div class="tab-pills">
+        <button class="tab-pill tab-pill--active">Teachers</button>
+        <button class="tab-pill">Students</button>
+        <button class="tab-pill">Parents</button>
+        <button class="tab-pill">Staff</button>
+      </div>
+
+      <!-- FILTER BAR -->
+      <div class="filter-bar">
+        <div class="search-bar-wrapper">
+          <span class="search-icon">🔍</span>
+          <input class="form-input search-bar" type="text" placeholder="Search by name...">
+        </div>
+        <select class="form-select">
+          <option>Grade: All</option>
+          <option>Grade 8</option>
+          <option>Grade 9</option>
+          <option>Grade 10</option>
+          <option>Grade 11</option>
+          <option>Grade 12</option>
+        </select>
+        <select class="form-select">
+          <option>Section: All</option>
+          <option>Section A</option>
+          <option>Section B</option>
+          <option>Section C</option>
+        </select>
+        <button class="btn btn-secondary">Export CSV</button>
+      </div>
+
+      <!-- BULK ACTION BAR -->
+      <div class="bulk-bar d-flex gap-8 align-center">
+        <label class="checkbox-label">
+          <input type="checkbox"> Select all
+        </label>
+        <span class="text-muted text-sm">3 selected</span>
+        <button class="btn btn-sm btn-secondary">Send Credentials</button>
+        <button class="btn btn-sm btn-danger">Deactivate</button>
+      </div>
+
+      <!-- USERS TABLE -->
+      <div class="table-wrapper">
+        <table class="table">
+          <thead>
+            <tr>
+              <th><input type="checkbox"></th>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Grade / Section</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>
+                <div class="d-flex align-center gap-8">
+                  <div class="avatar-sm">RS</div>
+                  Ramesh Sharma
+                </div>
+              </td>
+              <td>Teacher</td>
+              <td>12-A, 12-B</td>
+              <td>r.sharma@school.edu</td>
+              <td><span class="badge badge-success">Active</span></td>
+              <td><button class="btn btn-sm btn-ghost">•••</button></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>
+                <div class="d-flex align-center gap-8">
+                  <div class="avatar-sm">PV</div>
+                  Priya Verma
+                </div>
+              </td>
+              <td>Teacher</td>
+              <td>11-A, 11-C</td>
+              <td>p.verma@school.edu</td>
+              <td><span class="badge badge-success">Active</span></td>
+              <td><button class="btn btn-sm btn-ghost">•••</button></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>
+                <div class="d-flex align-center gap-8">
+                  <div class="avatar-sm">AG</div>
+                  Amit Gupta
+                </div>
+              </td>
+              <td>Teacher</td>
+              <td>10-A, 10-B</td>
+              <td>a.gupta@school.edu</td>
+              <td><span class="badge badge-success">Active</span></td>
+              <td><button class="btn btn-sm btn-ghost">•••</button></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>
+                <div class="d-flex align-center gap-8">
+                  <div class="avatar-sm">SR</div>
+                  Sunita Rao
+                </div>
+              </td>
+              <td>Teacher</td>
+              <td>12-C, 11-B</td>
+              <td>s.rao@school.edu</td>
+              <td><span class="badge badge-warning">Inactive</span></td>
+              <td><button class="btn btn-sm btn-ghost">•••</button></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>
+                <div class="d-flex align-center gap-8">
+                  <div class="avatar-sm">VN</div>
+                  Vikram Nair
+                </div>
+              </td>
+              <td>Teacher</td>
+              <td>9-A, 9-B</td>
+              <td>v.nair@school.edu</td>
+              <td><span class="badge badge-success">Active</span></td>
+              <td><button class="btn btn-sm btn-ghost">•••</button></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>
+                <div class="d-flex align-center gap-8">
+                  <div class="avatar-sm">MJ</div>
+                  Meera Joshi
+                </div>
+              </td>
+              <td>Teacher</td>
+              <td>8-A, 8-B</td>
+              <td>m.joshi@school.edu</td>
+              <td><span class="badge badge-success">Active</span></td>
+              <td><button class="btn btn-sm btn-ghost">•••</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- PAGINATION -->
+      <div class="pagination">
+        <button class="btn btn-sm btn-ghost" disabled>← Previous</button>
+        <span class="pagination-info">Page 1 of 8</span>
+        <button class="btn btn-sm btn-ghost">Next →</button>
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+</div><!-- /.app-shell -->
+</body>
+</html>

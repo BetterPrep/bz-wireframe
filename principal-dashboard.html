@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brainzeta — Principal Dashboard</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body class="app-layout">
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-text">Brainzeta</span>
+    </div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="principal-dashboard.html" class="sidebar-nav-item active"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="principal-assessment-calendar.html" class="sidebar-nav-item"><span class="nav-icon">📅</span> Assessment Calendar</a></li>
+        <li><a href="principal-teacher-monitor.html" class="sidebar-nav-item"><span class="nav-icon">👩‍🏫</span> Teacher Monitor</a></li>
+        <li><a href="principal-student-performance.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Student Performance</a></li>
+        <li><a href="principal-assessment-review.html" class="sidebar-nav-item"><span class="nav-icon">🔍</span> Assessment Review</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ===================== MAIN CONTENT ===================== -->
+  <div class="main-wrapper">
+
+    <!-- ===================== TOPBAR ===================== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Principal Dashboard</span>
+      </div>
+      <div class="topbar-right">
+        <span class="badge badge-role">Principal</span>
+        <span class="notif-btn">🔔 <span class="notif-badge">4</span></span>
+        <div class="avatar-initials">MP</div>
+      </div>
+    </header>
+
+    <!-- ===================== PAGE BODY ===================== -->
+    <main class="page-body">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <span>Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-active">Dashboard</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">School Overview</h1>
+        <p class="page-subtitle">ABC School — Academic Year 2025–26</p>
+      </div>
+
+      <!-- ===================== STAT GRID ===================== -->
+      <div class="stat-grid">
+        <div class="stat-card stat-blue">
+          <div class="stat-icon">📋</div>
+          <div class="stat-value">156</div>
+          <div class="stat-label">Active Assessments</div>
+        </div>
+        <div class="stat-card stat-green">
+          <div class="stat-icon">👩‍🏫</div>
+          <div class="stat-value">45</div>
+          <div class="stat-label">Teachers</div>
+        </div>
+        <div class="stat-card stat-orange">
+          <div class="stat-icon">👨‍🎓</div>
+          <div class="stat-value">1,200</div>
+          <div class="stat-label">Students</div>
+        </div>
+        <div class="stat-card stat-purple">
+          <div class="stat-icon">✅</div>
+          <div class="stat-value">78%</div>
+          <div class="stat-label">Avg. Pass Rate</div>
+        </div>
+      </div>
+
+      <!-- ===================== TWO-COLUMN GRID ===================== -->
+      <div class="grid-2">
+
+        <!-- Left: Pending Approvals by Teacher -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Pending Approvals by Teacher</h2>
+          </div>
+          <div class="card-body">
+            <div class="hbar-chart">
+
+              <div class="hbar-row">
+                <span class="hbar-label">Mr. Sharma</span>
+                <div class="hbar-track">
+                  <div class="hbar-fill hbar-fill-blue" style="width: 72%;"></div>
+                </div>
+                <span class="hbar-value">14 pending</span>
+              </div>
+
+              <div class="hbar-row">
+                <span class="hbar-label">Ms. Verma</span>
+                <div class="hbar-track">
+                  <div class="hbar-fill hbar-fill-blue" style="width: 55%;"></div>
+                </div>
+                <span class="hbar-value">11 pending</span>
+              </div>
+
+              <div class="hbar-row">
+                <span class="hbar-label">Mr. Gupta</span>
+                <div class="hbar-track">
+                  <div class="hbar-fill hbar-fill-blue" style="width: 40%;"></div>
+                </div>
+                <span class="hbar-value">8 pending</span>
+              </div>
+
+              <div class="hbar-row">
+                <span class="hbar-label">Ms. Rao</span>
+                <div class="hbar-track">
+                  <div class="hbar-fill hbar-fill-blue" style="width: 25%;"></div>
+                </div>
+                <span class="hbar-value">5 pending</span>
+              </div>
+
+              <div class="hbar-row">
+                <span class="hbar-label">Mr. Nair</span>
+                <div class="hbar-track">
+                  <div class="hbar-fill hbar-fill-blue" style="width: 10%;"></div>
+                </div>
+                <span class="hbar-value">2 pending</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Upcoming Assessments -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Upcoming Assessments (Next 7 Days)</h2>
+          </div>
+          <div class="card-body">
+            <ul class="list-plain list-spaced">
+
+              <li class="list-item-row">
+                <span class="list-icon">📋</span>
+                <div class="list-item-body">
+                  <span class="list-item-title">Math Half-Yearly Exam</span>
+                  <span class="list-item-meta">Grade 12-A, B &nbsp;|&nbsp; Due: Feb 26</span>
+                </div>
+                <span class="badge badge-error">2 days</span>
+              </li>
+
+              <li class="list-item-row">
+                <span class="list-icon">📋</span>
+                <div class="list-item-body">
+                  <span class="list-item-title">Physics Quiz</span>
+                  <span class="list-item-meta">Grade 11-B &nbsp;|&nbsp; Due: Feb 27</span>
+                </div>
+                <span class="badge badge-warning">3 days</span>
+              </li>
+
+              <li class="list-item-row">
+                <span class="list-icon">📋</span>
+                <div class="list-item-body">
+                  <span class="list-item-title">Economics Test</span>
+                  <span class="list-item-meta">Grade 12-C &nbsp;|&nbsp; Due: Mar 1</span>
+                </div>
+                <span class="badge badge-gray">5 days</span>
+              </li>
+
+              <li class="list-item-row">
+                <span class="list-icon">📋</span>
+                <div class="list-item-body">
+                  <span class="list-item-title">Chemistry Lab Report</span>
+                  <span class="list-item-meta">Grade 11-A &nbsp;|&nbsp; Due: Mar 3</span>
+                </div>
+                <span class="badge badge-gray">7 days</span>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /.grid-2 -->
+
+      <!-- ===================== GRADE-WISE PERFORMANCE TABLE ===================== -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Grade-wise Performance Overview</h2>
+        </div>
+        <div class="card-body">
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Grade</th>
+                  <th>Students</th>
+                  <th>Avg Score</th>
+                  <th>Pass Rate</th>
+                  <th>Top Subject</th>
+                  <th>Needs Attention</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Grade 12</strong></td>
+                  <td>240</td>
+                  <td>72.5%</td>
+                  <td><span class="badge badge-success">88%</span></td>
+                  <td>Mathematics</td>
+                  <td><span class="badge badge-error">Chemistry</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Grade 11</strong></td>
+                  <td>235</td>
+                  <td>68.2%</td>
+                  <td><span class="badge badge-success">82%</span></td>
+                  <td>Physics</td>
+                  <td><span class="badge badge-error">Economics</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Grade 10</strong></td>
+                  <td>280</td>
+                  <td>74.8%</td>
+                  <td><span class="badge badge-success">91%</span></td>
+                  <td>Social Science</td>
+                  <td><span class="badge badge-warning">Mathematics</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Grade 9</strong></td>
+                  <td>265</td>
+                  <td>70.1%</td>
+                  <td><span class="badge badge-success">86%</span></td>
+                  <td>English</td>
+                  <td><span class="badge badge-warning">Science</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Grade 8</strong></td>
+                  <td>180</td>
+                  <td>76.3%</td>
+                  <td><span class="badge badge-success">93%</span></td>
+                  <td>Hindi</td>
+                  <td><span class="badge badge-warning">Mathematics</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+
+</body>
+</html>

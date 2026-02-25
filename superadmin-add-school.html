@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brainzeta — Add New School</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body>
+
+<!-- ====== APP SHELL ====== -->
+<div class="app-shell">
+
+  <!-- ====== SIDEBAR ====== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-text">Brainzeta</span>
+    </div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="superadmin-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="superadmin-schools-list.html" class="sidebar-nav-item active"><span class="nav-icon">🏫</span> Schools</a></li>
+        <li><a href="superadmin-textbooks.html" class="sidebar-nav-item"><span class="nav-icon">📚</span> Textbooks</a></li>
+        <li><a href="superadmin-token-usage.html" class="sidebar-nav-item"><span class="nav-icon">🪙</span> Token Usage</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+  <!-- ====== END SIDEBAR ====== -->
+
+  <!-- ====== MAIN AREA ====== -->
+  <div class="main-wrapper">
+
+    <!-- ====== TOPBAR ====== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">Add New School</div>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-role-badge">Super Admin</span>
+        <button class="topbar-notif-btn">🔔<span class="notif-badge">3</span></button>
+        <div class="topbar-avatar">SA</div>
+      </div>
+    </header>
+    <!-- ====== END TOPBAR ====== -->
+
+    <!-- ====== PAGE CONTENT ====== -->
+    <main class="page-content">
+
+      <!-- ====== BREADCRUMB ====== -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="superadmin-dashboard.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="superadmin-schools-list.html">Schools</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Add New School</span>
+      </nav>
+
+      <!-- ====== PAGE HEADER ====== -->
+      <div class="page-header">
+        <div class="page-header-left">
+          <h1 class="page-title">Add New School</h1>
+        </div>
+      </div>
+
+      <!-- ====== SCHOOL CREATION FORM ====== -->
+      <form action="#" method="post">
+
+        <!-- ====== SECTION 1: SCHOOL INFORMATION ====== -->
+        <div class="card form-section">
+          <div class="card-header">
+            <h2 class="card-title">1. School Information</h2>
+          </div>
+          <div class="card-body">
+
+            <div class="form-group">
+              <label class="form-label" for="school-name">School Name <span class="required">*</span></label>
+              <input class="form-control" type="text" id="school-name" name="school_name" placeholder="e.g. ABC International School" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="address">Address</label>
+              <input class="form-control" type="text" id="address" name="address" placeholder="Street address, building name" />
+            </div>
+
+            <div class="form-row form-row-3">
+              <div class="form-group">
+                <label class="form-label" for="city">City <span class="required">*</span></label>
+                <input class="form-control" type="text" id="city" name="city" placeholder="e.g. Mumbai" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="state">State <span class="required">*</span></label>
+                <input class="form-control" type="text" id="state" name="state" placeholder="e.g. Maharashtra" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="pin">PIN Code</label>
+                <input class="form-control" type="text" id="pin" name="pin" placeholder="e.g. 400001" maxlength="6" pattern="[0-9]{6}" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="board">Board <span class="required">*</span></label>
+              <select class="form-control form-select" id="board" name="board" required>
+                <option value="" disabled selected>Select board</option>
+                <option value="cbse">CBSE</option>
+                <option value="icse">ICSE</option>
+                <option value="ib">IB</option>
+                <option value="state">State Board</option>
+              </select>
+            </div>
+
+            <div class="form-row form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="contact-email">Contact Email <span class="required">*</span></label>
+                <input class="form-control" type="email" id="contact-email" name="contact_email" placeholder="e.g. admin@abcschool.edu" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contact-phone">Contact Phone <span class="required">*</span></label>
+                <input class="form-control" type="tel" id="contact-phone" name="contact_phone" placeholder="e.g. +91 98765 43210" required />
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- ====== END SECTION 1 ====== -->
+
+        <!-- ====== SECTION 2: SCHOOL ADMIN ACCOUNT ====== -->
+        <div class="card form-section">
+          <div class="card-header">
+            <h2 class="card-title">2. School Admin Account</h2>
+          </div>
+          <div class="card-body">
+
+            <div class="form-group">
+              <label class="form-label" for="admin-name">Admin Full Name <span class="required">*</span></label>
+              <input class="form-control" type="text" id="admin-name" name="admin_name" placeholder="e.g. John Doe" required />
+            </div>
+
+            <div class="form-row form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="admin-username">Username <span class="required">*</span></label>
+                <input class="form-control" type="text" id="admin-username" name="admin_username" placeholder="e.g. johndoe_abc" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="admin-password">Auto-generated Password <span class="required">*</span></label>
+                <div class="input-with-action">
+                  <input class="form-control" type="text" id="admin-password" name="admin_password" value="Brz@2025!abc" readonly />
+                  <button type="button" class="btn btn-secondary btn-icon-sm" aria-label="Regenerate password" title="Regenerate password">🔄</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="admin-email">Admin Email <span class="required">*</span></label>
+                <input class="form-control" type="email" id="admin-email" name="admin_email" placeholder="e.g. john@abcschool.edu" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="admin-phone">Admin Phone <span class="required">*</span></label>
+                <input class="form-control" type="tel" id="admin-phone" name="admin_phone" placeholder="e.g. +91 87654 32100" required />
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- ====== END SECTION 2 ====== -->
+
+        <!-- ====== SECTION 3: CONFIGURATION ====== -->
+        <div class="card form-section">
+          <div class="card-header">
+            <h2 class="card-title">3. Configuration</h2>
+          </div>
+          <div class="card-body">
+
+            <div class="form-group">
+              <label class="form-label">Grades Offered</label>
+              <div class="checkbox-grid">
+                <label class="form-check"><input type="checkbox" name="grades[]" value="6" checked /> <span>Grade 6</span></label>
+                <label class="form-check"><input type="checkbox" name="grades[]" value="7" checked /> <span>Grade 7</span></label>
+                <label class="form-check"><input type="checkbox" name="grades[]" value="8" checked /> <span>Grade 8</span></label>
+                <label class="form-check"><input type="checkbox" name="grades[]" value="9" checked /> <span>Grade 9</span></label>
+                <label class="form-check"><input type="checkbox" name="grades[]" value="10" checked /> <span>Grade 10</span></label>
+                <label class="form-check"><input type="checkbox" name="grades[]" value="11" checked /> <span>Grade 11</span></label>
+                <label class="form-check"><input type="checkbox" name="grades[]" value="12" checked /> <span>Grade 12</span></label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="token-allocation">Initial Token Allocation <span class="required">*</span></label>
+              <input class="form-control" type="number" id="token-allocation" name="token_allocation" value="50000" min="1000" step="1000" required />
+              <p class="form-hint text-muted">Number of AI tokens allocated to this school at setup.</p>
+            </div>
+
+          </div>
+        </div>
+        <!-- ====== END SECTION 3 ====== -->
+
+        <!-- ====== FORM ACTIONS ====== -->
+        <div class="form-actions">
+          <a href="superadmin-schools-list.html" class="btn btn-secondary">Cancel</a>
+          <button type="submit" class="btn btn-primary">Create School</button>
+        </div>
+        <!-- ====== END FORM ACTIONS ====== -->
+
+      </form>
+      <!-- ====== END SCHOOL CREATION FORM ====== -->
+
+    </main>
+    <!-- ====== END PAGE CONTENT ====== -->
+
+  </div>
+  <!-- ====== END MAIN AREA ====== -->
+
+</div>
+<!-- ====== END APP SHELL ====== -->
+
+</body>
+</html>

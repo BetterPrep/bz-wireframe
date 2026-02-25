@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Dashboard — Brainzeta Student</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body class="layout-shell">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="student-dashboard.html" class="sidebar-nav-item active"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="student-assessment-details.html" class="sidebar-nav-item"><span class="nav-icon">📋</span> My Assessments</a></li>
+        <li><a href="student-upload-answer.html" class="sidebar-nav-item"><span class="nav-icon">📤</span> Upload Answer</a></li>
+        <li><a href="student-outcomes-list.html" class="sidebar-nav-item"><span class="nav-icon">🎯</span> My Outcomes</a></li>
+        <li><a href="student-result-details.html" class="sidebar-nav-item"><span class="nav-icon">📈</span> My Results</a></li>
+        <li><a href="student-practice-mode.html" class="sidebar-nav-item"><span class="nav-icon">🧠</span> Practice Mode</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN WRAPPER ===== -->
+  <div class="main-wrapper">
+
+    <!-- ===== TOPBAR ===== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">My Dashboard</span>
+      </div>
+      <div class="topbar-right">
+        <span class="role-badge badge badge-primary">Student</span>
+        <button class="btn btn-ghost btn-icon notif-btn" aria-label="Notifications">
+          🔔 <span class="notif-badge">2</span>
+        </button>
+        <div class="avatar-circle">AK</div>
+      </div>
+    </header>
+
+    <!-- ===== PAGE CONTENT ===== -->
+    <main class="page-content">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <span class="breadcrumb-item">Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item breadcrumb-current">Dashboard</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Welcome, Amit! 👋</h1>
+          <p class="page-subtitle">Grade 12-A · ABC School</p>
+        </div>
+      </div>
+
+      <!-- Tab Pills -->
+      <div class="tab-pills">
+        <a href="student-dashboard.html" class="tab-pill active">Workspace</a>
+        <a href="student-outcomes-list.html" class="tab-pill">Outcomes</a>
+      </div>
+
+      <!-- ===== CARD: Pending Submissions ===== -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h2 class="card-title">📋 Workspace — Pending Submissions</h2>
+        </div>
+        <div class="card-body">
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Assessment</th>
+                  <th>Subject</th>
+                  <th>Due Date</th>
+                  <th>Days Left</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Math Half-Yearly Exam</td>
+                  <td>Mathematics</td>
+                  <td>Feb 26, 2026</td>
+                  <td><span class="badge badge-error">2 days</span></td>
+                  <td><a href="student-upload-answer.html" class="btn btn-sm btn-primary">📤 Submit</a></td>
+                </tr>
+                <tr>
+                  <td>Physics Quiz</td>
+                  <td>Physics</td>
+                  <td>Mar 1, 2026</td>
+                  <td><span class="badge badge-warning">5 days</span></td>
+                  <td><a href="student-upload-answer.html" class="btn btn-sm btn-primary">📤 Submit</a></td>
+                </tr>
+                <tr>
+                  <td>Economics Assignment</td>
+                  <td>Economics</td>
+                  <td>Mar 5, 2026</td>
+                  <td><span class="badge badge-gray">9 days</span></td>
+                  <td><a href="student-upload-answer.html" class="btn btn-sm btn-primary">📤 Submit</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== CARD: Submitted — Waiting for Results ===== -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h2 class="card-title">⏳ Submitted — Waiting for Results</h2>
+        </div>
+        <div class="card-body">
+          <ul class="list-plain list-spaced">
+            <li class="list-item-row">
+              <span>📄 <strong>Political Science Exam</strong></span>
+              <span class="text-muted">Submitted Feb 20</span>
+              <span class="badge badge-primary">⏳ Under Evaluation</span>
+            </li>
+            <li class="list-item-row">
+              <span>📄 <strong>Chemistry Lab Report</strong></span>
+              <span class="text-muted">Submitted Feb 14</span>
+              <span class="badge badge-primary">⏳ Under Evaluation</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Alert -->
+      <div class="alert alert-info mt-16">
+        💡 You have 3 pending submissions. Submit before the deadline to receive marks.
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+
+</body>
+</html>

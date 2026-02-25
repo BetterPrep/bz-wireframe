@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brainzeta — Reports</title>
+  <link rel="stylesheet" href="styles/base.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="admin-dashboard.html" class="sidebar-link">🏠 Dashboard</a></li>
+        <li><a href="admin-users-list.html" class="sidebar-link">👥 Users</a></li>
+        <li class="sidebar-section-label">ACADEMIC</li>
+        <li><a href="admin-teacher-sections.html" class="sidebar-link">🗂️ Teacher Sections</a></li>
+        <li><a href="admin-curriculum-mapping.html" class="sidebar-link">📋 Curriculum</a></li>
+        <li class="sidebar-section-label">LIBRARY</li>
+        <li><a href="admin-textbook-library.html" class="sidebar-link">📖 Textbook Library</a></li>
+        <li><a href="admin-upload-textbook.html" class="sidebar-link">📤 Upload Textbook</a></li>
+        <li class="sidebar-section-label">REPORTS</li>
+        <li><a href="admin-token-usage.html" class="sidebar-link">🪙 Token Usage</a></li>
+        <li><a href="admin-reports.html" class="sidebar-link sidebar-link--active">📊 Reports</a></li>
+      </ul>
+    </nav>
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-link">👤 My Profile</a>
+      <a href="login.html" class="sidebar-link">🚪 Sign Out</a>
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">Reports</div>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-role-badge">School Admin</span>
+        <button class="topbar-notif-btn">🔔<span class="notif-badge">2</span></button>
+        <div class="topbar-avatar">JD</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+
+      <!-- BREADCRUMB -->
+      <nav class="breadcrumb">
+        <a href="admin-dashboard.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Reports</span>
+      </nav>
+
+      <!-- PAGE HEADER -->
+      <div class="page-header">
+        <h1>School Reports</h1>
+      </div>
+
+      <!-- TWO-COLUMN LAYOUT: main form + sidebar recent reports -->
+      <div class="grid-sidebar-main">
+
+        <!-- LEFT: Generate Report -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Generate Report</h2>
+          </div>
+          <div class="card-body">
+            <form>
+
+              <!-- Report Type -->
+              <div class="form-group">
+                <label class="form-label">Report Type <span class="required">*</span></label>
+                <div class="radio-group" style="display: flex; flex-direction: column; gap: 10px;">
+                  <label class="radio-label">
+                    <input type="radio" name="report-type" checked> Student Performance Report
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="report-type"> Teacher Activity Report
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="report-type"> Assessment Summary Report
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="report-type"> Token Usage Report
+                  </label>
+                </div>
+              </div>
+
+              <!-- Date Range -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">From Date</label>
+                  <input class="form-input" type="date" value="2026-01-01">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">To Date</label>
+                  <input class="form-input" type="date" value="2026-01-31">
+                </div>
+              </div>
+
+              <!-- Grade + Section -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Grade</label>
+                  <select class="form-select">
+                    <option selected>All Grades</option>
+                    <option>Grade 6</option>
+                    <option>Grade 7</option>
+                    <option>Grade 8</option>
+                    <option>Grade 9</option>
+                    <option>Grade 10</option>
+                    <option>Grade 11</option>
+                    <option>Grade 12</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Section</label>
+                  <select class="form-select">
+                    <option selected>All Sections</option>
+                    <option>Section A</option>
+                    <option>Section B</option>
+                    <option>Section C</option>
+                    <option>Section D</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Output Format -->
+              <div class="form-group">
+                <label class="form-label">Output Format</label>
+                <div class="radio-group d-flex gap-16">
+                  <label class="radio-label">
+                    <input type="radio" name="output-format" checked> PDF
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="output-format"> Excel
+                  </label>
+                </div>
+              </div>
+
+              <!-- Generate Button -->
+              <div class="form-actions" style="border-top: none; padding-top: 0;">
+                <button type="submit" class="btn btn-primary btn-block" style="width: 100%;">Generate Report</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+        <!-- RIGHT: Recent Reports -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Recent Reports</h2>
+          </div>
+          <div class="card-body">
+            <ul class="list-plain list-spaced">
+
+              <li class="list-item d-flex justify-between align-center" style="padding: 12px 0; border-bottom: 1px solid var(--color-border, #e5e7eb);">
+                <div>
+                  <div>📄 Student Performance Q1 2026</div>
+                  <div class="text-muted text-sm">PDF &nbsp;·&nbsp; 2 hours ago</div>
+                </div>
+                <button class="btn btn-sm btn-ghost">Download</button>
+              </li>
+
+              <li class="list-item d-flex justify-between align-center" style="padding: 12px 0; border-bottom: 1px solid var(--color-border, #e5e7eb);">
+                <div>
+                  <div>📊 Teacher Activity Jan 2026</div>
+                  <div class="text-muted text-sm">Excel &nbsp;·&nbsp; 1 day ago</div>
+                </div>
+                <button class="btn btn-sm btn-ghost">Download</button>
+              </li>
+
+              <li class="list-item d-flex justify-between align-center" style="padding: 12px 0; border-bottom: 1px solid var(--color-border, #e5e7eb);">
+                <div>
+                  <div>📄 Assessment Summary Dec 2025</div>
+                  <div class="text-muted text-sm">PDF &nbsp;·&nbsp; 3 days ago</div>
+                </div>
+                <button class="btn btn-sm btn-ghost">Download</button>
+              </li>
+
+              <li class="list-item d-flex justify-between align-center" style="padding: 12px 0;">
+                <div>
+                  <div>📊 Token Usage Report Nov 2025</div>
+                  <div class="text-muted text-sm">Excel &nbsp;·&nbsp; 1 week ago</div>
+                </div>
+                <button class="btn btn-sm btn-ghost">Download</button>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /.grid-sidebar-main -->
+
+    </main>
+  </div><!-- /.main-wrapper -->
+</div><!-- /.app-shell -->
+</body>
+</html>
