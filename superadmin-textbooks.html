@@ -5,6 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Brainzeta — System Textbooks</title>
   <link rel="stylesheet" href="styles/base.css" />
+  <style>
+    /* ====== Inline action dropdown (wireframe — always visible to show available actions) ====== */
+    .action-menu {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 2px;
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 4px;
+      min-width: 140px;
+    }
+    .action-menu a, .action-menu button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 5px 10px;
+      border: none;
+      background: none;
+      border-radius: 3px;
+      color: var(--color-text);
+      cursor: pointer;
+      font-size: var(--font-size-xs);
+      text-decoration: none;
+    }
+    .action-menu a:hover, .action-menu button:hover {
+      background: var(--color-bg-hover, #f5f5f5);
+    }
+    .action-menu .action-danger {
+      color: #DC2626;
+    }
+  </style>
 </head>
 <body>
 
@@ -61,9 +93,12 @@
       <div class="page-header">
         <div class="page-header-left">
           <h1 class="page-title">System Textbook Library</h1>
+          <!-- Mapping note: Textbooks uploaded here form the global library. Per-school curriculum mapping (which textbook maps to which grade/subject/section) is managed by each School Admin under Curriculum Mapping. -->
+          <p class="page-subtitle">Global library of textbooks available across all schools. Curriculum mapping per school is managed by School Admins.</p>
         </div>
         <div class="page-actions">
-          <button class="btn btn-primary">+ Add Textbook</button>
+          <!-- Add Textbook → upload a new textbook PDF to the system library -->
+          <a href="admin-upload-textbook.html" class="btn btn-primary">+ Add Textbook</a>
         </div>
       </div>
 
@@ -115,7 +150,13 @@
               <td>NCERT</td>
               <td>8</td>
               <td><span class="badge badge-success">Active</span></td>
-              <td><button class="btn btn-icon" aria-label="More options" title="More options">•••</button></td>
+              <td>
+                <div class="action-menu">
+                  <a href="#">👁 View Details</a>
+                  <button>✏️ Edit</button>
+                  <button class="action-danger">🚫 Deactivate</button>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>12</td>
@@ -124,7 +165,13 @@
               <td>NCERT</td>
               <td>6</td>
               <td><span class="badge badge-success">Active</span></td>
-              <td><button class="btn btn-icon" aria-label="More options" title="More options">•••</button></td>
+              <td>
+                <div class="action-menu">
+                  <a href="#">👁 View Details</a>
+                  <button>✏️ Edit</button>
+                  <button class="action-danger">🚫 Deactivate</button>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>12</td>
@@ -133,7 +180,13 @@
               <td>NCERT</td>
               <td>13</td>
               <td><span class="badge badge-success">Active</span></td>
-              <td><button class="btn btn-icon" aria-label="More options" title="More options">•••</button></td>
+              <td>
+                <div class="action-menu">
+                  <a href="#">👁 View Details</a>
+                  <button>✏️ Edit</button>
+                  <button class="action-danger">🚫 Deactivate</button>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>11</td>
@@ -142,7 +195,13 @@
               <td>NCERT</td>
               <td>15</td>
               <td><span class="badge badge-success">Active</span></td>
-              <td><button class="btn btn-icon" aria-label="More options" title="More options">•••</button></td>
+              <td>
+                <div class="action-menu">
+                  <a href="#">👁 View Details</a>
+                  <button>✏️ Edit</button>
+                  <button class="action-danger">🚫 Deactivate</button>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>11</td>
@@ -151,7 +210,13 @@
               <td>NCERT</td>
               <td>14</td>
               <td><span class="badge badge-success">Active</span></td>
-              <td><button class="btn btn-icon" aria-label="More options" title="More options">•••</button></td>
+              <td>
+                <div class="action-menu">
+                  <a href="#">👁 View Details</a>
+                  <button>✏️ Edit</button>
+                  <button class="action-danger">🚫 Deactivate</button>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>10</td>
@@ -160,7 +225,13 @@
               <td>NCERT</td>
               <td>12</td>
               <td><span class="badge badge-warning">Processing</span></td>
-              <td><button class="btn btn-icon" aria-label="More options" title="More options">•••</button></td>
+              <td>
+                <div class="action-menu">
+                  <a href="#">👁 View Details</a>
+                  <button>✏️ Edit</button>
+                  <button class="action-danger">🚫 Deactivate</button>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>9</td>
@@ -169,7 +240,13 @@
               <td>NCERT</td>
               <td>15</td>
               <td><span class="badge badge-success">Active</span></td>
-              <td><button class="btn btn-icon" aria-label="More options" title="More options">•••</button></td>
+              <td>
+                <div class="action-menu">
+                  <a href="#">👁 View Details</a>
+                  <button>✏️ Edit</button>
+                  <button class="action-danger">🚫 Deactivate</button>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
