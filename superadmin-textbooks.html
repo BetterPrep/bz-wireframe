@@ -6,22 +6,40 @@
   <title>Brainzeta — System Textbooks</title>
   <link rel="stylesheet" href="styles/base.css" />
   <style>
-    /* ====== Inline action dropdown (wireframe — always visible to show available actions) ====== */
-    .action-menu {
-      display: inline-flex;
-      flex-direction: column;
-      gap: 2px;
+    /* ====== Click-to-open dropdown menu (CSS-only, no JS) ====== */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-trigger {
+      cursor: pointer;
+    }
+    /* Hide menu by default */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: calc(100% + 4px);
+      z-index: 100;
+      min-width: 160px;
       background: #fff;
       border: 1px solid var(--color-border);
       border-radius: var(--radius-sm);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
       padding: 4px;
-      min-width: 140px;
+      flex-direction: column;
+      gap: 2px;
     }
-    .action-menu a, .action-menu button {
+    /* Show on focus-within (clicking the trigger focuses it, keeping menu open) */
+    .dropdown:focus-within .dropdown-menu {
+      display: flex;
+    }
+    .dropdown-menu a,
+    .dropdown-menu button {
       display: block;
       width: 100%;
       text-align: left;
-      padding: 5px 10px;
+      padding: 7px 12px;
       border: none;
       background: none;
       border-radius: 3px;
@@ -29,12 +47,19 @@
       cursor: pointer;
       font-size: var(--font-size-xs);
       text-decoration: none;
+      white-space: nowrap;
     }
-    .action-menu a:hover, .action-menu button:hover {
-      background: var(--color-bg-hover, #f5f5f5);
+    .dropdown-menu a:hover,
+    .dropdown-menu button:hover {
+      background: #f5f5f5;
     }
-    .action-menu .action-danger {
+    .dropdown-menu .action-danger {
       color: #DC2626;
+    }
+    .dropdown-menu hr {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      margin: 3px 0;
     }
   </style>
 </head>
@@ -151,10 +176,14 @@
               <td>8</td>
               <td><span class="badge badge-success">Active</span></td>
               <td>
-                <div class="action-menu">
-                  <a href="#">👁 View Details</a>
-                  <button>✏️ Edit</button>
-                  <button class="action-danger">🚫 Deactivate</button>
+                <div class="dropdown">
+                  <button class="btn btn-icon dropdown-trigger" tabindex="0" aria-label="More options">•••</button>
+                  <div class="dropdown-menu">
+                    <a href="#">👁 View Details</a>
+                    <button>✏️ Edit</button>
+                    <hr>
+                    <button class="action-danger">🚫 Deactivate</button>
+                  </div>
                 </div>
               </td>
             </tr>
@@ -166,10 +195,14 @@
               <td>6</td>
               <td><span class="badge badge-success">Active</span></td>
               <td>
-                <div class="action-menu">
-                  <a href="#">👁 View Details</a>
-                  <button>✏️ Edit</button>
-                  <button class="action-danger">🚫 Deactivate</button>
+                <div class="dropdown">
+                  <button class="btn btn-icon dropdown-trigger" tabindex="0" aria-label="More options">•••</button>
+                  <div class="dropdown-menu">
+                    <a href="#">👁 View Details</a>
+                    <button>✏️ Edit</button>
+                    <hr>
+                    <button class="action-danger">🚫 Deactivate</button>
+                  </div>
                 </div>
               </td>
             </tr>
@@ -181,10 +214,14 @@
               <td>13</td>
               <td><span class="badge badge-success">Active</span></td>
               <td>
-                <div class="action-menu">
-                  <a href="#">👁 View Details</a>
-                  <button>✏️ Edit</button>
-                  <button class="action-danger">🚫 Deactivate</button>
+                <div class="dropdown">
+                  <button class="btn btn-icon dropdown-trigger" tabindex="0" aria-label="More options">•••</button>
+                  <div class="dropdown-menu">
+                    <a href="#">👁 View Details</a>
+                    <button>✏️ Edit</button>
+                    <hr>
+                    <button class="action-danger">🚫 Deactivate</button>
+                  </div>
                 </div>
               </td>
             </tr>
@@ -196,10 +233,14 @@
               <td>15</td>
               <td><span class="badge badge-success">Active</span></td>
               <td>
-                <div class="action-menu">
-                  <a href="#">👁 View Details</a>
-                  <button>✏️ Edit</button>
-                  <button class="action-danger">🚫 Deactivate</button>
+                <div class="dropdown">
+                  <button class="btn btn-icon dropdown-trigger" tabindex="0" aria-label="More options">•••</button>
+                  <div class="dropdown-menu">
+                    <a href="#">👁 View Details</a>
+                    <button>✏️ Edit</button>
+                    <hr>
+                    <button class="action-danger">🚫 Deactivate</button>
+                  </div>
                 </div>
               </td>
             </tr>
@@ -211,10 +252,14 @@
               <td>14</td>
               <td><span class="badge badge-success">Active</span></td>
               <td>
-                <div class="action-menu">
-                  <a href="#">👁 View Details</a>
-                  <button>✏️ Edit</button>
-                  <button class="action-danger">🚫 Deactivate</button>
+                <div class="dropdown">
+                  <button class="btn btn-icon dropdown-trigger" tabindex="0" aria-label="More options">•••</button>
+                  <div class="dropdown-menu">
+                    <a href="#">👁 View Details</a>
+                    <button>✏️ Edit</button>
+                    <hr>
+                    <button class="action-danger">🚫 Deactivate</button>
+                  </div>
                 </div>
               </td>
             </tr>
@@ -226,10 +271,14 @@
               <td>12</td>
               <td><span class="badge badge-warning">Processing</span></td>
               <td>
-                <div class="action-menu">
-                  <a href="#">👁 View Details</a>
-                  <button>✏️ Edit</button>
-                  <button class="action-danger">🚫 Deactivate</button>
+                <div class="dropdown">
+                  <button class="btn btn-icon dropdown-trigger" tabindex="0" aria-label="More options">•••</button>
+                  <div class="dropdown-menu">
+                    <a href="#">👁 View Details</a>
+                    <button>✏️ Edit</button>
+                    <hr>
+                    <button class="action-danger">🚫 Deactivate</button>
+                  </div>
                 </div>
               </td>
             </tr>
@@ -241,10 +290,14 @@
               <td>15</td>
               <td><span class="badge badge-success">Active</span></td>
               <td>
-                <div class="action-menu">
-                  <a href="#">👁 View Details</a>
-                  <button>✏️ Edit</button>
-                  <button class="action-danger">🚫 Deactivate</button>
+                <div class="dropdown">
+                  <button class="btn btn-icon dropdown-trigger" tabindex="0" aria-label="More options">•••</button>
+                  <div class="dropdown-menu">
+                    <a href="#">👁 View Details</a>
+                    <button>✏️ Edit</button>
+                    <hr>
+                    <button class="action-danger">🚫 Deactivate</button>
+                  </div>
                 </div>
               </td>
             </tr>
