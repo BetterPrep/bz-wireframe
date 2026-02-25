@@ -5,6 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brainzeta — Textbook Library</title>
   <link rel="stylesheet" href="styles/base.css">
+  <style>
+    /* ====== Click-to-open dropdown menu (CSS-only, no JS) ====== */
+    .dropdown { position: relative; display: inline-block; }
+    .dropdown-menu {
+      display: none; position: absolute; right: 0; top: calc(100% + 4px);
+      z-index: 100; min-width: 175px; background: #fff;
+      border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12); padding: 4px;
+      flex-direction: column; gap: 2px;
+    }
+    .dropdown:focus-within .dropdown-menu { display: flex; }
+    .dropdown-menu a, .dropdown-menu button {
+      display: block; width: 100%; text-align: left; padding: 7px 12px;
+      border: none; background: none; border-radius: 3px;
+      color: var(--color-text); cursor: pointer; font-size: var(--font-size-xs);
+      text-decoration: none; white-space: nowrap;
+    }
+    .dropdown-menu a:hover, .dropdown-menu button:hover { background: #f5f5f5; }
+    .dropdown-menu .action-danger { color: #DC2626; }
+    .dropdown-menu hr { border: none; border-top: 1px solid var(--color-border); margin: 3px 0; }
+  </style>
 </head>
 <body>
 <div class="app-shell">
@@ -121,7 +142,17 @@
               <td>NCERT</td>
               <td>8</td>
               <td><span class="badge badge-gray">System</span></td>
-              <td><button class="btn btn-sm btn-ghost">•••</button></td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
+                  <div class="dropdown-menu">
+                    <a href="#">👁 View Details</a>
+                    <a href="admin-curriculum-mapping.html">📋 Map to Curriculum</a>
+                    <hr>
+                    <button class="action-danger">🗑 Remove</button>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>12</td>
@@ -130,7 +161,17 @@
               <td>NCERT</td>
               <td>6</td>
               <td><span class="badge badge-gray">System</span></td>
-              <td><button class="btn btn-sm btn-ghost">•••</button></td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
+                  <div class="dropdown-menu">
+                    <a href="#">👁 View Details</a>
+                    <a href="admin-curriculum-mapping.html">📋 Map to Curriculum</a>
+                    <hr>
+                    <button class="action-danger">🗑 Remove</button>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>12</td>
@@ -139,7 +180,17 @@
               <td>NCERT</td>
               <td>13</td>
               <td><span class="badge badge-gray">System</span></td>
-              <td><button class="btn btn-sm btn-ghost">•••</button></td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
+                  <div class="dropdown-menu">
+                    <a href="#">👁 View Details</a>
+                    <a href="admin-curriculum-mapping.html">📋 Map to Curriculum</a>
+                    <hr>
+                    <button class="action-danger">🗑 Remove</button>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>11</td>
@@ -148,7 +199,17 @@
               <td>NCERT</td>
               <td>15</td>
               <td><span class="badge badge-gray">System</span></td>
-              <td><button class="btn btn-sm btn-ghost">•••</button></td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
+                  <div class="dropdown-menu">
+                    <a href="#">👁 View Details</a>
+                    <a href="admin-curriculum-mapping.html">📋 Map to Curriculum</a>
+                    <hr>
+                    <button class="action-danger">🗑 Remove</button>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>11</td>
@@ -157,7 +218,17 @@
               <td>ABC School</td>
               <td>12</td>
               <td><span class="badge badge-blue">School</span></td>
-              <td><button class="btn btn-sm btn-ghost">•••</button></td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
+                  <div class="dropdown-menu">
+                    <a href="#">👁 View Details</a>
+                    <a href="admin-curriculum-mapping.html">📋 Map to Curriculum</a>
+                    <hr>
+                    <button class="action-danger">🗑 Remove</button>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>10</td>
@@ -166,7 +237,17 @@
               <td>NCERT</td>
               <td>12</td>
               <td><span class="badge badge-gray">System</span></td>
-              <td><button class="btn btn-sm btn-ghost">•••</button></td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
+                  <div class="dropdown-menu">
+                    <a href="#">👁 View Details</a>
+                    <a href="admin-curriculum-mapping.html">📋 Map to Curriculum</a>
+                    <hr>
+                    <button class="action-danger">🗑 Remove</button>
+                  </div>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
