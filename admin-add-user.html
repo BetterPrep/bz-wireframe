@@ -78,6 +78,40 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
     }
+
+    /* ====== Second parent toggle (CSS-only) ====== */
+    /* The #add-second-parent checkbox and the elements it controls
+       must all be siblings inside .parent-form */
+    #add-second-parent { display: none; }
+    .second-parent-block { display: none; }
+    #add-second-parent:checked ~ .second-parent-block { display: block; }
+    #add-second-parent:checked ~ .add-parent-btn { display: none; }
+
+    .add-parent-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border: 1.5px dashed var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      color: var(--color-primary);
+      cursor: pointer;
+      background: none;
+      margin-top: 4px;
+    }
+    .add-parent-btn:hover {
+      background: #f0f6ff;
+      border-color: var(--color-primary);
+    }
+    .remove-parent-btn {
+      font-size: var(--font-size-sm);
+      color: #DC2626;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
   </style>
 </head>
 <body>
@@ -158,7 +192,7 @@
                 <label for="role-teacher" class="role-tab">👩‍🏫 Teacher</label>
                 <label for="role-student" class="role-tab">👨‍🎓 Student</label>
                 <label for="role-parent"  class="role-tab">👪 Parent</label>
-                <label for="role-staff"   class="role-tab">🗂️ Staff</label>
+                <label for="role-staff"   class="role-tab">🗂️ School Assistant</label>
               </div>
             </div>
           </div>
@@ -208,7 +242,7 @@
               </div>
 
               <hr class="divider">
-              <div class="form-section-title">Subjects &amp; Grades</div>
+              <div class="form-section-title">Subjects, Grades &amp; Sections</div>
 
               <div class="form-group">
                 <label class="form-label">Subjects Taught <span class="required">*</span></label>
@@ -236,6 +270,17 @@
                   <label class="checkbox-label"><input type="checkbox" checked> 11</label>
                   <label class="checkbox-label"><input type="checkbox" checked> 12</label>
                 </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Sections Assigned <span class="required">*</span></label>
+                <div class="checkbox-group d-flex gap-16 flex-wrap">
+                  <label class="checkbox-label"><input type="checkbox" checked> A</label>
+                  <label class="checkbox-label"><input type="checkbox" checked> B</label>
+                  <label class="checkbox-label"><input type="checkbox"> C</label>
+                  <label class="checkbox-label"><input type="checkbox"> D</label>
+                </div>
+                <span class="form-hint">Sections across all assigned grades</span>
               </div>
 
               <div class="form-actions">
@@ -334,9 +379,14 @@
             <!-- END STUDENT FORM -->
 
             <!-- ==================== PARENT FORM ==================== -->
+            <!--
+              Second-parent toggle: #add-second-parent checkbox MUST come before
+              .add-parent-btn and .second-parent-block as a sibling inside .parent-form,
+              so that the :checked ~ selector works correctly.
+            -->
             <div class="role-form parent-form">
 
-              <div class="form-section-title">Parent Information</div>
+              <div class="form-section-title">Parent / Guardian 1</div>
 
               <div class="form-row">
                 <div class="form-group">
@@ -393,6 +443,56 @@
                 </div>
               </div>
 
+              <hr class="divider">
+
+              <!-- Hidden checkbox — controls second-parent visibility via CSS siblings -->
+              <input type="checkbox" id="add-second-parent">
+
+              <!-- "Add" button: hidden when checkbox is checked -->
+              <label for="add-second-parent" class="add-parent-btn">＋ Add Second Parent / Guardian</label>
+
+              <!-- Second parent block: shown when checkbox is checked -->
+              <div class="second-parent-block">
+
+                <div class="d-flex justify-between align-center" style="margin-bottom: 16px;">
+                  <div class="form-section-title" style="margin: 0;">
+                    Parent / Guardian 2
+                    <span style="font-weight: 400; color: var(--color-text-muted); font-size: var(--font-size-xs); margin-left: 6px;">(Optional)</span>
+                  </div>
+                  <!-- Clicking this unchecks the checkbox, hiding this block -->
+                  <label for="add-second-parent" class="remove-parent-btn">✕ Remove</label>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input class="form-input" type="text" placeholder="e.g. Rajesh Mehta">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input class="form-input" type="email" placeholder="e.g. rajesh.m@gmail.com">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <input class="form-input" type="text" placeholder="+91 XXXXX XXXXX">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Relationship</label>
+                    <select class="form-input form-select">
+                      <option value="" selected disabled>Select relationship</option>
+                      <option>Father</option>
+                      <option>Mother</option>
+                      <option>Guardian</option>
+                    </select>
+                  </div>
+                </div>
+
+              </div>
+              <!-- END second-parent-block -->
+
               <div class="form-actions">
                 <a href="admin-users-list.html" class="btn btn-secondary">Cancel</a>
                 <button type="submit" class="btn btn-primary">Create Parent</button>
@@ -401,10 +501,10 @@
             </div>
             <!-- END PARENT FORM -->
 
-            <!-- ==================== STAFF FORM ==================== -->
+            <!-- ==================== SCHOOL ASSISTANT (STAFF) FORM ==================== -->
             <div class="role-form staff-form">
 
-              <div class="form-section-title">Staff Information</div>
+              <div class="form-section-title">School Assistant Information</div>
 
               <div class="form-row">
                 <div class="form-group">
@@ -437,37 +537,71 @@
                   </div>
                   <button type="button" class="btn btn-secondary btn-sm">🔄 Regenerate</button>
                 </div>
-                <span class="form-hint">Password will be emailed to the staff member on creation</span>
+                <span class="form-hint">Password will be emailed to the school assistant on creation</span>
               </div>
 
               <hr class="divider">
-              <div class="form-section-title">Role &amp; Department</div>
+              <div class="form-section-title">Teacher Assignments</div>
 
-              <div class="form-row">
-                <div class="form-group">
-                  <label class="form-label">Designation <span class="required">*</span></label>
-                  <select class="form-input form-select">
-                    <option value="" selected disabled>Select designation</option>
-                    <option>School Assistant</option>
-                    <option>Lab Assistant</option>
-                    <option>Librarian</option>
-                    <option>Office Staff</option>
-                    <option>Counsellor</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Department</label>
-                  <input class="form-input" type="text" placeholder="e.g. Science Lab, Library">
+              <!-- Hint explaining what teacher assignment means -->
+              <p style="font-size: var(--font-size-sm); color: var(--color-text-muted); margin: 0 0 16px;">
+                Select the teachers this School Assistant will support. They will gain access to all assessments and submissions created by each assigned teacher.
+              </p>
+
+              <div class="form-group">
+                <label class="form-label">Assigned Teachers <span class="required">*</span></label>
+                <div class="checkbox-group" style="display: flex; flex-direction: column; gap: 12px; margin-top: 4px;">
+
+                  <label class="checkbox-label" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" checked>
+                    <div>
+                      <strong>Mr. Ramesh Sharma</strong>
+                      <span style="color: var(--color-text-muted); font-size: var(--font-size-xs); margin-left: 8px;">Mathematics · Grades 10, 11, 12</span>
+                    </div>
+                  </label>
+
+                  <label class="checkbox-label" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox">
+                    <div>
+                      <strong>Ms. Priya Verma</strong>
+                      <span style="color: var(--color-text-muted); font-size: var(--font-size-xs); margin-left: 8px;">Physics · Grades 11, 12</span>
+                    </div>
+                  </label>
+
+                  <label class="checkbox-label" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox">
+                    <div>
+                      <strong>Mr. Amit Gupta</strong>
+                      <span style="color: var(--color-text-muted); font-size: var(--font-size-xs); margin-left: 8px;">Chemistry · Grades 11, 12</span>
+                    </div>
+                  </label>
+
+                  <label class="checkbox-label" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox">
+                    <div>
+                      <strong>Ms. Sunita Rao</strong>
+                      <span style="color: var(--color-text-muted); font-size: var(--font-size-xs); margin-left: 8px;">Economics · Grade 12</span>
+                    </div>
+                  </label>
+
+                  <label class="checkbox-label" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox">
+                    <div>
+                      <strong>Mr. Vikram Nair</strong>
+                      <span style="color: var(--color-text-muted); font-size: var(--font-size-xs); margin-left: 8px;">Political Science · Grade 12</span>
+                    </div>
+                  </label>
+
                 </div>
               </div>
 
               <div class="form-actions">
                 <a href="admin-users-list.html" class="btn btn-secondary">Cancel</a>
-                <button type="submit" class="btn btn-primary">Create Staff</button>
+                <button type="submit" class="btn btn-primary">Create School Assistant</button>
               </div>
 
             </div>
-            <!-- END STAFF FORM -->
+            <!-- END SCHOOL ASSISTANT FORM -->
 
           </div>
         </div>

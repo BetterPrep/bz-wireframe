@@ -5,6 +5,81 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brainzeta — Curriculum Mapping</title>
   <link rel="stylesheet" href="styles/base.css">
+  <style>
+    /*
+      CSS-only inline panels for "Change" and "Map Now" actions.
+      The two checkbox inputs MUST be siblings (and precede) all the
+      elements they control — including the table card and the panels.
+      Labels anywhere on the page can trigger them via the `for` attribute.
+    */
+    .panel-toggle { display: none; }
+
+    /* Panels are hidden by default */
+    .mapping-panel { display: none; }
+    #panel-change:checked   ~ .mapping-panel-change   { display: block; }
+    #panel-map-now:checked  ~ .mapping-panel-map-now  { display: block; }
+
+    /* Highlight the active row when its panel is open */
+    #panel-change:checked  ~ .mapping-card .row-polsci  { background: #f0f6ff; }
+    #panel-map-now:checked ~ .mapping-card .row-physics { background: #fef9ec; }
+
+    /* Inline panel card styling */
+    .mapping-panel {
+      border: 2px solid var(--color-primary);
+      border-radius: var(--radius-md);
+      background: #fff;
+      margin-bottom: 16px;
+    }
+    .mapping-panel-map-now {
+      border-color: var(--color-warning);
+    }
+    .mapping-panel .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .mapping-panel .panel-title {
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+    }
+    .mapping-panel .panel-body {
+      padding: 20px;
+    }
+    .panel-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .panel-chapter-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .panel-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      padding: 14px 20px;
+      border-top: 1px solid var(--color-border);
+      background: #f9fafb;
+      border-radius: 0 0 var(--radius-md) var(--radius-md);
+    }
+    .current-book-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-xs);
+      color: #15803d;
+    }
+  </style>
 </head>
 <body>
 <div class="app-shell">
@@ -27,7 +102,6 @@
         <li><a href="admin-reports.html" class="sidebar-link">📊 Reports</a></li>
       </ul>
     </nav>
-    <!-- Sidebar Footer -->
     <div class="sidebar-footer">
       <a href="user-profile.html" class="sidebar-link">👤 My Profile</a>
       <a href="login.html" class="sidebar-link">🚪 Sign Out</a>
@@ -77,13 +151,22 @@
         </select>
       </div>
 
+      <!--
+        CSS-only panel toggles.
+        These MUST be placed here (before the card and panels) so that
+        `#panel-X:checked ~ .sibling` selectors work correctly.
+        The labels (buttons) inside the table use `for=` to target these.
+      -->
+      <input type="checkbox" id="panel-change"  class="panel-toggle">
+      <input type="checkbox" id="panel-map-now" class="panel-toggle">
+
       <!-- GRADE 12 MAPPINGS CARD -->
-      <div class="card">
+      <div class="card mapping-card">
         <div class="card-header">
           <h2 class="card-title">Grade 12 — Subject Mappings</h2>
         </div>
-        <div class="card-body">
-          <div class="table-wrapper">
+        <div class="card-body" style="padding: 0;">
+          <div class="table-wrapper" style="margin: 0; border: none;">
             <table class="table">
               <thead>
                 <tr>
@@ -95,12 +178,16 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <!-- row-polsci is highlighted when #panel-change is checked -->
+                <tr class="row-polsci">
                   <td>Political Science</td>
                   <td>NCERT Political Science 2025</td>
                   <td>8 chapters</td>
                   <td><span class="badge badge-success">Mapped</span></td>
-                  <td><button class="btn btn-sm btn-secondary">Change</button></td>
+                  <td>
+                    <!-- This label acts as the "Change" button for Political Science -->
+                    <label for="panel-change" class="btn btn-sm btn-secondary" style="cursor:pointer;">Change</label>
+                  </td>
                 </tr>
                 <tr>
                   <td>Economics</td>
@@ -116,12 +203,16 @@
                   <td><span class="badge badge-success">Mapped</span></td>
                   <td><button class="btn btn-sm btn-secondary">Change</button></td>
                 </tr>
-                <tr class="table-row--error">
+                <!-- row-physics is highlighted when #panel-map-now is checked -->
+                <tr class="table-row--error row-physics">
                   <td>Physics</td>
                   <td><span class="text-muted">— Not Mapped —</span></td>
                   <td><span class="text-muted">—</span></td>
                   <td><span class="badge badge-error">Unmapped</span></td>
-                  <td><button class="btn btn-sm btn-primary">Map Now</button></td>
+                  <td>
+                    <!-- This label acts as the "Map Now" button for Physics -->
+                    <label for="panel-map-now" class="btn btn-sm btn-primary" style="cursor:pointer;">Map Now</label>
+                  </td>
                 </tr>
                 <tr>
                   <td>Chemistry</td>
@@ -142,6 +233,116 @@
           </div>
         </div>
       </div>
+
+      <!-- ====== CHANGE PANEL — shown when "Change" is clicked on Political Science ====== -->
+      <!-- In production this would appear inline or as a modal; here it opens below the table -->
+      <div class="mapping-panel mapping-panel-change">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">✏️ Change Textbook — Political Science (Grade 12)</div>
+            <div style="font-size: var(--font-size-xs); color: var(--color-text-muted); margin-top: 4px;">
+              Currently mapped:
+              <span class="current-book-badge">📖 NCERT Political Science 2025</span>
+            </div>
+          </div>
+          <!-- Clicking "×" unchecks the checkbox and closes this panel -->
+          <label for="panel-change" style="cursor:pointer; font-size: 20px; color: var(--color-text-muted); line-height: 1;">×</label>
+        </div>
+        <div class="panel-body">
+          <div class="panel-form-row">
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label">Select New Textbook <span class="required">*</span></label>
+              <select class="form-select" style="width: 100%;">
+                <option value="" disabled>Choose from library...</option>
+                <option selected>NCERT Political Science 2025</option>
+                <option>NCERT Political Science 2024</option>
+                <option>School Custom — Pol. Science</option>
+              </select>
+              <span class="form-hint">Only textbooks available in your school library are shown</span>
+            </div>
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label">Publisher</label>
+              <input class="form-input" type="text" value="NCERT" disabled>
+            </div>
+          </div>
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label">Chapters to Include</label>
+            <span class="form-hint" style="display: block; margin-bottom: 8px;">Uncheck chapters you don't want available for assessment generation</span>
+            <div class="panel-chapter-grid">
+              <label class="checkbox-label"><input type="checkbox" checked> Ch. 1 — Cold War Era</label>
+              <label class="checkbox-label"><input type="checkbox" checked> Ch. 2 — End of Bipolarity</label>
+              <label class="checkbox-label"><input type="checkbox" checked> Ch. 3 — US Hegemony</label>
+              <label class="checkbox-label"><input type="checkbox" checked> Ch. 4 — Alternative Centres</label>
+              <label class="checkbox-label"><input type="checkbox" checked> Ch. 5 — South Asia</label>
+              <label class="checkbox-label"><input type="checkbox" checked> Ch. 6 — International Organisations</label>
+              <label class="checkbox-label"><input type="checkbox" checked> Ch. 7 — Security</label>
+              <label class="checkbox-label"><input type="checkbox" checked> Ch. 8 — Environment</label>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <label for="panel-change" class="btn btn-secondary" style="cursor:pointer;">Cancel</label>
+          <button class="btn btn-primary">Save Mapping</button>
+        </div>
+      </div>
+      <!-- END CHANGE PANEL -->
+
+      <!-- ====== MAP NOW PANEL — shown when "Map Now" is clicked on Physics ====== -->
+      <div class="mapping-panel mapping-panel-map-now">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">📌 Map Textbook — Physics (Grade 12)</div>
+            <div style="font-size: var(--font-size-xs); color: var(--color-text-muted); margin-top: 4px;">
+              No textbook mapped yet — students and teachers cannot use AI evaluation for this subject
+            </div>
+          </div>
+          <label for="panel-map-now" style="cursor:pointer; font-size: 20px; color: var(--color-text-muted); line-height: 1;">×</label>
+        </div>
+        <div class="panel-body">
+          <div class="panel-form-row">
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label">Select Textbook <span class="required">*</span></label>
+              <select class="form-select" style="width: 100%;">
+                <option value="" selected disabled>Choose from library...</option>
+                <option>NCERT Physics Part I &amp; II (2024)</option>
+                <option>NCERT Physics Part I (2024)</option>
+                <option>School Custom — Physics</option>
+              </select>
+              <span class="form-hint">Only textbooks available in your school library are shown</span>
+            </div>
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label">Publisher</label>
+              <input class="form-input" type="text" placeholder="Auto-filled on selection" disabled>
+            </div>
+          </div>
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label">Chapters to Include</label>
+            <span class="form-hint" style="display: block; margin-bottom: 8px;">Select which chapters should be available for assessment generation</span>
+            <div class="panel-chapter-grid">
+              <label class="checkbox-label"><input type="checkbox" checked> Ch. 1 — Electric Charges</label>
+              <label class="checkbox-label"><input type="checkbox" checked> Ch. 2 — Electrostatic Potential</label>
+              <label class="checkbox-label"><input type="checkbox" checked> Ch. 3 — Current Electricity</label>
+              <label class="checkbox-label"><input type="checkbox" checked> Ch. 4 — Moving Charges</label>
+              <label class="checkbox-label"><input type="checkbox" checked> Ch. 5 — Magnetism</label>
+              <label class="checkbox-label"><input type="checkbox" checked> Ch. 6 — Electromagnetic Induction</label>
+              <label class="checkbox-label"><input type="checkbox"> Ch. 7 — Alternating Current</label>
+              <label class="checkbox-label"><input type="checkbox"> Ch. 8 — Electromagnetic Waves</label>
+              <label class="checkbox-label"><input type="checkbox"> Ch. 9 — Ray Optics</label>
+              <label class="checkbox-label"><input type="checkbox"> Ch. 10 — Wave Optics</label>
+              <label class="checkbox-label"><input type="checkbox"> Ch. 11 — Dual Nature</label>
+              <label class="checkbox-label"><input type="checkbox"> Ch. 12 — Atoms</label>
+              <label class="checkbox-label"><input type="checkbox"> Ch. 13 — Nuclei</label>
+              <label class="checkbox-label"><input type="checkbox"> Ch. 14 — Semiconductors</label>
+              <label class="checkbox-label"><input type="checkbox"> Ch. 15 — Communication</label>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <label for="panel-map-now" class="btn btn-secondary" style="cursor:pointer;">Cancel</label>
+          <button class="btn btn-primary">Save Mapping</button>
+        </div>
+      </div>
+      <!-- END MAP NOW PANEL -->
 
       <!-- WARNING ALERT -->
       <div class="alert alert-warning">

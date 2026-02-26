@@ -61,142 +61,17 @@
         <h1>School Reports</h1>
       </div>
 
-      <!-- TWO-COLUMN LAYOUT: main form + sidebar recent reports -->
-      <div class="grid-sidebar-main">
-
-        <!-- LEFT: Generate Report -->
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">Generate Report</h2>
-          </div>
-          <div class="card-body">
-            <form>
-
-              <!-- Report Type -->
-              <div class="form-group">
-                <label class="form-label">Report Type <span class="required">*</span></label>
-                <div class="radio-group" style="display: flex; flex-direction: column; gap: 10px;">
-                  <label class="radio-label">
-                    <input type="radio" name="report-type" checked> Student Performance Report
-                  </label>
-                  <label class="radio-label">
-                    <input type="radio" name="report-type"> Teacher Activity Report
-                  </label>
-                  <label class="radio-label">
-                    <input type="radio" name="report-type"> Assessment Summary Report
-                  </label>
-                  <label class="radio-label">
-                    <input type="radio" name="report-type"> Token Usage Report
-                  </label>
-                </div>
-              </div>
-
-              <!-- Date Range -->
-              <div class="form-row">
-                <div class="form-group">
-                  <label class="form-label">From Date</label>
-                  <input class="form-input" type="date" value="2026-01-01">
-                </div>
-                <div class="form-group">
-                  <label class="form-label">To Date</label>
-                  <input class="form-input" type="date" value="2026-01-31">
-                </div>
-              </div>
-
-              <!-- Grade + Section -->
-              <div class="form-row">
-                <div class="form-group">
-                  <label class="form-label">Grade</label>
-                  <select class="form-select">
-                    <option selected>All Grades</option>
-                    <option>Grade 6</option>
-                    <option>Grade 7</option>
-                    <option>Grade 8</option>
-                    <option>Grade 9</option>
-                    <option>Grade 10</option>
-                    <option>Grade 11</option>
-                    <option>Grade 12</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Section</label>
-                  <select class="form-select">
-                    <option selected>All Sections</option>
-                    <option>Section A</option>
-                    <option>Section B</option>
-                    <option>Section C</option>
-                    <option>Section D</option>
-                  </select>
-                </div>
-              </div>
-
-              <!-- Output Format -->
-              <div class="form-group">
-                <label class="form-label">Output Format</label>
-                <div class="radio-group d-flex gap-16">
-                  <label class="radio-label">
-                    <input type="radio" name="output-format" checked> PDF
-                  </label>
-                  <label class="radio-label">
-                    <input type="radio" name="output-format"> Excel
-                  </label>
-                </div>
-              </div>
-
-              <!-- Generate Button -->
-              <div class="form-actions" style="border-top: none; padding-top: 0;">
-                <button type="submit" class="btn btn-primary btn-block" style="width: 100%;">Generate Report</button>
-              </div>
-
-            </form>
-          </div>
-        </div>
-
-        <!-- RIGHT: Recent Reports -->
-        <div class="card">
-          <div class="card-header">
-            <h2 class="card-title">Recent Reports</h2>
-          </div>
-          <div class="card-body">
-            <ul class="list-plain list-spaced">
-
-              <li class="list-item d-flex justify-between align-center" style="padding: 12px 0; border-bottom: 1px solid var(--color-border, #e5e7eb);">
-                <div>
-                  <div>📄 Student Performance Q1 2026</div>
-                  <div class="text-muted text-sm">PDF &nbsp;·&nbsp; 2 hours ago</div>
-                </div>
-                <button class="btn btn-sm btn-ghost">Download</button>
-              </li>
-
-              <li class="list-item d-flex justify-between align-center" style="padding: 12px 0; border-bottom: 1px solid var(--color-border, #e5e7eb);">
-                <div>
-                  <div>📊 Teacher Activity Jan 2026</div>
-                  <div class="text-muted text-sm">Excel &nbsp;·&nbsp; 1 day ago</div>
-                </div>
-                <button class="btn btn-sm btn-ghost">Download</button>
-              </li>
-
-              <li class="list-item d-flex justify-between align-center" style="padding: 12px 0; border-bottom: 1px solid var(--color-border, #e5e7eb);">
-                <div>
-                  <div>📄 Assessment Summary Dec 2025</div>
-                  <div class="text-muted text-sm">PDF &nbsp;·&nbsp; 3 days ago</div>
-                </div>
-                <button class="btn btn-sm btn-ghost">Download</button>
-              </li>
-
-              <li class="list-item d-flex justify-between align-center" style="padding: 12px 0;">
-                <div>
-                  <div>📊 Token Usage Report Nov 2025</div>
-                  <div class="text-muted text-sm">Excel &nbsp;·&nbsp; 1 week ago</div>
-                </div>
-                <button class="btn btn-sm btn-ghost">Download</button>
-              </li>
-
-            </ul>
-          </div>
-        </div>
-
-      </div><!-- /.grid-sidebar-main -->
+      <!-- ====== COMING SOON PLACEHOLDER ====== -->
+      <!-- Reports feature is out of current scope — placeholder for client review -->
+      <div class="card" style="text-align: center; padding: 72px 32px;">
+        <div style="font-size: 56px; margin-bottom: 20px;">📊</div>
+        <h2 style="margin: 0 0 10px; font-size: 22px;">Reports Coming Soon</h2>
+        <p style="color: var(--color-text-muted); max-width: 420px; margin: 0 auto 24px; font-size: var(--font-size-sm); line-height: 1.6;">
+          Detailed school reports — student performance, teacher activity, and assessment summaries — are currently out of scope for this release. This feature will be available in an upcoming version.
+        </p>
+        <span class="badge badge-warning" style="font-size: var(--font-size-sm); padding: 6px 18px;">Out of current scope</span>
+      </div>
+      <!-- END COMING SOON PLACEHOLDER -->
 
     </main>
   </div><!-- /.main-wrapper -->
