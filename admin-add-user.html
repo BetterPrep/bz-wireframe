@@ -5,6 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brainzeta — Add New User</title>
   <link rel="stylesheet" href="styles/base.css">
+  <style>
+    /* ====== Role radio inputs — hidden, controlled by label clicks ====== */
+    .role-radio { display: none; }
+
+    /* ====== Role tab pills ====== */
+    .role-tab-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .role-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 20px;
+      border: 1.5px solid var(--color-border);
+      border-radius: 999px;
+      font-size: var(--font-size-sm);
+      font-weight: 500;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      background: #fff;
+      transition: none;
+      user-select: none;
+    }
+    .role-tab:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    /* Active tab — driven by :checked state */
+    #role-teacher:checked ~ .page-body label[for="role-teacher"],
+    #role-student:checked ~ .page-body label[for="role-student"],
+    #role-parent:checked  ~ .page-body label[for="role-parent"],
+    #role-staff:checked   ~ .page-body label[for="role-staff"] {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #fff;
+    }
+
+    /* ====== Role form sections — all hidden by default ====== */
+    .role-form { display: none; }
+
+    /* Show the matching section based on which radio is checked */
+    #role-teacher:checked ~ .page-body .teacher-form { display: block; }
+    #role-student:checked ~ .page-body .student-form { display: block; }
+    #role-parent:checked  ~ .page-body .parent-form  { display: block; }
+    #role-staff:checked   ~ .page-body .staff-form   { display: block; }
+
+    /* ====== Shared form layout helpers ====== */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-section-title {
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin: 24px 0 16px;
+    }
+    .divider {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      margin: 24px 0;
+    }
+    .checkbox-group.grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+  </style>
 </head>
 <body>
 <div class="app-shell">
@@ -27,7 +101,6 @@
         <li><a href="admin-reports.html" class="sidebar-link">📊 Reports</a></li>
       </ul>
     </nav>
-    <!-- Sidebar Footer -->
     <div class="sidebar-footer">
       <a href="user-profile.html" class="sidebar-link">👤 My Profile</a>
       <a href="login.html" class="sidebar-link">🚪 Sign Out</a>
@@ -49,139 +122,358 @@
 
     <main class="page-content">
 
-      <!-- BREADCRUMB -->
-      <nav class="breadcrumb">
-        <a href="admin-dashboard.html">Home</a>
-        <span class="breadcrumb-sep">›</span>
-        <a href="admin-users-list.html">User Management</a>
-        <span class="breadcrumb-sep">›</span>
-        <span>Add New User</span>
-      </nav>
+      <!--
+        CSS-only role switcher:
+        Hidden radio inputs MUST be siblings of .page-body so that
+        the :checked ~ .page-body selector works correctly.
+      -->
+      <input type="radio" id="role-teacher" name="role" class="role-radio" checked>
+      <input type="radio" id="role-student" name="role" class="role-radio">
+      <input type="radio" id="role-parent"  name="role" class="role-radio">
+      <input type="radio" id="role-staff"   name="role" class="role-radio">
 
-      <!-- PAGE HEADER -->
-      <div class="page-header">
-        <h1>Add New User</h1>
-      </div>
+      <!-- Everything below is inside .page-body so :checked ~ .page-body can reach it -->
+      <div class="page-body">
 
-      <!-- MAIN FORM CARD -->
-      <div class="card">
-        <div class="card-body">
-          <form>
+        <!-- BREADCRUMB -->
+        <nav class="breadcrumb">
+          <a href="admin-dashboard.html">Home</a>
+          <span class="breadcrumb-sep">›</span>
+          <a href="admin-users-list.html">User Management</a>
+          <span class="breadcrumb-sep">›</span>
+          <span>Add New User</span>
+        </nav>
 
-            <!-- ROLE SELECTION -->
-            <div class="form-group">
-              <label class="form-label">Select Role <span class="required">*</span></label>
-              <div class="radio-group d-flex gap-24">
-                <label class="radio-label">
-                  <input type="radio" name="role" checked> Teacher
-                </label>
-                <label class="radio-label">
-                  <input type="radio" name="role"> Student
-                </label>
-                <label class="radio-label">
-                  <input type="radio" name="role"> Parent
-                </label>
-                <label class="radio-label">
-                  <input type="radio" name="role"> Staff
-                </label>
-              </div>
-            </div>
-
-            <hr class="divider">
-
-            <!-- SECTION TITLE -->
-            <div class="form-section-title">Teacher Information</div>
-
-            <!-- Full Name + Email -->
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label">Full Name <span class="required">*</span></label>
-                <input class="form-input" type="text" placeholder="e.g. Priya Verma">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Email <span class="required">*</span></label>
-                <input class="form-input" type="email" placeholder="e.g. p.verma@school.edu">
-              </div>
-            </div>
-
-            <!-- Phone + Username -->
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label">Phone <span class="required">*</span></label>
-                <input class="form-input" type="text" placeholder="+91 XXXXX XXXXX">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Username <span class="required">*</span></label>
-                <input class="form-input" type="text" placeholder="e.g. p.verma">
-              </div>
-            </div>
-
-            <!-- Auto-generated Password -->
-            <div class="form-group">
-              <label class="form-label">Auto-generated Password</label>
-              <div class="d-flex gap-8 align-center">
-                <div class="password-input-wrapper" style="flex: 1;">
-                  <input class="form-input" type="text" value="Temp@2026">
-                  <button type="button" class="password-toggle-btn">👁</button>
-                </div>
-                <button type="button" class="btn btn-secondary btn-sm">🔄</button>
-              </div>
-              <span class="form-hint">Password will be emailed to the user</span>
-            </div>
-
-            <hr class="divider">
-
-            <!-- SECTION TITLE: Subjects & Grades -->
-            <div class="form-section-title">Subjects &amp; Grades</div>
-
-            <!-- Subjects Taught -->
-            <div class="form-group">
-              <label class="form-label">Subjects Taught <span class="required">*</span></label>
-              <div class="checkbox-group grid-3">
-                <label class="checkbox-label">
-                  <input type="checkbox" checked> Mathematics
-                </label>
-                <label class="checkbox-label">
-                  <input type="checkbox" checked> Physics
-                </label>
-                <label class="checkbox-label">
-                  <input type="checkbox"> Chemistry
-                </label>
-                <label class="checkbox-label">
-                  <input type="checkbox"> English
-                </label>
-                <label class="checkbox-label">
-                  <input type="checkbox"> History
-                </label>
-                <label class="checkbox-label">
-                  <input type="checkbox"> Geography
-                </label>
-              </div>
-            </div>
-
-            <!-- Grades -->
-            <div class="form-group">
-              <label class="form-label">Grades <span class="required">*</span></label>
-              <div class="checkbox-group d-flex gap-16">
-                <label class="checkbox-label"><input type="checkbox"> 6</label>
-                <label class="checkbox-label"><input type="checkbox"> 7</label>
-                <label class="checkbox-label"><input type="checkbox"> 8</label>
-                <label class="checkbox-label"><input type="checkbox"> 9</label>
-                <label class="checkbox-label"><input type="checkbox" checked> 10</label>
-                <label class="checkbox-label"><input type="checkbox" checked> 11</label>
-                <label class="checkbox-label"><input type="checkbox" checked> 12</label>
-              </div>
-            </div>
-
-            <!-- FORM ACTIONS -->
-            <div class="form-actions">
-              <a href="admin-users-list.html" class="btn btn-secondary">Cancel</a>
-              <button type="submit" class="btn btn-primary">Create User</button>
-            </div>
-
-          </form>
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+          <h1>Add New User</h1>
         </div>
-      </div>
+
+        <!-- ROLE SELECTOR CARD -->
+        <div class="card" style="margin-bottom: 16px;">
+          <div class="card-body">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label">Select Role <span class="required">*</span></label>
+              <div class="role-tab-group">
+                <label for="role-teacher" class="role-tab">👩‍🏫 Teacher</label>
+                <label for="role-student" class="role-tab">👨‍🎓 Student</label>
+                <label for="role-parent"  class="role-tab">👪 Parent</label>
+                <label for="role-staff"   class="role-tab">🗂️ Staff</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== FORM CARD ====== -->
+        <div class="card">
+          <div class="card-body">
+
+            <!-- ==================== TEACHER FORM ==================== -->
+            <div class="role-form teacher-form">
+
+              <div class="form-section-title">Teacher Information</div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Full Name <span class="required">*</span></label>
+                  <input class="form-input" type="text" placeholder="e.g. Priya Verma">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email <span class="required">*</span></label>
+                  <input class="form-input" type="email" placeholder="e.g. p.verma@school.edu">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Phone <span class="required">*</span></label>
+                  <input class="form-input" type="text" placeholder="+91 XXXXX XXXXX">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Username <span class="required">*</span></label>
+                  <input class="form-input" type="text" placeholder="e.g. p.verma">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Auto-generated Password</label>
+                <div class="d-flex gap-8 align-center">
+                  <div class="password-input-wrapper" style="flex: 1;">
+                    <input class="form-input" type="text" value="Temp@2026">
+                    <button type="button" class="password-toggle-btn">👁</button>
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-sm">🔄 Regenerate</button>
+                </div>
+                <span class="form-hint">Password will be emailed to the user on creation</span>
+              </div>
+
+              <hr class="divider">
+              <div class="form-section-title">Subjects &amp; Grades</div>
+
+              <div class="form-group">
+                <label class="form-label">Subjects Taught <span class="required">*</span></label>
+                <div class="checkbox-group grid-3">
+                  <label class="checkbox-label"><input type="checkbox" checked> Mathematics</label>
+                  <label class="checkbox-label"><input type="checkbox"> Physics</label>
+                  <label class="checkbox-label"><input type="checkbox"> Chemistry</label>
+                  <label class="checkbox-label"><input type="checkbox"> English</label>
+                  <label class="checkbox-label"><input type="checkbox"> History</label>
+                  <label class="checkbox-label"><input type="checkbox"> Geography</label>
+                  <label class="checkbox-label"><input type="checkbox"> Political Science</label>
+                  <label class="checkbox-label"><input type="checkbox"> Economics</label>
+                  <label class="checkbox-label"><input type="checkbox"> Social Science</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Grades Assigned <span class="required">*</span></label>
+                <div class="checkbox-group d-flex gap-16 flex-wrap">
+                  <label class="checkbox-label"><input type="checkbox"> 6</label>
+                  <label class="checkbox-label"><input type="checkbox"> 7</label>
+                  <label class="checkbox-label"><input type="checkbox"> 8</label>
+                  <label class="checkbox-label"><input type="checkbox"> 9</label>
+                  <label class="checkbox-label"><input type="checkbox" checked> 10</label>
+                  <label class="checkbox-label"><input type="checkbox" checked> 11</label>
+                  <label class="checkbox-label"><input type="checkbox" checked> 12</label>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <a href="admin-users-list.html" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Create Teacher</button>
+              </div>
+
+            </div>
+            <!-- END TEACHER FORM -->
+
+            <!-- ==================== STUDENT FORM ==================== -->
+            <div class="role-form student-form">
+
+              <div class="form-section-title">Student Information</div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Full Name <span class="required">*</span></label>
+                  <input class="form-input" type="text" placeholder="e.g. Arjun Mehta">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email <span class="required">*</span></label>
+                  <input class="form-input" type="email" placeholder="e.g. arjun.m@school.edu">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Phone</label>
+                  <input class="form-input" type="text" placeholder="+91 XXXXX XXXXX">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Username <span class="required">*</span></label>
+                  <input class="form-input" type="text" placeholder="e.g. arjun.mehta">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Auto-generated Password</label>
+                <div class="d-flex gap-8 align-center">
+                  <div class="password-input-wrapper" style="flex: 1;">
+                    <input class="form-input" type="text" value="Temp@2026">
+                    <button type="button" class="password-toggle-btn">👁</button>
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-sm">🔄 Regenerate</button>
+                </div>
+                <span class="form-hint">Password will be emailed to the student on creation</span>
+              </div>
+
+              <hr class="divider">
+              <div class="form-section-title">Academic Details</div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Grade <span class="required">*</span></label>
+                  <select class="form-input form-select">
+                    <option value="" selected disabled>Select grade</option>
+                    <option>Grade 6</option>
+                    <option>Grade 7</option>
+                    <option>Grade 8</option>
+                    <option>Grade 9</option>
+                    <option>Grade 10</option>
+                    <option>Grade 11</option>
+                    <option>Grade 12</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Section <span class="required">*</span></label>
+                  <select class="form-input form-select">
+                    <option value="" selected disabled>Select section</option>
+                    <option>Section A</option>
+                    <option>Section B</option>
+                    <option>Section C</option>
+                    <option>Section D</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Roll Number</label>
+                  <input class="form-input" type="text" placeholder="e.g. 2024001">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Date of Birth</label>
+                  <input class="form-input" type="text" placeholder="DD / MM / YYYY">
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <a href="admin-users-list.html" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Create Student</button>
+              </div>
+
+            </div>
+            <!-- END STUDENT FORM -->
+
+            <!-- ==================== PARENT FORM ==================== -->
+            <div class="role-form parent-form">
+
+              <div class="form-section-title">Parent Information</div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Full Name <span class="required">*</span></label>
+                  <input class="form-input" type="text" placeholder="e.g. Sunita Mehta">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email <span class="required">*</span></label>
+                  <input class="form-input" type="email" placeholder="e.g. sunita.m@gmail.com">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Phone <span class="required">*</span></label>
+                  <input class="form-input" type="text" placeholder="+91 XXXXX XXXXX">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Relationship <span class="required">*</span></label>
+                  <select class="form-input form-select">
+                    <option value="" selected disabled>Select relationship</option>
+                    <option>Father</option>
+                    <option>Mother</option>
+                    <option>Guardian</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Auto-generated Password</label>
+                <div class="d-flex gap-8 align-center">
+                  <div class="password-input-wrapper" style="flex: 1;">
+                    <input class="form-input" type="text" value="Temp@2026">
+                    <button type="button" class="password-toggle-btn">👁</button>
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-sm">🔄 Regenerate</button>
+                </div>
+                <span class="form-hint">Password will be emailed to the parent on creation</span>
+              </div>
+
+              <hr class="divider">
+              <div class="form-section-title">Linked Student</div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Student Name <span class="required">*</span></label>
+                  <input class="form-input" type="text" placeholder="Search by student name or roll no.">
+                  <span class="form-hint">Search and select from enrolled students</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Grade &amp; Section</label>
+                  <input class="form-input" type="text" value="Grade 10 — Section A" disabled>
+                  <span class="form-hint">Auto-filled on student selection</span>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <a href="admin-users-list.html" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Create Parent</button>
+              </div>
+
+            </div>
+            <!-- END PARENT FORM -->
+
+            <!-- ==================== STAFF FORM ==================== -->
+            <div class="role-form staff-form">
+
+              <div class="form-section-title">Staff Information</div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Full Name <span class="required">*</span></label>
+                  <input class="form-input" type="text" placeholder="e.g. Kavya Pillai">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email <span class="required">*</span></label>
+                  <input class="form-input" type="email" placeholder="e.g. k.pillai@school.edu">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Phone <span class="required">*</span></label>
+                  <input class="form-input" type="text" placeholder="+91 XXXXX XXXXX">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Username <span class="required">*</span></label>
+                  <input class="form-input" type="text" placeholder="e.g. k.pillai">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Auto-generated Password</label>
+                <div class="d-flex gap-8 align-center">
+                  <div class="password-input-wrapper" style="flex: 1;">
+                    <input class="form-input" type="text" value="Temp@2026">
+                    <button type="button" class="password-toggle-btn">👁</button>
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-sm">🔄 Regenerate</button>
+                </div>
+                <span class="form-hint">Password will be emailed to the staff member on creation</span>
+              </div>
+
+              <hr class="divider">
+              <div class="form-section-title">Role &amp; Department</div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Designation <span class="required">*</span></label>
+                  <select class="form-input form-select">
+                    <option value="" selected disabled>Select designation</option>
+                    <option>School Assistant</option>
+                    <option>Lab Assistant</option>
+                    <option>Librarian</option>
+                    <option>Office Staff</option>
+                    <option>Counsellor</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Department</label>
+                  <input class="form-input" type="text" placeholder="e.g. Science Lab, Library">
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <a href="admin-users-list.html" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Create Staff</button>
+              </div>
+
+            </div>
+            <!-- END STAFF FORM -->
+
+          </div>
+        </div>
+        <!-- END FORM CARD -->
+
+      </div><!-- /.page-body -->
 
     </main>
   </div><!-- /.main-wrapper -->
