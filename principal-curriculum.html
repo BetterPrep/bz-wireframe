@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brainzeta — Curriculum Overview</title>
+  <link rel="stylesheet" href="styles/base.css" />
+  <style>
+    /* Summary stat strip */
+    .curriculum-summary {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .curriculum-summary-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      flex: 1;
+      min-width: 160px;
+    }
+    .curriculum-summary-item .cs-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .curriculum-summary-item .cs-label {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      margin-top: 2px;
+    }
+    .cs-icon { font-size: 1.4rem; }
+
+    /* Read-only banner */
+    .read-only-banner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: #f0f6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      color: #1d4ed8;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body class="app-layout">
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-text">Brainzeta</span>
+    </div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="principal-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="principal-assessment-calendar.html" class="sidebar-nav-item"><span class="nav-icon">📅</span> Assessment Calendar</a></li>
+        <li><a href="principal-teacher-monitor.html" class="sidebar-nav-item"><span class="nav-icon">👩‍🏫</span> Teacher Monitor</a></li>
+        <li><a href="principal-student-performance.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Student Performance</a></li>
+        <li><a href="principal-assessment-review.html" class="sidebar-nav-item"><span class="nav-icon">🔍</span> Assessment Review</a></li>
+        <li><a href="principal-curriculum.html" class="sidebar-nav-item active"><span class="nav-icon">📋</span> Curriculum</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ===================== MAIN CONTENT ===================== -->
+  <div class="main-wrapper">
+
+    <!-- ===================== TOPBAR ===================== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Curriculum Overview</span>
+      </div>
+      <div class="topbar-right">
+        <span class="badge badge-role">Principal</span>
+        <div class="avatar-initials">MP</div>
+      </div>
+    </header>
+
+    <!-- ===================== PAGE BODY ===================== -->
+    <main class="page-body">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="principal-dashboard.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-active">Curriculum</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Curriculum Overview</h1>
+          <p class="page-subtitle">Textbook-to-subject mappings across all grades — ABC School</p>
+        </div>
+      </div>
+
+      <!-- READ-ONLY BANNER -->
+      <div class="read-only-banner">
+        ℹ️ You have read-only access to the curriculum. To update mappings, contact the School Admin.
+      </div>
+
+      <!-- SUMMARY STRIP -->
+      <div class="curriculum-summary">
+        <div class="curriculum-summary-item">
+          <span class="cs-icon">📚</span>
+          <div>
+            <div class="cs-value">42</div>
+            <div class="cs-label">Total Subjects</div>
+          </div>
+        </div>
+        <div class="curriculum-summary-item">
+          <span class="cs-icon" style="color:#16a34a;">✅</span>
+          <div>
+            <div class="cs-value" style="color:#16a34a;">38</div>
+            <div class="cs-label">Mapped</div>
+          </div>
+        </div>
+        <div class="curriculum-summary-item">
+          <span class="cs-icon" style="color:#dc2626;">⚠️</span>
+          <div>
+            <div class="cs-value" style="color:#dc2626;">4</div>
+            <div class="cs-label">Unmapped</div>
+          </div>
+        </div>
+        <div class="curriculum-summary-item">
+          <span class="cs-icon">📖</span>
+          <div>
+            <div class="cs-value">12</div>
+            <div class="cs-label">Textbooks in Use</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILTER BAR -->
+      <div class="filter-bar" style="margin-bottom: 16px;">
+        <select class="form-select">
+          <option value="" selected>All Grades</option>
+          <option>Grade 6</option>
+          <option>Grade 7</option>
+          <option>Grade 8</option>
+          <option>Grade 9</option>
+          <option>Grade 10</option>
+          <option>Grade 11</option>
+          <option>Grade 12</option>
+        </select>
+        <select class="form-select">
+          <option value="" selected>All Statuses</option>
+          <option>Mapped</option>
+          <option>Unmapped</option>
+        </select>
+      </div>
+
+      <!-- GRADE 12 MAPPINGS CARD -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Grade 12 — Subject Mappings</h2>
+          <span class="badge badge-success" style="margin-left: auto;">4 / 6 Mapped</span>
+        </div>
+        <div class="card-body" style="padding: 0;">
+          <div class="table-wrapper" style="margin: 0; border: none;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Mapped Textbook</th>
+                  <th>Publisher</th>
+                  <th>Chapters</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Political Science</td>
+                  <td>NCERT Political Science 2025</td>
+                  <td>NCERT</td>
+                  <td>8 chapters</td>
+                  <td><span class="badge badge-success">Mapped</span></td>
+                </tr>
+                <tr>
+                  <td>Economics</td>
+                  <td>NCERT Economics 2025</td>
+                  <td>NCERT</td>
+                  <td>6 chapters</td>
+                  <td><span class="badge badge-success">Mapped</span></td>
+                </tr>
+                <tr>
+                  <td>Mathematics</td>
+                  <td>NCERT Mathematics 2025</td>
+                  <td>NCERT</td>
+                  <td>13 chapters</td>
+                  <td><span class="badge badge-success">Mapped</span></td>
+                </tr>
+                <tr class="table-row--error">
+                  <td>Physics</td>
+                  <td><span class="text-muted">— Not Mapped —</span></td>
+                  <td><span class="text-muted">—</span></td>
+                  <td><span class="text-muted">—</span></td>
+                  <td><span class="badge badge-error">Unmapped</span></td>
+                </tr>
+                <tr>
+                  <td>Chemistry</td>
+                  <td>School Custom Chemistry</td>
+                  <td>School</td>
+                  <td>12 chapters</td>
+                  <td><span class="badge badge-success">Mapped</span></td>
+                </tr>
+                <tr class="table-row--error">
+                  <td>English</td>
+                  <td><span class="text-muted">— Not Mapped —</span></td>
+                  <td><span class="text-muted">—</span></td>
+                  <td><span class="text-muted">—</span></td>
+                  <td><span class="badge badge-error">Unmapped</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRADE 11 MAPPINGS CARD -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Grade 11 — Subject Mappings</h2>
+          <span class="badge badge-success" style="margin-left: auto;">5 / 6 Mapped</span>
+        </div>
+        <div class="card-body" style="padding: 0;">
+          <div class="table-wrapper" style="margin: 0; border: none;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Mapped Textbook</th>
+                  <th>Publisher</th>
+                  <th>Chapters</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mathematics</td>
+                  <td>NCERT Mathematics 2025</td>
+                  <td>NCERT</td>
+                  <td>16 chapters</td>
+                  <td><span class="badge badge-success">Mapped</span></td>
+                </tr>
+                <tr>
+                  <td>Physics</td>
+                  <td>NCERT Physics Part I &amp; II (2024)</td>
+                  <td>NCERT</td>
+                  <td>15 chapters</td>
+                  <td><span class="badge badge-success">Mapped</span></td>
+                </tr>
+                <tr>
+                  <td>Chemistry</td>
+                  <td>NCERT Chemistry Part I &amp; II (2024)</td>
+                  <td>NCERT</td>
+                  <td>14 chapters</td>
+                  <td><span class="badge badge-success">Mapped</span></td>
+                </tr>
+                <tr>
+                  <td>Biology</td>
+                  <td>NCERT Biology 2024</td>
+                  <td>NCERT</td>
+                  <td>22 chapters</td>
+                  <td><span class="badge badge-success">Mapped</span></td>
+                </tr>
+                <tr>
+                  <td>English</td>
+                  <td>NCERT Hornbill + Snapshots</td>
+                  <td>NCERT</td>
+                  <td>8 chapters</td>
+                  <td><span class="badge badge-success">Mapped</span></td>
+                </tr>
+                <tr class="table-row--error">
+                  <td>Economics</td>
+                  <td><span class="text-muted">— Not Mapped —</span></td>
+                  <td><span class="text-muted">—</span></td>
+                  <td><span class="text-muted">—</span></td>
+                  <td><span class="badge badge-error">Unmapped</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRADE 10 MAPPINGS CARD -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Grade 10 — Subject Mappings</h2>
+          <span class="badge badge-success" style="margin-left: auto;">5 / 5 Mapped</span>
+        </div>
+        <div class="card-body" style="padding: 0;">
+          <div class="table-wrapper" style="margin: 0; border: none;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Mapped Textbook</th>
+                  <th>Publisher</th>
+                  <th>Chapters</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mathematics</td>
+                  <td>NCERT Mathematics Std. X</td>
+                  <td>NCERT</td>
+                  <td>15 chapters</td>
+                  <td><span class="badge badge-success">Mapped</span></td>
+                </tr>
+                <tr>
+                  <td>Science</td>
+                  <td>NCERT Science Std. X</td>
+                  <td>NCERT</td>
+                  <td>16 chapters</td>
+                  <td><span class="badge badge-success">Mapped</span></td>
+                </tr>
+                <tr>
+                  <td>Social Science</td>
+                  <td>NCERT Social Science Std. X</td>
+                  <td>NCERT</td>
+                  <td>22 chapters</td>
+                  <td><span class="badge badge-success">Mapped</span></td>
+                </tr>
+                <tr>
+                  <td>English</td>
+                  <td>NCERT First Flight + Footprints</td>
+                  <td>NCERT</td>
+                  <td>11 chapters</td>
+                  <td><span class="badge badge-success">Mapped</span></td>
+                </tr>
+                <tr>
+                  <td>Hindi</td>
+                  <td>NCERT Kshitij + Kritika</td>
+                  <td>NCERT</td>
+                  <td>17 chapters</td>
+                  <td><span class="badge badge-success">Mapped</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- UNMAPPED SUBJECTS ALERT -->
+      <div class="alert alert-warning">
+        ⚠️ 4 subjects across Grades 11 &amp; 12 are unmapped. AI evaluation is disabled for these subjects. Please ask the School Admin to complete the mapping.
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+
+</body>
+</html>
