@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Performance Summary — Brainzeta Parent</title>
+  <link rel="stylesheet" href="styles/base.css" />
+  <style>
+    /* Text section cards */
+    .summary-section {
+      margin-bottom: 0;
+    }
+    .summary-section p {
+      font-size: var(--font-size-sm);
+      color: var(--color-text);
+      line-height: 1.7;
+      margin: 0 0 10px;
+    }
+    .summary-section p:last-child {
+      margin-bottom: 0;
+    }
+    .section-icon {
+      font-size: 1.1rem;
+      margin-right: 6px;
+    }
+  </style>
+</head>
+<body class="layout-shell">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="parent-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="parent-pending-assignments.html" class="sidebar-nav-item"><span class="nav-icon">📋</span> Pending Assignments</a></li>
+        <li><a href="parent-results-list.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Results</a></li>
+        <li><a href="parent-performance-summary.html" class="sidebar-nav-item active"><span class="nav-icon">📈</span> Performance Summary</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN WRAPPER ===== -->
+  <div class="main-wrapper">
+
+    <!-- ===== TOPBAR ===== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Performance Summary</span>
+      </div>
+      <div class="topbar-right">
+        <span class="role-badge badge badge-primary">Parent</span>
+        <div class="avatar-circle">SK</div>
+      </div>
+    </header>
+
+    <!-- ===== PAGE CONTENT ===== -->
+    <main class="page-content">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <span class="breadcrumb-item">Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item breadcrumb-current">Performance Summary</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Amit's Performance Summary</h1>
+          <p class="page-subtitle">Academic performance overview — Grade 12-A · ABC School</p>
+        </div>
+      </div>
+
+      <!-- Stat grid — 3 cards (no trend comparison) -->
+      <div class="stat-grid mt-16">
+        <div class="stat-card">
+          <div class="stat-label">Avg Score</div>
+          <div class="stat-value" style="color: var(--color-primary);">86%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Assessments Taken</div>
+          <div class="stat-value" style="color: var(--color-success);">8</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Best Subject</div>
+          <div class="stat-value" style="color: var(--color-warning);">English (96%)</div>
+        </div>
+      </div>
+
+      <!-- ===== CARD: Subject-wise Performance ===== -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h2 class="card-title">Subject-wise Performance</h2>
+        </div>
+        <div class="card-body">
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Teacher</th>
+                  <th>Assessments</th>
+                  <th>Avg Score</th>
+                  <th>Best Score</th>
+                  <th>Lowest Score</th>
+                  <th>Trend</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mathematics</td>
+                  <td>Mr. Sharma</td>
+                  <td>3</td>
+                  <td>85%</td>
+                  <td>90%</td>
+                  <td>78%</td>
+                  <td><span class="badge badge-success">↑ Improving</span></td>
+                </tr>
+                <tr>
+                  <td>Physics</td>
+                  <td>Mr. Gupta</td>
+                  <td>2</td>
+                  <td>88%</td>
+                  <td>90%</td>
+                  <td>86%</td>
+                  <td><span class="badge badge-success">↑ Stable</span></td>
+                </tr>
+                <tr>
+                  <td>Chemistry</td>
+                  <td>Ms. Rao</td>
+                  <td>1</td>
+                  <td>85%</td>
+                  <td>85%</td>
+                  <td>85%</td>
+                  <td><span class="badge badge-gray">→ Stable</span></td>
+                </tr>
+                <tr>
+                  <td>Economics</td>
+                  <td>Ms. Verma</td>
+                  <td>1</td>
+                  <td>81%</td>
+                  <td>81%</td>
+                  <td>81%</td>
+                  <td><span class="badge badge-warning">↓ Watch</span></td>
+                </tr>
+                <tr>
+                  <td>English</td>
+                  <td>Ms. Joshi</td>
+                  <td>1</td>
+                  <td>96%</td>
+                  <td>96%</td>
+                  <td>96%</td>
+                  <td><span class="badge badge-success">↑ Excellent</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== CARD: Strengths ===== -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h2 class="card-title"><span class="section-icon">💪</span> Strengths</h2>
+        </div>
+        <div class="card-body summary-section">
+          <p>Amit demonstrates exceptional command of language and expression in English, consistently scoring above 95% across all assessments. His responses show clarity of thought and strong analytical reasoning when interpreting literary and comprehension passages.</p>
+          <p>In Physics, Amit shows a solid grasp of core concepts such as mechanics and optics, accurately applying formulae and arriving at correct conclusions under time constraints. His performance in objective sections is particularly strong, reflecting good retention and recall.</p>
+        </div>
+      </div>
+
+      <!-- ===== CARD: Areas of Improvement ===== -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h2 class="card-title"><span class="section-icon">📈</span> Areas of Improvement</h2>
+        </div>
+        <div class="card-body summary-section">
+          <p>Amit should dedicate more structured practice to Economics, where his average of 81% suggests gaps in application-based questions — particularly in macroeconomics and government budget topics. Regular revision of solved examples and past papers is recommended.</p>
+          <p>In Mathematics, while his average is strong at 85%, the variance between his best (90%) and lowest (78%) scores indicates inconsistency, likely due to rushing through multi-step problems. Working on step-by-step problem solving and time management during practice tests will help stabilise performance.</p>
+        </div>
+      </div>
+
+      <!-- ===== CARD: Weaknesses ===== -->
+      <div class="card mt-16">
+        <div class="card-header">
+          <h2 class="card-title"><span class="section-icon">⚠️</span> Weaknesses</h2>
+        </div>
+        <div class="card-body summary-section">
+          <p>Amit tends to lose marks on long-form descriptive questions, particularly in Economics and Chemistry, where detailed explanations and structured answers are expected. His responses often lack the depth of reasoning required for full marks, suggesting a need to practise answer structuring.</p>
+          <p>Attention to detail in Chemistry numerical problems has been flagged by his teacher — small errors in unit conversion and significant figures are costing marks that are otherwise within reach. Focused revision on these foundational accuracy habits is strongly recommended.</p>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+
+</body>
+</html>
