@@ -1,22 +1,49 @@
 # Brainzeta — Delivery Plan
 
-**Version:** 1.0 &nbsp;|&nbsp; **Date:** March 2, 2026
+**Version:** 1.1 &nbsp;|&nbsp; **Date:** March 2, 2026
 **Build approach:** AI-assisted development
+**Working hours:** 4 hours/day
 **Total Milestones:** 5
 
 ---
 
 ## Overview
 
-| # | Milestone | Roles Covered | AI Activated |
-|---|---|---|---|
-| M1 | Platform Setup | SuperAdmin, School Admin | Textbook embedding (background) |
-| M2 | Assessment Creation | Teacher (create flow), Principal | Rubric extraction |
-| M3 | Submission Pipeline | Student, School Assistant | Answer evaluation (background) |
-| M4 | Review & Results | Teacher (approval), Student, Parent | Scores surface + Performance summaries |
-| M5 | Production Readiness | All roles | AI hardening, accuracy benchmarking |
+| # | Milestone | Roles Covered | AI Activated | Days |
+|---|---|---|---|---|
+| M1 | Platform Setup | SuperAdmin, School Admin | Textbook embedding (background) | **12** |
+| M2 | Assessment Creation | Teacher (create flow), Principal | Rubric extraction | **8** |
+| M3 | Submission Pipeline | Student, School Assistant | Answer evaluation (background) | **7** |
+| M4 | Review & Results | Teacher (approval), Student, Parent | Scores surface + Performance summaries | **8** |
+| M5 | Production Readiness | All roles | AI hardening, accuracy benchmarking | **15** |
+| | | | **Total** | **50 days (~10 weeks)** |
+
+> **With 15% integration buffer:** ~57 days / ~11.5 weeks. Integration points between milestones (especially M3→M4 where AI output first surfaces in UI) are where unexpected time is most commonly lost.
 
 > **AI parallel track:** The core AI pipeline (rubric extraction, answer evaluation, embedding generation, performance summaries) is built as an independent service from the start and integrated milestone by milestone. M1–M3 can use mocked AI responses for frontend development; real AI is required from M4 onwards.
+
+---
+
+## Timeline Rationale
+
+### What AI-assisted development speeds up (60–70% faster)
+- Frontend screens — wireframes already done, AI generates directly from them
+- CRUD APIs — boilerplate, validation, standard patterns
+- Test generation — writing unit and integration tests
+
+### What AI does not significantly speed up
+- AI pipeline integration — prompt tuning, edge case handling, output calibration
+- Security hardening — needs human judgment and manual testing
+- UAT — real users, real bugs, coordination time
+- Load testing and operational setup — infrastructure configuration
+- Bug fixing at integration points — always surfaces unexpected issues
+
+### Key risks to the timeline
+1. **M1 quality gates everything downstream** — if user management, file upload, and curriculum mapping are shaky, debt compounds across every later milestone
+2. **M3 → M4 is the riskiest handoff** — the approval interface and result screens are built around AI evaluation output; lock the AI service JSON contracts before starting M4 frontend work
+3. **M5 is largely irreducible** — UAT, security review, and AI accuracy benchmarking cannot be meaningfully compressed regardless of AI assistance
+
+---
 
 ---
 
