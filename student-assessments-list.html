@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Assessments — Brainzeta Student</title>
+  <link rel="stylesheet" href="styles/base.css" />
+</head>
+<body class="layout-shell">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span class="sidebar-logo-text">Brainzeta</span></div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="student-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="student-assessments-list.html" class="sidebar-nav-item active"><span class="nav-icon">📋</span> My Assessments</a></li>
+        <li><a href="student-outcomes-list.html" class="sidebar-nav-item"><span class="nav-icon">🎯</span> My Outcomes</a></li>
+        <li><a href="student-result-details.html" class="sidebar-nav-item"><span class="nav-icon">📈</span> My Results</a></li>
+        <li><a href="student-practice-mode.html" class="sidebar-nav-item"><span class="nav-icon">🧠</span> Practice Mode</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN WRAPPER ===== -->
+  <div class="main-wrapper">
+
+    <!-- ===== TOPBAR ===== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">My Assessments</span>
+      </div>
+      <div class="topbar-right">
+        <span class="role-badge badge badge-primary">Student</span>
+        <div class="avatar-circle">AK</div>
+      </div>
+    </header>
+
+    <!-- ===== PAGE CONTENT ===== -->
+    <main class="page-content">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="student-dashboard.html" class="breadcrumb-item">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item breadcrumb-current">My Assessments</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">My Assessments</h1>
+          <p class="page-subtitle">Grade 12-A · ABC School</p>
+        </div>
+      </div>
+
+      <!-- Filter bar -->
+      <div class="filter-bar">
+        <select class="form-select">
+          <option selected>All Subjects</option>
+          <option>Mathematics</option>
+          <option>Physics</option>
+          <option>Chemistry</option>
+          <option>Economics</option>
+          <option>English</option>
+          <option>Political Science</option>
+        </select>
+        <select class="form-select">
+          <option selected>All Statuses</option>
+          <option>Pending</option>
+          <option>Submitted</option>
+          <option>Evaluated</option>
+        </select>
+      </div>
+
+      <!-- ===== ASSESSMENTS TABLE ===== -->
+      <div class="card mt-16">
+        <div class="card-body" style="padding: 0;">
+          <div class="table-wrapper" style="margin: 0; border: none;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Assessment</th>
+                  <th>Subject</th>
+                  <th>Due Date</th>
+                  <th>Max Marks</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <!-- Pending -->
+                <tr>
+                  <td><strong>Math Half-Yearly Exam</strong></td>
+                  <td>Mathematics</td>
+                  <td>Feb 26, 2026</td>
+                  <td>80</td>
+                  <td><span class="badge badge-error">⏰ Due in 2 days</span></td>
+                  <td><a href="student-assessment-details.html" class="btn btn-sm btn-primary">View</a></td>
+                </tr>
+
+                <tr>
+                  <td><strong>Physics Quiz — Ch. 3</strong></td>
+                  <td>Physics</td>
+                  <td>Mar 1, 2026</td>
+                  <td>20</td>
+                  <td><span class="badge badge-warning">⏰ Due in 5 days</span></td>
+                  <td><a href="student-assessment-details.html" class="btn btn-sm btn-primary">View</a></td>
+                </tr>
+
+                <tr>
+                  <td><strong>Economics Assignment</strong></td>
+                  <td>Economics</td>
+                  <td>Mar 5, 2026</td>
+                  <td>25</td>
+                  <td><span class="badge badge-gray">Due in 9 days</span></td>
+                  <td><a href="student-assessment-details.html" class="btn btn-sm btn-primary">View</a></td>
+                </tr>
+
+                <!-- Submitted / Under Evaluation -->
+                <tr>
+                  <td><strong>Political Science Exam</strong></td>
+                  <td>Political Science</td>
+                  <td>Feb 20, 2026</td>
+                  <td>60</td>
+                  <td><span class="badge badge-primary">⏳ Under Evaluation</span></td>
+                  <td><a href="student-assessment-details.html" class="btn btn-sm btn-secondary">View</a></td>
+                </tr>
+
+                <tr>
+                  <td><strong>Chemistry Lab Report</strong></td>
+                  <td>Chemistry</td>
+                  <td>Feb 14, 2026</td>
+                  <td>30</td>
+                  <td><span class="badge badge-primary">⏳ Under Evaluation</span></td>
+                  <td><a href="student-assessment-details.html" class="btn btn-sm btn-secondary">View</a></td>
+                </tr>
+
+                <!-- Evaluated / Results out -->
+                <tr>
+                  <td><strong>Math Unit Test — Calculus</strong></td>
+                  <td>Mathematics</td>
+                  <td>Feb 5, 2026</td>
+                  <td>40</td>
+                  <td><span class="badge badge-success">✅ Result: 36/40</span></td>
+                  <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></td>
+                </tr>
+
+                <tr>
+                  <td><strong>English Essay Assignment</strong></td>
+                  <td>English</td>
+                  <td>Jan 28, 2026</td>
+                  <td>20</td>
+                  <td><span class="badge badge-success">✅ Result: 18/20</span></td>
+                  <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></td>
+                </tr>
+
+                <tr>
+                  <td><strong>Physics Unit Test</strong></td>
+                  <td>Physics</td>
+                  <td>Jan 20, 2026</td>
+                  <td>50</td>
+                  <td><span class="badge badge-success">✅ Result: 44/50</span></td>
+                  <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /.main-wrapper -->
+
+</body>
+</html>
