@@ -1,6 +1,6 @@
 # Brainzeta — Delivery Plan
 
-**Version:** 1.1 &nbsp;|&nbsp; **Date:** March 2, 2026
+**Version:** 1.2 &nbsp;|&nbsp; **Date:** March 2, 2026
 **Build approach:** AI-assisted development
 **Working hours:** 4 hours/day
 **Total Milestones:** 5
@@ -94,8 +94,13 @@
 - [ ] `GET /admin/textbooks` — list with grade/subject filters
 - [ ] `POST /admin/textbooks` — create textbook metadata
 - [ ] `POST /admin/textbooks/:id/chapters` — upload chapter PDF
-- [ ] `GET /admin/token-usage` — aggregated usage by school with date range filter
-- [ ] Token allocation API — assign/top-up tokens to a school
+- [ ] `GET /admin/dashboard` — platform-wide stats (school count, teacher count, student count, token usage MTD), top-10 schools token chart data, global activity feed
+- [ ] `GET /admin/token-usage` — paginated, date-range-filtered table of all schools' token consumption
+- [ ] `GET /admin/token-usage/export` — CSV download of all schools' token usage for the selected date range
+- [ ] `POST /admin/schools/:id/token-allocation` — body: `{ tokens: number, note?: string }` — top-up a school's token balance; log the action in audit trail
+- [ ] `GET /admin/schools/:id/users` — users belonging to a school, filterable by role (for School Details → Users tab)
+- [ ] `GET /admin/schools/:id/token-usage` — monthly token breakdown for a school (for School Details → Token Usage tab)
+- [ ] `GET /admin/schools/:id/activity` — recent event feed for a school (for School Details → Activity tab)
 
 #### Frontend
 - [ ] SuperAdmin dashboard — metrics cards (schools, teachers, students, uptime), token usage bar chart, activity feed, quick actions
@@ -126,6 +131,11 @@
 - [ ] `GET /school/textbooks` — combined view of system + school textbooks
 - [ ] `POST /school/textbooks` — upload school-specific textbook
 - [ ] `POST /school/textbooks/:id/chapters` — upload chapter PDF
+- [ ] `GET /school/dashboard` — school-wide dashboard stats (teacher count, student count, active assessments, token balance + % used) + activity feed
+- [ ] `GET /school/grades` — list of grades configured for this school; drives grade dropdowns across Add User, Teacher Sections, and Curriculum screens
+- [ ] `GET /school/sections?grade=` — sections (e.g. 12-A, 12-B) for a given grade; drives section dropdowns in Add Student form and Teacher Sections screen
+- [ ] `GET /school/subjects` — subjects active in this school (derived from curriculum mappings); drives subject checkboxes in Add Teacher form
+- [ ] `GET /school/users/export` — CSV export of filtered user list (same filter params as `GET /school/users`)
 - [ ] Token Usage (school level) — `GET /school/token-usage` — balance card + per-teacher table
 
 #### Frontend
@@ -179,9 +189,12 @@
 - [ ] Section Assignment model — assessment ↔ section mapping with due date and notification flags
 - [ ] `POST /assessments/:id/assign` — assign to one or more sections, trigger student notifications
 - [ ] `GET /assessments/:id/sections` — list assigned sections with student counts
-- [ ] Textbook chapter linking — `GET /chapters?grade=&subject=` — returns available chapters for selection in Step 1
+- [ ] `GET /teacher/dashboard` — teacher-specific stats (total assessments, total submissions received, pending approvals count, upcoming due dates count) + upcoming assessments list (sorted by due date) + recent submissions feed
+- [ ] `GET /teacher/sections` — sections currently assigned to this teacher (grade + section pairs); drives class selector on Class Analytics and Submission Tracker filter
+- [ ] Textbook chapter linking — `GET /school/textbooks/chapters?grade=&subject=` — returns available chapters for the selected grade+subject combination for chapter selection in Step 1
 
 #### Frontend
+- [ ] Teacher dashboard — stat cards (My Assessments, Total Submissions, Pending Approvals, Upcoming Due Dates), upcoming assessments table sorted by deadline, recent submissions feed, pending approvals list, quick actions
 - [ ] Assessments list — status tab pills (All / Draft / Assigned / In Progress / Completed), Sections column (one row per section, e.g. 12-A / 12-B as separate rows), submission count per section, actions menu
 - [ ] Create Assessment Step 1 — metadata form, chapter selection checkboxes (loaded by grade + subject), progress bar 33%
 - [ ] Create Assessment Step 2 — two upload dropzones (question paper + rubric), file validation indicators, AI processing status ("Extracting rubric structure…"), progress bar 67%
@@ -198,7 +211,6 @@
   - [ ] Confidence scoring per question (flag low-confidence extractions for teacher attention)
   - [ ] Integration: called at end of Step 2 upload, result pre-populates Step 3
   - [ ] Fallback: if extraction fails, teacher enters rubric manually (Step 3 starts empty)
-- [ ] Teacher dashboard — upcoming assessments feed, pending approvals card (empty state), recent submissions feed, quick actions
 
 ---
 
@@ -206,6 +218,7 @@
 
 #### Backend
 - [ ] Principal read APIs (school-scoped, read-only)
+  - [ ] `GET /principal/dashboard` — school-wide overview stats (active assessments, teacher count, student count, avg pass rate), pending approvals breakdown by teacher (for horizontal bar chart), assessment status distribution counts (Draft / Assigned / In Progress / Completed), recent activity feed
   - [ ] `GET /principal/assessments/calendar` — all school assessments by date, filterable
   - [ ] `GET /principal/teachers/activity` — per-teacher: assessments created, pending approvals, last active
   - [ ] `GET /principal/students/performance` — grade/section aggregate stats, student-level table
@@ -240,8 +253,7 @@
 - [ ] Submission model — student, assessment, section, answer sheet file, submitted at, evaluation status, evaluation result (hidden until approved)
 - [ ] `POST /student/assessments/:id/submit` — upload answer sheet, validate PDF + size, create submission record, trigger evaluation job
 - [ ] Duplicate submission guard — reject if already submitted
-- [ ] `GET /student/outcomes` — list of approved results for the student
-- [ ] `GET /student/outcomes/:submissionId` — individual result detail (only if status = Approved)
+- [ ] `GET /student/outcomes` — list of approved results for the student (title, subject, score, grade, approved date)
 
 #### Frontend
 - [ ] Student dashboard — pending assessments table (View button → Assessment Details), submitted/waiting list, sidebar: Dashboard, My Assessments, My Outcomes
@@ -261,6 +273,7 @@
 - [ ] `POST /sta/upload/bulk/confirm` — submit confirmed batch, trigger evaluation jobs per submission
 - [ ] `GET /sta/upload/history` — paginated upload log with status per submission
 - [ ] `POST /sta/upload/:id/retry` — re-trigger upload for a failed record
+- [ ] `GET /sta/dashboard` — upload stats for today (uploaded count, in-queue count, processing count, failed count) + recent uploads feed (last 10 records with status)
 
 #### Frontend
 - [ ] STA dashboard — metrics cards (uploaded today, in queue, processing, failed), quick actions, recent uploads feed
@@ -321,7 +334,8 @@
 ### 4.2 Student Results
 
 #### Backend
-- [ ] Result retrieval — `GET /student/outcomes/:submissionId` — returns final approved scores, per-question feedback, overall feedback, answer sheet file URLs, question paper file URL
+- [ ] `GET /student/outcomes/:submissionId` — returns final approved scores, per-question scores + feedback, overall feedback (strengths/improvement/focus areas), signed URLs for answer sheet and question paper PDF files; only accessible when status = Approved
+- [ ] `GET /student/outcomes/:submissionId/download` — returns a time-limited signed URL for the result PDF (generates on demand if not cached)
 
 #### Frontend
 - [ ] Result details (3-col layout) — score summary in page header (score/total, grade, %, download), Question Paper viewer (left), Answer Sheet viewer (centre), Scores & Feedback (right: per-question scores with feedback, overall feedback card with strengths / areas of improvement / focus areas)
@@ -331,7 +345,9 @@
 ### 4.3 Parent View
 
 #### Backend
-- [ ] `GET /parent/ward/assessments` — pending + submitted assessments for ward
+- [ ] `GET /parent/wards` — list of linked children (name, grade, section) — drives the child selector dropdown on all parent screens; needed for parents with multiple wards
+- [ ] `GET /parent/dashboard` — active child's pending submissions (count + list) + recent approved results (last 7 days) — single endpoint to load the dashboard without multiple round-trips
+- [ ] `GET /parent/ward/assessments` — pending + submitted assessments for the selected ward
 - [ ] `GET /parent/ward/results` — all approved results for ward, date/subject filters
 - [ ] `GET /parent/ward/results/:submissionId` — individual result (same data as student view)
 - [ ] `GET /parent/ward/performance-summary` — aggregate stats + AI-generated performance text
