@@ -5,6 +5,117 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Assessments — Brainzeta Student</title>
   <link rel="stylesheet" href="styles/base.css" />
+  <style>
+    /* ── Subject / Chapter / Topic grouped assessment list ── */
+
+    .subject-group {
+      margin-bottom: 1.5rem;
+    }
+
+    /* Subject header row */
+    .subject-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      font-size: var(--font-size-sm);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+    .subject-header::-webkit-details-marker { display: none; }
+    .subject-header .subject-count {
+      margin-left: auto;
+      font-size: var(--font-size-xs);
+      font-weight: 500;
+      opacity: 0.85;
+    }
+    .subject-header .chevron {
+      font-style: normal;
+      transition: none;
+      font-size: 0.75rem;
+    }
+    details[open] > .subject-header .chevron::before { content: '▾'; }
+    details:not([open]) > .subject-header .chevron::before { content: '▸'; }
+
+    .subject-body {
+      border: 1px solid var(--color-border);
+      border-top: none;
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    }
+
+    /* Chapter accordion inside a subject */
+    .chapter-group {
+      border-bottom: 1px solid var(--color-border);
+    }
+    .chapter-group:last-child { border-bottom: none; }
+
+    .chapter-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 16px;
+      background: #f5f7fa;
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: var(--color-text);
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+    .chapter-header::-webkit-details-marker { display: none; }
+    .chapter-header .chapter-count {
+      margin-left: auto;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+    }
+    .chapter-header .chevron { font-size: 0.7rem; }
+    details[open] > .chapter-header .chevron::before { content: '▾'; }
+    details:not([open]) > .chapter-header .chevron::before { content: '▸'; }
+
+    .chapter-body { background: #fff; }
+
+    /* Topic label row inside a chapter */
+    .topic-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 32px;
+      border-bottom: 1px solid var(--color-border);
+      background: #fafafa;
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .topic-row:last-of-type { border-bottom: none; }
+
+    /* Assessment rows under a topic */
+    .assessment-row {
+      display: grid;
+      grid-template-columns: 1fr 120px 100px 100px 110px;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 32px;
+      border-bottom: 1px solid var(--color-border);
+      font-size: var(--font-size-sm);
+    }
+    .assessment-row:last-child { border-bottom: none; }
+    .assessment-row:hover { background: #f9fafb; }
+
+    .assessment-name { font-weight: 500; }
+    .assessment-meta {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      margin-top: 2px;
+    }
+  </style>
 </head>
 <body class="layout-shell">
 
@@ -71,108 +182,271 @@
         <select class="form-select">
           <option selected>All Statuses</option>
           <option>Pending</option>
-          <option>Submitted</option>
-          <option>Evaluated</option>
+          <option>Under Evaluation</option>
+          <option>Result Available</option>
         </select>
       </div>
 
-      <!-- ===== ASSESSMENTS TABLE ===== -->
-      <div class="card mt-16">
-        <div class="card-body" style="padding: 0;">
-          <div class="table-wrapper" style="margin: 0; border: none;">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Assessment</th>
-                  <th>Subject</th>
-                  <th>Due Date</th>
-                  <th>Max Marks</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
+      <!-- ===== ASSESSMENTS — Subject › Chapter › Topic grouped ===== -->
 
-                <!-- Pending -->
-                <tr>
-                  <td><strong>Math Half-Yearly Exam</strong></td>
-                  <td>Mathematics</td>
-                  <td>Feb 26, 2026</td>
-                  <td>80</td>
-                  <td><span class="badge badge-error">⏰ Due in 2 days</span></td>
-                  <td><a href="student-assessment-details.html" class="btn btn-sm btn-primary">View</a></td>
-                </tr>
+      <!-- ── Subject: Mathematics ── -->
+      <details class="subject-group mt-16" open>
+        <summary class="subject-header">
+          <span class="chevron"></span>
+          📐 Mathematics
+          <span class="subject-count">3 assessments</span>
+        </summary>
+        <div class="subject-body">
 
-                <tr>
-                  <td><strong>Physics Quiz — Ch. 3</strong></td>
-                  <td>Physics</td>
-                  <td>Mar 1, 2026</td>
-                  <td>20</td>
-                  <td><span class="badge badge-warning">⏰ Due in 5 days</span></td>
-                  <td><a href="student-assessment-details.html" class="btn btn-sm btn-primary">View</a></td>
-                </tr>
+          <!-- Chapter: Ch. 5 – Continuity & Differentiability -->
+          <details class="chapter-group" open>
+            <summary class="chapter-header">
+              <span class="chevron"></span>
+              Ch. 5 — Continuity &amp; Differentiability
+              <span class="chapter-count">1 assessment</span>
+            </summary>
+            <div class="chapter-body">
+              <!-- Topic label -->
+              <div class="topic-row">Chain Rule</div>
+              <!-- Assessment row -->
+              <div class="assessment-row">
+                <div>
+                  <div class="assessment-name">Math Unit Test — Calculus</div>
+                  <div class="assessment-meta">Unit Test · 40 marks · Feb 5, 2026</div>
+                </div>
+                <span>40 marks</span>
+                <span>Feb 5, 2026</span>
+                <span><span class="badge badge-success">✅ 36/40</span></span>
+                <span><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></span>
+              </div>
+            </div>
+          </details>
 
-                <tr>
-                  <td><strong>Economics Assignment</strong></td>
-                  <td>Economics</td>
-                  <td>Mar 5, 2026</td>
-                  <td>25</td>
-                  <td><span class="badge badge-gray">Due in 9 days</span></td>
-                  <td><a href="student-assessment-details.html" class="btn btn-sm btn-primary">View</a></td>
-                </tr>
+          <!-- Chapter: Ch. 6 – Applications of Derivatives -->
+          <details class="chapter-group" open>
+            <summary class="chapter-header">
+              <span class="chevron"></span>
+              Ch. 6 — Applications of Derivatives
+              <span class="chapter-count">2 assessments</span>
+            </summary>
+            <div class="chapter-body">
+              <!-- Topic label -->
+              <div class="topic-row">Maxima &amp; Minima</div>
+              <div class="assessment-row">
+                <div>
+                  <div class="assessment-name">Math Half-Yearly Exam</div>
+                  <div class="assessment-meta">Exam · 80 marks · Due Feb 26, 2026</div>
+                </div>
+                <span>80 marks</span>
+                <span>Feb 26, 2026</span>
+                <span><span class="badge badge-error">⏰ 2 days left</span></span>
+                <span><a href="student-assessment-details.html" class="btn btn-sm btn-primary">Submit</a></span>
+              </div>
+              <!-- Topic label -->
+              <div class="topic-row">Rate of Change</div>
+              <div class="assessment-row">
+                <div>
+                  <div class="assessment-name">Math Assignment — ROC</div>
+                  <div class="assessment-meta">Assignment · 20 marks · Due Mar 10, 2026</div>
+                </div>
+                <span>20 marks</span>
+                <span>Mar 10, 2026</span>
+                <span><span class="badge badge-gray">12 days left</span></span>
+                <span><a href="student-assessment-details.html" class="btn btn-sm btn-primary">Submit</a></span>
+              </div>
+            </div>
+          </details>
 
-                <!-- Submitted / Under Evaluation -->
-                <tr>
-                  <td><strong>Political Science Exam</strong></td>
-                  <td>Political Science</td>
-                  <td>Feb 20, 2026</td>
-                  <td>60</td>
-                  <td><span class="badge badge-primary">⏳ Under Evaluation</span></td>
-                  <td><a href="student-assessment-details.html" class="btn btn-sm btn-secondary">View</a></td>
-                </tr>
-
-                <tr>
-                  <td><strong>Chemistry Lab Report</strong></td>
-                  <td>Chemistry</td>
-                  <td>Feb 14, 2026</td>
-                  <td>30</td>
-                  <td><span class="badge badge-primary">⏳ Under Evaluation</span></td>
-                  <td><a href="student-assessment-details.html" class="btn btn-sm btn-secondary">View</a></td>
-                </tr>
-
-                <!-- Evaluated / Results out -->
-                <tr>
-                  <td><strong>Math Unit Test — Calculus</strong></td>
-                  <td>Mathematics</td>
-                  <td>Feb 5, 2026</td>
-                  <td>40</td>
-                  <td><span class="badge badge-success">✅ Result: 36/40</span></td>
-                  <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></td>
-                </tr>
-
-                <tr>
-                  <td><strong>English Essay Assignment</strong></td>
-                  <td>English</td>
-                  <td>Jan 28, 2026</td>
-                  <td>20</td>
-                  <td><span class="badge badge-success">✅ Result: 18/20</span></td>
-                  <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></td>
-                </tr>
-
-                <tr>
-                  <td><strong>Physics Unit Test</strong></td>
-                  <td>Physics</td>
-                  <td>Jan 20, 2026</td>
-                  <td>50</td>
-                  <td><span class="badge badge-success">✅ Result: 44/50</span></td>
-                  <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></td>
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
         </div>
-      </div>
+      </details>
+
+      <!-- ── Subject: Physics ── -->
+      <details class="subject-group" open>
+        <summary class="subject-header">
+          <span class="chevron"></span>
+          ⚡ Physics
+          <span class="subject-count">2 assessments</span>
+        </summary>
+        <div class="subject-body">
+
+          <!-- Chapter: Ch. 3 – Motion in a Straight Line -->
+          <details class="chapter-group" open>
+            <summary class="chapter-header">
+              <span class="chevron"></span>
+              Ch. 3 — Motion in a Straight Line
+              <span class="chapter-count">1 assessment</span>
+            </summary>
+            <div class="chapter-body">
+              <div class="topic-row">Kinematics Equations</div>
+              <div class="assessment-row">
+                <div>
+                  <div class="assessment-name">Physics Quiz</div>
+                  <div class="assessment-meta">Quiz · 20 marks · Due Mar 1, 2026</div>
+                </div>
+                <span>20 marks</span>
+                <span>Mar 1, 2026</span>
+                <span><span class="badge badge-warning">⏰ 5 days left</span></span>
+                <span><a href="student-assessment-details.html" class="btn btn-sm btn-primary">Submit</a></span>
+              </div>
+            </div>
+          </details>
+
+          <!-- Chapter: Ch. 7 – Systems of Particles -->
+          <details class="chapter-group" open>
+            <summary class="chapter-header">
+              <span class="chevron"></span>
+              Ch. 7 — Systems of Particles &amp; Rotational Motion
+              <span class="chapter-count">1 assessment</span>
+            </summary>
+            <div class="chapter-body">
+              <div class="topic-row">Moment of Inertia</div>
+              <div class="assessment-row">
+                <div>
+                  <div class="assessment-name">Physics Unit Test</div>
+                  <div class="assessment-meta">Unit Test · 50 marks · Jan 20, 2026</div>
+                </div>
+                <span>50 marks</span>
+                <span>Jan 20, 2026</span>
+                <span><span class="badge badge-success">✅ 44/50</span></span>
+                <span><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></span>
+              </div>
+            </div>
+          </details>
+
+        </div>
+      </details>
+
+      <!-- ── Subject: Chemistry ── -->
+      <details class="subject-group" open>
+        <summary class="subject-header">
+          <span class="chevron"></span>
+          🧪 Chemistry
+          <span class="subject-count">1 assessment</span>
+        </summary>
+        <div class="subject-body">
+
+          <details class="chapter-group" open>
+            <summary class="chapter-header">
+              <span class="chevron"></span>
+              Ch. 2 — Solutions
+              <span class="chapter-count">1 assessment</span>
+            </summary>
+            <div class="chapter-body">
+              <div class="topic-row">Colligative Properties</div>
+              <div class="assessment-row">
+                <div>
+                  <div class="assessment-name">Chemistry Lab Report</div>
+                  <div class="assessment-meta">Assignment · 30 marks · Submitted Feb 14, 2026</div>
+                </div>
+                <span>30 marks</span>
+                <span>Feb 14, 2026</span>
+                <span><span class="badge badge-primary">⏳ Under Evaluation</span></span>
+                <span><a href="student-assessment-details.html" class="btn btn-sm btn-secondary">View</a></span>
+              </div>
+            </div>
+          </details>
+
+        </div>
+      </details>
+
+      <!-- ── Subject: Economics ── -->
+      <details class="subject-group" open>
+        <summary class="subject-header">
+          <span class="chevron"></span>
+          📈 Economics
+          <span class="subject-count">1 assessment</span>
+        </summary>
+        <div class="subject-body">
+
+          <details class="chapter-group" open>
+            <summary class="chapter-header">
+              <span class="chevron"></span>
+              Ch. 2 — Theory of Consumer Behaviour
+              <span class="chapter-count">1 assessment</span>
+            </summary>
+            <div class="chapter-body">
+              <div class="topic-row">Indifference Curves</div>
+              <div class="assessment-row">
+                <div>
+                  <div class="assessment-name">Economics Assignment</div>
+                  <div class="assessment-meta">Assignment · 25 marks · Due Mar 5, 2026</div>
+                </div>
+                <span>25 marks</span>
+                <span>Mar 5, 2026</span>
+                <span><span class="badge badge-gray">9 days left</span></span>
+                <span><a href="student-assessment-details.html" class="btn btn-sm btn-primary">Submit</a></span>
+              </div>
+            </div>
+          </details>
+
+        </div>
+      </details>
+
+      <!-- ── Subject: English ── -->
+      <details class="subject-group" open>
+        <summary class="subject-header">
+          <span class="chevron"></span>
+          📖 English
+          <span class="subject-count">1 assessment</span>
+        </summary>
+        <div class="subject-body">
+
+          <details class="chapter-group" open>
+            <summary class="chapter-header">
+              <span class="chevron"></span>
+              Ch. 4 — Prose
+              <span class="chapter-count">1 assessment</span>
+            </summary>
+            <div class="chapter-body">
+              <div class="topic-row">Analytical Writing</div>
+              <div class="assessment-row">
+                <div>
+                  <div class="assessment-name">English Essay Assignment</div>
+                  <div class="assessment-meta">Assignment · 20 marks · Jan 28, 2026</div>
+                </div>
+                <span>20 marks</span>
+                <span>Jan 28, 2026</span>
+                <span><span class="badge badge-success">✅ 18/20</span></span>
+                <span><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></span>
+              </div>
+            </div>
+          </details>
+
+        </div>
+      </details>
+
+      <!-- ── Subject: Political Science ── -->
+      <details class="subject-group" open>
+        <summary class="subject-header">
+          <span class="chevron"></span>
+          🏛️ Political Science
+          <span class="subject-count">1 assessment</span>
+        </summary>
+        <div class="subject-body">
+
+          <details class="chapter-group" open>
+            <summary class="chapter-header">
+              <span class="chevron"></span>
+              Ch. 3 — Election and Representation
+              <span class="chapter-count">1 assessment</span>
+            </summary>
+            <div class="chapter-body">
+              <div class="topic-row">FPTP vs Proportional Representation</div>
+              <div class="assessment-row">
+                <div>
+                  <div class="assessment-name">Political Science Exam</div>
+                  <div class="assessment-meta">Exam · 60 marks · Submitted Feb 20, 2026</div>
+                </div>
+                <span>60 marks</span>
+                <span>Feb 20, 2026</span>
+                <span><span class="badge badge-primary">⏳ Under Evaluation</span></span>
+                <span><a href="student-assessment-details.html" class="btn btn-sm btn-secondary">View</a></span>
+              </div>
+            </div>
+          </details>
+
+        </div>
+      </details>
 
     </main>
   </div><!-- /.main-wrapper -->

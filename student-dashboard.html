@@ -64,18 +64,19 @@
         <a href="student-outcomes-list.html" class="tab-pill">Outcomes</a>
       </div>
 
-      <!-- ===== CARD: Pending Submissions ===== -->
+      <!-- ===== TABLE 1: Not Yet Submitted ===== -->
       <div class="card mt-16">
         <div class="card-header">
-          <h2 class="card-title">📋 Workspace — Pending Submissions</h2>
+          <h2 class="card-title">📋 Not Yet Submitted</h2>
+          <span class="badge badge-error" style="margin-left: auto;">3 pending</span>
         </div>
-        <div class="card-body">
-          <div class="table-wrapper">
+        <div class="card-body" style="padding: 0;">
+          <div class="table-wrapper" style="margin: 0; border: none;">
             <table class="table">
               <thead>
                 <tr>
                   <th>Assessment</th>
-                  <th>Subject</th>
+                  <th>Subject · Chapter · Topic</th>
                   <th>Due Date</th>
                   <th>Days Left</th>
                   <th>Action</th>
@@ -83,25 +84,25 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>Math Half-Yearly Exam</td>
-                  <td>Mathematics</td>
+                  <td><strong>Math Half-Yearly Exam</strong><br><span class="text-muted" style="font-size: var(--font-size-xs);">Exam · 80 marks</span></td>
+                  <td>Mathematics · Ch. 6 – Applications of Derivatives · Maxima &amp; Minima</td>
                   <td>Feb 26, 2026</td>
                   <td><span class="badge badge-error">2 days</span></td>
-                  <td><a href="student-assessment-details.html" class="btn btn-sm btn-primary">View</a></td>
+                  <td><a href="student-assessment-details.html" class="btn btn-sm btn-primary">Submit</a></td>
                 </tr>
                 <tr>
-                  <td>Physics Quiz</td>
-                  <td>Physics</td>
+                  <td><strong>Physics Quiz</strong><br><span class="text-muted" style="font-size: var(--font-size-xs);">Quiz · 20 marks</span></td>
+                  <td>Physics · Ch. 3 – Motion in a Straight Line · Kinematics Equations</td>
                   <td>Mar 1, 2026</td>
                   <td><span class="badge badge-warning">5 days</span></td>
-                  <td><a href="student-assessment-details.html" class="btn btn-sm btn-primary">View</a></td>
+                  <td><a href="student-assessment-details.html" class="btn btn-sm btn-primary">Submit</a></td>
                 </tr>
                 <tr>
-                  <td>Economics Assignment</td>
-                  <td>Economics</td>
+                  <td><strong>Economics Assignment</strong><br><span class="text-muted" style="font-size: var(--font-size-xs);">Assignment · 25 marks</span></td>
+                  <td>Economics · Ch. 2 – Theory of Consumer Behaviour · Indifference Curves</td>
                   <td>Mar 5, 2026</td>
                   <td><span class="badge badge-gray">9 days</span></td>
-                  <td><a href="student-assessment-details.html" class="btn btn-sm btn-primary">View</a></td>
+                  <td><a href="student-assessment-details.html" class="btn btn-sm btn-primary">Submit</a></td>
                 </tr>
               </tbody>
             </table>
@@ -109,30 +110,43 @@
         </div>
       </div>
 
-      <!-- ===== CARD: Submitted — Waiting for Results ===== -->
+      <!-- ===== TABLE 2: Results Ready — Not Yet Viewed ===== -->
       <div class="card mt-16">
         <div class="card-header">
-          <h2 class="card-title">⏳ Submitted — Waiting for Results</h2>
+          <h2 class="card-title">🎉 Results Ready — Not Yet Viewed</h2>
+          <span class="badge badge-success" style="margin-left: auto;">2 new</span>
         </div>
-        <div class="card-body">
-          <ul class="list-plain list-spaced">
-            <li class="list-item-row">
-              <span>📄 <strong>Political Science Exam</strong></span>
-              <span class="text-muted">Submitted Feb 20</span>
-              <span class="badge badge-primary">⏳ Under Evaluation</span>
-            </li>
-            <li class="list-item-row">
-              <span>📄 <strong>Chemistry Lab Report</strong></span>
-              <span class="text-muted">Submitted Feb 14</span>
-              <span class="badge badge-primary">⏳ Under Evaluation</span>
-            </li>
-          </ul>
+        <div class="card-body" style="padding: 0;">
+          <div class="table-wrapper" style="margin: 0; border: none;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Assessment</th>
+                  <th>Subject · Chapter · Topic</th>
+                  <th>Score</th>
+                  <th>Grade</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Math Unit Test — Calculus</strong><br><span class="text-muted" style="font-size: var(--font-size-xs);">Approved Feb 22</span></td>
+                  <td>Mathematics · Ch. 5 – Continuity &amp; Differentiability · Chain Rule</td>
+                  <td><strong>36 / 40</strong></td>
+                  <td><span class="badge badge-success">A</span></td>
+                  <td><a href="student-result-details.html" class="btn btn-sm btn-primary">View Result</a></td>
+                </tr>
+                <tr>
+                  <td><strong>English Essay Assignment</strong><br><span class="text-muted" style="font-size: var(--font-size-xs);">Approved Feb 18</span></td>
+                  <td>English · Ch. 4 – Prose · Analytical Writing</td>
+                  <td><strong>18 / 20</strong></td>
+                  <td><span class="badge badge-success">A+</span></td>
+                  <td><a href="student-result-details.html" class="btn btn-sm btn-primary">View Result</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-
-      <!-- Alert -->
-      <div class="alert alert-info mt-16">
-        💡 You have 3 pending submissions. Submit before the deadline to receive marks.
       </div>
 
     </main>
