@@ -5,6 +5,119 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Outcomes — Brainzeta Student</title>
   <link rel="stylesheet" href="styles/base.css" />
+  <style>
+
+    /* ================================================================
+       SUBJECT CARDS — default view
+    ================================================================ */
+    .subject-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .subject-card {
+      display: block;
+      padding: 20px 18px;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: #fff;
+      text-decoration: none;
+      color: var(--color-text);
+      cursor: pointer;
+    }
+    .subject-card:hover {
+      border-color: var(--color-primary);
+      background: #f4f8ff;
+    }
+    .subject-card-icon { font-size: 2rem; margin-bottom: 10px; }
+    .subject-card-name { font-size: var(--font-size-base); font-weight: 700; margin-bottom: 4px; }
+    .subject-card-count { font-size: var(--font-size-xs); color: var(--color-text-muted); margin-bottom: 12px; }
+    .subject-card-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    /* ================================================================
+       SUBJECT TABLE VIEW — shown when card is clicked (:target)
+    ================================================================ */
+    .subject-table-section { display: none; }
+    .subject-table-section:target { display: block; }
+    body:has(.subject-table-section:target) .subject-cards-grid  { display: none; }
+    body:has(.subject-table-section:target) .cards-hint          { display: none; }
+    body:has(.subject-table-section:target) .outcomes-alert      { display: none; }
+
+    .subject-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: var(--font-size-sm);
+      color: var(--color-primary);
+      text-decoration: none;
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+    .subject-back:hover { text-decoration: underline; }
+
+    .subject-view-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .subject-view-title { font-size: 1.25rem; font-weight: 700; margin: 0; }
+
+    /* ================================================================
+       OUTCOMES TABLE
+    ================================================================ */
+    .outcomes-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--font-size-sm);
+      border: 1px solid var(--color-border);
+    }
+    .outcomes-table th {
+      padding: 9px 12px;
+      background: #f5f7fa;
+      text-align: left;
+      font-weight: 600;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 2px solid var(--color-border);
+      white-space: nowrap;
+    }
+    .outcomes-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--color-border);
+      vertical-align: middle;
+    }
+    .outcomes-table tbody tr:last-child td { border-bottom: none; }
+    .outcomes-table tbody tr:hover { background: #fafbfc; }
+
+    /* Subject-wide special exam rows */
+    .row-special td { background: #e6eef8; font-weight: 600; color: #1e3a5c; }
+    .row-special:hover td { background: #dde7f5; }
+
+    /* Chapter cell — spans all topic rows via rowspan */
+    .chapter-cell {
+      background: #dce8f5;
+      font-weight: 700;
+      color: #1a3a5c !important;
+      vertical-align: middle;
+      border-right: 2px solid #adc8e8;
+      width: 200px;
+      min-width: 170px;
+    }
+
+    /* Topics with no result yet — muted */
+    .row-no-result td { color: var(--color-text-muted); }
+
+    /* Newly received results — subtle green highlight */
+    .row-new td { background: #f0fdf4; }
+    .row-new:hover td { background: #dcfce7; }
+
+    .topic-name { font-weight: 500; }
+
+  </style>
 </head>
 <body class="layout-shell">
 
@@ -16,7 +129,6 @@
         <li><a href="student-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
         <li><a href="student-assessments-list.html" class="sidebar-nav-item"><span class="nav-icon">📋</span> My Assessments</a></li>
         <li><a href="student-outcomes-list.html" class="sidebar-nav-item active"><span class="nav-icon">🎯</span> My Outcomes</a></li>
-        <!-- <li><a href="student-practice-mode.html" class="sidebar-nav-item"><span class="nav-icon">🧠</span> Practice Mode</a></li> -->
       </ul>
     </nav>
     <div class="sidebar-footer">
@@ -30,12 +142,9 @@
 
     <!-- ===== TOPBAR ===== -->
     <header class="topbar">
-      <div class="topbar-left">
-        <span class="topbar-title">My Outcomes</span>
-      </div>
+      <div class="topbar-left"><span class="topbar-title">My Outcomes</span></div>
       <div class="topbar-right">
         <span class="role-badge badge badge-primary">Student</span>
-        </button>
         <div class="avatar-circle">AK</div>
       </div>
     </header>
@@ -43,18 +152,16 @@
     <!-- ===== PAGE CONTENT ===== -->
     <main class="page-content">
 
-      <!-- Breadcrumb -->
       <nav class="breadcrumb">
-        <span class="breadcrumb-item">Home</span>
+        <a href="student-dashboard.html" class="breadcrumb-item">Home</a>
         <span class="breadcrumb-sep">›</span>
         <span class="breadcrumb-item breadcrumb-current">My Outcomes</span>
       </nav>
 
-      <!-- Page Header -->
       <div class="page-header">
         <div>
           <h1 class="page-title">My Outcomes</h1>
-          <p class="page-subtitle">Your marked assessments and results</p>
+          <p class="page-subtitle">Grade 12-A · ABC School</p>
         </div>
       </div>
 
@@ -64,130 +171,580 @@
         <a href="student-outcomes-list.html" class="tab-pill active">Outcomes</a>
       </div>
 
-      <!-- Alert -->
-      <div class="alert alert-info mt-16">
-        🆕 You have 2 new results! Check below.
+      <!-- New results alert — hidden when inside a subject section -->
+      <div class="alert alert-success mt-16 outcomes-alert">
+        🆕 <strong>2 new results received:</strong>
+        Mathematics — Ch.5 Chain Rule Unit Test (36/40 · Grade A) &nbsp;·&nbsp;
+        English — Analytical Writing Essay (18/20 · Grade A+)
       </div>
 
-      <!-- ===== CARD: New Results ===== -->
-      <div class="card mt-16">
-        <div class="card-header">
-          <h2 class="card-title">🎉 New Results — Recently Received</h2>
-        </div>
-        <div class="card-body">
-          <ul class="list-plain list-spaced">
-            <li class="list-item-row">
-              <span>📊 <strong>Math Half-Yearly Exam</strong></span>
-              <span class="text-muted">Score: 72/80 (90%)</span>
-              <span class="badge badge-success">Grade A</span>
-              <span class="text-muted" style="font-size:13px;">Received: Today</span>
-              <a href="student-result-details.html" class="btn btn-sm btn-primary">View Details</a>
-            </li>
-            <li class="list-item-row">
-              <span>📊 <strong>Physics Quiz</strong></span>
-              <span class="text-muted">Score: 18/20 (90%)</span>
-              <span class="badge badge-success">Grade A</span>
-              <span class="text-muted" style="font-size:13px;">Received: 2 days ago</span>
-              <a href="student-result-details.html" class="btn btn-sm btn-primary">View Details</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <!-- Hint text — hidden when inside a subject section -->
+      <p class="cards-hint text-muted mt-16" style="font-size:var(--font-size-sm);">
+        Select a subject to view your chapter and topic-wise result breakdown.
+      </p>
 
-      <!-- ===== CARD: All Results ===== -->
-      <div class="card mt-16">
-        <div class="card-header">
-          <h2 class="card-title">📊 All Results</h2>
-        </div>
-        <div class="card-body">
+      <!-- ================================================================
+           DEFAULT VIEW — subject cards
+      ================================================================ -->
+      <div class="subject-cards-grid">
 
-          <!-- Filter Bar -->
-          <div class="filter-bar mb-16">
-            <div class="filter-group">
-              <label class="filter-label">Subject</label>
-              <select class="form-select">
-                <option>All</option>
-                <option>Mathematics</option>
-                <option>Physics</option>
-                <option>Chemistry</option>
-                <option>English</option>
-                <option>Political Science</option>
-              </select>
-            </div>
-            <div class="filter-group">
-              <label class="filter-label">Date</label>
-              <select class="form-select">
-                <option>Last 3 Months</option>
-                <option>Last 6 Months</option>
-                <option>This Year</option>
-              </select>
-            </div>
+        <a href="#subject-math" class="subject-card">
+          <div class="subject-card-icon">📐</div>
+          <div class="subject-card-name">Mathematics</div>
+          <div class="subject-card-count">3 results · 13 chapters</div>
+          <div class="subject-card-badges">
+            <span class="badge badge-warning">🆕 1 new</span>
+            <span class="badge badge-success">✅ 3 results</span>
           </div>
+        </a>
 
-          <div class="table-wrapper">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Assessment</th>
-                  <th>Subject</th>
-                  <th>Score</th>
-                  <th>%</th>
-                  <th>Grade</th>
-                  <th>Date</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Math HY Exam</td>
-                  <td>Mathematics</td>
-                  <td>72/80</td>
-                  <td>90%</td>
-                  <td><span class="badge badge-success">A</span></td>
-                  <td>Today</td>
-                  <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View</a></td>
-                </tr>
-                <tr>
-                  <td>Physics Quiz</td>
-                  <td>Physics</td>
-                  <td>18/20</td>
-                  <td>90%</td>
-                  <td><span class="badge badge-success">A</span></td>
-                  <td>2d ago</td>
-                  <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View</a></td>
-                </tr>
-                <tr>
-                  <td>Pol Science Exam</td>
-                  <td>Pol. Science</td>
-                  <td>65/80</td>
-                  <td>81%</td>
-                  <td><span class="badge badge-primary">B+</span></td>
-                  <td>1w ago</td>
-                  <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View</a></td>
-                </tr>
-                <tr>
-                  <td>Chemistry Lab</td>
-                  <td>Chemistry</td>
-                  <td>34/40</td>
-                  <td>85%</td>
-                  <td><span class="badge badge-success">A</span></td>
-                  <td>2w ago</td>
-                  <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View</a></td>
-                </tr>
-                <tr>
-                  <td>English Grammar</td>
-                  <td>English</td>
-                  <td>48/50</td>
-                  <td>96%</td>
-                  <td><span class="badge badge-success">A+</span></td>
-                  <td>3w ago</td>
-                  <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View</a></td>
-                </tr>
-              </tbody>
-            </table>
+        <a href="#subject-physics" class="subject-card">
+          <div class="subject-card-icon">⚡</div>
+          <div class="subject-card-name">Physics</div>
+          <div class="subject-card-count">2 results · 10 chapters</div>
+          <div class="subject-card-badges">
+            <span class="badge badge-success">✅ 2 results</span>
           </div>
+        </a>
+
+        <a href="#subject-chemistry" class="subject-card">
+          <div class="subject-card-icon">🧪</div>
+          <div class="subject-card-name">Chemistry</div>
+          <div class="subject-card-count">1 result · 9 chapters</div>
+          <div class="subject-card-badges">
+            <span class="badge badge-success">✅ 1 result</span>
+          </div>
+        </a>
+
+        <a href="#subject-economics" class="subject-card">
+          <div class="subject-card-icon">📈</div>
+          <div class="subject-card-name">Economics</div>
+          <div class="subject-card-count">0 results · 6 chapters</div>
+          <div class="subject-card-badges">
+            <span class="badge badge-gray">No results yet</span>
+          </div>
+        </a>
+
+        <a href="#subject-english" class="subject-card">
+          <div class="subject-card-icon">📖</div>
+          <div class="subject-card-name">English</div>
+          <div class="subject-card-count">2 results · 7 chapters</div>
+          <div class="subject-card-badges">
+            <span class="badge badge-warning">🆕 1 new</span>
+            <span class="badge badge-success">✅ 2 results</span>
+          </div>
+        </a>
+
+        <a href="#subject-polsci" class="subject-card">
+          <div class="subject-card-icon">🏛️</div>
+          <div class="subject-card-name">Political Science</div>
+          <div class="subject-card-count">1 result · 9 chapters</div>
+          <div class="subject-card-badges">
+            <span class="badge badge-success">✅ 1 result</span>
+          </div>
+        </a>
+
+      </div><!-- end .subject-cards-grid -->
+
+
+      <!-- ================================================================
+           SUBJECT VIEW: MATHEMATICS  (13 chapters)
+      ================================================================ -->
+      <section id="subject-math" class="subject-table-section">
+
+        <a href="student-outcomes-list.html" class="subject-back">← All Subjects</a>
+
+        <div class="subject-view-header">
+          <span style="font-size:1.75rem;">📐</span>
+          <h2 class="subject-view-title">Mathematics</h2>
+          <span class="badge badge-warning" style="margin-left:4px;">🆕 1 new</span>
+          <span class="badge badge-success">✅ 3 results</span>
         </div>
-      </div>
+
+        <div class="filter-bar" style="margin-bottom:14px;">
+          <label class="form-label" style="margin:0; white-space:nowrap; font-size:var(--font-size-sm);">Assessment Type:</label>
+          <select class="form-select" style="width:auto; min-width:160px;">
+            <option selected>All Types</option>
+            <option>Quiz</option>
+            <option>Unit Test</option>
+            <option>Exam</option>
+            <option>Assignment</option>
+          </select>
+        </div>
+
+        <table class="outcomes-table">
+          <thead>
+            <tr>
+              <th>Chapter</th>
+              <th>Topic</th>
+              <th>Type</th>
+              <th>Score</th>
+              <th>Grade</th>
+              <th>Date Received</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- Subject-wide rows -->
+            <tr class="row-special"><td colspan="2">Mixed Questions</td><td>Quiz</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr class="row-special"><td colspan="2">Term 1 Half Yearly Exam</td><td>Exam</td><td>68 / 80</td><td><span class="badge badge-primary">B+</span></td><td>Oct 25, 2025</td><td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></td></tr>
+            <tr class="row-special"><td colspan="2">Annual Exams</td><td>Exam</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.1 — Relations & Functions (4 topics, all no result) -->
+            <tr class="row-no-result"><td rowspan="4" class="chapter-cell">Ch. 1<br>Relations &amp; Functions</td><td class="topic-name">1.1 Types of Relations</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">1.2 Types of Functions</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">1.3 Composition &amp; Inverse Functions</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">1.4 Binary Operations</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.2 — Inverse Trigonometric Functions (3 topics, all no result) -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 2<br>Inverse Trigonometric Functions</td><td class="topic-name">2.1 Basic Concepts &amp; Domains</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">2.2 Properties of Inverse Trig Functions</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">2.3 Graphs &amp; Principal Values</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.3 — Matrices (4 topics, 3.2 has result) -->
+            <tr class="row-no-result"><td rowspan="4" class="chapter-cell">Ch. 3<br>Matrices</td><td class="topic-name">3.1 Matrix Notation &amp; Types</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr><td class="topic-name">3.2 Operations on Matrices</td><td>Unit Test</td><td>22 / 25</td><td><span class="badge badge-success">A</span></td><td>Dec 10, 2025</td><td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></td></tr>
+            <tr class="row-no-result"><td class="topic-name">3.3 Transpose &amp; Symmetric Matrices</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">3.4 Elementary Row Operations</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.4 — Determinants (4 topics, all no result) -->
+            <tr class="row-no-result"><td rowspan="4" class="chapter-cell">Ch. 4<br>Determinants</td><td class="topic-name">4.1 Determinant of a Matrix</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">4.2 Properties of Determinants</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">4.3 Minors, Cofactors &amp; Adjoint</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">4.4 Inverse of a Matrix &amp; Applications</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.5 — Continuity & Differentiability (5 topics, 5.2 NEW result) -->
+            <tr class="row-no-result"><td rowspan="5" class="chapter-cell">Ch. 5<br>Continuity &amp; Differentiability</td><td class="topic-name">5.1 Continuity of Functions</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-new"><td class="topic-name">5.2 Chain Rule <span class="badge badge-warning" style="font-size:10px; margin-left:4px;">🆕 New</span></td><td>Unit Test</td><td>36 / 40</td><td><span class="badge badge-success">A</span></td><td>Feb 22, 2026</td><td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></td></tr>
+            <tr class="row-no-result"><td class="topic-name">5.3 Implicit Differentiation</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">5.4 Higher Order Derivatives</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">5.5 Rolle's &amp; Mean Value Theorem</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.6 — Application of Derivatives (5 topics, all no result — pending submission) -->
+            <tr class="row-no-result"><td rowspan="5" class="chapter-cell">Ch. 6<br>Application of Derivatives</td><td class="topic-name">6.1 Rate of Change of Quantities</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">6.2 Tangents &amp; Normals</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">6.3 Maxima &amp; Minima</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">6.4 Increasing &amp; Decreasing Functions</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">6.5 Approximations</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.7 (4 topics, all no result) -->
+            <tr class="row-no-result"><td rowspan="4" class="chapter-cell">Ch. 7<br>Integrals</td><td class="topic-name">7.1 Integration as Antiderivative</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">7.2 Integration by Substitution &amp; Parts</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">7.3 Integration by Partial Fractions</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">7.4 Definite Integrals &amp; Properties</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.8 (2 topics) -->
+            <tr class="row-no-result"><td rowspan="2" class="chapter-cell">Ch. 8<br>Application of Integrals</td><td class="topic-name">8.1 Area Under Simple Curves</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">8.2 Area Between Two Curves</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.9 (3 topics) -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 9<br>Differential Equations</td><td class="topic-name">9.1 Basic Concepts &amp; Order</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">9.2 General &amp; Particular Solutions</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">9.3 Variable Separable Method</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.10 (3 topics) -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 10<br>Vector Algebra</td><td class="topic-name">10.1 Types of Vectors &amp; Operations</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">10.2 Scalar (Dot) Product</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">10.3 Vector (Cross) Product</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.11 (4 topics) -->
+            <tr class="row-no-result"><td rowspan="4" class="chapter-cell">Ch. 11<br>Three Dimensional Geometry</td><td class="topic-name">11.1 Direction Cosines &amp; Ratios</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">11.2 Equation of a Line in Space</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">11.3 Angle Between Lines &amp; Planes</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">11.4 Equation of a Plane</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.12 (3 topics) -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 12<br>Linear Programming</td><td class="topic-name">12.1 Introduction &amp; Mathematical Formulation</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">12.2 Graphical Method of Solution</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">12.3 Corner Point Method</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.13 (4 topics) -->
+            <tr class="row-no-result"><td rowspan="4" class="chapter-cell">Ch. 13<br>Probability</td><td class="topic-name">13.1 Conditional Probability &amp; Multiplication Theorem</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">13.2 Independent Events &amp; Bayes' Theorem</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">13.3 Random Variables &amp; Probability Distribution</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">13.4 Bernoulli Trials &amp; Binomial Distribution</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+          </tbody>
+        </table>
+      </section>
+
+
+      <!-- ================================================================
+           SUBJECT VIEW: PHYSICS  (10 chapters)
+      ================================================================ -->
+      <section id="subject-physics" class="subject-table-section">
+
+        <a href="student-outcomes-list.html" class="subject-back">← All Subjects</a>
+
+        <div class="subject-view-header">
+          <span style="font-size:1.75rem;">⚡</span>
+          <h2 class="subject-view-title">Physics</h2>
+          <span class="badge badge-success" style="margin-left:4px;">✅ 2 results</span>
+        </div>
+
+        <div class="filter-bar" style="margin-bottom:14px;">
+          <label class="form-label" style="margin:0; white-space:nowrap; font-size:var(--font-size-sm);">Assessment Type:</label>
+          <select class="form-select" style="width:auto; min-width:160px;">
+            <option selected>All Types</option>
+            <option>Quiz</option>
+            <option>Unit Test</option>
+            <option>Exam</option>
+            <option>Assignment</option>
+          </select>
+        </div>
+
+        <table class="outcomes-table">
+          <thead>
+            <tr><th>Chapter</th><th>Topic</th><th>Type</th><th>Score</th><th>Grade</th><th>Date Received</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+
+            <tr class="row-special"><td colspan="2">Mixed Questions</td><td>Quiz</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr class="row-special"><td colspan="2">Half Yearly Exam</td><td>Exam</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr class="row-special"><td colspan="2">Annual Exams</td><td>Exam</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.1 — 1.2 has result -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 1<br>Electric Charges &amp; Fields</td><td class="topic-name">1.1 Electric Charge &amp; Coulomb's Law</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr><td class="topic-name">1.2 Electric Field &amp; Field Lines</td><td>Quiz</td><td>9 / 10</td><td><span class="badge badge-success">A</span></td><td>Dec 18, 2025</td><td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></td></tr>
+            <tr class="row-no-result"><td class="topic-name">1.3 Gauss's Law &amp; Applications</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.2 (3 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 2<br>Electrostatic Potential &amp; Capacitance</td><td class="topic-name">2.1 Electrostatic Potential &amp; Potential Energy</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">2.2 Conductors &amp; Insulators</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">2.3 Capacitors &amp; Capacitance</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.3 (4 topics, no result — pending submission) -->
+            <tr class="row-no-result"><td rowspan="4" class="chapter-cell">Ch. 3<br>Motion in a Straight Line</td><td class="topic-name">3.1 Uniform &amp; Non-Uniform Motion</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">3.2 Kinematics Equations</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">3.3 Relative Velocity</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">3.4 Projectile Motion</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.4 (3 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 4<br>Current Electricity</td><td class="topic-name">4.1 Electric Current &amp; Ohm's Law</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">4.2 Resistance &amp; Resistivity</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">4.3 Kirchhoff's Laws &amp; Circuits</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.5 (3 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 5<br>Moving Charges &amp; Magnetism</td><td class="topic-name">5.1 Magnetic Force on a Current</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">5.2 Biot-Savart Law &amp; Ampere's Law</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">5.3 Moving Coil Galvanometer</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.6 (3 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 6<br>Electromagnetic Induction</td><td class="topic-name">6.1 Magnetic Flux &amp; Faraday's Laws</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">6.2 Lenz's Law &amp; Eddy Currents</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">6.3 Self-Inductance &amp; Mutual Inductance</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.7 — 7.2 has result -->
+            <tr class="row-no-result"><td rowspan="4" class="chapter-cell">Ch. 7<br>Systems of Particles &amp; Rotational Motion</td><td class="topic-name">7.1 Centre of Mass</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr><td class="topic-name">7.2 Moment of Inertia</td><td>Unit Test</td><td>44 / 50</td><td><span class="badge badge-success">A</span></td><td>Jan 20, 2026</td><td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></td></tr>
+            <tr class="row-no-result"><td class="topic-name">7.3 Angular Momentum &amp; Torque</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">7.4 Rolling Motion</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.8 (3 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 8<br>Alternating Current</td><td class="topic-name">8.1 AC Voltage &amp; RMS Values</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">8.2 LCR Series Circuit &amp; Resonance</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">8.3 Power in AC Circuits &amp; Transformers</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.9 (3 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 9<br>Ray Optics &amp; Optical Instruments</td><td class="topic-name">9.1 Reflection &amp; Refraction of Light</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">9.2 Total Internal Reflection &amp; Prism</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">9.3 Lenses, Microscopes &amp; Telescopes</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.10 (2 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="2" class="chapter-cell">Ch. 10<br>Wave Optics</td><td class="topic-name">10.1 Huygens' Principle &amp; Interference</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">10.2 Diffraction &amp; Polarisation</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+          </tbody>
+        </table>
+      </section>
+
+
+      <!-- ================================================================
+           SUBJECT VIEW: CHEMISTRY  (9 chapters)
+      ================================================================ -->
+      <section id="subject-chemistry" class="subject-table-section">
+
+        <a href="student-outcomes-list.html" class="subject-back">← All Subjects</a>
+
+        <div class="subject-view-header">
+          <span style="font-size:1.75rem;">🧪</span>
+          <h2 class="subject-view-title">Chemistry</h2>
+          <span class="badge badge-success" style="margin-left:4px;">✅ 1 result</span>
+        </div>
+
+        <div class="filter-bar" style="margin-bottom:14px;">
+          <label class="form-label" style="margin:0; white-space:nowrap; font-size:var(--font-size-sm);">Assessment Type:</label>
+          <select class="form-select" style="width:auto; min-width:160px;">
+            <option selected>All Types</option>
+            <option>Quiz</option>
+            <option>Unit Test</option>
+            <option>Exam</option>
+            <option>Assignment</option>
+          </select>
+        </div>
+
+        <table class="outcomes-table">
+          <thead>
+            <tr><th>Chapter</th><th>Topic</th><th>Type</th><th>Score</th><th>Grade</th><th>Date Received</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+
+            <tr class="row-special"><td colspan="2">Half Yearly Exam</td><td>Exam</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.1 (3 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 1<br>The Solid State</td><td class="topic-name">1.1 Types of Solids &amp; Crystal Lattices</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">1.2 Unit Cell &amp; Packing Efficiency</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">1.3 Defects in Crystals</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.2 (4 topics, no result — under evaluation) -->
+            <tr class="row-no-result"><td rowspan="4" class="chapter-cell">Ch. 2<br>Solutions</td><td class="topic-name">2.1 Types of Solutions &amp; Concentration</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">2.2 Colligative Properties</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">2.3 Osmosis &amp; Osmotic Pressure</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">2.4 Abnormal Molecular Masses</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.3 (3 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 3<br>Electrochemistry</td><td class="topic-name">3.1 Electrolytic &amp; Galvanic Cells</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">3.2 Nernst Equation &amp; EMF</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">3.3 Corrosion &amp; Batteries</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.4 (3 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 4<br>Chemical Kinetics</td><td class="topic-name">4.1 Rate of Reaction &amp; Factors</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">4.2 Order &amp; Molecularity</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">4.3 Arrhenius Equation &amp; Activation Energy</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.5 (2 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="2" class="chapter-cell">Ch. 5<br>Surface Chemistry</td><td class="topic-name">5.1 Adsorption &amp; Catalysis</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">5.2 Colloids &amp; Emulsions</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.6 (2 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="2" class="chapter-cell">Ch. 6<br>General Principles of Isolation of Elements</td><td class="topic-name">6.1 Occurrence &amp; Concentration of Ores</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">6.2 Extraction &amp; Refining of Metals</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.7 (3 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 7<br>Coordination Compounds</td><td class="topic-name">7.1 Werner's Theory &amp; Terminology</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">7.2 IUPAC Nomenclature</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">7.3 Bonding &amp; Stability of Complexes</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.8 (3 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 8<br>Alcohols, Phenols &amp; Ethers</td><td class="topic-name">8.1 Classification &amp; Nomenclature</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">8.2 Preparation &amp; Properties of Alcohols</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">8.3 Properties of Phenols &amp; Ethers</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.9 — 9.1 has result -->
+            <tr><td rowspan="3" class="chapter-cell">Ch. 9<br>Biomolecules</td><td class="topic-name">9.1 Carbohydrates &amp; Classification</td><td>Quiz</td><td>14 / 15</td><td><span class="badge badge-success">A</span></td><td>Nov 28, 2025</td><td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></td></tr>
+            <tr class="row-no-result"><td class="topic-name">9.2 Proteins &amp; Amino Acids</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">9.3 Nucleic Acids, Vitamins &amp; Hormones</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+          </tbody>
+        </table>
+      </section>
+
+
+      <!-- ================================================================
+           SUBJECT VIEW: ECONOMICS  (6 chapters — no results yet)
+      ================================================================ -->
+      <section id="subject-economics" class="subject-table-section">
+
+        <a href="student-outcomes-list.html" class="subject-back">← All Subjects</a>
+
+        <div class="subject-view-header">
+          <span style="font-size:1.75rem;">📈</span>
+          <h2 class="subject-view-title">Economics</h2>
+          <span class="badge badge-gray" style="margin-left:4px;">No results yet</span>
+        </div>
+
+        <div class="filter-bar" style="margin-bottom:14px;">
+          <label class="form-label" style="margin:0; white-space:nowrap; font-size:var(--font-size-sm);">Assessment Type:</label>
+          <select class="form-select" style="width:auto; min-width:160px;">
+            <option selected>All Types</option>
+            <option>Quiz</option>
+            <option>Unit Test</option>
+            <option>Exam</option>
+            <option>Assignment</option>
+          </select>
+        </div>
+
+        <table class="outcomes-table">
+          <thead>
+            <tr><th>Chapter</th><th>Topic</th><th>Type</th><th>Score</th><th>Grade</th><th>Date Received</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+
+            <tr class="row-special"><td colspan="2">Half Yearly Exam</td><td>Exam</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+
+            <tr class="row-no-result"><td rowspan="2" class="chapter-cell">Ch. 1<br>Introduction to Micro Economics</td><td class="topic-name">1.1 Meaning &amp; Scope of Economics</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">1.2 Central Problems of an Economy</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <tr class="row-no-result"><td rowspan="4" class="chapter-cell">Ch. 2<br>Theory of Consumer Behaviour</td><td class="topic-name">2.1 Budget Constraints &amp; Consumer Equilibrium</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">2.2 Indifference Curves</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">2.3 Demand &amp; Elasticity of Demand</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">2.4 Price Effect &amp; Income Effect</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 3<br>Production &amp; Costs</td><td class="topic-name">3.1 Production Function &amp; Returns to Factor</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">3.2 Cost Concepts &amp; Cost Curves</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">3.3 Revenue Concepts</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 4<br>Theory of the Firm</td><td class="topic-name">4.1 Supply &amp; Law of Supply</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">4.2 Elasticity of Supply</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">4.3 Producer's Equilibrium</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 5<br>Market Forms &amp; Pricing</td><td class="topic-name">5.1 Perfect Competition</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">5.2 Monopoly &amp; Monopolistic Competition</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">5.3 Oligopoly</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 6<br>National Income Accounting</td><td class="topic-name">6.1 Circular Flow of Income</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">6.2 GDP, GNP &amp; NNP</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">6.3 Methods of Measuring National Income</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+          </tbody>
+        </table>
+      </section>
+
+
+      <!-- ================================================================
+           SUBJECT VIEW: ENGLISH  (7 chapters)
+      ================================================================ -->
+      <section id="subject-english" class="subject-table-section">
+
+        <a href="student-outcomes-list.html" class="subject-back">← All Subjects</a>
+
+        <div class="subject-view-header">
+          <span style="font-size:1.75rem;">📖</span>
+          <h2 class="subject-view-title">English</h2>
+          <span class="badge badge-warning" style="margin-left:4px;">🆕 1 new</span>
+          <span class="badge badge-success">✅ 2 results</span>
+        </div>
+
+        <div class="filter-bar" style="margin-bottom:14px;">
+          <label class="form-label" style="margin:0; white-space:nowrap; font-size:var(--font-size-sm);">Assessment Type:</label>
+          <select class="form-select" style="width:auto; min-width:160px;">
+            <option selected>All Types</option>
+            <option>Quiz</option>
+            <option>Unit Test</option>
+            <option>Exam</option>
+            <option>Assignment</option>
+          </select>
+        </div>
+
+        <table class="outcomes-table">
+          <thead>
+            <tr><th>Chapter</th><th>Topic</th><th>Type</th><th>Score</th><th>Grade</th><th>Date Received</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+
+            <tr class="row-special"><td colspan="2">Half Yearly Exam</td><td>Exam</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.1 (2 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="2" class="chapter-cell">Ch. 1<br>Flamingo — The Last Lesson</td><td class="topic-name">1.1 Reading &amp; Comprehension</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">1.2 Character Analysis &amp; Theme</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.2 (2 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="2" class="chapter-cell">Ch. 2<br>Flamingo — Lost Spring</td><td class="topic-name">2.1 Reading &amp; Comprehension</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">2.2 Social Context &amp; Symbolism</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.3 (2 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="2" class="chapter-cell">Ch. 3<br>Flamingo — Deep Water</td><td class="topic-name">3.1 Reading &amp; Comprehension</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">3.2 Overcoming Fear — Theme Discussion</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.4 — 4.2 NEW result -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 4<br>Flamingo — Prose &amp; Analytical Writing</td><td class="topic-name">4.1 Prose Analysis &amp; Literary Devices</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-new"><td class="topic-name">4.2 Analytical Writing <span class="badge badge-warning" style="font-size:10px; margin-left:4px;">🆕 New</span></td><td>Essay</td><td>18 / 20</td><td><span class="badge badge-success">A+</span></td><td>Feb 18, 2026</td><td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></td></tr>
+            <tr class="row-no-result"><td class="topic-name">4.3 Comprehension &amp; Critical Thinking</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.5 (2 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="2" class="chapter-cell">Ch. 5<br>Flamingo — Indigo</td><td class="topic-name">5.1 Reading &amp; Comprehension</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">5.2 Historical Context &amp; Gandhi's Role</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.6 — 6.2 has result -->
+            <tr class="row-no-result"><td rowspan="2" class="chapter-cell">Ch. 6<br>Poetry — My Mother at Sixty-Six</td><td class="topic-name">6.1 Poem Reading &amp; Imagery</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr><td class="topic-name">6.2 Poetic Devices &amp; Theme</td><td>Assignment</td><td>23 / 25</td><td><span class="badge badge-success">A</span></td><td>Jan 10, 2026</td><td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></td></tr>
+
+            <!-- Ch.7 (2 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="2" class="chapter-cell">Ch. 7<br>Vistas — The Tiger King</td><td class="topic-name">7.1 Reading &amp; Comprehension</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">7.2 Satire &amp; Irony — Theme Discussion</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+          </tbody>
+        </table>
+      </section>
+
+
+      <!-- ================================================================
+           SUBJECT VIEW: POLITICAL SCIENCE  (9 chapters)
+      ================================================================ -->
+      <section id="subject-polsci" class="subject-table-section">
+
+        <a href="student-outcomes-list.html" class="subject-back">← All Subjects</a>
+
+        <div class="subject-view-header">
+          <span style="font-size:1.75rem;">🏛️</span>
+          <h2 class="subject-view-title">Political Science</h2>
+          <span class="badge badge-success" style="margin-left:4px;">✅ 1 result</span>
+        </div>
+
+        <div class="filter-bar" style="margin-bottom:14px;">
+          <label class="form-label" style="margin:0; white-space:nowrap; font-size:var(--font-size-sm);">Assessment Type:</label>
+          <select class="form-select" style="width:auto; min-width:160px;">
+            <option selected>All Types</option>
+            <option>Quiz</option>
+            <option>Unit Test</option>
+            <option>Exam</option>
+            <option>Assignment</option>
+          </select>
+        </div>
+
+        <table class="outcomes-table">
+          <thead>
+            <tr><th>Chapter</th><th>Topic</th><th>Type</th><th>Score</th><th>Grade</th><th>Date Received</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+
+            <tr class="row-special"><td colspan="2">Half Yearly Exam</td><td>Exam</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.1 — 1.2 has result -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 1<br>Cold War Era</td><td class="topic-name">1.1 Emergence of Two Power Blocs</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr><td class="topic-name">1.2 Arenas of Cold War</td><td>Quiz</td><td>16 / 20</td><td><span class="badge badge-primary">B+</span></td><td>Nov 20, 2025</td><td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></td></tr>
+            <tr class="row-no-result"><td class="topic-name">1.3 Non-Aligned Movement</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.2 (3 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 2<br>End of Bipolarity</td><td class="topic-name">2.1 Unraveling of Soviet System</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">2.2 End of Cold War &amp; USSR Disintegration</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">2.3 Consequences for Successor States</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.3 (3 topics, no result — under evaluation) -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 3<br>Election &amp; Representation</td><td class="topic-name">3.1 FPTP vs Proportional Representation</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">3.2 Election Commission of India</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">3.3 Reservations &amp; Representation</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.4 (2 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="2" class="chapter-cell">Ch. 4<br>US Hegemony in World Politics</td><td class="topic-name">4.1 Nature of US Dominance</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">4.2 Resistance to US Hegemony</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.5 (2 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="2" class="chapter-cell">Ch. 5<br>Contemporary South Asia</td><td class="topic-name">5.1 Conflicts &amp; Peace in South Asia</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">5.2 India &amp; Its Neighbours</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.6 (2 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="2" class="chapter-cell">Ch. 6<br>International Organisations</td><td class="topic-name">6.1 United Nations &amp; Its Structure</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">6.2 Reform of International Organisations</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.7 (2 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="2" class="chapter-cell">Ch. 7<br>Security in the Contemporary World</td><td class="topic-name">7.1 Traditional &amp; Non-Traditional Security</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">7.2 India's Security Strategy</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.8 (2 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="2" class="chapter-cell">Ch. 8<br>Environment &amp; Natural Resources</td><td class="topic-name">8.1 Global Environmental Concerns</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">8.2 Resource Geopolitics</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+            <!-- Ch.9 (3 topics, no result) -->
+            <tr class="row-no-result"><td rowspan="3" class="chapter-cell">Ch. 9<br>Globalisation</td><td class="topic-name">9.1 What is Globalisation?</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">9.2 India &amp; Globalisation</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+            <tr class="row-no-result"><td class="topic-name">9.3 Resistance to Globalisation</td><td>—</td><td>—</td><td><span class="badge badge-gray">No Result Yet</span></td><td>—</td><td>—</td></tr>
+
+          </tbody>
+        </table>
+      </section>
+
 
     </main>
   </div><!-- /.main-wrapper -->
