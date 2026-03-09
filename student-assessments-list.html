@@ -50,10 +50,10 @@
     .subject-table-section:target { display: block; }
 
     /* When a subject table is open, hide the cards grid and hint text */
-    body:has(.subject-table-section:target) .subject-cards-grid  { display: none; }
-    body:has(.subject-table-section:target) .cards-hint          { display: none; }
+    body:has(.subject-table-section:target) .subject-cards-grid { display: none; }
+    body:has(.subject-table-section:target) .cards-hint         { display: none; }
 
-    /* Back breadcrumb inside subject view */
+    /* Back link inside subject view */
     .subject-back {
       display: inline-flex;
       align-items: center;
@@ -70,7 +70,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     .subject-view-title {
       font-size: 1.25rem;
@@ -86,8 +86,6 @@
       border-collapse: collapse;
       font-size: var(--font-size-sm);
       border: 1px solid var(--color-border);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
     }
     .assessment-table th {
       padding: 9px 12px;
@@ -109,7 +107,7 @@
     .assessment-table tbody tr:last-child td { border-bottom: none; }
     .assessment-table tbody tr:hover { background: #fafbfc; }
 
-    /* Special subject-wide exam rows */
+    /* Subject-wide special exam rows (Half Yearly, Annual, etc.) */
     .row-special td {
       background: #e6eef8;
       font-weight: 600;
@@ -117,21 +115,21 @@
     }
     .row-special:hover td { background: #dde7f5; }
 
-    /* Chapter cell — spans multiple topic rows */
+    /* Chapter cell — left column, always prominent blue */
     .chapter-cell {
       background: #dce8f5;
       font-weight: 700;
-      color: #1a3a5c;
+      color: #1a3a5c !important; /* override .row-unassigned td muted color */
       vertical-align: middle;
       border-right: 2px solid #adc8e8;
-      width: 200px;
-      min-width: 160px;
+      width: 220px;
+      min-width: 180px;
     }
 
-    /* Topic rows with no assessment */
+    /* Unassigned chapter rows — muted text except chapter cell */
     .row-unassigned td { color: var(--color-text-muted); }
+
     .topic-name { font-weight: 500; }
-    .dash { color: #ccc; }
 
   </style>
 </head>
@@ -145,7 +143,6 @@
         <li><a href="student-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
         <li><a href="student-assessments-list.html" class="sidebar-nav-item active"><span class="nav-icon">📋</span> My Assessments</a></li>
         <li><a href="student-outcomes-list.html" class="sidebar-nav-item"><span class="nav-icon">🎯</span> My Outcomes</a></li>
-        <!-- <li><a href="student-practice-mode.html" class="sidebar-nav-item"><span class="nav-icon">🧠</span> Practice Mode</a></li> -->
       </ul>
     </nav>
     <div class="sidebar-footer">
@@ -186,96 +183,78 @@
         </div>
       </div>
 
-      <!-- Status filter — visible in both views -->
-      <div class="filter-bar">
-        <label class="form-label" style="margin:0; white-space:nowrap;">Filter by Status:</label>
-        <select class="form-select">
-          <option selected>All Statuses</option>
-          <option>Pending Submission</option>
-          <option>Under Evaluation</option>
-          <option>Result Available</option>
-        </select>
-      </div>
+      <!-- Hint text — hidden once a subject is open -->
+      <p class="cards-hint text-muted mt-16" style="font-size: var(--font-size-sm);">
+        Select a subject to view its full chapter-wise assessment breakdown.
+      </p>
 
       <!-- ================================================================
            DEFAULT VIEW — subject cards grid
+           (hidden when a subject section is :targeted)
       ================================================================ -->
-
-      <!-- Hint text shown only on cards view -->
-      <p class="cards-hint text-muted mt-16" style="font-size: var(--font-size-sm);">
-        Select a subject to view its chapters and assessments.
-      </p>
-
       <div class="subject-cards-grid">
 
-        <!-- Mathematics -->
         <a href="#subject-math" class="subject-card">
           <div class="subject-card-icon">📐</div>
           <div class="subject-card-name">Mathematics</div>
-          <div class="subject-card-count">4 assessments · 3 chapters</div>
+          <div class="subject-card-count">3 assessments · 13 chapters</div>
           <div class="subject-card-badges">
             <span class="badge badge-error">⏰ 1 urgent</span>
             <span class="badge badge-success">✅ 1 result</span>
           </div>
         </a>
 
-        <!-- Physics -->
         <a href="#subject-physics" class="subject-card">
           <div class="subject-card-icon">⚡</div>
           <div class="subject-card-name">Physics</div>
-          <div class="subject-card-count">2 assessments · 2 chapters</div>
+          <div class="subject-card-count">2 assessments · 10 chapters</div>
           <div class="subject-card-badges">
             <span class="badge badge-warning">⏰ 1 pending</span>
             <span class="badge badge-success">✅ 1 result</span>
           </div>
         </a>
 
-        <!-- Chemistry -->
         <a href="#subject-chemistry" class="subject-card">
           <div class="subject-card-icon">🧪</div>
           <div class="subject-card-name">Chemistry</div>
-          <div class="subject-card-count">1 assessment · 1 chapter</div>
+          <div class="subject-card-count">1 assessment · 9 chapters</div>
           <div class="subject-card-badges">
             <span class="badge badge-primary">⏳ Under Evaluation</span>
           </div>
         </a>
 
-        <!-- Economics -->
         <a href="#subject-economics" class="subject-card">
           <div class="subject-card-icon">📈</div>
           <div class="subject-card-name">Economics</div>
-          <div class="subject-card-count">1 assessment · 1 chapter</div>
+          <div class="subject-card-count">1 assessment · 6 chapters</div>
           <div class="subject-card-badges">
-            <span class="badge badge-gray">Due in 9 days</span>
+            <span class="badge badge-gray">📝 Due in 9 days</span>
           </div>
         </a>
 
-        <!-- English -->
         <a href="#subject-english" class="subject-card">
           <div class="subject-card-icon">📖</div>
           <div class="subject-card-name">English</div>
-          <div class="subject-card-count">1 assessment · 1 chapter</div>
+          <div class="subject-card-count">1 assessment · 7 chapters</div>
           <div class="subject-card-badges">
             <span class="badge badge-success">✅ 1 result</span>
           </div>
         </a>
 
-        <!-- Political Science -->
         <a href="#subject-polsci" class="subject-card">
           <div class="subject-card-icon">🏛️</div>
           <div class="subject-card-name">Political Science</div>
-          <div class="subject-card-count">1 assessment · 1 chapter</div>
+          <div class="subject-card-count">1 assessment · 9 chapters</div>
           <div class="subject-card-badges">
             <span class="badge badge-primary">⏳ Under Evaluation</span>
           </div>
         </a>
 
-      </div>
-      <!-- end .subject-cards-grid -->
+      </div><!-- end .subject-cards-grid -->
 
 
       <!-- ================================================================
-           SUBJECT VIEW: MATHEMATICS
+           SUBJECT VIEW: MATHEMATICS  (13 chapters)
       ================================================================ -->
       <section id="subject-math" class="subject-table-section">
 
@@ -288,11 +267,23 @@
           <span class="badge badge-success">✅ 1 result</span>
         </div>
 
+        <!-- Status filter — only visible inside a subject view -->
+        <div class="filter-bar" style="margin-bottom:14px;">
+          <label class="form-label" style="margin:0; white-space:nowrap; font-size:var(--font-size-sm);">Filter by Status:</label>
+          <select class="form-select" style="width:auto; min-width:160px;">
+            <option selected>All Statuses</option>
+            <option>Pending Submission</option>
+            <option>Under Evaluation</option>
+            <option>Result Available</option>
+            <option>Not Assigned</option>
+          </select>
+        </div>
+
         <table class="assessment-table">
           <thead>
             <tr>
               <th>Chapter</th>
-              <th>Topic</th>
+              <th>Topic / Focus Area</th>
               <th>Type</th>
               <th>Due Date</th>
               <th>Status</th>
@@ -301,118 +292,98 @@
           </thead>
           <tbody>
 
-            <!-- Subject-wide exam rows -->
+            <!-- Subject-wide exams (not chapter-specific) -->
             <tr class="row-special">
               <td colspan="2">Mixed Questions</td>
-              <td>Quiz</td>
-              <td>—</td>
-              <td><span class="badge badge-gray">Not Assigned</span></td>
-              <td><span class="dash">—</span></td>
+              <td>Quiz</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
             <tr class="row-special">
               <td colspan="2">Term Exams</td>
-              <td>Exam</td>
-              <td>—</td>
-              <td><span class="badge badge-gray">Not Assigned</span></td>
-              <td><span class="dash">—</span></td>
+              <td>Exam</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
             <tr class="row-special">
               <td colspan="2">Half Yearly Exam</td>
-              <td>Exam</td>
-              <td>Feb 26, 2026</td>
+              <td>Exam</td><td>Feb 26, 2026</td>
               <td><span class="badge badge-error">⏰ 2 days left</span></td>
               <td><a href="student-assessment-details.html" class="btn btn-sm btn-primary">Submit</a></td>
             </tr>
             <tr class="row-special">
               <td colspan="2">Annual Exams</td>
-              <td>Exam</td>
-              <td>—</td>
-              <td><span class="badge badge-gray">Not Assigned</span></td>
-              <td><span class="dash">—</span></td>
+              <td>Exam</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
 
-            <!-- Ch. 5 — Continuity & Differentiability -->
-            <tr>
-              <td rowspan="5" class="chapter-cell">Ch. 5<br>Continuity &amp; Differentiability</td>
-              <td class="topic-name">5.1 Introduction</td>
-              <td><span class="dash">—</span></td>
-              <td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td>
-              <td><span class="dash">—</span></td>
+            <!-- Chapter rows: one row per chapter -->
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 1<br>Relations &amp; Functions</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 2<br>Inverse Trigonometric Functions</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 3<br>Matrices</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 4<br>Determinants</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
             <tr>
+              <td class="chapter-cell">Ch. 5<br>Continuity &amp; Differentiability</td>
               <td class="topic-name">5.2 Chain Rule</td>
-              <td>Unit Test</td>
-              <td>Feb 5, 2026</td>
+              <td>Unit Test</td><td>Feb 5, 2026</td>
               <td><span class="badge badge-success">✅ 36 / 40</span></td>
               <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></td>
             </tr>
-            <tr class="row-unassigned">
-              <td class="topic-name">5.3 Implicit Differentiation</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td>
-              <td><span class="dash">—</span></td>
-            </tr>
-            <tr class="row-unassigned">
-              <td class="topic-name">5.4 Higher Order Derivatives</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td>
-              <td><span class="dash">—</span></td>
-            </tr>
-            <tr class="row-unassigned">
-              <td class="topic-name">5.5 Rolle's &amp; Mean Value Theorem</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td>
-              <td><span class="dash">—</span></td>
-            </tr>
-
-            <!-- Ch. 6 — Applications of Derivatives -->
             <tr>
-              <td rowspan="4" class="chapter-cell">Ch. 6<br>Applications of Derivatives</td>
-              <td class="topic-name">6.1 Rate of Change</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td>
-              <td><span class="dash">—</span></td>
-            </tr>
-            <tr class="row-unassigned">
-              <td class="topic-name">6.2 Tangents &amp; Normals</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td>
-              <td><span class="dash">—</span></td>
-            </tr>
-            <tr>
+              <td class="chapter-cell">Ch. 6<br>Application of Derivatives</td>
               <td class="topic-name">6.3 Maxima &amp; Minima</td>
-              <td>Assignment</td>
-              <td>Mar 10, 2026</td>
+              <td>Assignment</td><td>Mar 10, 2026</td>
               <td><span class="badge badge-gray">12 days left</span></td>
               <td><a href="student-assessment-details.html" class="btn btn-sm btn-primary">Submit</a></td>
             </tr>
             <tr class="row-unassigned">
-              <td class="topic-name">6.4 Increasing &amp; Decreasing Functions</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td>
-              <td><span class="dash">—</span></td>
-            </tr>
-
-            <!-- Ch. 7 — Integrals -->
-            <tr class="row-unassigned">
-              <td rowspan="3" class="chapter-cell">Ch. 7<br>Integrals</td>
-              <td class="topic-name">7.1 Integration as Antiderivative</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td>
-              <td><span class="dash">—</span></td>
+              <td class="chapter-cell">Ch. 7<br>Integrals</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
             <tr class="row-unassigned">
-              <td class="topic-name">7.2 Integration by Parts</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td>
-              <td><span class="dash">—</span></td>
+              <td class="chapter-cell">Ch. 8<br>Application of Integrals</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
             <tr class="row-unassigned">
-              <td class="topic-name">7.3 Definite Integrals</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td>
-              <td><span class="dash">—</span></td>
+              <td class="chapter-cell">Ch. 9<br>Differential Equations</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 10<br>Vector Algebra</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 11<br>Three Dimensional Geometry</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 12<br>Linear Programming</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 13<br>Probability</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
 
           </tbody>
@@ -421,7 +392,7 @@
 
 
       <!-- ================================================================
-           SUBJECT VIEW: PHYSICS
+           SUBJECT VIEW: PHYSICS  (10 chapters)
       ================================================================ -->
       <section id="subject-physics" class="subject-table-section">
 
@@ -434,63 +405,91 @@
           <span class="badge badge-success">✅ 1 result</span>
         </div>
 
+        <div class="filter-bar" style="margin-bottom:14px;">
+          <label class="form-label" style="margin:0; white-space:nowrap; font-size:var(--font-size-sm);">Filter by Status:</label>
+          <select class="form-select" style="width:auto; min-width:160px;">
+            <option selected>All Statuses</option>
+            <option>Pending Submission</option>
+            <option>Under Evaluation</option>
+            <option>Result Available</option>
+            <option>Not Assigned</option>
+          </select>
+        </div>
+
         <table class="assessment-table">
           <thead>
             <tr>
-              <th>Chapter</th><th>Topic</th><th>Type</th><th>Due Date</th><th>Status</th><th>Action</th>
+              <th>Chapter</th><th>Topic / Focus Area</th><th>Type</th><th>Due Date</th><th>Status</th><th>Action</th>
             </tr>
           </thead>
           <tbody>
 
             <tr class="row-special">
               <td colspan="2">Mixed Questions</td><td>Quiz</td><td>—</td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
             <tr class="row-special">
               <td colspan="2">Half Yearly Exam</td><td>Exam</td><td>—</td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
             <tr class="row-special">
               <td colspan="2">Annual Exams</td><td>Exam</td><td>—</td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
 
-            <!-- Ch. 3 — Motion in a Straight Line -->
             <tr class="row-unassigned">
-              <td rowspan="3" class="chapter-cell">Ch. 3<br>Motion in a Straight Line</td>
-              <td class="topic-name">3.1 Uniform &amp; Non-Uniform Motion</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td class="chapter-cell">Ch. 1<br>Electric Charges &amp; Fields</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 2<br>Electrostatic Potential &amp; Capacitance</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
             <tr>
+              <td class="chapter-cell">Ch. 3<br>Motion in a Straight Line</td>
               <td class="topic-name">3.2 Kinematics Equations</td>
               <td>Quiz</td><td>Mar 1, 2026</td>
               <td><span class="badge badge-warning">⏰ 5 days left</span></td>
               <td><a href="student-assessment-details.html" class="btn btn-sm btn-primary">Submit</a></td>
             </tr>
             <tr class="row-unassigned">
-              <td class="topic-name">3.3 Relative Velocity</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td class="chapter-cell">Ch. 4<br>Current Electricity</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
-
-            <!-- Ch. 7 — Systems of Particles -->
             <tr class="row-unassigned">
-              <td rowspan="3" class="chapter-cell">Ch. 7<br>Systems of Particles &amp; Rotational Motion</td>
-              <td class="topic-name">7.1 Centre of Mass</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td class="chapter-cell">Ch. 5<br>Moving Charges &amp; Magnetism</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 6<br>Electromagnetic Induction</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
             <tr>
+              <td class="chapter-cell">Ch. 7<br>Systems of Particles &amp; Rotational Motion</td>
               <td class="topic-name">7.2 Moment of Inertia</td>
               <td>Unit Test</td><td>Jan 20, 2026</td>
               <td><span class="badge badge-success">✅ 44 / 50</span></td>
               <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></td>
             </tr>
             <tr class="row-unassigned">
-              <td class="topic-name">7.3 Angular Momentum</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td class="chapter-cell">Ch. 8<br>Alternating Current</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 9<br>Ray Optics &amp; Optical Instruments</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 10<br>Wave Optics</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
 
           </tbody>
@@ -499,7 +498,7 @@
 
 
       <!-- ================================================================
-           SUBJECT VIEW: CHEMISTRY
+           SUBJECT VIEW: CHEMISTRY  (9 chapters)
       ================================================================ -->
       <section id="subject-chemistry" class="subject-table-section">
 
@@ -511,36 +510,76 @@
           <span class="badge badge-primary" style="margin-left:4px;">⏳ Under Evaluation</span>
         </div>
 
+        <div class="filter-bar" style="margin-bottom:14px;">
+          <label class="form-label" style="margin:0; white-space:nowrap; font-size:var(--font-size-sm);">Filter by Status:</label>
+          <select class="form-select" style="width:auto; min-width:160px;">
+            <option selected>All Statuses</option>
+            <option>Pending Submission</option>
+            <option>Under Evaluation</option>
+            <option>Result Available</option>
+            <option>Not Assigned</option>
+          </select>
+        </div>
+
         <table class="assessment-table">
           <thead>
             <tr>
-              <th>Chapter</th><th>Topic</th><th>Type</th><th>Due Date</th><th>Status</th><th>Action</th>
+              <th>Chapter</th><th>Topic / Focus Area</th><th>Type</th><th>Due Date</th><th>Status</th><th>Action</th>
             </tr>
           </thead>
           <tbody>
 
             <tr class="row-special">
               <td colspan="2">Half Yearly Exam</td><td>Exam</td><td>—</td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
 
-            <!-- Ch. 2 — Solutions -->
             <tr class="row-unassigned">
-              <td rowspan="3" class="chapter-cell">Ch. 2<br>Solutions</td>
-              <td class="topic-name">2.1 Types of Solutions</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td class="chapter-cell">Ch. 1<br>The Solid State</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
             <tr>
+              <td class="chapter-cell">Ch. 2<br>Solutions</td>
               <td class="topic-name">2.2 Colligative Properties</td>
               <td>Lab Report</td><td>Feb 14, 2026</td>
               <td><span class="badge badge-primary">⏳ Under Evaluation</span></td>
               <td><a href="student-assessment-details.html" class="btn btn-sm btn-secondary">View</a></td>
             </tr>
             <tr class="row-unassigned">
-              <td class="topic-name">2.3 Osmosis &amp; Osmotic Pressure</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td class="chapter-cell">Ch. 3<br>Electrochemistry</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 4<br>Chemical Kinetics</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 5<br>Surface Chemistry</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 6<br>General Principles of Isolation of Elements</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 7<br>Coordination Compounds</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 8<br>Alcohols, Phenols &amp; Ethers</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 9<br>Biomolecules</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
 
           </tbody>
@@ -549,7 +588,7 @@
 
 
       <!-- ================================================================
-           SUBJECT VIEW: ECONOMICS
+           SUBJECT VIEW: ECONOMICS  (6 chapters)
       ================================================================ -->
       <section id="subject-economics" class="subject-table-section">
 
@@ -558,39 +597,64 @@
         <div class="subject-view-header">
           <span style="font-size:1.75rem;">📈</span>
           <h2 class="subject-view-title">Economics</h2>
-          <span class="badge badge-gray" style="margin-left:4px;">Due in 9 days</span>
+          <span class="badge badge-gray" style="margin-left:4px;">📝 Due in 9 days</span>
+        </div>
+
+        <div class="filter-bar" style="margin-bottom:14px;">
+          <label class="form-label" style="margin:0; white-space:nowrap; font-size:var(--font-size-sm);">Filter by Status:</label>
+          <select class="form-select" style="width:auto; min-width:160px;">
+            <option selected>All Statuses</option>
+            <option>Pending Submission</option>
+            <option>Under Evaluation</option>
+            <option>Result Available</option>
+            <option>Not Assigned</option>
+          </select>
         </div>
 
         <table class="assessment-table">
           <thead>
             <tr>
-              <th>Chapter</th><th>Topic</th><th>Type</th><th>Due Date</th><th>Status</th><th>Action</th>
+              <th>Chapter</th><th>Topic / Focus Area</th><th>Type</th><th>Due Date</th><th>Status</th><th>Action</th>
             </tr>
           </thead>
           <tbody>
 
             <tr class="row-special">
               <td colspan="2">Half Yearly Exam</td><td>Exam</td><td>—</td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
 
-            <!-- Ch. 2 — Theory of Consumer Behaviour -->
             <tr class="row-unassigned">
-              <td rowspan="3" class="chapter-cell">Ch. 2<br>Theory of Consumer Behaviour</td>
-              <td class="topic-name">2.1 Budget &amp; Consumer Equilibrium</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td class="chapter-cell">Ch. 1<br>Introduction to Micro Economics</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
             <tr>
+              <td class="chapter-cell">Ch. 2<br>Theory of Consumer Behaviour</td>
               <td class="topic-name">2.2 Indifference Curves</td>
               <td>Assignment</td><td>Mar 5, 2026</td>
               <td><span class="badge badge-gray">9 days left</span></td>
               <td><a href="student-assessment-details.html" class="btn btn-sm btn-primary">Submit</a></td>
             </tr>
             <tr class="row-unassigned">
-              <td class="topic-name">2.3 Demand &amp; Elasticity</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td class="chapter-cell">Ch. 3<br>Production &amp; Costs</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 4<br>Theory of the Firm</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 5<br>Market Forms &amp; Pricing</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 6<br>National Income Accounting</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
 
           </tbody>
@@ -599,7 +663,7 @@
 
 
       <!-- ================================================================
-           SUBJECT VIEW: ENGLISH
+           SUBJECT VIEW: ENGLISH  (7 chapters)
       ================================================================ -->
       <section id="subject-english" class="subject-table-section">
 
@@ -611,36 +675,66 @@
           <span class="badge badge-success" style="margin-left:4px;">✅ 1 result</span>
         </div>
 
+        <div class="filter-bar" style="margin-bottom:14px;">
+          <label class="form-label" style="margin:0; white-space:nowrap; font-size:var(--font-size-sm);">Filter by Status:</label>
+          <select class="form-select" style="width:auto; min-width:160px;">
+            <option selected>All Statuses</option>
+            <option>Pending Submission</option>
+            <option>Under Evaluation</option>
+            <option>Result Available</option>
+            <option>Not Assigned</option>
+          </select>
+        </div>
+
         <table class="assessment-table">
           <thead>
             <tr>
-              <th>Chapter</th><th>Topic</th><th>Type</th><th>Due Date</th><th>Status</th><th>Action</th>
+              <th>Chapter</th><th>Topic / Focus Area</th><th>Type</th><th>Due Date</th><th>Status</th><th>Action</th>
             </tr>
           </thead>
           <tbody>
 
             <tr class="row-special">
               <td colspan="2">Half Yearly Exam</td><td>Exam</td><td>—</td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
 
-            <!-- Ch. 4 — Prose -->
             <tr class="row-unassigned">
-              <td rowspan="3" class="chapter-cell">Ch. 4<br>Prose — Flamingo</td>
-              <td class="topic-name">4.1 The Last Lesson</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td class="chapter-cell">Ch. 1<br>Flamingo — The Last Lesson</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 2<br>Flamingo — Lost Spring</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 3<br>Flamingo — Deep Water</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
             <tr>
+              <td class="chapter-cell">Ch. 4<br>Flamingo — Prose &amp; Analytical Writing</td>
               <td class="topic-name">4.2 Analytical Writing</td>
               <td>Essay</td><td>Jan 28, 2026</td>
               <td><span class="badge badge-success">✅ 18 / 20</span></td>
               <td><a href="student-result-details.html" class="btn btn-sm btn-ghost">View Result</a></td>
             </tr>
             <tr class="row-unassigned">
-              <td class="topic-name">4.3 Lost Spring</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td class="chapter-cell">Ch. 5<br>Flamingo — Indigo</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 6<br>Poetry — My Mother at Sixty-Six</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 7<br>Vistas — The Tiger King</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
 
           </tbody>
@@ -649,7 +743,7 @@
 
 
       <!-- ================================================================
-           SUBJECT VIEW: POLITICAL SCIENCE
+           SUBJECT VIEW: POLITICAL SCIENCE  (9 chapters)
       ================================================================ -->
       <section id="subject-polsci" class="subject-table-section">
 
@@ -661,36 +755,76 @@
           <span class="badge badge-primary" style="margin-left:4px;">⏳ Under Evaluation</span>
         </div>
 
+        <div class="filter-bar" style="margin-bottom:14px;">
+          <label class="form-label" style="margin:0; white-space:nowrap; font-size:var(--font-size-sm);">Filter by Status:</label>
+          <select class="form-select" style="width:auto; min-width:160px;">
+            <option selected>All Statuses</option>
+            <option>Pending Submission</option>
+            <option>Under Evaluation</option>
+            <option>Result Available</option>
+            <option>Not Assigned</option>
+          </select>
+        </div>
+
         <table class="assessment-table">
           <thead>
             <tr>
-              <th>Chapter</th><th>Topic</th><th>Type</th><th>Due Date</th><th>Status</th><th>Action</th>
+              <th>Chapter</th><th>Topic / Focus Area</th><th>Type</th><th>Due Date</th><th>Status</th><th>Action</th>
             </tr>
           </thead>
           <tbody>
 
             <tr class="row-special">
               <td colspan="2">Half Yearly Exam</td><td>Exam</td><td>—</td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
 
-            <!-- Ch. 3 — Election and Representation -->
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 1<br>Cold War Era</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 2<br>End of Bipolarity</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
             <tr>
-              <td rowspan="3" class="chapter-cell">Ch. 3<br>Election &amp; Representation</td>
+              <td class="chapter-cell">Ch. 3<br>Election &amp; Representation</td>
               <td class="topic-name">3.1 FPTP vs Proportional Representation</td>
               <td>Exam</td><td>Feb 20, 2026</td>
               <td><span class="badge badge-primary">⏳ Under Evaluation</span></td>
               <td><a href="student-assessment-details.html" class="btn btn-sm btn-secondary">View</a></td>
             </tr>
             <tr class="row-unassigned">
-              <td class="topic-name">3.2 Election Commission of India</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td class="chapter-cell">Ch. 4<br>US Hegemony in World Politics</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
             <tr class="row-unassigned">
-              <td class="topic-name">3.3 Reservations &amp; Representation</td>
-              <td><span class="dash">—</span></td><td><span class="dash">—</span></td>
-              <td><span class="badge badge-gray">Not Assigned</span></td><td><span class="dash">—</span></td>
+              <td class="chapter-cell">Ch. 5<br>Contemporary South Asia</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 6<br>International Organisations</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 7<br>Security in the Contemporary World</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 8<br>Environment &amp; Natural Resources</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
+            </tr>
+            <tr class="row-unassigned">
+              <td class="chapter-cell">Ch. 9<br>Globalisation</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td><span class="badge badge-gray">Not Assigned</span></td><td>—</td>
             </tr>
 
           </tbody>
