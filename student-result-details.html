@@ -5,8 +5,92 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Result Details — Brainzeta Student</title>
   <link rel="stylesheet" href="styles/base.css" />
+  <style>
+
+    /* ================================================================
+       QUESTION PANEL — full-width collapsible strip above answer cols
+    ================================================================ */
+    .question-panel {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    /* Summary / clickable header */
+    .question-panel > summary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 16px;
+      background: var(--color-bg-subtle);
+      border-bottom: 1px solid var(--color-border);
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+    .question-panel > summary::-webkit-details-marker { display: none; }
+    .question-panel > summary:hover { background: #eef0f3; }
+
+    /* Chevron rotates on open */
+    .qp-chevron {
+      font-style: normal;
+      font-size: 0.7rem;
+      color: var(--color-text-muted);
+      width: 14px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    details.question-panel[open] > summary .qp-chevron::before { content: '▾'; }
+    details.question-panel:not([open]) > summary .qp-chevron::before { content: '▸'; }
+
+    /* Meta hint on the right */
+    .qp-meta {
+      margin-left: auto;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      font-weight: 400;
+    }
+
+    /* Pages inside the panel shown as a horizontal scrollable strip */
+    .question-panel-body {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+      padding: 16px;
+      overflow-x: auto;
+      background: #fff;
+      align-items: flex-start;
+    }
+
+    /* Each page thumbnail inside the question panel */
+    .qp-page {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      width: 160px;
+    }
+    .qp-page-label {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      text-align: center;
+    }
+    .qp-page-img {
+      width: 160px;
+      height: 220px;
+      object-fit: cover;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-bg-muted);
+    }
+
+  </style>
 </head>
-<body class="app-layout">
+<body class="layout-shell">
 
   <!-- ===== SIDEBAR ===== -->
   <aside class="sidebar">
@@ -33,98 +117,105 @@
         <span class="topbar-title">Result Details</span>
       </div>
       <div class="topbar-right">
-        <span class="badge badge-role">Student</span>
-        <span class="avatar avatar-sm">AK</span>
+        <span class="role-badge badge badge-primary">Student</span>
+        <div class="avatar-circle">AK</div>
       </div>
     </header>
 
-    <!-- ===== PAGE BODY ===== -->
-    <main class="page-body page-body-flush">
+    <!-- ===== PAGE CONTENT ===== -->
+    <main class="page-content">
 
       <!-- Breadcrumb -->
-      <nav class="breadcrumb breadcrumb-pad">
-        <span class="breadcrumb-item">Home</span>
+      <nav class="breadcrumb">
+        <a href="student-dashboard.html" class="breadcrumb-item">Home</a>
         <span class="breadcrumb-sep">›</span>
-        <span class="breadcrumb-item"><a href="student-outcomes-list.html">My Outcomes</a></span>
+        <a href="student-outcomes-list.html" class="breadcrumb-item">My Outcomes</a>
         <span class="breadcrumb-sep">›</span>
         <span class="breadcrumb-item breadcrumb-current">Math Half-Yearly Exam</span>
       </nav>
 
       <!-- Page Header + Score Summary -->
-      <div class="page-header breadcrumb-pad">
+      <div class="page-header">
         <div>
           <h1 class="page-title">Math Half-Yearly Exam — Result</h1>
           <p class="page-subtitle">Mathematics · Section 12-A · Approved by Mr. Ramesh Sharma on Feb 24, 2026</p>
         </div>
-        <!-- Score chips -->
-        <div class="d-flex align-center gap-12">
-          <span style="font-size:28px; font-weight:800; color:#1a237e;">72 <span style="font-size:16px; font-weight:400; color:#777;">/ 80</span></span>
+        <div class="d-flex gap-12" style="align-items:center;">
+          <span style="font-size:26px; font-weight:800; color:#1a237e;">72 <span style="font-size:15px; font-weight:400; color:#777;">/ 80</span></span>
           <span class="badge badge-success" style="font-size:13px; padding:5px 14px;">Grade A</span>
           <span class="badge badge-primary" style="font-size:13px; padding:5px 14px;">90%</span>
           <button class="btn btn-sm btn-secondary">⬇ Download PDF</button>
         </div>
       </div>
 
-      <!-- ============================================================
-           3-COLUMN REVIEW LAYOUT
-      ============================================================ -->
-      <div class="review-layout">
+      <!-- ================================================================
+           QUESTION PAPER — full width, collapsed by default
+      ================================================================ -->
+      <details class="question-panel">
+        <summary>
+          <span class="qp-chevron"></span>
+          📋 Question Paper
+          <span class="qp-meta">4 pages · click to expand</span>
+        </summary>
+        <div class="question-panel-body">
 
-        <!-- ── Column 1: Question Paper ── -->
-        <div class="review-col">
-          <div class="review-col-header">
-            📋 Question Paper
+          <div class="qp-page">
+            <div class="qp-page-label">Page 1 of 4</div>
+            <img src="https://placehold.co/160x220/f5f5f5/999?text=Page+1" alt="Question paper page 1" class="qp-page-img" />
           </div>
-          <div class="review-col-body">
-            <div class="answer-page">
-              <div class="answer-page-label">Page 1 of 4</div>
-              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+1" alt="Question paper page 1" class="answer-page-img" />
-            </div>
-            <div class="answer-page">
-              <div class="answer-page-label">Page 2 of 4</div>
-              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+2" alt="Question paper page 2" class="answer-page-img" />
-            </div>
-            <div class="answer-page">
-              <div class="answer-page-label">Page 3 of 4</div>
-              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+3" alt="Question paper page 3" class="answer-page-img" />
-            </div>
-            <button class="btn btn-ghost btn-block mt-8">Show More Pages</button>
+          <div class="qp-page">
+            <div class="qp-page-label">Page 2 of 4</div>
+            <img src="https://placehold.co/160x220/f5f5f5/999?text=Page+2" alt="Question paper page 2" class="qp-page-img" />
           </div>
+          <div class="qp-page">
+            <div class="qp-page-label">Page 3 of 4</div>
+            <img src="https://placehold.co/160x220/f5f5f5/999?text=Page+3" alt="Question paper page 3" class="qp-page-img" />
+          </div>
+          <div class="qp-page">
+            <div class="qp-page-label">Page 4 of 4</div>
+            <img src="https://placehold.co/160x220/f5f5f5/999?text=Page+4" alt="Question paper page 4" class="qp-page-img" />
+          </div>
+
         </div>
+      </details>
 
-        <!-- ── Column 2: Answer Sheet ── -->
+      <!-- ================================================================
+           2-COLUMN: Answer Sheet  |  Scores & Feedback
+      ================================================================ -->
+      <div class="grid-2">
+
+        <!-- ── Column 1: Answer Sheet ── -->
         <div class="review-col">
-          <div class="review-col-header">
-            📄 Your Answer Sheet
-          </div>
+          <div class="review-col-header">📄 Your Answer Sheet</div>
           <div class="review-col-body">
+
             <div class="answer-page">
               <div class="answer-page-label">Page 1 of 5</div>
-              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+1" alt="Answer sheet page 1" class="answer-page-img" />
+              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+1" alt="Answer sheet page 1" style="width:100%; border-radius:4px;" />
             </div>
             <div class="answer-page">
               <div class="answer-page-label">Page 2 of 5</div>
-              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+2" alt="Answer sheet page 2" class="answer-page-img" />
+              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+2" alt="Answer sheet page 2" style="width:100%; border-radius:4px;" />
             </div>
             <div class="answer-page">
               <div class="answer-page-label">Page 3 of 5</div>
-              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+3" alt="Answer sheet page 3" class="answer-page-img" />
+              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+3" alt="Answer sheet page 3" style="width:100%; border-radius:4px;" />
             </div>
             <button class="btn btn-ghost btn-block mt-8">Show More Pages</button>
+
           </div>
         </div>
 
-        <!-- ── Column 3: Scores & Feedback ── -->
+        <!-- ── Column 2: Scores & Feedback ── -->
         <div class="review-col">
-          <div class="review-col-header">
-            🏆 Scores &amp; Feedback
-          </div>
+          <div class="review-col-header">🏆 Scores &amp; Feedback</div>
           <div class="review-col-body">
 
             <!-- Score Display -->
-            <div class="score-display-block">
-              <span class="score-main">72</span><span class="score-denom text-muted"> / 80</span>
-              <div class="score-sub text-muted">Approved by Mr. Ramesh Sharma</div>
+            <div class="score-display" style="text-align:center; padding:12px 0 16px;">
+              <span style="font-size:2rem; font-weight:800; color:#1a237e;">72</span>
+              <span class="text-muted" style="font-size:1rem;"> / 80</span>
+              <div class="text-muted" style="font-size:var(--font-size-xs); margin-top:4px;">Approved by Mr. Ramesh Sharma</div>
             </div>
 
             <hr class="divider" />
@@ -198,7 +289,7 @@
           </div>
         </div>
 
-      </div><!-- /review-layout -->
+      </div><!-- /grid-2 -->
 
     </main>
   </div><!-- /.main-wrapper -->
