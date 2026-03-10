@@ -5,6 +5,202 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Dashboard — Brainzeta Teacher</title>
   <link rel="stylesheet" href="styles/base.css" />
+  <style>
+    /* ================================================================
+       WORKFLOW ACTION CARDS — the four primary teacher workflows
+    ================================================================ */
+
+    .section-label {
+      font-size: var(--font-size-sm);
+      font-weight: 700;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin: 28px 0 14px;
+    }
+
+    /* 2×2 grid of workflow cards */
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .workflow-card {
+      display: flex;
+      flex-direction: column;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      background: #fff;
+      overflow: hidden;
+      transition: box-shadow 0.15s;
+    }
+    .workflow-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.09);
+    }
+
+    /* Coloured top accent strip */
+    .workflow-card-accent {
+      height: 4px;
+      width: 100%;
+    }
+    .wf-blue   .workflow-card-accent { background: #3b82f6; }
+    .wf-violet .workflow-card-accent { background: #8b5cf6; }
+    .wf-teal   .workflow-card-accent { background: #0d9488; }
+    .wf-orange .workflow-card-accent { background: #f59e0b; }
+
+    .workflow-card-inner {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 20px 22px 18px;
+    }
+
+    /* Top row: icon + title + badge */
+    .workflow-card-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+    .workflow-card-icon {
+      font-size: 2rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .workflow-card-title-group {
+      flex: 1;
+    }
+    .workflow-card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin: 0 0 3px;
+    }
+    .workflow-card-desc {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+      line-height: 1.45;
+      margin: 0;
+    }
+    .workflow-status-badge {
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .wsb-blue   { background: #eff6ff; color: #1d4ed8; }
+    .wsb-violet { background: #f5f3ff; color: #6d28d9; }
+    .wsb-teal   { background: #f0fdfa; color: #0f766e; }
+    .wsb-orange { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+
+    /* Divider */
+    .workflow-card-divider {
+      height: 1px;
+      background: var(--color-border);
+      margin: 12px 0;
+    }
+
+    /* Small item list inside the card */
+    .workflow-item-list {
+      list-style: none;
+      margin: 0 0 16px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .workflow-item-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: var(--font-size-sm);
+      color: var(--color-text);
+      gap: 8px;
+    }
+    .workflow-item-list li .item-name {
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .workflow-item-list li .item-meta {
+      color: var(--color-text-muted);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+    .workflow-item-list .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-right: 2px;
+    }
+    .dot-orange { background: #f59e0b; }
+    .dot-red    { background: #ef4444; }
+    .dot-green  { background: #10b981; }
+    .dot-blue   { background: #3b82f6; }
+    .dot-gray   { background: #9ca3af; }
+
+    .workflow-empty-state {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+
+    /* Card footer CTA */
+    .workflow-card-footer {
+      margin-top: auto;
+    }
+    .workflow-card-footer .btn {
+      width: 100%;
+      justify-content: center;
+    }
+    .wf-blue   .btn-wf { background: #3b82f6; color: #fff; }
+    .wf-blue   .btn-wf:hover { background: #2563eb; }
+    .wf-violet .btn-wf { background: #8b5cf6; color: #fff; }
+    .wf-violet .btn-wf:hover { background: #7c3aed; }
+    .wf-teal   .btn-wf { background: #0d9488; color: #fff; }
+    .wf-teal   .btn-wf:hover { background: #0f766e; }
+    .wf-orange .btn-wf { background: #f59e0b; color: #fff; }
+    .wf-orange .btn-wf:hover { background: #d97706; }
+
+    /* ================================================================
+       BOTTOM ROW — recent activity (condensed)
+    ================================================================ */
+    .bottom-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    /* Upcoming assessment mini-table */
+    .mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--font-size-sm);
+    }
+    .mini-table th {
+      text-align: left;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0 8px 8px;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .mini-table td {
+      padding: 9px 8px;
+      border-bottom: 1px solid var(--color-bg-subtle);
+      vertical-align: middle;
+    }
+    .mini-table tr:last-child td { border-bottom: none; }
+  </style>
 </head>
 <body class="app-layout">
 
@@ -60,7 +256,7 @@
       <div class="page-header">
         <div>
           <h1 class="page-title">Welcome back, Mr. Sharma!</h1>
-          <p class="page-subtitle">Mathematics — Grade 11 &amp; 12</p>
+          <p class="page-subtitle">Mathematics &amp; Physics — Grade 11 &amp; 12</p>
         </div>
       </div>
 
@@ -71,108 +267,276 @@
           <div class="stat-value">12</div>
           <div class="stat-label">My Assessments</div>
         </div>
+        <div class="stat-card stat-card-purple">
+          <div class="stat-icon">🗂️</div>
+          <div class="stat-value">5</div>
+          <div class="stat-label">Need Rubric</div>
+        </div>
         <div class="stat-card stat-card-green">
           <div class="stat-icon">📤</div>
-          <div class="stat-value">145</div>
-          <div class="stat-label">Total Submissions</div>
+          <div class="stat-value">4</div>
+          <div class="stat-label">Ready to Assign</div>
         </div>
         <div class="stat-card stat-card-orange">
           <div class="stat-icon">⏳</div>
           <div class="stat-value">8</div>
           <div class="stat-label">Pending Approvals</div>
         </div>
-        <div class="stat-card stat-card-purple">
-          <div class="stat-icon">👨‍🎓</div>
-          <div class="stat-value">156</div>
-          <div class="stat-label">My Students</div>
-        </div>
       </div>
 
-      <!-- ── Pending Approvals Card ── -->
-      <div class="card pending-card mt-24">
-        <div class="card-header">
-          <h2 class="pending-card-title">⚠ Pending Approvals (8)</h2>
-        </div>
-        <div class="card-body">
-          <ul class="list-plain list-spaced">
-            <li class="d-flex justify-between align-center">
-              <span>Math HY Exam — 12-A: <strong>5 submissions waiting</strong></span>
-              <a href="teacher-pending-approvals.html" class="btn btn-sm btn-primary">Review Now</a>
-            </li>
-            <li class="d-flex justify-between align-center">
-              <span>Physics Quiz — 11-B: <strong>3 submissions waiting</strong></span>
-              <a href="teacher-pending-approvals.html" class="btn btn-sm btn-primary">Review Now</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <!-- ── Workflow Cards ── -->
+      <p class="section-label">What do you want to do today?</p>
 
-      <!-- ── Upcoming Assessments ── -->
-      <div class="card mt-24">
-        <div class="card-header">
-          <h2 class="card-title">Upcoming Assessments</h2>
-        </div>
-        <div class="card-body">
-          <ul class="list-plain list-spaced">
-            <li class="d-flex justify-between align-center">
-              <span>📋 <strong>Political Science HY Exam</strong> &nbsp;|&nbsp; Sections 12-A, 12-B &nbsp;|&nbsp; Due: Feb 26, 2026</span>
-              <span class="badge badge-warning">2 days</span>
-            </li>
-            <li class="d-flex justify-between align-center">
-              <span>📋 <strong>Economics Assignment</strong> &nbsp;|&nbsp; Section 12-C &nbsp;|&nbsp; Due: Mar 1, 2026</span>
-              <span class="badge badge-gray">5 days</span>
-            </li>
-            <li class="d-flex justify-between align-center">
-              <span>📋 <strong>Physics Lab Report</strong> &nbsp;|&nbsp; Section 11-B &nbsp;|&nbsp; Due: Mar 5, 2026</span>
-              <span class="badge badge-gray">9 days</span>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <div class="workflow-grid">
 
-      <!-- ── Recent Submissions ── -->
-      <div class="card mt-24">
-        <div class="card-header">
-          <h2 class="card-title">Recent Submissions</h2>
-        </div>
-        <div class="card-body">
-          <ul class="activity-feed list-plain">
-            <li class="activity-item">
-              <span class="activity-dot"></span>
-              <span class="activity-text"><strong>Amit Kumar</strong> submitted Math HY Exam — 12-A</span>
-              <span class="activity-time text-muted">2h ago</span>
-            </li>
-            <li class="activity-item">
-              <span class="activity-dot"></span>
-              <span class="activity-text"><strong>Priya Sharma</strong> submitted Physics Quiz — 11-B</span>
-              <span class="activity-time text-muted">3h ago</span>
-            </li>
-            <li class="activity-item">
-              <span class="activity-dot"></span>
-              <span class="activity-text"><strong>Raj Malhotra</strong> submitted Math HY Exam — 12-A</span>
-              <span class="activity-time text-muted">4h ago</span>
-            </li>
-            <li class="activity-item">
-              <span class="activity-dot"></span>
-              <span class="activity-text"><strong>Sara Joshi</strong> submitted Physics Quiz — 11-B</span>
-              <span class="activity-time text-muted">5h ago</span>
-            </li>
-          </ul>
-        </div>
-      </div>
+        <!-- ─── Card 1: Create Assessment ─── -->
+        <div class="workflow-card wf-blue">
+          <div class="workflow-card-accent"></div>
+          <div class="workflow-card-inner">
+            <div class="workflow-card-head">
+              <div class="workflow-card-icon">✏️</div>
+              <div class="workflow-card-title-group">
+                <h2 class="workflow-card-title">Create Assessment</h2>
+                <p class="workflow-card-desc">
+                  Pick a grade &amp; subject, select chapters, name it, and either
+                  upload your own paper or let AI draft it for you to edit.
+                </p>
+              </div>
+            </div>
 
-      <!-- ── Quick Actions ── -->
-      <div class="card mt-24">
-        <div class="card-header">
-          <h2 class="card-title">Quick Actions</h2>
-        </div>
-        <div class="card-body">
-          <div class="d-flex gap-12">
-            <a href="teacher-create-assessment-step1.html" class="btn btn-primary">+ Create Assessment</a>
-            <a href="teacher-submission-tracker.html" class="btn btn-secondary">View All Submissions</a>
+            <div class="workflow-card-divider"></div>
+
+            <!-- How it works steps -->
+            <ul class="workflow-item-list">
+              <li>
+                <span class="dot dot-blue"></span>
+                <span class="item-name">Select grade &amp; subject</span>
+                <span class="item-meta">Step 1</span>
+              </li>
+              <li>
+                <span class="dot dot-blue"></span>
+                <span class="item-name">Choose chapters &amp; assessment type</span>
+                <span class="item-meta">Step 2</span>
+              </li>
+              <li>
+                <span class="dot dot-blue"></span>
+                <span class="item-name">Upload your paper  —or—  AI generate &amp; edit</span>
+                <span class="item-meta">Step 3</span>
+              </li>
+            </ul>
+
+            <div class="workflow-card-footer">
+              <a href="teacher-create-assessment-step1.html" class="btn btn-wf">+ Create New Assessment</a>
+            </div>
           </div>
         </div>
-      </div>
+
+        <!-- ─── Card 2: Upload Marking Matrix ─── -->
+        <div class="workflow-card wf-violet">
+          <div class="workflow-card-accent"></div>
+          <div class="workflow-card-inner">
+            <div class="workflow-card-head">
+              <div class="workflow-card-icon">🗂️</div>
+              <div class="workflow-card-title-group">
+                <h2 class="workflow-card-title">Upload Marking Matrix</h2>
+                <p class="workflow-card-desc">
+                  Attach a rubric to assessments that don't have one yet.
+                  AI can generate a draft rubric, or you can upload your own.
+                </p>
+              </div>
+              <span class="workflow-status-badge wsb-violet">5 need rubric</span>
+            </div>
+
+            <div class="workflow-card-divider"></div>
+
+            <!-- Assessments without rubric -->
+            <ul class="workflow-item-list">
+              <li>
+                <span class="dot dot-orange"></span>
+                <span class="item-name">Math Ch.6 Quiz — Grade 12</span>
+                <span class="item-meta">No rubric</span>
+              </li>
+              <li>
+                <span class="dot dot-orange"></span>
+                <span class="item-name">Physics Lab Report — Grade 11</span>
+                <span class="item-meta">No rubric</span>
+              </li>
+              <li>
+                <span class="dot dot-orange"></span>
+                <span class="item-name">Math Unit Test Ch.7 — Grade 11</span>
+                <span class="item-meta">No rubric</span>
+              </li>
+              <li>
+                <span class="dot dot-gray"></span>
+                <span class="item-name">+ 2 more assessments</span>
+                <span class="item-meta"></span>
+              </li>
+            </ul>
+
+            <div class="workflow-card-footer">
+              <a href="teacher-assessments-list.html" class="btn btn-wf">Attach Rubric</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── Card 3: Assign Assessments ─── -->
+        <div class="workflow-card wf-teal">
+          <div class="workflow-card-accent"></div>
+          <div class="workflow-card-inner">
+            <div class="workflow-card-head">
+              <div class="workflow-card-icon">📤</div>
+              <div class="workflow-card-title-group">
+                <h2 class="workflow-card-title">Assign Assessments</h2>
+                <p class="workflow-card-desc">
+                  Rubric-ready assessments can be assigned to one or more
+                  sections of your mapped grades. Set a due date per section.
+                </p>
+              </div>
+              <span class="workflow-status-badge wsb-teal">4 ready</span>
+            </div>
+
+            <div class="workflow-card-divider"></div>
+
+            <!-- Ready-to-assign assessments -->
+            <ul class="workflow-item-list">
+              <li>
+                <span class="dot dot-green"></span>
+                <span class="item-name">Math HY Exam — Grade 12</span>
+                <span class="item-meta">Rubric ✓</span>
+              </li>
+              <li>
+                <span class="dot dot-green"></span>
+                <span class="item-name">Physics Ch.4 Quiz — Grade 11</span>
+                <span class="item-meta">Rubric ✓</span>
+              </li>
+              <li>
+                <span class="dot dot-green"></span>
+                <span class="item-name">Math Ch.5 Unit Test — Grade 11</span>
+                <span class="item-meta">Rubric ✓</span>
+              </li>
+              <li>
+                <span class="dot dot-gray"></span>
+                <span class="item-name">+ 1 more assessment</span>
+                <span class="item-meta"></span>
+              </li>
+            </ul>
+
+            <div class="workflow-card-footer">
+              <a href="teacher-assignment-page.html" class="btn btn-wf">Assign to Sections</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── Card 4: Pending Approval ─── -->
+        <div class="workflow-card wf-orange">
+          <div class="workflow-card-accent"></div>
+          <div class="workflow-card-inner">
+            <div class="workflow-card-head">
+              <div class="workflow-card-icon">✅</div>
+              <div class="workflow-card-title-group">
+                <h2 class="workflow-card-title">Pending Approvals</h2>
+                <p class="workflow-card-desc">
+                  AI has graded these submissions. Review one-by-one and add
+                  feedback, or bulk-approve sections where grades look good.
+                </p>
+              </div>
+              <span class="workflow-status-badge wsb-orange">8 waiting</span>
+            </div>
+
+            <div class="workflow-card-divider"></div>
+
+            <!-- Batches waiting -->
+            <ul class="workflow-item-list">
+              <li>
+                <span class="dot dot-red"></span>
+                <span class="item-name">Math HY Exam — 12-A</span>
+                <span class="item-meta">5 submissions</span>
+              </li>
+              <li>
+                <span class="dot dot-orange"></span>
+                <span class="item-name">Physics Quiz — 11-B</span>
+                <span class="item-meta">3 submissions</span>
+              </li>
+            </ul>
+
+            <div class="workflow-card-footer">
+              <a href="teacher-pending-approvals.html" class="btn btn-wf">Review &amp; Approve</a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /workflow-grid -->
+
+      <!-- ── Bottom Row: Upcoming + Recent Activity ── -->
+      <div class="bottom-row">
+
+        <!-- Upcoming Assessments -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Upcoming Due Dates</h2>
+          </div>
+          <div class="card-body" style="padding-top: 8px;">
+            <table class="mini-table">
+              <thead>
+                <tr>
+                  <th>Assessment</th>
+                  <th>Sections</th>
+                  <th>Due</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Math HY Exam</strong></td>
+                  <td>12-A, 12-B</td>
+                  <td><span class="badge badge-warning">Feb 26</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Economics Assignment</strong></td>
+                  <td>12-C</td>
+                  <td><span class="badge badge-gray">Mar 1</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Physics Lab Report</strong></td>
+                  <td>11-B</td>
+                  <td><span class="badge badge-gray">Mar 5</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Recent Submissions Activity Feed -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Recent Submissions</h2>
+          </div>
+          <div class="card-body">
+            <ul class="activity-feed list-plain">
+              <li class="activity-item">
+                <span class="activity-dot"></span>
+                <span class="activity-text"><strong>Amit Kumar</strong> submitted Math HY Exam — 12-A</span>
+                <span class="activity-time text-muted">2h ago</span>
+              </li>
+              <li class="activity-item">
+                <span class="activity-dot"></span>
+                <span class="activity-text"><strong>Priya Sharma</strong> submitted Physics Quiz — 11-B</span>
+                <span class="activity-time text-muted">3h ago</span>
+              </li>
+              <li class="activity-item">
+                <span class="activity-dot"></span>
+                <span class="activity-text"><strong>Raj Malhotra</strong> submitted Math HY Exam — 12-A</span>
+                <span class="activity-time text-muted">4h ago</span>
+              </li>
+              <li class="activity-item">
+                <span class="activity-dot"></span>
+                <span class="activity-text"><strong>Sara Joshi</strong> submitted Physics Quiz — 11-B</span>
+                <span class="activity-time text-muted">5h ago</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /bottom-row -->
 
     </main>
   </div><!-- /main-wrapper -->
