@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assign Assessments — Brainzeta Teacher</title>
+  <link rel="stylesheet" href="styles/base.css" />
+  <style>
+    /* ================================================================
+       GRADE + SUBJECT SELECTOR
+    ================================================================ */
+    .selector-bar {
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+      padding: 20px 24px;
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+    }
+    .selector-group { display: flex; flex-direction: column; gap: 4px; }
+    .selector-group label {
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .selector-group select {
+      min-width: 180px;
+      padding: 8px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      background: #fff;
+    }
+
+    /* ================================================================
+       EMPTY STATE
+    ================================================================ */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 60px 20px;
+      border: 2px dashed var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-bg-subtle);
+      color: var(--color-text-muted);
+      gap: 8px;
+    }
+    .empty-state .icon { font-size: 2.5rem; }
+    .empty-state h3 { margin: 0; font-size: var(--font-size-lg); color: var(--color-text); }
+    .empty-state p { margin: 0; font-size: var(--font-size-sm); max-width: 400px; }
+
+    body:has(#grade-select option[value="12"]:checked):has(#subject-select option[value="mathematics"]:checked) .empty-state { display: none; }
+    body:has(#grade-select option[value="12"]:checked):has(#subject-select option[value="mathematics"]:checked) .ready-view { display: block; }
+    .ready-view { display: none; }
+
+    /* ================================================================
+       SUBJECT VIEW HEADER
+    ================================================================ */
+    .subject-view-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .subject-view-icon { font-size: 1.8rem; }
+    .subject-view-title { font-size: 1.2rem; font-weight: 700; margin: 0; }
+    .subject-view-meta { font-size: var(--font-size-xs); color: var(--color-text-muted); margin-top: 2px; }
+
+    /* ================================================================
+       TIER SECTIONS
+    ================================================================ */
+    .tier-section { margin-bottom: 28px; }
+    .tier-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: #f5f7fa;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      border: 1px solid var(--color-border);
+      border-bottom: 2px solid var(--color-primary);
+    }
+    .tier-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 10px;
+    }
+    .tier-1 { background: #dbeafe; color: #1d4ed8; }
+    .tier-2 { background: #dcfce7; color: #15803d; }
+    .tier-label { font-weight: 600; font-size: var(--font-size-sm); color: var(--color-text); }
+    .tier-desc { font-size: var(--font-size-xs); color: var(--color-text-muted); margin-left: auto; }
+
+    /* ================================================================
+       ASSIGN TABLE
+    ================================================================ */
+    .assign-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--font-size-sm);
+      border: 1px solid var(--color-border);
+      border-top: none;
+    }
+    .assign-table th {
+      padding: 9px 12px;
+      background: #fafbfc;
+      text-align: left;
+      font-weight: 600;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--color-border);
+      white-space: nowrap;
+    }
+    .assign-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--color-border);
+      vertical-align: middle;
+    }
+    .assign-table tbody tr:last-child td { border-bottom: none; }
+    .assign-table tbody tr:hover td { background: #fafbfc; }
+
+    .assess-name { font-weight: 500; color: var(--color-text); }
+
+    .chapter-cell {
+      background: #dce8f5;
+      font-weight: 700;
+      color: #1a3a5c !important;
+      vertical-align: middle;
+      border-right: 2px solid #adc8e8;
+      width: 210px;
+      min-width: 180px;
+    }
+    .chapter-cell .ch-num {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #5580a0;
+      margin-bottom: 2px;
+    }
+    .chapter-cell .ch-name {
+      font-size: var(--font-size-sm);
+      line-height: 1.3;
+    }
+
+    /* Sections assigned indicator */
+    .sections-indicator {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+    }
+    .sections-indicator strong {
+      color: var(--color-text);
+    }
+
+    /* Note callout */
+    .note-callout {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      background: #f0fdfa;
+      border: 1px solid #99f6e4;
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: var(--font-size-sm);
+      color: #0f766e;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body class="app-layout">
+
+  <!-- ============================================================
+       SIDEBAR
+  ============================================================ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-text">Brainzeta</span>
+    </div>
+    <nav>
+      <ul class="sidebar-nav list-plain">
+        <li><a href="teacher-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
+        <li><a href="teacher-assessments-list.html" class="sidebar-nav-item"><span class="nav-icon">📋</span> My Assessments</a></li>
+        <li><a href="teacher-submission-tracker.html" class="sidebar-nav-item"><span class="nav-icon">📬</span> Submission Tracker</a></li>
+        <li><a href="teacher-pending-approvals.html" class="sidebar-nav-item"><span class="nav-icon">✅</span> Pending Approvals</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="user-profile.html" class="sidebar-nav-item"><span class="nav-icon">👤</span> My Profile</a>
+      <a href="login.html" class="sidebar-nav-item"><span class="nav-icon">🚪</span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <div class="main-wrapper">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Assign Assessments</span>
+      </div>
+      <div class="topbar-right">
+        <span class="badge badge-role">Teacher</span>
+        <span class="avatar avatar-sm">RS</span>
+      </div>
+    </header>
+
+    <!-- PAGE BODY -->
+    <main class="page-body">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <span class="breadcrumb-item">Home</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item"><a href="teacher-dashboard.html">Dashboard</a></span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-item breadcrumb-current">Assign Assessments</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Assign Assessments</h1>
+          <p class="page-subtitle">Assessments with rubrics ready to be assigned to sections</p>
+        </div>
+      </div>
+
+      <!-- ── Grade + Subject Selector ── -->
+      <div class="selector-bar">
+        <div class="selector-group">
+          <label for="grade-select">Grade <span class="required">*</span></label>
+          <select id="grade-select" class="select-input">
+            <option value="">Select Grade...</option>
+            <option value="10">Grade 10</option>
+            <option value="11">Grade 11</option>
+            <option value="12" selected>Grade 12</option>
+          </select>
+        </div>
+        <div class="selector-group">
+          <label for="subject-select">Subject <span class="required">*</span></label>
+          <select id="subject-select" class="select-input">
+            <option value="">Select Subject...</option>
+            <option value="mathematics" selected>Mathematics</option>
+            <option value="physics">Physics</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="economics">Economics</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- ── Empty State ── -->
+      <div class="empty-state">
+        <span class="icon">📤</span>
+        <h3>Select Grade &amp; Subject</h3>
+        <p>Choose a grade and subject above to see assessments ready to be assigned to sections.</p>
+      </div>
+
+      <!-- ================================================================
+           READY VIEW — assessments with rubric, ready to assign
+      ================================================================ -->
+      <div class="ready-view">
+
+        <!-- Subject View Header -->
+        <div class="subject-view-header">
+          <span class="subject-view-icon">📐</span>
+          <div>
+            <h2 class="subject-view-title">Mathematics — Grade 12</h2>
+            <div class="subject-view-meta">4 assessments ready to assign · Sections: 12-A, 12-B, 12-C</div>
+          </div>
+        </div>
+
+        <!-- Info banner -->
+        <div class="note-callout">
+          📤 <span>Showing assessments that have a <strong>rubric attached</strong> and can be assigned to one or more sections. Already fully-assigned assessments are not shown.</span>
+        </div>
+
+        <!-- TIER 1 — General assessments ready to assign -->
+        <div class="tier-section">
+          <div class="tier-header">
+            <span class="tier-badge tier-1">Tier 1</span>
+            <span class="tier-label">General Assessments</span>
+            <span class="tier-desc">2 ready to assign</span>
+          </div>
+          <table class="assign-table">
+            <thead>
+              <tr>
+                <th style="width:28%">Assessment</th>
+                <th>Type</th>
+                <th>Marks</th>
+                <th>Questions</th>
+                <th>Assigned To</th>
+                <th>Created</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="assess-name">Math Half-Yearly Exam</td>
+                <td>Exam</td>
+                <td>80</td>
+                <td>5</td>
+                <td><span class="sections-indicator"><strong>1</strong> of 3 sections</span></td>
+                <td>Jan 10</td>
+                <td><a href="teacher-assignment-page.html" class="btn btn-sm btn-primary">Assign</a></td>
+              </tr>
+              <tr>
+                <td class="assess-name">Practice Test — Ch. 1–6</td>
+                <td>Test</td>
+                <td>50</td>
+                <td>10</td>
+                <td><span class="sections-indicator"><strong>0</strong> of 3 sections</span></td>
+                <td>Mar 2</td>
+                <td><a href="teacher-assignment-page.html" class="btn btn-sm btn-primary">Assign</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- TIER 2 — Chapter-wise assessments ready to assign -->
+        <div class="tier-section">
+          <div class="tier-header">
+            <span class="tier-badge tier-2">Tier 2</span>
+            <span class="tier-label">Chapter-wise Assessments</span>
+            <span class="tier-desc">2 ready to assign</span>
+          </div>
+          <table class="assign-table">
+            <thead>
+              <tr>
+                <th style="width:210px">Chapter</th>
+                <th style="width:22%">Assessment</th>
+                <th>Type</th>
+                <th>Marks</th>
+                <th>Questions</th>
+                <th>Assigned To</th>
+                <th>Created</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="chapter-cell"><span class="ch-num">Ch. 2</span><span class="ch-name">Inverse Trigonometric Functions</span></td>
+                <td class="assess-name">Inverse Trig Quiz</td>
+                <td>Quiz</td>
+                <td>20</td>
+                <td>5</td>
+                <td><span class="sections-indicator"><strong>1</strong> of 3 sections</span></td>
+                <td>Jan 5</td>
+                <td><a href="teacher-assignment-page.html" class="btn btn-sm btn-primary">Assign</a></td>
+              </tr>
+              <tr>
+                <td class="chapter-cell"><span class="ch-num">Ch. 6</span><span class="ch-name">Application of Derivatives</span></td>
+                <td class="assess-name">Maxima &amp; Minima Assignment</td>
+                <td>Assignment</td>
+                <td>25</td>
+                <td>6</td>
+                <td><span class="sections-indicator"><strong>2</strong> of 3 sections</span></td>
+                <td>Feb 15</td>
+                <td><a href="teacher-assignment-page.html" class="btn btn-sm btn-primary">Assign</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /ready-view -->
+
+    </main>
+  </div><!-- /main-wrapper -->
+</body>
+</html>

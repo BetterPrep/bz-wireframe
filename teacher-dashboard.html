@@ -97,60 +97,6 @@
     .wsb-teal   { background: #f0fdfa; color: #0f766e; }
     .wsb-orange { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
 
-    /* Divider */
-    .workflow-card-divider {
-      height: 1px;
-      background: var(--color-border);
-      margin: 12px 0;
-    }
-
-    /* Small item list inside the card */
-    .workflow-item-list {
-      list-style: none;
-      margin: 0 0 16px;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-    .workflow-item-list li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: var(--font-size-sm);
-      color: var(--color-text);
-      gap: 8px;
-    }
-    .workflow-item-list li .item-name {
-      flex: 1;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-    .workflow-item-list li .item-meta {
-      color: var(--color-text-muted);
-      font-size: 11px;
-      white-space: nowrap;
-    }
-    .workflow-item-list .dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      margin-right: 2px;
-    }
-    .dot-orange { background: #f59e0b; }
-    .dot-red    { background: #ef4444; }
-    .dot-green  { background: #10b981; }
-    .dot-blue   { background: #3b82f6; }
-    .dot-gray   { background: #9ca3af; }
-
-    .workflow-empty-state {
-      font-size: var(--font-size-sm);
-      color: var(--color-text-muted);
-      font-style: italic;
-      margin-bottom: 16px;
-    }
-
     /* Card footer CTA */
     .workflow-card-footer {
       margin-top: auto;
@@ -215,7 +161,7 @@
       <ul class="sidebar-nav list-plain">
         <li><a href="teacher-dashboard.html" class="sidebar-nav-item active"><span class="nav-icon">🏠</span> Dashboard</a></li>
         <li><a href="teacher-assessments-list.html" class="sidebar-nav-item"><span class="nav-icon">📋</span> My Assessments</a></li>
-        <li><a href="teacher-class-analytics.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Class Analytics</a></li>
+
         <li><a href="teacher-submission-tracker.html" class="sidebar-nav-item"><span class="nav-icon">📬</span> Submission Tracker</a></li>
         <li><a href="teacher-pending-approvals.html" class="sidebar-nav-item"><span class="nav-icon">✅</span> Pending Approvals</a></li>
       </ul>
@@ -298,33 +244,11 @@
               <div class="workflow-card-title-group">
                 <h2 class="workflow-card-title">Create Assessment</h2>
                 <p class="workflow-card-desc">
-                  Pick a grade &amp; subject, select chapters, name it, and either
+                  Pick a grade &amp; subject, select chapters, and either
                   upload your own paper or let AI draft it for you to edit.
                 </p>
               </div>
             </div>
-
-            <div class="workflow-card-divider"></div>
-
-            <!-- How it works steps -->
-            <ul class="workflow-item-list">
-              <li>
-                <span class="dot dot-blue"></span>
-                <span class="item-name">Select grade &amp; subject</span>
-                <span class="item-meta">Step 1</span>
-              </li>
-              <li>
-                <span class="dot dot-blue"></span>
-                <span class="item-name">Choose chapters &amp; assessment type</span>
-                <span class="item-meta">Step 2</span>
-              </li>
-              <li>
-                <span class="dot dot-blue"></span>
-                <span class="item-name">Upload your paper  —or—  AI generate &amp; edit</span>
-                <span class="item-meta">Step 3</span>
-              </li>
-            </ul>
-
             <div class="workflow-card-footer">
               <a href="teacher-create-assessment-step1.html" class="btn btn-wf">+ Create New Assessment</a>
             </div>
@@ -346,35 +270,8 @@
               </div>
               <span class="workflow-status-badge wsb-violet">5 need rubric</span>
             </div>
-
-            <div class="workflow-card-divider"></div>
-
-            <!-- Assessments without rubric -->
-            <ul class="workflow-item-list">
-              <li>
-                <span class="dot dot-orange"></span>
-                <span class="item-name">Math Ch.6 Quiz — Grade 12</span>
-                <span class="item-meta">No rubric</span>
-              </li>
-              <li>
-                <span class="dot dot-orange"></span>
-                <span class="item-name">Physics Lab Report — Grade 11</span>
-                <span class="item-meta">No rubric</span>
-              </li>
-              <li>
-                <span class="dot dot-orange"></span>
-                <span class="item-name">Math Unit Test Ch.7 — Grade 11</span>
-                <span class="item-meta">No rubric</span>
-              </li>
-              <li>
-                <span class="dot dot-gray"></span>
-                <span class="item-name">+ 2 more assessments</span>
-                <span class="item-meta"></span>
-              </li>
-            </ul>
-
             <div class="workflow-card-footer">
-              <a href="teacher-assessments-list.html" class="btn btn-wf">Attach Rubric</a>
+              <a href="teacher-attach-rubric.html" class="btn btn-wf">Attach Rubric</a>
             </div>
           </div>
         </div>
@@ -394,35 +291,8 @@
               </div>
               <span class="workflow-status-badge wsb-teal">4 ready</span>
             </div>
-
-            <div class="workflow-card-divider"></div>
-
-            <!-- Ready-to-assign assessments -->
-            <ul class="workflow-item-list">
-              <li>
-                <span class="dot dot-green"></span>
-                <span class="item-name">Math HY Exam — Grade 12</span>
-                <span class="item-meta">Rubric ✓</span>
-              </li>
-              <li>
-                <span class="dot dot-green"></span>
-                <span class="item-name">Physics Ch.4 Quiz — Grade 11</span>
-                <span class="item-meta">Rubric ✓</span>
-              </li>
-              <li>
-                <span class="dot dot-green"></span>
-                <span class="item-name">Math Ch.5 Unit Test — Grade 11</span>
-                <span class="item-meta">Rubric ✓</span>
-              </li>
-              <li>
-                <span class="dot dot-gray"></span>
-                <span class="item-name">+ 1 more assessment</span>
-                <span class="item-meta"></span>
-              </li>
-            </ul>
-
             <div class="workflow-card-footer">
-              <a href="teacher-assignment-page.html" class="btn btn-wf">Assign to Sections</a>
+              <a href="teacher-assign-select.html" class="btn btn-wf">Assign to Sections</a>
             </div>
           </div>
         </div>
@@ -436,29 +306,12 @@
               <div class="workflow-card-title-group">
                 <h2 class="workflow-card-title">Pending Approvals</h2>
                 <p class="workflow-card-desc">
-                  AI has graded these submissions. Review one-by-one and add
-                  feedback, or bulk-approve sections where grades look good.
+                  AI has graded these submissions. Review the scores and
+                  feedback, then approve or edit before releasing to students.
                 </p>
               </div>
               <span class="workflow-status-badge wsb-orange">8 waiting</span>
             </div>
-
-            <div class="workflow-card-divider"></div>
-
-            <!-- Batches waiting -->
-            <ul class="workflow-item-list">
-              <li>
-                <span class="dot dot-red"></span>
-                <span class="item-name">Math HY Exam — 12-A</span>
-                <span class="item-meta">5 submissions</span>
-              </li>
-              <li>
-                <span class="dot dot-orange"></span>
-                <span class="item-name">Physics Quiz — 11-B</span>
-                <span class="item-meta">3 submissions</span>
-              </li>
-            </ul>
-
             <div class="workflow-card-footer">
               <a href="teacher-pending-approvals.html" class="btn btn-wf">Review &amp; Approve</a>
             </div>

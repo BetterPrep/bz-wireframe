@@ -25,6 +25,175 @@
     .dropdown-menu a:hover, .dropdown-menu button:hover { background: #f5f5f5; }
     .dropdown-menu .action-danger { color: #DC2626; }
     .dropdown-menu hr { border: none; border-top: 1px solid var(--color-border); margin: 3px 0; }
+
+    /* ================================================================
+       GRADE + SUBJECT SELECTOR
+    ================================================================ */
+    .selector-bar {
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+      padding: 20px 24px;
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+    }
+    .selector-group { display: flex; flex-direction: column; gap: 4px; }
+    .selector-group label {
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .selector-group select {
+      min-width: 180px;
+      padding: 8px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      background: #fff;
+    }
+
+    /* ================================================================
+       EMPTY STATE — shown before grade+subject selection
+    ================================================================ */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 60px 20px;
+      border: 2px dashed var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-bg-subtle);
+      color: var(--color-text-muted);
+      gap: 8px;
+    }
+    .empty-state .icon { font-size: 2.5rem; }
+    .empty-state h3 { margin: 0; font-size: var(--font-size-lg); color: var(--color-text); }
+    .empty-state p { margin: 0; font-size: var(--font-size-sm); max-width: 380px; }
+
+    /* Hide empty state and show assessments when both are selected */
+    body:has(#grade-select option[value="12"]:checked):has(#subject-select option[value="mathematics"]:checked) .empty-state { display: none; }
+    body:has(#grade-select option[value="12"]:checked):has(#subject-select option[value="mathematics"]:checked) .assessments-view { display: block; }
+
+    .assessments-view { display: none; }
+
+    /* ================================================================
+       TIER SECTIONS (from student view)
+    ================================================================ */
+    .tier-section { margin-bottom: 28px; }
+
+    .tier-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: #f5f7fa;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      border: 1px solid var(--color-border);
+      border-bottom: 2px solid var(--color-primary);
+    }
+    .tier-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 10px;
+    }
+    .tier-1 { background: #dbeafe; color: #1d4ed8; }
+    .tier-2 { background: #dcfce7; color: #15803d; }
+    .tier-label { font-weight: 600; font-size: var(--font-size-sm); color: var(--color-text); }
+    .tier-desc { font-size: var(--font-size-xs); color: var(--color-text-muted); margin-left: auto; }
+
+    /* ================================================================
+       ASSESSMENT TABLE
+    ================================================================ */
+    .assessment-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--font-size-sm);
+      border: 1px solid var(--color-border);
+      border-top: none;
+    }
+    .assessment-table th {
+      padding: 9px 12px;
+      background: #fafbfc;
+      text-align: left;
+      font-weight: 600;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--color-border);
+      white-space: nowrap;
+    }
+    .assessment-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--color-border);
+      vertical-align: middle;
+    }
+    .assessment-table tbody tr:last-child td { border-bottom: none; }
+    .assessment-table tbody tr:hover td { background: #fafbfc; }
+
+    .chapter-cell {
+      background: #dce8f5;
+      font-weight: 700;
+      color: #1a3a5c !important;
+      vertical-align: middle;
+      border-right: 2px solid #adc8e8;
+      width: 210px;
+      min-width: 180px;
+    }
+    .chapter-cell .ch-num {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #5580a0;
+      margin-bottom: 2px;
+    }
+    .chapter-cell .ch-name {
+      font-size: var(--font-size-sm);
+      line-height: 1.3;
+    }
+
+    .row-unassigned td { color: var(--color-text-muted); font-style: italic; }
+    .no-tests-cell {
+      color: var(--color-text-muted);
+      font-style: italic;
+      font-size: var(--font-size-xs);
+    }
+    .assess-name { font-weight: 500; font-style: normal !important; color: var(--color-text) !important; }
+    .row-not-assigned td { color: var(--color-text-muted); }
+
+    /* ================================================================
+       SUBJECT VIEW HEADER
+    ================================================================ */
+    .subject-view-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .subject-view-icon { font-size: 1.8rem; }
+    .subject-view-title { font-size: 1.2rem; font-weight: 700; margin: 0; }
+    .subject-view-meta { font-size: var(--font-size-xs); color: var(--color-text-muted); margin-top: 2px; }
+
+    /* ================================================================
+       FILTER BAR INSIDE VIEW
+    ================================================================ */
+    .view-filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .filter-label {
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      color: var(--color-text-muted);
+    }
   </style>
 </head>
 <body class="app-layout">
@@ -40,7 +209,7 @@
       <ul class="sidebar-nav list-plain">
         <li><a href="teacher-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
         <li><a href="teacher-assessments-list.html" class="sidebar-nav-item active"><span class="nav-icon">📋</span> My Assessments</a></li>
-        <li><a href="teacher-class-analytics.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Class Analytics</a></li>
+
         <li><a href="teacher-submission-tracker.html" class="sidebar-nav-item"><span class="nav-icon">📬</span> Submission Tracker</a></li>
         <li><a href="teacher-pending-approvals.html" class="sidebar-nav-item"><span class="nav-icon">✅</span> Pending Approvals</a></li>
       </ul>
@@ -80,237 +249,351 @@
       <!-- Page Header -->
       <div class="page-header">
         <div>
-          <h1 class="page-title">My Assessments <span class="badge badge-gray">12</span></h1>
+          <h1 class="page-title">My Assessments</h1>
+          <p class="page-subtitle">Mr. Ramesh Sharma — Mathematics · Grade 11 &amp; 12</p>
         </div>
-        <div class="page-actions">
-          <a href="teacher-create-assessment-step1.html" class="btn btn-primary">+ Create New</a>
+        <div class="page-actions d-flex gap-8">
+          <a href="teacher-create-assessment-step1.html" class="btn btn-secondary">+ Create New</a>
+          <a href="teacher-create-assessment-step1.html" class="btn btn-primary">✨ Generate with AI</a>
         </div>
       </div>
 
-      <!-- ── Tab Pills ── -->
-      <div class="tab-pills">
-        <button class="tab-pill active">All</button>
-        <button class="tab-pill">Draft</button>
-        <button class="tab-pill">Assigned</button>
-        <button class="tab-pill">In Progress</button>
-        <button class="tab-pill">Completed</button>
+      <!-- ── Grade + Subject Selector ── -->
+      <div class="selector-bar">
+        <div class="selector-group">
+          <label for="grade-select">Grade <span class="required">*</span></label>
+          <select id="grade-select" class="select-input">
+            <option value="">Select Grade...</option>
+            <option value="10">Grade 10</option>
+            <option value="11">Grade 11</option>
+            <option value="12" selected>Grade 12</option>
+          </select>
+        </div>
+        <div class="selector-group">
+          <label for="subject-select">Subject <span class="required">*</span></label>
+          <select id="subject-select" class="select-input">
+            <option value="">Select Subject...</option>
+            <option value="mathematics" selected>Mathematics</option>
+            <option value="physics">Physics</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="economics">Economics</option>
+          </select>
+        </div>
       </div>
 
-      <!-- ── Filter Bar ── -->
-      <div class="filter-bar">
-        <input class="search-bar" type="text" placeholder="Search assessments..." />
-        <select class="select-input">
-          <option>Grade: All</option>
-          <option>Grade 10</option>
-          <option>Grade 11</option>
-          <option>Grade 12</option>
-        </select>
-        <select class="select-input">
-          <option>Subject: All</option>
-          <option>Mathematics</option>
-          <option>Physics</option>
-          <option>Chemistry</option>
-          <option>Economics</option>
-          <option>History</option>
-        </select>
+      <!-- ── Empty State (when grade/subject not selected) ── -->
+      <div class="empty-state">
+        <span class="icon">📋</span>
+        <h3>Select Grade &amp; Subject</h3>
+        <p>Choose a grade and subject above to view the chapter-wise assessment breakdown for your classes.</p>
       </div>
 
-      <!-- ── Assessments Table ── -->
-      <div class="table-wrapper">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Type</th>
-              <th>Sections</th>
-              <th>Subject</th>
-              <th>Status</th>
-              <th>Due Date</th>
-              <th>Submissions</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Math Half-Yearly — one row per section -->
-            <tr>
-              <td><a href="teacher-assessment-details.html" class="link-primary">Math Half-Yearly Exam</a></td>
-              <td>Exam</td>
-              <td>12-A</td>
-              <td>Mathematics</td>
-              <td><span class="badge badge-warning">In Progress</span></td>
-              <td>Feb 26</td>
-              <td>25/39</td>
-              <td>
-                <div class="dropdown">
-                  <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
-                  <div class="dropdown-menu">
-                    <a href="teacher-assessment-details.html">👁 View Details</a>
-                    <a href="teacher-submission-tracker.html">📬 View Submissions</a>
-                    <button>✏️ Edit</button>
-                    <hr>
-                    <button class="action-danger">🗑 Delete</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td><a href="teacher-assessment-details.html" class="link-primary">Math Half-Yearly Exam</a></td>
-              <td>Exam</td>
-              <td>12-B</td>
-              <td>Mathematics</td>
-              <td><span class="badge badge-warning">In Progress</span></td>
-              <td>Feb 26</td>
-              <td>20/39</td>
-              <td>
-                <div class="dropdown">
-                  <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
-                  <div class="dropdown-menu">
-                    <a href="teacher-assessment-details.html">👁 View Details</a>
-                    <a href="teacher-submission-tracker.html">📬 View Submissions</a>
-                    <button>✏️ Edit</button>
-                    <hr>
-                    <button class="action-danger">🗑 Delete</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td><a href="teacher-assessment-details.html" class="link-primary">Physics Quiz</a></td>
-              <td>Quiz</td>
-              <td>11-B</td>
-              <td>Physics</td>
-              <td><span class="badge badge-success">Completed</span></td>
-              <td>Feb 12</td>
-              <td>38/38</td>
-              <td>
-                <div class="dropdown">
-                  <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
-                  <div class="dropdown-menu">
-                    <a href="teacher-assessment-details.html">👁 View Details</a>
-                    <a href="teacher-submission-tracker.html">📬 View Submissions</a>
-                    <button>✏️ Edit</button>
-                    <hr>
-                    <button class="action-danger">🗑 Delete</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td><a href="teacher-assessment-details.html" class="link-primary">Economics Assignment</a></td>
-              <td>Assignment</td>
-              <td>12-C</td>
-              <td>Economics</td>
-              <td><span class="badge badge-success">Completed</span></td>
-              <td>Feb 15</td>
-              <td>42/42</td>
-              <td>
-                <div class="dropdown">
-                  <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
-                  <div class="dropdown-menu">
-                    <a href="teacher-assessment-details.html">👁 View Details</a>
-                    <a href="teacher-submission-tracker.html">📬 View Submissions</a>
-                    <button>✏️ Edit</button>
-                    <hr>
-                    <button class="action-danger">🗑 Delete</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <!-- Chemistry Test — one row per section -->
-            <tr>
-              <td><a href="teacher-assessment-details.html" class="link-primary">Chemistry Test</a></td>
-              <td>Exam</td>
-              <td>11-A</td>
-              <td>Chemistry</td>
-              <td><span class="badge badge-primary">Assigned</span></td>
-              <td>Feb 20</td>
-              <td>0/21</td>
-              <td>
-                <div class="dropdown">
-                  <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
-                  <div class="dropdown-menu">
-                    <a href="teacher-assessment-details.html">👁 View Details</a>
-                    <a href="teacher-submission-tracker.html">📬 View Submissions</a>
-                    <button>✏️ Edit</button>
-                    <hr>
-                    <button class="action-danger">🗑 Delete</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td><a href="teacher-assessment-details.html" class="link-primary">Chemistry Test</a></td>
-              <td>Exam</td>
-              <td>11-C</td>
-              <td>Chemistry</td>
-              <td><span class="badge badge-primary">Assigned</span></td>
-              <td>Feb 20</td>
-              <td>0/19</td>
-              <td>
-                <div class="dropdown">
-                  <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
-                  <div class="dropdown-menu">
-                    <a href="teacher-assessment-details.html">👁 View Details</a>
-                    <a href="teacher-submission-tracker.html">📬 View Submissions</a>
-                    <button>✏️ Edit</button>
-                    <hr>
-                    <button class="action-danger">🗑 Delete</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td><a href="teacher-assessment-details.html" class="link-primary">History Essay</a></td>
-              <td>Assignment</td>
-              <td>10-A</td>
-              <td>History</td>
-              <td><span class="badge badge-gray">Draft</span></td>
-              <td>—</td>
-              <td>—</td>
-              <td>
-                <div class="dropdown">
-                  <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
-                  <div class="dropdown-menu">
-                    <a href="teacher-assessment-details.html">👁 View Details</a>
-                    <a href="teacher-submission-tracker.html">📬 View Submissions</a>
-                    <button>✏️ Edit</button>
-                    <hr>
-                    <button class="action-danger">🗑 Delete</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td><a href="teacher-assessment-details.html" class="link-primary">Algebra Practice Set</a></td>
-              <td>Assignment</td>
-              <td>12-B</td>
-              <td>Mathematics</td>
-              <td><span class="badge badge-gray">Draft</span></td>
-              <td>—</td>
-              <td>—</td>
-              <td>
-                <div class="dropdown">
-                  <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
-                  <div class="dropdown-menu">
-                    <a href="teacher-assessment-details.html">👁 View Details</a>
-                    <a href="teacher-submission-tracker.html">📬 View Submissions</a>
-                    <button>✏️ Edit</button>
-                    <hr>
-                    <button class="action-danger">🗑 Delete</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <!-- ================================================================
+           ASSESSMENTS VIEW — shown when both Grade + Subject selected
+           (wireframe shows Grade 12 + Mathematics pre-selected)
+      ================================================================ -->
+      <div class="assessments-view">
 
-      <!-- ── Pagination ── -->
-      <div class="pagination">
-        <button class="btn btn-sm btn-ghost" disabled>← Previous</button>
-        <span class="pagination-info">Page 1 of 2</span>
-        <button class="btn btn-sm btn-ghost">Next →</button>
-      </div>
+        <!-- Subject View Header -->
+        <div class="subject-view-header">
+          <span class="subject-view-icon">📐</span>
+          <div>
+            <h2 class="subject-view-title">Mathematics — Grade 12</h2>
+            <div class="subject-view-meta">13 chapters · 8 assessments across 3 sections (12-A, 12-B, 12-C)</div>
+          </div>
+          <div class="d-flex gap-8" style="margin-left:auto;">
+            <span class="badge badge-warning">⏳ 2 in progress</span>
+            <span class="badge badge-success">✅ 3 completed</span>
+            <span class="badge badge-gray">📝 2 drafts</span>
+          </div>
+        </div>
+
+        <!-- Status Filter -->
+        <div class="view-filter-bar">
+          <span class="filter-label">Filter by status:</span>
+          <select class="select-input" style="width:auto; min-width:160px;">
+            <option>All Statuses</option>
+            <option>Draft</option>
+            <option>Assigned</option>
+            <option>In Progress</option>
+            <option>Completed</option>
+          </select>
+          <input class="search-bar" type="text" placeholder="Search assessments..." style="margin-left:auto; max-width:240px;" />
+        </div>
+
+        <!-- TIER 1 — General / Multi-chapter assessments -->
+        <div class="tier-section">
+          <div class="tier-header">
+            <span class="tier-badge tier-1">Tier 1</span>
+            <span class="tier-label">General Assessments</span>
+            <span class="tier-desc">Subject-wide &amp; multi-chapter tests</span>
+          </div>
+          <table class="assessment-table">
+            <thead>
+              <tr>
+                <th style="width:28%">Assessment</th>
+                <th>Type</th>
+                <th>Sections</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Submissions</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- In Progress -->
+              <tr>
+                <td class="assess-name"><a href="teacher-assessment-details.html" class="link-primary">Math Half-Yearly Exam</a></td>
+                <td>Exam</td>
+                <td>12-A, 12-B</td>
+                <td>Feb 26</td>
+                <td><span class="badge badge-warning">In Progress</span></td>
+                <td>45/78</td>
+                <td>
+                  <div class="dropdown">
+                    <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
+                    <div class="dropdown-menu">
+                      <a href="teacher-assessment-details.html">👁 View Details</a>
+                      <a href="teacher-submission-tracker.html">📬 View Submissions</a>
+                      <a href="teacher-edit-rubric.html">🗂️ Edit Rubric</a>
+                      <button>✏️ Edit</button>
+                      <hr>
+                      <button class="action-danger">🗑 Delete</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <!-- Not assigned yet -->
+              <tr class="row-not-assigned">
+                <td>Mixed Questions Test</td>
+                <td>Mixed</td>
+                <td>—</td>
+                <td>—</td>
+                <td><span class="badge badge-gray">Draft</span></td>
+                <td>—</td>
+                <td>
+                  <div class="dropdown">
+                    <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
+                    <div class="dropdown-menu">
+                      <a href="teacher-assessment-details.html">👁 View Details</a>
+                      <a href="teacher-edit-rubric.html">🗂️ Edit Rubric</a>
+                      <button>✏️ Edit</button>
+                      <hr>
+                      <button class="action-danger">🗑 Delete</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <!-- Not assigned yet -->
+              <tr class="row-not-assigned">
+                <td>Term Exams</td>
+                <td>Exam</td>
+                <td>—</td>
+                <td>—</td>
+                <td><span class="badge badge-gray">— Not Assigned</span></td>
+                <td>—</td>
+                <td>—</td>
+              </tr>
+              <!-- Not assigned yet -->
+              <tr class="row-not-assigned">
+                <td>Annual Exams</td>
+                <td>Exam</td>
+                <td>—</td>
+                <td>—</td>
+                <td><span class="badge badge-gray">— Not Assigned</span></td>
+                <td>—</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- TIER 2 — Chapter-wise assessments -->
+        <div class="tier-section">
+          <div class="tier-header">
+            <span class="tier-badge tier-2">Tier 2</span>
+            <span class="tier-label">Chapter-wise Assessments</span>
+            <span class="tier-desc">All 13 chapters</span>
+          </div>
+          <table class="assessment-table">
+            <thead>
+              <tr>
+                <th style="width:210px">Chapter</th>
+                <th style="width:22%">Assessment</th>
+                <th>Type</th>
+                <th>Sections</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Submissions</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- Ch.1 — no assessments -->
+              <tr class="row-unassigned">
+                <td class="chapter-cell"><span class="ch-num">Ch. 1</span><span class="ch-name">Relations &amp; Functions</span></td>
+                <td colspan="7" class="no-tests-cell">No assessments created yet</td>
+              </tr>
+
+              <!-- Ch.2 — 1 assessment (completed) -->
+              <tr>
+                <td class="chapter-cell"><span class="ch-num">Ch. 2</span><span class="ch-name">Inverse Trigonometric Functions</span></td>
+                <td class="assess-name"><a href="teacher-assessment-details.html" class="link-primary">Inverse Trig Quiz</a></td>
+                <td>Quiz</td>
+                <td>12-A</td>
+                <td>Jan 20</td>
+                <td><span class="badge badge-success">Completed</span></td>
+                <td>39/39</td>
+                <td>
+                  <div class="dropdown">
+                    <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
+                    <div class="dropdown-menu">
+                      <a href="teacher-assessment-details.html">👁 View Details</a>
+                      <a href="teacher-submission-tracker.html">📬 View Submissions</a>
+                      <a href="teacher-edit-rubric.html">🗂️ Edit Rubric</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Ch.3 — no assessments -->
+              <tr class="row-unassigned">
+                <td class="chapter-cell"><span class="ch-num">Ch. 3</span><span class="ch-name">Matrices</span></td>
+                <td colspan="7" class="no-tests-cell">No assessments created yet</td>
+              </tr>
+
+              <!-- Ch.4 — no assessments -->
+              <tr class="row-unassigned">
+                <td class="chapter-cell"><span class="ch-num">Ch. 4</span><span class="ch-name">Determinants</span></td>
+                <td colspan="7" class="no-tests-cell">No assessments created yet</td>
+              </tr>
+
+              <!-- Ch.5 — 2 assessments (rowspan) -->
+              <tr>
+                <td rowspan="2" class="chapter-cell"><span class="ch-num">Ch. 5</span><span class="ch-name">Continuity &amp; Differentiability</span></td>
+                <td class="assess-name"><a href="teacher-assessment-details.html" class="link-primary">Chain Rule Quiz</a></td>
+                <td>Quiz</td>
+                <td>12-A, 12-B</td>
+                <td>Jan 25</td>
+                <td><span class="badge badge-success">Completed</span></td>
+                <td>77/77</td>
+                <td>
+                  <div class="dropdown">
+                    <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
+                    <div class="dropdown-menu">
+                      <a href="teacher-assessment-details.html">👁 View Details</a>
+                      <a href="teacher-submission-tracker.html">📬 View Submissions</a>
+                      <a href="teacher-edit-rubric.html">🗂️ Edit Rubric</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="assess-name"><a href="teacher-assessment-details.html" class="link-primary">Differentiability Unit Test</a></td>
+                <td>Unit Test</td>
+                <td>12-A, 12-B</td>
+                <td>Feb 5</td>
+                <td><span class="badge badge-success">Completed</span></td>
+                <td>75/77</td>
+                <td>
+                  <div class="dropdown">
+                    <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
+                    <div class="dropdown-menu">
+                      <a href="teacher-assessment-details.html">👁 View Details</a>
+                      <a href="teacher-submission-tracker.html">📬 View Submissions</a>
+                      <a href="teacher-edit-rubric.html">🗂️ Edit Rubric</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Ch.6 — 1 assessment (in progress) -->
+              <tr>
+                <td class="chapter-cell"><span class="ch-num">Ch. 6</span><span class="ch-name">Application of Derivatives</span></td>
+                <td class="assess-name"><a href="teacher-assessment-details.html" class="link-primary">Maxima &amp; Minima Assignment</a></td>
+                <td>Assignment</td>
+                <td>12-A, 12-C</td>
+                <td>Mar 22</td>
+                <td><span class="badge badge-warning">In Progress</span></td>
+                <td>18/74</td>
+                <td>
+                  <div class="dropdown">
+                    <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
+                    <div class="dropdown-menu">
+                      <a href="teacher-assessment-details.html">👁 View Details</a>
+                      <a href="teacher-submission-tracker.html">📬 View Submissions</a>
+                      <a href="teacher-edit-rubric.html">🗂️ Edit Rubric</a>
+                      <button>✏️ Edit</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Ch.7 — draft -->
+              <tr>
+                <td class="chapter-cell"><span class="ch-num">Ch. 7</span><span class="ch-name">Integrals</span></td>
+                <td class="assess-name">Integration Practice Set</td>
+                <td>Assignment</td>
+                <td>—</td>
+                <td>—</td>
+                <td><span class="badge badge-gray">Draft</span></td>
+                <td>—</td>
+                <td>
+                  <div class="dropdown">
+                    <button class="btn btn-sm btn-ghost" tabindex="0" aria-label="More options">•••</button>
+                    <div class="dropdown-menu">
+                      <a href="teacher-assessment-details.html">👁 View Details</a>
+                      <a href="teacher-edit-rubric.html">🗂️ Edit Rubric</a>
+                      <button>✏️ Edit</button>
+                      <hr>
+                      <button class="action-danger">🗑 Delete</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Ch.8 — no assessments -->
+              <tr class="row-unassigned">
+                <td class="chapter-cell"><span class="ch-num">Ch. 8</span><span class="ch-name">Application of Integrals</span></td>
+                <td colspan="7" class="no-tests-cell">No assessments created yet</td>
+              </tr>
+
+              <!-- Ch.9 — no assessments -->
+              <tr class="row-unassigned">
+                <td class="chapter-cell"><span class="ch-num">Ch. 9</span><span class="ch-name">Differential Equations</span></td>
+                <td colspan="7" class="no-tests-cell">No assessments created yet</td>
+              </tr>
+
+              <!-- Ch.10 — no assessments -->
+              <tr class="row-unassigned">
+                <td class="chapter-cell"><span class="ch-num">Ch. 10</span><span class="ch-name">Vector Algebra</span></td>
+                <td colspan="7" class="no-tests-cell">No assessments created yet</td>
+              </tr>
+
+              <!-- Ch.11 — no assessments -->
+              <tr class="row-unassigned">
+                <td class="chapter-cell"><span class="ch-num">Ch. 11</span><span class="ch-name">Three-Dimensional Geometry</span></td>
+                <td colspan="7" class="no-tests-cell">No assessments created yet</td>
+              </tr>
+
+              <!-- Ch.12 — no assessments -->
+              <tr class="row-unassigned">
+                <td class="chapter-cell"><span class="ch-num">Ch. 12</span><span class="ch-name">Linear Programming</span></td>
+                <td colspan="7" class="no-tests-cell">No assessments created yet</td>
+              </tr>
+
+              <!-- Ch.13 — no assessments -->
+              <tr class="row-unassigned">
+                <td class="chapter-cell"><span class="ch-num">Ch. 13</span><span class="ch-name">Probability</span></td>
+                <td colspan="7" class="no-tests-cell">No assessments created yet</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /assessments-view -->
 
     </main>
   </div><!-- /main-wrapper -->

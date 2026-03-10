@@ -3,8 +3,232 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Create Assessment — Step 3 — Brainzeta Teacher</title>
+  <title>Create Assessment — Step 3: Rubric — Brainzeta Teacher</title>
   <link rel="stylesheet" href="styles/base.css" />
+  <style>
+    /* ================================================================
+       MODE TOGGLE TABS
+    ================================================================ */
+    .mode-tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--color-bg-subtle);
+      border-radius: var(--radius-sm);
+      padding: 4px;
+      width: fit-content;
+      margin-bottom: 16px;
+    }
+    .mode-tab {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: var(--color-text-muted);
+      user-select: none;
+    }
+    .mode-tab input[type="radio"] { display: none; }
+    .mode-tab:has(input:checked) {
+      background: #fff;
+      color: var(--color-text);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    }
+
+    .rubric-section .panel-upload   { display: none; }
+    .rubric-section .panel-generate { display: none; }
+    .rubric-section .panel-skip     { display: none; }
+    .rubric-section:has(#rubric-upload:checked)   .panel-upload   { display: block; }
+    .rubric-section:has(#rubric-generate:checked) .panel-generate { display: block; }
+    .rubric-section:has(#rubric-skip:checked)     .panel-skip     { display: block; }
+
+    /* Show "Save & Assign" only when rubric mode != skip */
+    .rubric-section:has(#rubric-skip:checked) ~ .form-actions .btn-assign { display: none; }
+    .rubric-section:has(#rubric-skip:checked) ~ .form-actions .btn-draft-hint { display: block; }
+
+    /* ================================================================
+       UPLOAD — PDF-only view
+    ================================================================ */
+    .rubric-pdf-preview {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-bg-subtle);
+      padding: 16px;
+      max-width: 560px;
+    }
+    .rubric-pdf-preview h4 {
+      font-size: var(--font-size-sm);
+      font-weight: 700;
+      margin: 0 0 12px;
+    }
+    .rubric-pdf-preview img {
+      width: 100%;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+    }
+    .rubric-pdf-preview .page-label {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      text-align: center;
+      margin-top: 4px;
+    }
+
+    /* ================================================================
+       GENERATE — 2-column: Questions | Editable Rubric Points
+    ================================================================ */
+    .rubric-gen-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .rubric-gen-col {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .rubric-gen-col-header {
+      padding: 10px 14px;
+      background: var(--color-bg-subtle);
+      border-bottom: 1px solid var(--color-border);
+      font-size: var(--font-size-sm);
+      font-weight: 700;
+    }
+    .rubric-gen-col-body {
+      padding: 14px;
+    }
+
+    /* Left column — question list (read-only) */
+    .q-readonly-block {
+      padding: 10px 0;
+    }
+    .q-readonly-block + .q-readonly-block {
+      border-top: 1px solid var(--color-bg-subtle);
+    }
+    .q-readonly-num {
+      font-size: var(--font-size-sm);
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .q-readonly-num .marks-tag {
+      font-weight: 400;
+      font-size: var(--font-size-xs);
+      background: #eff6ff;
+      color: #1e40af;
+      padding: 1px 7px;
+      border-radius: 8px;
+    }
+    .q-readonly-text {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+      line-height: 1.45;
+    }
+
+    /* Right column — rubric key points (editable) */
+    .rubric-q-block {
+      padding: 10px 0;
+    }
+    .rubric-q-block + .rubric-q-block {
+      border-top: 1px solid var(--color-bg-subtle);
+    }
+    .rubric-q-title {
+      font-size: var(--font-size-sm);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .rubric-kp-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+    .rubric-kp-row textarea {
+      flex: 1;
+      min-height: 36px;
+      font-size: var(--font-size-xs);
+      line-height: 1.4;
+      resize: vertical;
+      font-family: inherit;
+      padding: 6px 8px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+    }
+    .rubric-kp-marks {
+      width: 50px;
+      padding: 6px 4px;
+      font-size: var(--font-size-xs);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .rubric-add-kp {
+      font-size: var(--font-size-xs);
+      color: var(--color-primary);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 2px 0;
+      font-weight: 600;
+    }
+
+    /* AI info banner */
+    .ai-info-banner {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 14px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      color: #1e40af;
+      margin-bottom: 16px;
+    }
+    .ai-info-banner .ai-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+
+    /* Skip panel */
+    .skip-panel-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 32px 20px;
+      border: 2px dashed var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-bg-subtle);
+      color: var(--color-text-muted);
+      gap: 8px;
+    }
+    .skip-panel-info .icon { font-size: 2rem; }
+    .skip-panel-info p { margin: 0; font-size: var(--font-size-sm); max-width: 420px; }
+    .skip-panel-info p strong { color: var(--color-text); }
+
+    /* Note callout */
+    .note-callout {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: var(--font-size-sm);
+      color: #92400e;
+    }
+
+    /* Draft hint */
+    .btn-draft-hint {
+      display: none;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      margin-top: 4px;
+    }
+  </style>
 </head>
 <body class="app-layout">
 
@@ -19,7 +243,7 @@
       <ul class="sidebar-nav list-plain">
         <li><a href="teacher-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
         <li><a href="teacher-assessments-list.html" class="sidebar-nav-item active"><span class="nav-icon">📋</span> My Assessments</a></li>
-        <li><a href="teacher-class-analytics.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Class Analytics</a></li>
+
         <li><a href="teacher-submission-tracker.html" class="sidebar-nav-item"><span class="nav-icon">📬</span> Submission Tracker</a></li>
         <li><a href="teacher-pending-approvals.html" class="sidebar-nav-item"><span class="nav-icon">✅</span> Pending Approvals</a></li>
       </ul>
@@ -72,130 +296,225 @@
         <div class="stepper-connector stepper-connector-done"></div>
         <div class="stepper-step stepper-done">
           <div class="stepper-circle">✓</div>
-          <div class="stepper-label">Upload Files</div>
+          <div class="stepper-label">Question Paper</div>
         </div>
         <div class="stepper-connector stepper-connector-done"></div>
         <div class="stepper-step stepper-active">
           <div class="stepper-circle">3</div>
-          <div class="stepper-label">Review Rubric</div>
+          <div class="stepper-label">Rubric</div>
         </div>
       </div>
 
-      <!-- ── Alert Success ── -->
-      <div class="alert alert-success mt-24">
-        ✓ AI has extracted the rubric structure from your marking rubric. Please review and edit if needed.
+      <!-- ── Context reminder ── -->
+      <div class="alert alert-info mt-24">
+        📋 <strong>Chain Rule Quiz</strong> — Grade 12 · Quiz · <strong>20 marks</strong> · 5 Questions · Ch. 5: Continuity &amp; Differentiability
       </div>
 
-      <!-- ── Question Blocks ── -->
+      <!-- ══════════════════════════════════════════════════════════
+           RUBRIC CARD
+      ══════════════════════════════════════════════════════════ -->
+      <div class="card mt-16 rubric-section">
+        <div class="card-body">
 
-      <!-- Question 1 -->
-      <div class="question-block card mt-16">
-        <div class="question-block-header d-flex justify-between align-center">
-          <h3 class="question-block-title">Question 1 · 10 marks</h3>
-          <div class="d-flex gap-8">
-            <button class="btn btn-sm btn-ghost">Edit</button>
-            <button class="btn btn-sm btn-ghost">Delete</button>
+          <h3 style="font-size:0.95rem; font-weight:700; margin:0 0 4px; display:flex; align-items:center; gap:8px;">
+            🗂️ Marking Rubric
+            <span style="font-size:11px; font-weight:400; color:var(--color-text-muted);">(Optional)</span>
+          </h3>
+          <p style="font-size:var(--font-size-xs); color:var(--color-text-muted); margin:0 0 16px;">
+            You can skip this step and add the rubric later from the assessment details page.
+          </p>
+
+          <!-- Mode toggle -->
+          <div class="mode-tabs">
+            <label class="mode-tab" for="rubric-upload">
+              <input type="radio" id="rubric-upload" name="rubric-mode" value="upload" />
+              📤 Upload Rubric
+            </label>
+            <label class="mode-tab" for="rubric-generate">
+              <input type="radio" id="rubric-generate" name="rubric-mode" value="generate" checked />
+              ✨ Generate with AI
+            </label>
+            <label class="mode-tab" for="rubric-skip">
+              <input type="radio" id="rubric-skip" name="rubric-mode" value="skip" />
+              ⏭️ Skip for now
+            </label>
           </div>
-        </div>
-        <div class="question-block-body">
-          <p class="form-label mb-4">Expected Key Points:</p>
-          <ul class="key-points-list">
-            <li>The Cold War refers to the ideological struggle between USA and USSR <span class="marks-tag">(5 marks)</span> · <em>Keywords: Cold War, USA, USSR, ideology</em></li>
-            <li>The Cold War led to the formation of alliances such as NATO and Warsaw Pact <span class="marks-tag">(5 marks)</span> · <em>Keywords: NATO, Warsaw Pact, alliances</em></li>
-          </ul>
-        </div>
-      </div>
 
-      <!-- Question 2 -->
-      <div class="question-block card mt-12">
-        <div class="question-block-header d-flex justify-between align-center">
-          <h3 class="question-block-title">Question 2 · 10 marks</h3>
-          <div class="d-flex gap-8">
-            <button class="btn btn-sm btn-ghost">Edit</button>
-            <button class="btn btn-sm btn-ghost">Delete</button>
+          <!-- ─── UPLOAD PANEL — PDF view only ─── -->
+          <div class="panel-upload">
+
+            <!-- Dropzone -->
+            <div class="dropzone">
+              <span class="dropzone-icon">📄</span>
+              <p class="dropzone-primary">Drag &amp; drop your marking rubric here</p>
+              <p class="dropzone-secondary text-muted">or <strong>browse files</strong> · PDF / Word · Max 50 MB</p>
+            </div>
+
+            <!-- After upload: PDF preview -->
+            <div class="rubric-pdf-preview mt-16">
+              <h4>📄 Uploaded Rubric</h4>
+              <img src="https://placehold.co/520x680/f5f5f5/999?text=Rubric+PDF+—+Page+1" alt="Rubric PDF" />
+              <div class="page-label">Page 1 of 1</div>
+            </div>
+
+          </div><!-- /panel-upload -->
+
+          <!-- ─── GENERATE PANEL — 2-column layout ─── -->
+          <div class="panel-generate">
+
+            <div class="ai-info-banner">
+              <span class="ai-icon">🤖</span>
+              <span>AI has generated a marking rubric based on your question paper. Review each question's key points and marks on the right — all fields are <strong>editable</strong>.</span>
+            </div>
+
+            <div class="rubric-gen-layout">
+
+              <!-- LEFT COLUMN — Question Paper (read-only) -->
+              <div class="rubric-gen-col">
+                <div class="rubric-gen-col-header">📄 Question Paper</div>
+                <div class="rubric-gen-col-body">
+
+                  <div class="q-readonly-block">
+                    <div class="q-readonly-num">Q1 <span class="marks-tag">4 marks</span></div>
+                    <div class="q-readonly-text">Define continuity of a function at a point. State the three conditions required for f(x) to be continuous at x = a.</div>
+                  </div>
+
+                  <div class="q-readonly-block">
+                    <div class="q-readonly-num">Q2 <span class="marks-tag">4 marks</span></div>
+                    <div class="q-readonly-text">Check the differentiability of f(x) = |x − 2| at x = 2. If not differentiable, explain why using the definition of the derivative.</div>
+                  </div>
+
+                  <div class="q-readonly-block">
+                    <div class="q-readonly-num">Q3 <span class="marks-tag">4 marks</span></div>
+                    <div class="q-readonly-text">Using the chain rule, find dy/dx for y = sin(x² + 3x). Show each step clearly, identifying the inner and outer functions.</div>
+                  </div>
+
+                  <div class="q-readonly-block">
+                    <div class="q-readonly-num">Q4 <span class="marks-tag">4 marks</span></div>
+                    <div class="q-readonly-text">Verify Rolle's Theorem for f(x) = x² − 4x + 3 on [1, 3]. State and verify all three conditions.</div>
+                  </div>
+
+                  <div class="q-readonly-block">
+                    <div class="q-readonly-num">Q5 <span class="marks-tag">4 marks</span></div>
+                    <div class="q-readonly-text">If f(x) = eˣ · cos(x), find f'(x) using the product rule. Simplify your answer fully.</div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- RIGHT COLUMN — Rubric Key Points (editable) -->
+              <div class="rubric-gen-col">
+                <div class="rubric-gen-col-header">🗂️ Rubric — Key Points &amp; Marks</div>
+                <div class="rubric-gen-col-body">
+
+                  <!-- Q1 Rubric -->
+                  <div class="rubric-q-block">
+                    <div class="rubric-q-title">Q1 — 4 marks</div>
+                    <div class="rubric-kp-row">
+                      <textarea>Definition of continuity at a point: f(a) is defined, lim x→a f(x) exists, lim x→a f(x) = f(a)</textarea>
+                      <input type="number" class="rubric-kp-marks" value="2" min="0" />
+                    </div>
+                    <div class="rubric-kp-row">
+                      <textarea>Clearly states all three conditions with correct notation</textarea>
+                      <input type="number" class="rubric-kp-marks" value="2" min="0" />
+                    </div>
+                    <button class="rubric-add-kp">+ Add key point</button>
+                  </div>
+
+                  <!-- Q2 Rubric -->
+                  <div class="rubric-q-block">
+                    <div class="rubric-q-title">Q2 — 4 marks</div>
+                    <div class="rubric-kp-row">
+                      <textarea>Computes left-hand and right-hand derivatives at x = 2</textarea>
+                      <input type="number" class="rubric-kp-marks" value="2" min="0" />
+                    </div>
+                    <div class="rubric-kp-row">
+                      <textarea>Concludes non-differentiable because LHD ≠ RHD; explains corner/cusp</textarea>
+                      <input type="number" class="rubric-kp-marks" value="2" min="0" />
+                    </div>
+                    <button class="rubric-add-kp">+ Add key point</button>
+                  </div>
+
+                  <!-- Q3 Rubric -->
+                  <div class="rubric-q-block">
+                    <div class="rubric-q-title">Q3 — 4 marks</div>
+                    <div class="rubric-kp-row">
+                      <textarea>Identifies outer fn sin(u) and inner fn u = x² + 3x</textarea>
+                      <input type="number" class="rubric-kp-marks" value="1" min="0" />
+                    </div>
+                    <div class="rubric-kp-row">
+                      <textarea>Applies chain rule: cos(x²+3x) · (2x + 3)</textarea>
+                      <input type="number" class="rubric-kp-marks" value="2" min="0" />
+                    </div>
+                    <div class="rubric-kp-row">
+                      <textarea>Final simplified answer with correct notation</textarea>
+                      <input type="number" class="rubric-kp-marks" value="1" min="0" />
+                    </div>
+                    <button class="rubric-add-kp">+ Add key point</button>
+                  </div>
+
+                  <!-- Q4 Rubric -->
+                  <div class="rubric-q-block">
+                    <div class="rubric-q-title">Q4 — 4 marks</div>
+                    <div class="rubric-kp-row">
+                      <textarea>Verifies continuity on [1,3] and differentiability on (1,3)</textarea>
+                      <input type="number" class="rubric-kp-marks" value="1" min="0" />
+                    </div>
+                    <div class="rubric-kp-row">
+                      <textarea>Shows f(1) = f(3) = 0</textarea>
+                      <input type="number" class="rubric-kp-marks" value="1" min="0" />
+                    </div>
+                    <div class="rubric-kp-row">
+                      <textarea>Finds c = 2 where f'(c) = 0; concludes theorem verified</textarea>
+                      <input type="number" class="rubric-kp-marks" value="2" min="0" />
+                    </div>
+                    <button class="rubric-add-kp">+ Add key point</button>
+                  </div>
+
+                  <!-- Q5 Rubric -->
+                  <div class="rubric-q-block">
+                    <div class="rubric-q-title">Q5 — 4 marks</div>
+                    <div class="rubric-kp-row">
+                      <textarea>Applies product rule: f'(x) = eˣ·cos(x) + eˣ·(−sin(x))</textarea>
+                      <input type="number" class="rubric-kp-marks" value="2" min="0" />
+                    </div>
+                    <div class="rubric-kp-row">
+                      <textarea>Simplifies to eˣ(cos x − sin x)</textarea>
+                      <input type="number" class="rubric-kp-marks" value="2" min="0" />
+                    </div>
+                    <button class="rubric-add-kp">+ Add key point</button>
+                  </div>
+
+                </div>
+              </div>
+
+            </div><!-- /rubric-gen-layout -->
+
+          </div><!-- /panel-generate -->
+
+          <!-- ─── SKIP PANEL ─── -->
+          <div class="panel-skip">
+            <div class="skip-panel-info">
+              <span class="icon">⏭️</span>
+              <p><strong>No rubric for now</strong></p>
+              <p>You can save this assessment as a draft and add or generate the rubric later from the assessment details page.</p>
+            </div>
           </div>
-        </div>
-        <div class="question-block-body">
-          <p class="form-label mb-4">Expected Key Points:</p>
-          <ul class="key-points-list">
-            <li>Description of bipolar world order <span class="marks-tag">(5 marks)</span> · <em>Keywords: bipolar, superpower</em></li>
-            <li>Fall of Soviet Union as end of bipolarity <span class="marks-tag">(5 marks)</span> · <em>Keywords: Soviet Union, collapse</em></li>
-          </ul>
-        </div>
-      </div>
 
-      <!-- Question 3 -->
-      <div class="question-block card mt-12">
-        <div class="question-block-header d-flex justify-between align-center">
-          <h3 class="question-block-title">Question 3 · 20 marks</h3>
-          <div class="d-flex gap-8">
-            <button class="btn btn-sm btn-ghost">Edit</button>
-            <button class="btn btn-sm btn-ghost">Delete</button>
-          </div>
-        </div>
-        <div class="question-block-body">
-          <p class="form-label mb-4">Expected Key Points:</p>
-          <ul class="key-points-list">
-            <li>US Hegemony in the post-Cold War era <span class="marks-tag">(10 marks)</span> · <em>Keywords: hegemony, unipolar</em></li>
-            <li>Examples of US military and economic dominance <span class="marks-tag">(10 marks)</span> · <em>Keywords: Gulf War, WTO, IMF</em></li>
-          </ul>
-        </div>
-      </div>
+        </div><!-- /card-body -->
+      </div><!-- /card rubric-section -->
 
-      <!-- Question 4 -->
-      <div class="question-block card mt-12">
-        <div class="question-block-header d-flex justify-between align-center">
-          <h3 class="question-block-title">Question 4 · 20 marks</h3>
-          <div class="d-flex gap-8">
-            <button class="btn btn-sm btn-ghost">Edit</button>
-            <button class="btn btn-sm btn-ghost">Delete</button>
-          </div>
-        </div>
-        <div class="question-block-body">
-          <p class="form-label mb-4">Expected Key Points:</p>
-          <ul class="key-points-list">
-            <li>Definition of New International Economic Order <span class="marks-tag">(10 marks)</span></li>
-            <li>India's role in NIEO movement <span class="marks-tag">(10 marks)</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Question 5 -->
-      <div class="question-block card mt-12">
-        <div class="question-block-header d-flex justify-between align-center">
-          <h3 class="question-block-title">Question 5 · 20 marks</h3>
-          <div class="d-flex gap-8">
-            <button class="btn btn-sm btn-ghost">Edit</button>
-            <button class="btn btn-sm btn-ghost">Delete</button>
-          </div>
-        </div>
-        <div class="question-block-body">
-          <p class="form-label mb-4">Expected Key Points:</p>
-          <ul class="key-points-list">
-            <li>India's foreign policy of non-alignment <span class="marks-tag">(10 marks)</span></li>
-            <li>Benefits of NAM for India <span class="marks-tag">(10 marks)</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Add Question Button -->
-      <div class="mt-16">
-        <button class="btn btn-secondary">+ Add Question Manually</button>
-      </div>
-
-      <!-- ── Total Marks Summary ── -->
-      <div class="card card-sm mt-16">
-        <div class="card-body d-flex justify-between align-center">
-          <span>Sum of all questions: <strong>80 marks</strong></span>
-          <span class="badge badge-success">✓ Matches Max Marks (80)</span>
-        </div>
+      <!-- Note about optional -->
+      <div class="note-callout mt-16">
+        ℹ️ <span>The rubric is optional at this stage. You can <strong>Save as Draft</strong> without a rubric, but <strong>Save &amp; Assign</strong> requires a rubric to be uploaded or generated.</span>
       </div>
 
       <!-- Form Actions -->
       <div class="form-actions mt-24">
         <a href="teacher-create-assessment-step2.html" class="btn btn-secondary">← Back</a>
         <button class="btn btn-secondary">Save as Draft</button>
-        <a href="teacher-assignment-page.html" class="btn btn-primary">Save &amp; Assign →</a>
+        <a href="teacher-assignment-page.html" class="btn btn-primary btn-assign">Save &amp; Assign →</a>
+        <span class="btn-draft-hint">Save as Draft to continue without a rubric</span>
       </div>
 
     </main>

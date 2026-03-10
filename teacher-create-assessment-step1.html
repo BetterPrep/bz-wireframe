@@ -5,6 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Create Assessment — Step 1 — Brainzeta Teacher</title>
   <link rel="stylesheet" href="styles/base.css" />
+  <style>
+    /* ================================================================
+       TIER SELECTION — radio toggle for General vs Chapter-wise
+    ================================================================ */
+    .tier-radio-group {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .tier-radio-card {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px 16px;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      background: #fff;
+    }
+    .tier-radio-card:has(input:checked) {
+      border-color: var(--color-primary);
+      background: #f0f5ff;
+    }
+    .tier-radio-card input[type="radio"] { margin-top: 3px; flex-shrink: 0; }
+    .tier-radio-card-body { flex: 1; }
+    .tier-radio-card-title {
+      font-size: var(--font-size-sm);
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 2px;
+    }
+    .tier-radio-card-desc {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      line-height: 1.4;
+    }
+    .tier-radio-card .tier-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 7px;
+      border-radius: 8px;
+      margin-left: 6px;
+    }
+    .t1 { background: #dbeafe; color: #1d4ed8; }
+    .t2 { background: #dcfce7; color: #15803d; }
+
+    /* ================================================================
+       CHAPTER SELECTION — conditional visibility
+    ================================================================ */
+    .chapter-select-single,
+    .chapter-select-multi {
+      display: none;
+    }
+    body:has(#tier-chapter:checked) .chapter-select-single { display: block; }
+    body:has(#tier-general:checked) .chapter-select-multi  { display: block; }
+  </style>
 </head>
 <body class="app-layout">
 
@@ -19,7 +76,7 @@
       <ul class="sidebar-nav list-plain">
         <li><a href="teacher-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
         <li><a href="teacher-assessments-list.html" class="sidebar-nav-item active"><span class="nav-icon">📋</span> My Assessments</a></li>
-        <li><a href="teacher-class-analytics.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Class Analytics</a></li>
+
         <li><a href="teacher-submission-tracker.html" class="sidebar-nav-item"><span class="nav-icon">📬</span> Submission Tracker</a></li>
         <li><a href="teacher-pending-approvals.html" class="sidebar-nav-item"><span class="nav-icon">✅</span> Pending Approvals</a></li>
       </ul>
@@ -72,12 +129,12 @@
         <div class="stepper-connector"></div>
         <div class="stepper-step stepper-pending">
           <div class="stepper-circle">2</div>
-          <div class="stepper-label">Upload Files</div>
+          <div class="stepper-label">Question Paper</div>
         </div>
         <div class="stepper-connector"></div>
         <div class="stepper-step stepper-pending">
           <div class="stepper-circle">3</div>
-          <div class="stepper-label">Review Rubric</div>
+          <div class="stepper-label">Rubric</div>
         </div>
       </div>
 
@@ -89,23 +146,12 @@
         <div class="card-body">
           <form>
 
-            <!-- Assessment Title -->
-            <div class="form-group">
-              <label class="form-label">Assessment Title <span class="required">*</span></label>
-              <input class="form-input form-input-full" type="text" placeholder="e.g. Mathematics Half-Yearly Examination" />
-            </div>
-
-            <!-- Description -->
-            <div class="form-group">
-              <label class="form-label">Description</label>
-              <textarea class="form-input form-input-full form-textarea" rows="3" placeholder="Describe the assessment purpose and instructions for students"></textarea>
-            </div>
-
-            <!-- Row: Grade / Subject / Type -->
+            <!-- Row: Grade / Subject -->
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label">Grade <span class="required">*</span></label>
                 <select class="form-input select-input">
+                  <option value="">Select Grade...</option>
                   <option>10</option>
                   <option>11</option>
                   <option selected>12</option>
@@ -114,6 +160,7 @@
               <div class="form-group">
                 <label class="form-label">Subject <span class="required">*</span></label>
                 <select class="form-input select-input">
+                  <option value="">Select Subject...</option>
                   <option selected>Mathematics</option>
                   <option>Physics</option>
                   <option>Chemistry</option>
@@ -121,62 +168,118 @@
                   <option>History</option>
                 </select>
               </div>
+            </div>
+
+            <!-- Assessment Tier -->
+            <div class="form-group">
+              <label class="form-label">Assessment Scope <span class="required">*</span></label>
+              <div class="tier-radio-group">
+                <label class="tier-radio-card">
+                  <input type="radio" id="tier-chapter" name="tier" value="chapter" checked />
+                  <div class="tier-radio-card-body">
+                    <div class="tier-radio-card-title">Chapter-wise <span class="tier-badge t2">Tier 2</span></div>
+                    <div class="tier-radio-card-desc">Assessment on a single chapter — quiz, assignment, or topic test</div>
+                  </div>
+                </label>
+                <label class="tier-radio-card">
+                  <input type="radio" id="tier-general" name="tier" value="general" />
+                  <div class="tier-radio-card-body">
+                    <div class="tier-radio-card-title">General <span class="tier-badge t1">Tier 1</span></div>
+                    <div class="tier-radio-card-desc">Multi-chapter assessment — half-yearly, unit test, or full exam</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Chapter Selection — single (for Tier 2) -->
+            <div class="chapter-select-single">
               <div class="form-group">
-                <label class="form-label">Assessment Type <span class="required">*</span></label>
-                <select class="form-input select-input">
-                  <option selected>Exam</option>
-                  <option>Quiz</option>
-                  <option>Assignment</option>
-                  <option>Lab Report</option>
+                <label class="form-label">Chapter <span class="required">*</span></label>
+                <select class="form-input select-input form-input-full">
+                  <option value="">Select Chapter...</option>
+                  <option>Ch. 1: Relations &amp; Functions</option>
+                  <option>Ch. 2: Inverse Trigonometric Functions</option>
+                  <option>Ch. 3: Matrices</option>
+                  <option>Ch. 4: Determinants</option>
+                  <option selected>Ch. 5: Continuity &amp; Differentiability</option>
+                  <option>Ch. 6: Application of Derivatives</option>
+                  <option>Ch. 7: Integrals</option>
+                  <option>Ch. 8: Application of Integrals</option>
+                  <option>Ch. 9: Differential Equations</option>
+                  <option>Ch. 10: Vector Algebra</option>
+                  <option>Ch. 11: Three-Dimensional Geometry</option>
+                  <option>Ch. 12: Linear Programming</option>
+                  <option>Ch. 13: Probability</option>
                 </select>
               </div>
+            </div>
+
+            <!-- Chapter Selection — multi (for Tier 1) -->
+            <div class="chapter-select-multi">
+              <div class="form-group">
+                <label class="form-label">Chapters Covered <span class="required">*</span></label>
+                <p class="form-hint">Select all chapters this assessment covers</p>
+                <div class="checkbox-group">
+                  <label class="checkbox-label"><input type="checkbox" /> Ch. 1: Relations &amp; Functions</label>
+                  <label class="checkbox-label"><input type="checkbox" checked /> Ch. 2: Inverse Trigonometric Functions</label>
+                  <label class="checkbox-label"><input type="checkbox" checked /> Ch. 3: Matrices</label>
+                  <label class="checkbox-label"><input type="checkbox" /> Ch. 4: Determinants</label>
+                  <label class="checkbox-label"><input type="checkbox" checked /> Ch. 5: Continuity &amp; Differentiability</label>
+                  <label class="checkbox-label"><input type="checkbox" /> Ch. 6: Application of Derivatives</label>
+                  <label class="checkbox-label"><input type="checkbox" /> Ch. 7: Integrals</label>
+                  <label class="checkbox-label"><input type="checkbox" /> Ch. 8: Application of Integrals</label>
+                  <label class="checkbox-label"><input type="checkbox" /> Ch. 9: Differential Equations</label>
+                  <label class="checkbox-label"><input type="checkbox" /> Ch. 10: Vector Algebra</label>
+                  <label class="checkbox-label"><input type="checkbox" /> Ch. 11: Three-Dimensional Geometry</label>
+                  <label class="checkbox-label"><input type="checkbox" /> Ch. 12: Linear Programming</label>
+                  <label class="checkbox-label"><input type="checkbox" /> Ch. 13: Probability</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Assessment Type -->
+            <div class="form-group">
+              <label class="form-label">Assessment Type <span class="required">*</span></label>
+              <select class="form-input select-input">
+                <option value="">Select Type...</option>
+                <option>Quiz</option>
+                <option>Assignment</option>
+                <option>Unit Test</option>
+                <option selected>Exam</option>
+                <option>Lab Report</option>
+              </select>
+            </div>
+
+            <!-- Assessment Title -->
+            <div class="form-group">
+              <label class="form-label">Assessment Title <span class="required">*</span></label>
+              <input class="form-input form-input-full" type="text" value="Chain Rule Quiz" placeholder="e.g. Chain Rule Quiz, Half-Yearly Exam, Matrices Assignment" />
+              <p class="form-hint">Name by topic, chapter, or scope — this is what students see</p>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+              <label class="form-label">Description</label>
+              <textarea class="form-input form-input-full form-textarea" rows="2" placeholder="Brief instructions for students (optional)"></textarea>
             </div>
 
             <!-- Row: Max Marks / Due Date -->
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label">Max Marks <span class="required">*</span></label>
-                <input class="form-input" type="number" value="80" />
+                <input class="form-input" type="number" value="20" />
               </div>
               <div class="form-group">
-                <label class="form-label">Due Date <span class="required">*</span></label>
-                <input class="form-input" type="date" value="2026-02-26" />
-              </div>
-            </div>
-
-            <!-- Requires Approval -->
-            <div class="form-group">
-              <label class="form-label">Requires Teacher Approval?</label>
-              <div class="radio-group">
-                <label class="radio-label">
-                  <input type="radio" name="approval" checked />
-                  <strong>Yes</strong> — AI evaluates, teacher approves
-                </label>
-                <label class="radio-label">
-                  <input type="radio" name="approval" />
-                  <strong>No</strong> — Instant AI feedback (Practice Mode)
-                </label>
-              </div>
-            </div>
-
-            <!-- Link Textbook Chapters -->
-            <div class="form-group">
-              <label class="form-label">Link Textbook Chapters (Optional)</label>
-              <p class="form-hint">Select relevant chapters for AI evaluation context</p>
-              <div class="checkbox-group">
-                <label class="checkbox-label"><input type="checkbox" /> Chapter 1: Relations and Functions</label>
-                <label class="checkbox-label"><input type="checkbox" checked /> Chapter 2: Inverse Trigonometric Functions</label>
-                <label class="checkbox-label"><input type="checkbox" checked /> Chapter 3: Matrices</label>
-                <label class="checkbox-label"><input type="checkbox" /> Chapter 4: Determinants</label>
-                <label class="checkbox-label"><input type="checkbox" checked /> Chapter 5: Continuity and Differentiability</label>
-                <label class="checkbox-label"><input type="checkbox" /> Chapter 6: Application of Derivatives</label>
+                <label class="form-label">Due Date</label>
+                <input class="form-input" type="date" value="2026-03-20" />
+                <p class="form-hint">Can be set later when assigning to sections</p>
               </div>
             </div>
 
             <!-- Form Actions -->
             <div class="form-actions">
               <a href="teacher-assessments-list.html" class="btn btn-secondary">Cancel</a>
-              <a href="teacher-create-assessment-step2.html" class="btn btn-primary">Next: Upload Files →</a>
+              <a href="teacher-create-assessment-step2.html" class="btn btn-primary">Next: Paper &amp; Rubric →</a>
             </div>
 
           </form>

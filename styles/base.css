@@ -228,7 +228,8 @@ input, select, textarea { font-family: var(--font-base); }
 }
 
 /* Page content */
-.page-content {
+.page-content,
+.page-body {
   padding: 24px;
   flex: 1;
   max-width: 1400px;

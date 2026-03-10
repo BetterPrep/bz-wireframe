@@ -33,7 +33,12 @@
       "Bash(git -C /Users/jain/Desktop/BrainZeta/wiremocks push origin main)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(git rm parent-performance-tracker.html)",
+      "Bash(xargs -n1 basename)",
+      "Bash(for f in student-dashboard.html student-assessment-details.html student-result-details.html student-practice-mode.html student-upload-answer.html student-assessments-list.html student-outcomes-list.html)",
+      "Bash(do head -1 $f)",
+      "Bash(echo \"ok: $f\")"
     ]
   }
 }

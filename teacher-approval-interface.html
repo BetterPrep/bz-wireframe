@@ -5,6 +5,186 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Review Submission — Brainzeta Teacher</title>
   <link rel="stylesheet" href="styles/base.css" />
+  <style>
+
+    /* ================================================================
+       QUESTION PANEL — full-width collapsible strip above answer cols
+       (matches student-result-details.html layout)
+    ================================================================ */
+    .question-panel {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .question-panel > summary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 16px;
+      background: var(--color-bg-subtle);
+      border-bottom: 1px solid var(--color-border);
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+    .question-panel > summary::-webkit-details-marker { display: none; }
+    .question-panel > summary:hover { background: #eef0f3; }
+
+    .qp-chevron {
+      font-style: normal;
+      font-size: 0.7rem;
+      color: var(--color-text-muted);
+      width: 14px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    details.question-panel[open] > summary .qp-chevron::before { content: '▾'; }
+    details.question-panel:not([open]) > summary .qp-chevron::before { content: '▸'; }
+
+    .qp-meta {
+      margin-left: auto;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      font-weight: 400;
+    }
+
+    .question-panel-body {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+      padding: 16px;
+      overflow-x: auto;
+      background: #fff;
+      align-items: flex-start;
+    }
+
+    .qp-page {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      width: 160px;
+    }
+    .qp-page-label {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      text-align: center;
+    }
+    .qp-page-img {
+      width: 160px;
+      height: 220px;
+      object-fit: cover;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-bg-muted);
+    }
+
+    /* ================================================================
+       VIEWPORT-FIXED 2-COL GRID
+    ================================================================ */
+    .review-grid-fixed {
+      height: calc(100vh - var(--topbar-height) - 260px);
+      align-items: stretch;
+    }
+    .review-grid-fixed .review-col {
+      height: 100%;
+      min-height: 0;
+    }
+    .review-grid-fixed .review-col-body {
+      min-height: 0;
+    }
+
+    /* ================================================================
+       APPROVAL BAR — fixed at bottom
+    ================================================================ */
+    .approval-bar {
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 1px solid var(--color-border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      z-index: 50;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
+    }
+    .approval-radio-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: var(--font-size-sm);
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    /* ================================================================
+       EDITABLE FEEDBACK — when "Approve with edits" is selected,
+       feedback paragraphs become textareas (CSS :has() trick)
+    ================================================================ */
+    .ai-q-feedback-edit { display: none; }
+    .ai-q-feedback-view { display: block; }
+
+    body:has(#approval-edit:checked) .ai-q-feedback-view { display: none; }
+    body:has(#approval-edit:checked) .ai-q-feedback-edit { display: block; }
+
+    body:has(#approval-edit:checked) .overall-feedback-view { display: none; }
+    body:has(#approval-edit:checked) .overall-feedback-edit { display: block; }
+    .overall-feedback-edit { display: none; }
+
+    .feedback-textarea {
+      width: 100%;
+      min-height: 48px;
+      padding: 6px 8px;
+      border: 1px solid var(--color-primary);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-xs);
+      font-family: inherit;
+      color: var(--color-text);
+      background: #f8faff;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .score-edit-input {
+      width: 36px;
+      padding: 2px 4px;
+      border: 1px solid var(--color-primary);
+      border-radius: 3px;
+      font-size: inherit;
+      font-weight: 700;
+      text-align: center;
+      background: #f8faff;
+    }
+
+    /* Show score edit inputs only in edit mode */
+    .score-editable { display: none; }
+    .score-readonly { display: inline; }
+    body:has(#approval-edit:checked) .score-editable { display: inline; }
+    body:has(#approval-edit:checked) .score-readonly { display: none; }
+
+    /* Edit mode indicator */
+    .edit-mode-banner {
+      display: none;
+      padding: 8px 14px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-xs);
+      color: #1e40af;
+      margin-bottom: 12px;
+    }
+    body:has(#approval-edit:checked) .edit-mode-banner { display: flex; align-items: center; gap: 8px; }
+
+  </style>
 </head>
 <body class="app-layout">
 
@@ -19,7 +199,7 @@
       <ul class="sidebar-nav list-plain">
         <li><a href="teacher-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
         <li><a href="teacher-assessments-list.html" class="sidebar-nav-item"><span class="nav-icon">📋</span> My Assessments</a></li>
-        <li><a href="teacher-class-analytics.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Class Analytics</a></li>
+
         <li><a href="teacher-submission-tracker.html" class="sidebar-nav-item"><span class="nav-icon">📬</span> Submission Tracker</a></li>
         <li><a href="teacher-pending-approvals.html" class="sidebar-nav-item active"><span class="nav-icon">✅</span> Pending Approvals</a></li>
       </ul>
@@ -58,121 +238,168 @@
         <span class="breadcrumb-item breadcrumb-current">Review Submission</span>
       </nav>
 
-      <!-- Page Header -->
+      <!-- Page Header + Score Summary -->
       <div class="page-header breadcrumb-pad">
         <div>
-          <h1 class="page-title">Review — Priya Sharma</h1>
-          <p class="page-subtitle">Math Half-Yearly Exam — Section 12-A</p>
+          <h1 class="page-title">Math Half-Yearly Exam — Priya Sharma</h1>
+          <p class="page-subtitle">Mathematics · Section 12-A · AI Score: Pending Teacher Approval</p>
+        </div>
+        <div class="d-flex gap-12" style="align-items:center;">
+          <span style="font-size:26px; font-weight:800; color:#1a237e;">76 <span style="font-size:15px; font-weight:400; color:#777;">/ 80</span></span>
+          <span class="badge badge-warning" style="font-size:13px; padding:5px 14px;">Pending</span>
         </div>
       </div>
 
-      <!-- ============================================================
-           3-COLUMN REVIEW LAYOUT
-      ============================================================ -->
-      <div class="review-layout">
+      <!-- ================================================================
+           QUESTION PAPER — full width, collapsed by default
+      ================================================================ -->
+      <details class="question-panel" style="margin: 0 24px;">
+        <summary>
+          <span class="qp-chevron"></span>
+          📋 Question Paper
+          <span class="qp-meta">4 pages · click to expand</span>
+        </summary>
+        <div class="question-panel-body">
 
-        <!-- ── Column 1: Question Paper ── -->
-        <div class="review-col">
-          <div class="review-col-header">
-            📋 Question Paper
+          <div class="qp-page">
+            <div class="qp-page-label">Page 1 of 4</div>
+            <img src="https://placehold.co/160x220/f5f5f5/999?text=Page+1" alt="Question paper page 1" class="qp-page-img" />
           </div>
-          <div class="review-col-body">
-            <div class="answer-page">
-              <div class="answer-page-label">Page 1 of 4</div>
-              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+1" alt="Question paper page 1" class="answer-page-img" />
-            </div>
-            <div class="answer-page">
-              <div class="answer-page-label">Page 2 of 4</div>
-              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+2" alt="Question paper page 2" class="answer-page-img" />
-            </div>
-            <div class="answer-page">
-              <div class="answer-page-label">Page 3 of 4</div>
-              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+3" alt="Question paper page 3" class="answer-page-img" />
-            </div>
-            <button class="btn btn-ghost btn-block mt-8">Show More Pages</button>
+          <div class="qp-page">
+            <div class="qp-page-label">Page 2 of 4</div>
+            <img src="https://placehold.co/160x220/f5f5f5/999?text=Page+2" alt="Question paper page 2" class="qp-page-img" />
           </div>
+          <div class="qp-page">
+            <div class="qp-page-label">Page 3 of 4</div>
+            <img src="https://placehold.co/160x220/f5f5f5/999?text=Page+3" alt="Question paper page 3" class="qp-page-img" />
+          </div>
+          <div class="qp-page">
+            <div class="qp-page-label">Page 4 of 4</div>
+            <img src="https://placehold.co/160x220/f5f5f5/999?text=Page+4" alt="Question paper page 4" class="qp-page-img" />
+          </div>
+
         </div>
+      </details>
 
-        <!-- ── Column 2: Answer Sheet ── -->
+      <!-- ================================================================
+           2-COLUMN: Answer Sheet  |  AI Evaluation & Feedback
+      ================================================================ -->
+      <div class="grid-2 review-grid-fixed" style="margin: 16px 24px 80px;">
+
+        <!-- ── Column 1: Answer Sheet ── -->
         <div class="review-col">
-          <div class="review-col-header">
-            📄 Answer Sheet — Priya Sharma
-          </div>
+          <div class="review-col-header">📄 Answer Sheet — Priya Sharma</div>
           <div class="review-col-body">
+
             <div class="answer-page">
               <div class="answer-page-label">Page 1 of 5</div>
-              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+1" alt="Answer sheet page 1" class="answer-page-img" />
+              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+1" alt="Answer sheet page 1" style="width:100%; border-radius:4px;" />
             </div>
             <div class="answer-page">
               <div class="answer-page-label">Page 2 of 5</div>
-              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+2" alt="Answer sheet page 2" class="answer-page-img" />
+              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+2" alt="Answer sheet page 2" style="width:100%; border-radius:4px;" />
             </div>
             <div class="answer-page">
               <div class="answer-page-label">Page 3 of 5</div>
-              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+3" alt="Answer sheet page 3" class="answer-page-img" />
+              <img src="https://placehold.co/200x280/f5f5f5/999?text=Page+3" alt="Answer sheet page 3" style="width:100%; border-radius:4px;" />
             </div>
             <button class="btn btn-ghost btn-block mt-8">Show More Pages</button>
+
           </div>
         </div>
 
-        <!-- ── Column 3: AI Evaluation ── -->
+        <!-- ── Column 2: Scores & Feedback ── -->
         <div class="review-col">
-          <div class="review-col-header">
-            🤖 AI Evaluation
-          </div>
+          <div class="review-col-header">🤖 AI Evaluation</div>
           <div class="review-col-body">
 
             <!-- Score Display -->
-            <div class="score-display-block">
-              <span class="score-main">76</span><span class="score-denom text-muted"> / 80</span>
-              <div class="score-sub text-muted">AI Score — Pending Teacher Approval</div>
+            <div class="score-display" style="text-align:center; padding:12px 0 16px;">
+              <span style="font-size:2rem; font-weight:800; color:#1a237e;">76</span>
+              <span class="text-muted" style="font-size:1rem;"> / 80</span>
+              <div class="text-muted" style="font-size:var(--font-size-xs); margin-top:4px;">AI Score — Pending Teacher Approval</div>
+            </div>
+
+            <!-- Edit mode banner -->
+            <div class="edit-mode-banner">
+              ✏️ <strong>Edit mode:</strong> Scores and feedback fields are now editable. Make your changes and click Approve.
             </div>
 
             <hr class="divider" />
 
-            <!-- Q1 AI Score -->
+            <!-- Q1 -->
             <div class="ai-q-block">
               <div class="ai-q-header d-flex justify-between align-center">
-                <span class="ai-q-label">Q1</span>
-                <span class="badge badge-success">9 / 10</span>
+                <span class="ai-q-label">Q1 <span class="text-muted" style="font-weight:400;">(10 marks)</span></span>
+                <span class="badge badge-success">
+                  <span class="score-readonly">9 / 10</span>
+                  <span class="score-editable"><input type="number" class="score-edit-input" value="9" min="0" max="10" /> / 10</span>
+                </span>
               </div>
-              <p class="ai-q-feedback text-muted">Comprehensive answer covering all key aspects of the Cold War.</p>
+              <p class="ai-q-feedback ai-q-feedback-view text-muted">Comprehensive answer covering all key aspects of the Cold War.</p>
+              <div class="ai-q-feedback ai-q-feedback-edit">
+                <textarea class="feedback-textarea">Comprehensive answer covering all key aspects of the Cold War.</textarea>
+              </div>
             </div>
 
-            <!-- Q2 AI Score -->
+            <!-- Q2 -->
             <div class="ai-q-block">
               <div class="ai-q-header d-flex justify-between align-center">
-                <span class="ai-q-label">Q2</span>
-                <span class="badge badge-success">9 / 10</span>
+                <span class="ai-q-label">Q2 <span class="text-muted" style="font-weight:400;">(10 marks)</span></span>
+                <span class="badge badge-success">
+                  <span class="score-readonly">9 / 10</span>
+                  <span class="score-editable"><input type="number" class="score-edit-input" value="9" min="0" max="10" /> / 10</span>
+                </span>
               </div>
-              <p class="ai-q-feedback text-muted">Good understanding of bipolarity and USSR collapse.</p>
+              <p class="ai-q-feedback ai-q-feedback-view text-muted">Good understanding of bipolarity and USSR collapse.</p>
+              <div class="ai-q-feedback ai-q-feedback-edit">
+                <textarea class="feedback-textarea">Good understanding of bipolarity and USSR collapse.</textarea>
+              </div>
             </div>
 
-            <!-- Q3 AI Score -->
+            <!-- Q3 -->
             <div class="ai-q-block">
               <div class="ai-q-header d-flex justify-between align-center">
-                <span class="ai-q-label">Q3</span>
-                <span class="badge badge-success">18 / 20</span>
+                <span class="ai-q-label">Q3 <span class="text-muted" style="font-weight:400;">(20 marks)</span></span>
+                <span class="badge badge-success">
+                  <span class="score-readonly">18 / 20</span>
+                  <span class="score-editable"><input type="number" class="score-edit-input" value="18" min="0" max="20" /> / 20</span>
+                </span>
               </div>
-              <p class="ai-q-feedback text-muted">Well-structured. Minor gaps in economic examples.</p>
+              <p class="ai-q-feedback ai-q-feedback-view text-muted">Well-structured. Minor gaps in economic examples.</p>
+              <div class="ai-q-feedback ai-q-feedback-edit">
+                <textarea class="feedback-textarea">Well-structured. Minor gaps in economic examples.</textarea>
+              </div>
             </div>
 
-            <!-- Q4 AI Score -->
+            <!-- Q4 -->
             <div class="ai-q-block">
               <div class="ai-q-header d-flex justify-between align-center">
-                <span class="ai-q-label">Q4</span>
-                <span class="badge badge-success">20 / 20</span>
+                <span class="ai-q-label">Q4 <span class="text-muted" style="font-weight:400;">(20 marks)</span></span>
+                <span class="badge badge-success">
+                  <span class="score-readonly">20 / 20</span>
+                  <span class="score-editable"><input type="number" class="score-edit-input" value="20" min="0" max="20" /> / 20</span>
+                </span>
               </div>
-              <p class="ai-q-feedback text-muted">Excellent detailed response on NIEO and India's contribution.</p>
+              <p class="ai-q-feedback ai-q-feedback-view text-muted">Excellent detailed response on NIEO and India's contribution.</p>
+              <div class="ai-q-feedback ai-q-feedback-edit">
+                <textarea class="feedback-textarea">Excellent detailed response on NIEO and India's contribution.</textarea>
+              </div>
             </div>
 
-            <!-- Q5 AI Score -->
+            <!-- Q5 -->
             <div class="ai-q-block">
               <div class="ai-q-header d-flex justify-between align-center">
-                <span class="ai-q-label">Q5</span>
-                <span class="badge badge-success">20 / 20</span>
+                <span class="ai-q-label">Q5 <span class="text-muted" style="font-weight:400;">(20 marks)</span></span>
+                <span class="badge badge-success">
+                  <span class="score-readonly">20 / 20</span>
+                  <span class="score-editable"><input type="number" class="score-edit-input" value="20" min="0" max="20" /> / 20</span>
+                </span>
               </div>
-              <p class="ai-q-feedback text-muted">Strong analysis with relevant historical context.</p>
+              <p class="ai-q-feedback ai-q-feedback-view text-muted">Strong analysis with relevant historical context.</p>
+              <div class="ai-q-feedback ai-q-feedback-edit">
+                <textarea class="feedback-textarea">Strong analysis with relevant historical context.</textarea>
+              </div>
             </div>
 
             <hr class="divider" />
@@ -183,36 +410,49 @@
                 <h4 class="card-title">Overall Feedback</h4>
               </div>
               <div class="card-body">
-                <p class="form-label mb-4">Strengths:</p>
-                <p class="text-muted mb-8">• Strong conceptual understanding &nbsp;·&nbsp; Well-organized answers &nbsp;·&nbsp; Good use of examples</p>
-                <p class="form-label mb-4">Areas for Improvement:</p>
-                <p class="text-muted">• Some minor factual gaps in Q3 economic section</p>
-              </div>
-            </div>
 
-            <div class="d-flex gap-8 mt-12">
-              <button class="btn btn-sm btn-ghost">✏ Edit Score</button>
-              <button class="btn btn-sm btn-ghost">✏ Edit Feedback</button>
+                <!-- View mode -->
+                <div class="overall-feedback-view">
+                  <p class="form-label mb-4">✅ Strengths</p>
+                  <p class="text-muted mb-8">• Strong conceptual understanding &nbsp;·&nbsp; Well-organized answers &nbsp;·&nbsp; Good use of examples</p>
+                  <p class="form-label mb-4">📈 Areas for Improvement</p>
+                  <p class="text-muted mb-8">• Some minor factual gaps in Q3 economic section</p>
+                  <p class="form-label mb-4">📚 Focus Areas</p>
+                  <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:4px;">
+                    <span style="background:#e8eaf6; color:#3949ab; border:1px solid #c5cae9; padding:3px 10px; border-radius:20px; font-size:12px;">Ch. 3: US Hegemony</span>
+                    <span style="background:#e8eaf6; color:#3949ab; border:1px solid #c5cae9; padding:3px 10px; border-radius:20px; font-size:12px;">Ch. 6: Economic Institutions</span>
+                  </div>
+                </div>
+
+                <!-- Edit mode -->
+                <div class="overall-feedback-edit">
+                  <p class="form-label mb-4">✅ Strengths</p>
+                  <textarea class="feedback-textarea mb-8" rows="2">Strong conceptual understanding · Well-organized answers · Good use of examples</textarea>
+                  <p class="form-label mb-4">📈 Areas for Improvement</p>
+                  <textarea class="feedback-textarea mb-8" rows="2">Some minor factual gaps in Q3 economic section</textarea>
+                  <p class="form-label mb-4">📚 Focus Areas</p>
+                  <textarea class="feedback-textarea" rows="2">Ch. 3: US Hegemony, Ch. 6: Economic Institutions</textarea>
+                </div>
+
+              </div>
             </div>
 
           </div>
         </div>
 
-      </div><!-- /review-layout -->
+      </div><!-- /grid-2 -->
 
       <!-- ============================================================
-           APPROVAL BAR
+           APPROVAL BAR — no reject, no prev/next
       ============================================================ -->
       <div class="approval-bar">
         <div class="d-flex gap-20 align-center">
-          <label class="approval-radio-label"><input type="radio" name="approval-decision" checked /> Approve as-is</label>
-          <label class="approval-radio-label"><input type="radio" name="approval-decision" /> Approve with edits</label>
-          <label class="approval-radio-label"><input type="radio" name="approval-decision" /> Reject</label>
+          <label class="approval-radio-label"><input type="radio" id="approval-asis" name="approval-decision" checked /> Approve as-is</label>
+          <label class="approval-radio-label"><input type="radio" id="approval-edit" name="approval-decision" /> Approve with edits</label>
         </div>
         <div class="d-flex gap-8">
-          <a href="teacher-pending-approvals.html" class="btn btn-secondary">← Previous Student</a>
+          <a href="teacher-pending-approvals.html" class="btn btn-secondary">← Back to Queue</a>
           <button class="btn btn-success">✓ Approve</button>
-          <button class="btn btn-primary">Next Student →</button>
         </div>
       </div>
 

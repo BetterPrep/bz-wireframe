@@ -5,6 +5,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Submission Tracker — Brainzeta Teacher</title>
   <link rel="stylesheet" href="styles/base.css" />
+  <style>
+    /* ================================================================
+       GRADE + SUBJECT + ASSESSMENT SELECTOR
+    ================================================================ */
+    .selector-bar {
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+      padding: 20px 24px;
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+    }
+    .selector-group { display: flex; flex-direction: column; gap: 4px; }
+    .selector-group label {
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .selector-group select {
+      min-width: 180px;
+      padding: 8px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      background: #fff;
+    }
+    .selector-group.wide select { min-width: 260px; }
+
+    /* ================================================================
+       EMPTY STATE
+    ================================================================ */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 60px 20px;
+      border: 2px dashed var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-bg-subtle);
+      color: var(--color-text-muted);
+      gap: 8px;
+    }
+    .empty-state .icon { font-size: 2.5rem; }
+    .empty-state h3 { margin: 0; font-size: var(--font-size-lg); color: var(--color-text); }
+    .empty-state p { margin: 0; font-size: var(--font-size-sm); max-width: 420px; }
+
+    body:has(#grade-select option[value="12"]:checked):has(#subject-select option[value="mathematics"]:checked):has(#assess-select option[value="math-hy"]:checked) .empty-state { display: none; }
+    body:has(#grade-select option[value="12"]:checked):has(#subject-select option[value="mathematics"]:checked):has(#assess-select option[value="math-hy"]:checked) .tracker-view { display: block; }
+    .tracker-view { display: none; }
+
+    /* ================================================================
+       FILTER / BULK BARS
+    ================================================================ */
+    .view-filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .filter-label {
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      color: var(--color-text-muted);
+    }
+    .bulk-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: var(--font-size-xs);
+    }
+    .bulk-bar .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+    }
+  </style>
 </head>
 <body class="app-layout">
 
@@ -19,7 +102,6 @@
       <ul class="sidebar-nav list-plain">
         <li><a href="teacher-dashboard.html" class="sidebar-nav-item"><span class="nav-icon">🏠</span> Dashboard</a></li>
         <li><a href="teacher-assessments-list.html" class="sidebar-nav-item"><span class="nav-icon">📋</span> My Assessments</a></li>
-        <li><a href="teacher-class-analytics.html" class="sidebar-nav-item"><span class="nav-icon">📊</span> Class Analytics</a></li>
         <li><a href="teacher-submission-tracker.html" class="sidebar-nav-item active"><span class="nav-icon">📬</span> Submission Tracker</a></li>
         <li><a href="teacher-pending-approvals.html" class="sidebar-nav-item"><span class="nav-icon">✅</span> Pending Approvals</a></li>
       </ul>
@@ -58,159 +140,208 @@
 
       <!-- Page Header -->
       <div class="page-header">
-        <div>
-          <h1 class="page-title">Submission Tracker</h1>
-          <p class="page-subtitle">Math Half-Yearly Exam — Grade 12</p>
+        <h1 class="page-title">Submission Tracker</h1>
+        <p class="page-subtitle">Track student submissions and their evaluation status</p>
+      </div>
+
+      <!-- ── Grade + Subject + Assessment Selector ── -->
+      <div class="selector-bar">
+        <div class="selector-group">
+          <label for="grade-select">Grade <span class="required">*</span></label>
+          <select id="grade-select" class="select-input">
+            <option value="">Select Grade...</option>
+            <option value="10">Grade 10</option>
+            <option value="11">Grade 11</option>
+            <option value="12" selected>Grade 12</option>
+          </select>
+        </div>
+        <div class="selector-group">
+          <label for="subject-select">Subject <span class="required">*</span></label>
+          <select id="subject-select" class="select-input">
+            <option value="">Select Subject...</option>
+            <option value="mathematics" selected>Mathematics</option>
+            <option value="physics">Physics</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="economics">Economics</option>
+          </select>
+        </div>
+        <div class="selector-group wide">
+          <label for="assess-select">Assessment <span class="required">*</span></label>
+          <select id="assess-select" class="select-input">
+            <option value="">Select Assessment...</option>
+            <option value="math-hy" selected>Math Half-Yearly Exam (80 marks)</option>
+            <option value="chain-rule">Chain Rule Quiz — Ch. 5 (20 marks)</option>
+            <option value="maxima">Maxima &amp; Minima Assignment — Ch. 6 (25 marks)</option>
+          </select>
         </div>
       </div>
 
-      <!-- ── Stat Grid ── -->
-      <div class="stat-grid stat-grid-4">
-        <div class="stat-card stat-card-blue">
-          <div class="stat-value">45/78</div>
-          <div class="stat-label">Submitted</div>
-        </div>
-        <div class="stat-card stat-card-green">
-          <div class="stat-value">30</div>
-          <div class="stat-label">Evaluated</div>
-        </div>
-        <div class="stat-card stat-card-orange">
-          <div class="stat-value">8</div>
-          <div class="stat-label">Pending Approval</div>
-        </div>
-        <div class="stat-card stat-card-purple">
-          <div class="stat-value">7</div>
-          <div class="stat-label">Approved</div>
-        </div>
+      <!-- ── Empty State ── -->
+      <div class="empty-state">
+        <span class="icon">📬</span>
+        <h3>Select Grade, Subject &amp; Assessment</h3>
+        <p>Choose a grade, subject, and assessment above to track student submissions and their evaluation status.</p>
       </div>
 
-      <!-- ── Filter Bar ── -->
-      <div class="filter-bar mt-24">
-        <select class="select-input">
-          <option>Assessment: Math HY Exam</option>
-          <option>Physics Quiz</option>
-          <option>Economics Assignment</option>
-        </select>
-        <select class="select-input">
-          <option>Section: All</option>
-          <option>12-A</option>
-          <option>12-B</option>
-        </select>
-        <select class="select-input">
-          <option>Status: All</option>
-          <option>Approved</option>
-          <option>Pending Approval</option>
-          <option>Evaluated</option>
-          <option>Not Submitted</option>
-        </select>
-        <input class="search-bar" type="text" placeholder="Search student..." />
-      </div>
+      <!-- ================================================================
+           TRACKER VIEW — shown when all three selectors have values
+      ================================================================ -->
+      <div class="tracker-view">
 
-      <!-- ── Bulk Actions Bar ── -->
-      <div class="bulk-bar d-flex gap-8 align-center mt-12">
-        <label class="checkbox-label"><input type="checkbox" /> Select all pending</label>
-        <span class="text-muted">12 selected</span>
-        <button class="btn btn-sm btn-secondary">Send Reminders</button>
-        <button class="btn btn-sm btn-secondary">Download Reports</button>
-      </div>
+        <!-- ── Stat Grid ── -->
+        <div class="stat-grid stat-grid-4">
+          <div class="stat-card stat-card-blue">
+            <div class="stat-value">45/78</div>
+            <div class="stat-label">Submitted</div>
+          </div>
+          <div class="stat-card stat-card-green">
+            <div class="stat-value">30</div>
+            <div class="stat-label">Evaluated</div>
+          </div>
+          <div class="stat-card stat-card-orange">
+            <div class="stat-value">8</div>
+            <div class="stat-label">Pending Approval</div>
+          </div>
+          <div class="stat-card stat-card-purple">
+            <div class="stat-value">7</div>
+            <div class="stat-label">Approved</div>
+          </div>
+        </div>
 
-      <!-- ── Submissions Table ── -->
-      <div class="table-wrapper mt-8">
-        <table class="table">
-          <thead>
-            <tr>
-              <th class="col-check"><input type="checkbox" /></th>
-              <th>Roll</th>
-              <th>Name</th>
-              <th>Section</th>
-              <th>Submission Status</th>
-              <th>Score</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><input type="checkbox" /></td>
-              <td>101</td>
-              <td>Amit Kumar</td>
-              <td>12-A</td>
-              <td><span class="badge badge-success">✓ Approved</span></td>
-              <td>72/80</td>
-              <td><button class="btn btn-sm btn-ghost">View</button></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" /></td>
-              <td>102</td>
-              <td>Priya Sharma</td>
-              <td>12-A</td>
-              <td><span class="badge badge-warning">⏳ Pending Approval</span></td>
-              <td>—</td>
-              <td><a href="teacher-approval-interface.html" class="btn btn-sm btn-primary">Review</a></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" /></td>
-              <td>103</td>
-              <td>Raj Malhotra</td>
-              <td>12-A</td>
-              <td><span class="badge badge-primary">🔄 Evaluated</span></td>
-              <td>—</td>
-              <td><a href="teacher-approval-interface.html" class="btn btn-sm btn-primary">Review</a></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" /></td>
-              <td>104</td>
-              <td>Sara Joshi</td>
-              <td>12-A</td>
-              <td><span class="badge badge-error">⚠ Not Submitted</span></td>
-              <td>—</td>
-              <td><button class="btn btn-sm btn-secondary">Remind</button></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" /></td>
-              <td>105</td>
-              <td>Karan Patel</td>
-              <td>12-A</td>
-              <td><span class="badge badge-success">✓ Approved</span></td>
-              <td>68/80</td>
-              <td><button class="btn btn-sm btn-ghost">View</button></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" /></td>
-              <td>106</td>
-              <td>Anjali Singh</td>
-              <td>12-B</td>
-              <td><span class="badge badge-success">✓ Approved</span></td>
-              <td>75/80</td>
-              <td><button class="btn btn-sm btn-ghost">View</button></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" /></td>
-              <td>107</td>
-              <td>Vikram Mehta</td>
-              <td>12-B</td>
-              <td><span class="badge badge-error">⚠ Not Submitted</span></td>
-              <td>—</td>
-              <td><button class="btn btn-sm btn-secondary">Remind</button></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" /></td>
-              <td>108</td>
-              <td>Neha Gupta</td>
-              <td>12-B</td>
-              <td><span class="badge badge-warning">⏳ Pending Approval</span></td>
-              <td>—</td>
-              <td><a href="teacher-approval-interface.html" class="btn btn-sm btn-primary">Review</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <!-- ── Filter + Bulk ── -->
+        <div class="view-filter-bar mt-24">
+          <span class="filter-label">Section:</span>
+          <select class="select-input" style="width:auto; min-width:130px;">
+            <option>All Sections</option>
+            <option>12-A</option>
+            <option>12-B</option>
+          </select>
+          <span class="filter-label" style="margin-left:8px;">Status:</span>
+          <select class="select-input" style="width:auto; min-width:160px;">
+            <option>All Statuses</option>
+            <option>Approved</option>
+            <option>Pending Approval</option>
+            <option>Evaluated</option>
+            <option>Not Submitted</option>
+          </select>
+          <input class="search-bar" type="text" placeholder="Search student..." style="margin-left:auto; max-width:220px;" />
+        </div>
 
-      <!-- ── Pagination ── -->
-      <div class="pagination">
-        <button class="btn btn-sm btn-ghost" disabled>← Previous</button>
-        <span class="pagination-info">Page 1 of 6</span>
-        <button class="btn btn-sm btn-ghost">Next →</button>
-      </div>
+        <div class="bulk-bar">
+          <label class="checkbox-label"><input type="checkbox" /> Select all pending</label>
+          <span class="text-muted">0 selected</span>
+          <button class="btn btn-sm btn-secondary" style="margin-left:auto;">Send Reminders</button>
+          <button class="btn btn-sm btn-secondary">Download Reports</button>
+        </div>
+
+        <!-- ── Submissions Table ── -->
+        <div class="table-wrapper mt-4">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="col-check"><input type="checkbox" /></th>
+                <th>Roll</th>
+                <th>Student</th>
+                <th>Section</th>
+                <th>Status</th>
+                <th>Score</th>
+                <th>Submitted</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td>101</td>
+                <td><div class="d-flex gap-8 align-center"><span class="avatar avatar-xs">AK</span> Amit Kumar</div></td>
+                <td>12-A</td>
+                <td><span class="badge badge-success">Approved</span></td>
+                <td>72/80</td>
+                <td class="text-muted">Feb 24</td>
+                <td><button class="btn btn-sm btn-ghost">View</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td>102</td>
+                <td><div class="d-flex gap-8 align-center"><span class="avatar avatar-xs">PS</span> Priya Sharma</div></td>
+                <td>12-A</td>
+                <td><span class="badge badge-warning">Pending Approval</span></td>
+                <td>76/80</td>
+                <td class="text-muted">Feb 25</td>
+                <td><a href="teacher-approval-interface.html" class="btn btn-sm btn-primary">Review</a></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td>103</td>
+                <td><div class="d-flex gap-8 align-center"><span class="avatar avatar-xs">RM</span> Raj Malhotra</div></td>
+                <td>12-A</td>
+                <td><span class="badge badge-warning">Pending Approval</span></td>
+                <td>65/80</td>
+                <td class="text-muted">Feb 25</td>
+                <td><a href="teacher-approval-interface.html" class="btn btn-sm btn-primary">Review</a></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td>104</td>
+                <td><div class="d-flex gap-8 align-center"><span class="avatar avatar-xs">SJ</span> Sara Joshi</div></td>
+                <td>12-A</td>
+                <td><span class="badge badge-error">Not Submitted</span></td>
+                <td>—</td>
+                <td>—</td>
+                <td><button class="btn btn-sm btn-secondary">Remind</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td>105</td>
+                <td><div class="d-flex gap-8 align-center"><span class="avatar avatar-xs">KP</span> Karan Patel</div></td>
+                <td>12-A</td>
+                <td><span class="badge badge-success">Approved</span></td>
+                <td>68/80</td>
+                <td class="text-muted">Feb 23</td>
+                <td><button class="btn btn-sm btn-ghost">View</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td>106</td>
+                <td><div class="d-flex gap-8 align-center"><span class="avatar avatar-xs">AS</span> Anjali Singh</div></td>
+                <td>12-B</td>
+                <td><span class="badge badge-success">Approved</span></td>
+                <td>75/80</td>
+                <td class="text-muted">Feb 24</td>
+                <td><button class="btn btn-sm btn-ghost">View</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td>107</td>
+                <td><div class="d-flex gap-8 align-center"><span class="avatar avatar-xs">VM</span> Vikram Mehta</div></td>
+                <td>12-B</td>
+                <td><span class="badge badge-error">Not Submitted</span></td>
+                <td>—</td>
+                <td>—</td>
+                <td><button class="btn btn-sm btn-secondary">Remind</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td>108</td>
+                <td><div class="d-flex gap-8 align-center"><span class="avatar avatar-xs">NG</span> Neha Gupta</div></td>
+                <td>12-B</td>
+                <td><span class="badge badge-warning">Pending Approval</span></td>
+                <td>58/80</td>
+                <td class="text-muted">Feb 25</td>
+                <td><a href="teacher-approval-interface.html" class="btn btn-sm btn-primary">Review</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ── Pagination ── -->
+        <div class="pagination">
+          <button class="btn btn-sm btn-ghost" disabled>← Previous</button>
+          <span class="pagination-info">Page 1 of 6</span>
+          <button class="btn btn-sm btn-ghost">Next →</button>
+        </div>
+
+      </div><!-- /tracker-view -->
 
     </main>
   </div><!-- /main-wrapper -->
