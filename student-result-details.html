@@ -54,6 +54,22 @@
       font-weight: 400;
     }
 
+    /* ================================================================
+       VIEWPORT-FIXED 2-COL GRID — internal scroll per column
+    ================================================================ */
+    .review-grid-fixed {
+      /* Subtract topbar + breadcrumb + page-header + question-panel-header + gaps */
+      height: calc(100vh - var(--topbar-height) - 260px);
+      align-items: stretch;
+    }
+    .review-grid-fixed .review-col {
+      height: 100%;
+      min-height: 0;           /* allow flex child to shrink below content */
+    }
+    .review-grid-fixed .review-col-body {
+      min-height: 0;           /* critical: lets overflow-y: auto activate */
+    }
+
     /* Pages inside the panel shown as a horizontal scrollable strip */
     .question-panel-body {
       display: flex;
@@ -182,7 +198,7 @@
       <!-- ================================================================
            2-COLUMN: Answer Sheet  |  Scores & Feedback
       ================================================================ -->
-      <div class="grid-2">
+      <div class="grid-2 review-grid-fixed">
 
         <!-- ── Column 1: Answer Sheet ── -->
         <div class="review-col">
